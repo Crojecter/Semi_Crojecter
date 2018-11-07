@@ -34,14 +34,46 @@ public class MemberService {
 		con = getConnection();
 		
 		Member result = mDao.selectMember(con, m);
-		
-		close(con);
-		
+				
 		if(result != null) commit(con);
 		else rollback(con);
 		
+		close(con);
+		
 		return result;
 
+	}
+
+	public int sendEmail(Member m) {
+		
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDao.sendEmail(con, m);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public int rndPwd(String tempPassword, Member m) {
+		
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDao.rndPwd(con, tempPassword, m);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 }
