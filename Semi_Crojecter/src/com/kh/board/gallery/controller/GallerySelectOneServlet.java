@@ -1,4 +1,4 @@
-package com.kh.member.controller;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
 
@@ -7,22 +7,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
+import com.kh.board.gallery.model.service.GalleryService;
+import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 /**
- * Servlet implementation class Login
+ * Servlet implementation class GallerySelectOneServlet
  */
-@WebServlet("/login.do")
-public class Login extends HttpServlet {
+@WebServlet("/gSelectOne.ga")
+public class GallerySelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Login() {
+    public GallerySelectOneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +30,26 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		int bid = Integer.parseInt(request.getParameter("bid"));
+			
+		GalleryForDetail gfd = new GalleryService().selectOneGFD(bid);
+		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
 		
-		String email = request.getParameter("email");
-		String pwd = request.getParameter("password");
-		
-		Member m = new Member(email,pwd);
-		MemberService ms = new MemberService();
-		
-		m = ms.selectMember(m);
-		
-		System.out.println(m);
-		if(m != null) {
-			HttpSession session = request.getSession();
-			session.setAttribute("member", m);
-			response.sendRedirect("/crojecter");
-			System.out.println("로그인 성공");
+		String page = "";
+		if(gfd != null) {
+			
+			page = "views/board/galleryDetail.jsp";
+			request.setAttribute("gallery", gfd);
+			//request.setAttribute("clist", clist);
+			
 		} else {
-			System.out.println("로그인 실패");
+			
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "갤러리 상세보기 실패!");
 		}
+		
+		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

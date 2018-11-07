@@ -77,7 +77,7 @@ public class MemberDao {
 			pstmt.setString(2, m.getMpwd());
 			
 			rset = pstmt.executeQuery();
-			
+
 			if(rset.next()) {
 				
 				result = new Member();
@@ -100,6 +100,64 @@ public class MemberDao {
 		} finally {
 			
 			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+
+	public int sendEmail(Connection con, Member m) {
+
+		int result = 0;
+		
+		String sql = prop.getProperty("selectEmail");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMname());
+			pstmt.setString(2, m.getMemail());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
+
+	public int rndPwd(Connection con, String tempPassword, Member m) {
+		
+		int result = 0;
+		
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, tempPassword);
+			pstmt.setString(2, m.getMemail());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
 			close(pstmt);
 			
 		}
