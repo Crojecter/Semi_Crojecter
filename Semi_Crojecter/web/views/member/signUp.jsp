@@ -97,6 +97,8 @@
 						$("#labelNickname").css("visibility", "visible");
 						$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
 						nnChk = 0;
+						
+						memberVerify();
 					} else if(data == "success") {
 						// 닉네임 체크 성공시 정규식으로 한번더 검사해서 성공할 경우 아래 실행
 						var regNickname = /^[가-힣|ㄱ-ㅎ|a-z|A-Z|0-9]{2,10}$/;
@@ -105,17 +107,23 @@
 							nnChk = 1;
 							$("#nickName").css("background-color", "#B7F400");
 							$("#labelNickname").css("visibility", "hidden");
+							
+							memberVerify();
 						} else {
 							nnChk = 0;
 							$("#nickName").css("background-color", "#FFA5A5");
 							$("#labelNickname").css("visibility", "visible");
 							$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
+							
+							memberVerify();
 						}
 					} else {
 						nnChk = 0;
 						$("#nickName").css("background-color", "#FFA5A5");
 						$("#labelNickname").css("visibility", "visible");
 						$("#labelNickname").text('중복된 닉네임 입니다.');
+						
+						memberVerify();
 					}
 				}
 			});
@@ -134,25 +142,68 @@
 						$("#labelEmail").css("visibility", "visible");
 						$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
 						eChk = 0;
+						
+						memberVerify();
 					} else if(data == "success") {
 						// 이메일 체크 성공시 정규식으로 한번더 검사
 						var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 						
 						if(regEmail.test(email)) {
+							
+							var emailChk = $("#emailCheck").val();
+							
+							if(emailChk == "") {
+								$("#email").css("background-color", "white");
+								$("#labelEmail").css("visibility", "visible");
+								eChk = 0;
+								
+								memberVerify();
+							} else if(email == emailChk) {
+								$("#email").css("background-color", "#B7F400");
+								$("#labelEmail").css("visibility", "hidden");
+								eChk = 1;
+								
+								memberVerify();
+							} else {
+								$("#email").css("background-color", "#FFA5A5");
+								$("#labelEmail").css("visibility", "visible");
+								eChk = 0;
+								
+								memberVerify();
+							}
+							
 							eChk = 1;
 							$("#email").css("background-color", "#B7F400");	
-							$("#labelEmail").css("visibility", "hidden");
+							$("#labelEmail").css("visibility", "visible");
+							
+							if($("#emailCheck").val() == null) {
+								$("#labelEmail").text('이메일 확인부분 미입력');
+								$("#emailCheck").css("background-color", "#FFA5A5");
+								
+								memberVerify();
+							} else {
+								$("#labelEmail").text('이메일 확인부분 미입력');
+								$("#emailCheck").css("background-color", "#FFA5A5");
+								
+								memberVerify();
+							}
+							
+							memberVerify();
 						} else {
 							eChk = 0;
 							$("#email").css("background-color", "#FFA5A5");
 							$("#labelEmail").css("visibility", "visible");
 							$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
+							
+							memberVerify();
 						}
 					} else {
 						eChk = 0;
 						$("#email").css("background-color", "#FFA5A5");
 						$("#labelEmail").css("visibility", "visible");
 						$("#labelEmail").text('중복된 이메일 입니다.');
+						
+						memberVerify();
 					}
 				}
 			});		
@@ -162,19 +213,28 @@
 		function checkedEmail() {
 			var email = $("#email").val();
 			var emailChk = $("#emailCheck").val();
+			var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 			
-			if(emailChk == "") {
+			if(emailChk == "" && regEmail.test(email)) {
 				$("#emailCheck").css("background-color", "white");
 				$("#labelEmail").css("visibility", "visible");
+				$("#labelEmail").text('이메일 확인부분 미입력');
 				eChk = 0;
+				
+				memberVerify();
 			} else if(email == emailChk) {
 				$("#emailCheck").css("background-color", "#B7F400");
 				$("#labelEmail").css("visibility", "hidden");
 				eChk = 1;
+				
+				memberVerify();
 			} else {
 				$("#emailCheck").css("background-color", "#FFA5A5");
 				$("#labelEmail").css("visibility", "visible");
+				$("#labelEmail").text('이메일 미일치');
 				eChk = 0;
+				
+				memberVerify();
 			}
 			memberVerify();
 		}
@@ -192,19 +252,28 @@
 					pChk = 1;
 					$("#passwordCheck").css("background-color", "#B7F400");
 					$("#labelPwd").css("visibility", "hidden");
+					
+					memberVerify();
 				} else {
 					pChk = 0;
 					$("#passwordCheck").css("background-color", "#FFA5A5");
 					$("#labelPwd").css("visibility", "visible");
+					
+					memberVerify();
 				}
+				
 			} else if (pwdChk == "" || pwd == "") {
 				$("#passwordCheck").css("background-color", "white");
 				$("#labelPwd").css("visibility", "visible");
 				pChk = 0;
+				
+				memberVerify();
 			} else {
 				pChk = 0;
 				$("#passwordCheck").css("background-color", "#FFA5A5");
 				$("#labelPwd").css("visibility", "visible");
+				
+				memberVerify();
 			}
 
 			memberVerify();
