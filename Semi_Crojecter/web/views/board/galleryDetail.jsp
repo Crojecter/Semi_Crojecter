@@ -18,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 	.outer{
 		width:800px;
@@ -44,6 +44,15 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
+	
+	.followBtn {
+		background : red;
+	}
+	
+	.unfollowBtn {
+		background : yellow;
+	}
+	
 </style>
 
 <title>갤러리 상세보기</title>
@@ -89,7 +98,6 @@
 		</div>
 		
 		<div align="center">
-			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">팔로우</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">좋아요</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">후원하기</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
@@ -98,18 +106,89 @@
 			<% if(m != null && m.getMname().equals(gfd.getMname())){ %>
 			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=gfd.getBid()%>">수정하기</button>
 			<% } %>
-
+			
+			<br>
+			
+			<button type="button" class="followBtn">팔로우</button>
+	
 		</div>
-		
+
 	</div>
-	
-	
+
 	<script>
-	
-	
-	
+
+		$(function() {
+				$.ajax({
+					url : "/crojecter/fCheck.fo",
+					type : "get",
+					data : {
+						wid : <%=g.getBwriter()%>,
+						mid : <%=m.getMid()%>
+					},
+					success : function(data) {
+						if(data == 'ok') {
+							console.log("이미 팔로우 한 상태");
+							$('.followBtn').attr('class','unfollowBtn');
+						} else if(data == 'no') {
+							console.log("아직 팔로우하지 않은 상태");
+						}
+					},
+					error : function() {
+						console.log("follow 정보 가져오기 실패");
+					}
+				});
+		})
+
+		
+ 		$(".followBtn").click(function(){
+			$.ajax({
+				url : "/crojecter/fInsert.fo",
+				type : "get",
+				data : {
+					wid : <%=g.getBwriter()%>,
+					mid : <%=m.getMid()%>
+				}, 
+				success : function(data){
+					
+					if(data == 'ok') {
+						console.log('ok');
+						$('.followBtn').attr('class','unfollowBtn');
+					} else {
+						console.log('no');
+					}
+					
+				}, 
+				error : function(data){
+					console.log("follow 테스트 실패");
+				}
+			});
+		}); 
+
+		$(".unfollowBtn").click(function(){
+			$.ajax({
+				url : "/crojecter/fDelete.fo",
+				type : "get",
+				data : {
+					wid : <%=g.getBwriter()%>,
+					mid : <%=m.getMid()%>
+				}, 
+				success : function(data){
+					
+					if(data == 'ok') {
+						console.log('ok');
+						$('.unfollowBtn').attr('class','followBtn');
+					} else {
+						console.log('no');
+					}
+				}, 
+				error : function(data){
+					console.log("follow 테스트 실패");
+				}
+			});
+		}); 
+		
+		
 	</script>
-
-
+	
 </body>
 </html>
