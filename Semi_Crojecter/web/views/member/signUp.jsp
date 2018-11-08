@@ -40,7 +40,7 @@
 				<tr>
 					<td>
 						<input type="text" name="nickName" id="nickName" placeholder="사용하실 닉네임을 입력해주세요" oninput="checkNickName();"/>
-						<label id="labelNickname" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >2~6 글자의 닉네임을 입력하세요. 특수문자 불가</label>
+						<label id="labelNickname" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
 					</td>
 				</tr>
 				<tr>
@@ -64,7 +64,7 @@
 				<tr>
 					<td>
 						<input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호를 확인합니다" oninput="checkedPassword();"/>
-						<label id="labelPwd" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 1개 이상, 특수문자 1개 이상 포함</label>
+						<label id="labelPwd" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함</label>
 					</td>
 				</tr>
 				<tr>
@@ -92,12 +92,14 @@
 				url : "/crojecter/checkNickName.do",
 				type : "post",
 				success : function(data) {
-					if(nickname == "" || nickname == " ") {
+					if(nickname == "") {
 						$("#nickName").css("background-color", "white");
+						$("#labelNickname").css("visibility", "visible");
+						$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
 						nnChk = 0;
 					} else if(data == "success") {
 						// 닉네임 체크 성공시 정규식으로 한번더 검사해서 성공할 경우 아래 실행
-						var regNickname = /^[가-힣|a-z|A-Z|0-9]{2,10}$/;
+						var regNickname = /^[가-힣|ㄱ-ㅎ|a-z|A-Z|0-9]{2,10}$/;
 						
 						if(regNickname.test(nickname)) {
 							nnChk = 1;
@@ -107,10 +109,13 @@
 							nnChk = 0;
 							$("#nickName").css("background-color", "#FFA5A5");
 							$("#labelNickname").css("visibility", "visible");
+							$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
 						}
 					} else {
 						nnChk = 0;
 						$("#nickName").css("background-color", "#FFA5A5");
+						$("#labelNickname").css("visibility", "visible");
+						$("#labelNickname").text('중복된 닉네임 입니다.');
 					}
 				}
 			});
@@ -126,6 +131,8 @@
 				success : function(data) {
 					if(email == "") {
 						$("#email").css("background-color", "white");
+						$("#labelEmail").css("visibility", "visible");
+						$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
 						eChk = 0;
 					} else if(data == "success") {
 						// 이메일 체크 성공시 정규식으로 한번더 검사
@@ -139,10 +146,13 @@
 							eChk = 0;
 							$("#email").css("background-color", "#FFA5A5");
 							$("#labelEmail").css("visibility", "visible");
+							$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
 						}
 					} else {
 						eChk = 0;
 						$("#email").css("background-color", "#FFA5A5");
+						$("#labelEmail").css("visibility", "visible");
+						$("#labelEmail").text('중복된 이메일 입니다.');
 					}
 				}
 			});		
@@ -155,10 +165,16 @@
 			
 			if(emailChk == "") {
 				$("#emailCheck").css("background-color", "white");
+				$("#labelEmail").css("visibility", "visible");
+				eChk = 0;
 			} else if(email == emailChk) {
 				$("#emailCheck").css("background-color", "#B7F400");
+				$("#labelEmail").css("visibility", "hidden");
+				eChk = 1;
 			} else {
 				$("#emailCheck").css("background-color", "#FFA5A5");
+				$("#labelEmail").css("visibility", "visible");
+				eChk = 0;
 			}
 			memberVerify();
 		}
@@ -181,12 +197,14 @@
 					$("#passwordCheck").css("background-color", "#FFA5A5");
 					$("#labelPwd").css("visibility", "visible");
 				}
-			} else if (pwdChk == "") {
+			} else if (pwdChk == "" || pwd == "") {
 				$("#passwordCheck").css("background-color", "white");
+				$("#labelPwd").css("visibility", "visible");
 				pChk = 0;
 			} else {
 				pChk = 0;
 				$("#passwordCheck").css("background-color", "#FFA5A5");
+				$("#labelPwd").css("visibility", "visible");
 			}
 
 			memberVerify();
@@ -205,11 +223,6 @@
 		}
 
 		function singUpCheck() {
-
-			// 정규식으로 검사
-			var chkNickname = 0;
-			var chkEmail = 0;
-			var chkPwd = 0;
 
 			$("#form").submit();
 
