@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,7 +18,7 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>-->
-	<style>		
+	<style>
 	</style> 
 </head>
 <body>
@@ -76,15 +77,57 @@
 		</nav> -->
 		<%@ include file="views/common/header.jsp" %>
 		<!-- 슬라이드 -->
+		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
+				<li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
+				<li data-target="#carouselExampleCaptions" data-slide-to="2" class="active"></li>
+			</ol>
+		<div class="carousel-inner">
+		
 		<div class="carousel-item">
-		  <img src="la.jpg" alt="Los Angeles">
-		  <div class="carousel-caption">
-		    <h3>Los Angeles</h3>
-		    <p>We had such a great time in LA!</p>
-		  </div>
+		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide" alt="First slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02514%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02514%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9296875%22%20y%3D%22217.75625%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+		<div class="carousel-caption d-none d-md-block">
+		<h5>First slide label</h5>
+		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+		</div>
 		</div>
 		
+		<div class="carousel-item">
+		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02516%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02516%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.75625%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+		<div class="carousel-caption d-none d-md-block">
+		<h5>Second slide label</h5>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+		</div>
+		</div>
+		
+		<div class="carousel-item active">
+		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02517%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02517%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277.0078125%22%20y%3D%22217.75625%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
+		<div class="carousel-caption d-none d-md-block">
+		<h5>Third slide label</h5>
+		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+		</div>
+		</div>
+		</div>
+		
+		<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Previous</span>
+		</a>
+		<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Next</span>
+		</a>
+		</div>
+		
+		
+		
+		
 		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+			<table>
+			<tr>
+			<td id="content">제목 및 세부사항이 있을거에요</td>
+			<td >
 			<ol class="carousel-indicators">
 				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
 				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -92,15 +135,18 @@
 			</ol>
 			<div class="carousel-inner">
 				<div class="carousel-item active">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono1.jpg" alt="First slide" style="height: 300px; width: 300px;">
+				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono1.jpg" alt="First slide">
 				</div>
 				<div class="carousel-item">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono2.jpg" alt="Second slide" style="height: 300px; width: 300px;">
+				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono2.jpg" alt="Second slide">
 				</div>
 				<div class="carousel-item">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono3.jpg" alt="Third slide" style="height: 300px; width: 300px;">
+				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono3.jpg" alt="Third slide">
 				</div>
 			</div>
+			</td>
+			</tr>
+			</table>
 			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
@@ -110,32 +156,7 @@
 				<span class="sr-only">Next</span>
 			</a>
 		</div>
-		<!-- 순위 -->
-		<div style="width:300px; height:300px">
-			<h3> 인기태그 순위</h3>
-			<span>1</span><div class="progress">
-			  <div class="progress-bar bg-danger" style="width:80%"><apan>조회수</apan></div>
-			</div>
-			<span>2</span><div class="progress">
-			   <div class="progress-bar bg-warning" style="width:70%"><span>조회수</span></div>
-			</div>
-			<span>3</span><div class="progress">
-			  <div class="progress-bar bg-success" style="width:60%"><span>조회수</span></div>
-			</div>
-			<span>4</span><div class="progress">
-			  <div class="progress-bar bg-info" style="width:50%"><span>조회수</span></div>
-			</div>
-			<span>5</span><div class="progress">
-			  <div class="progress-bar " style="width:40%"><span>조회수</span></div>
-			</div>
-			<span>6</span><div class="progress">
-			  <div class="progress-bar" style="width:30%"><span>조회수</span></div>
-			</div>
-			<span>7</span><div class="progress">
-			  <div class="progress-bar" style="width:20%"><span>조회수</span></div>
-			</div>
-					
-		</div>
+		<!-- 인기태그 -->
 
 
 		<!-- 게시글보기 -->
@@ -172,191 +193,10 @@
 		<div class="card" style="width: 300px; height: auto; display: inline-block;">
 		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
 			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
+				<h5 class="card-title"><a href="">Card title  <span id="cid" class="badge" style="background:black; color:white;">5</span></a></h5>
 				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
 				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
 				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall2.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall3.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall4.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall5.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall6.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall7.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall8.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall2.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall3.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall4.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall5.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall6.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall7.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall8.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall2.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall3.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
 			</div>
 		</div>
 		<div class="card" style="width: 300px; height: auto; display: inline-block;">
@@ -370,7 +210,7 @@
 			</div>
 		</div>
 	
-		
+
 
 		<!-- 페이지 -->
 		<nav aria-label="..." class="pageNav"  style="float: right; position: absolute; left: 40%;">
@@ -399,6 +239,5 @@
 		<a name="bottom"></a>
 	<%@ include file="views/common/footer.jsp" %>
 </body>
-	<!-- 풋터 -->
 
 </html>
