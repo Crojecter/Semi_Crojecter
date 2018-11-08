@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member" %>
+<%
+	Member m = (Member)session.getAttribute("member");
+	System.out.println("m : " + m);
+%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
@@ -38,9 +43,12 @@
 
 
 <body>
+	<% if (m != null) { %>
+	<form action="<%= request.getContextPath() %>/gInsert.ga" >
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-md-1"></div>
 		<div class="col-md-8">
+		<input type="hidden" name="userId" value="<%= m.getMid() %>" />
 			<div id="summernote">
 				<p><br><br>당신만의 창작물을 작성해주세요.</p>
 			</div>
@@ -64,11 +72,14 @@
 			</select> 
 			<input type="text" placeholder="태그 입력(,로 구분)" style="width: 100%; height: 150px">
 
-			<button class="btn btn-success" id="insertBtn" onclick="showContent();">업로드</button>
+			<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
 		</div>
 		<div class="col-md-1"></div>
 	</div>
-	
+	</form>
+	<% } else { 
+		request.getRequestDispatcher("../member/login.jsp").forward(request, response);
+	 } %>
 	<div class="output"></div> 	<%--출력물을 보여주는 임시 div --%> 
 
 	<script>
@@ -86,6 +97,8 @@
 		function showContent() {
             $('.output').html($('#summernote').summernote('code'));
         }
+		
+		fuction 
 	</script>
 </body>
 </html>
