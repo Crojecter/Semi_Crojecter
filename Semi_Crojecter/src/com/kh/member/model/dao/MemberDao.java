@@ -10,6 +10,7 @@ import java.util.Properties;
 
 import com.kh.member.model.vo.Member;
 import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 public class MemberDao {
 	
@@ -166,4 +167,61 @@ public class MemberDao {
 		
 	}
 
+	public int updateMember(Connection con, Member m) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMname());
+			pstmt.setString(2, m.getMpwd());
+			pstmt.setString(3, m.getMemail());
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+
+	}
+
+	public int deleteMember(Connection con, String memail) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteMember");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, memail);
+
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+
+		} finally {
+			
+			close(pstmt);
+		}
+		
+		return result;
+	}	
 }
