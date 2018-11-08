@@ -10,23 +10,24 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-	input, label{
+	input, #text{
 		width:250px;
 		height:25px;
 		margin:1px 10px 1px 10px;
 	}
-	input[type=submit]{
+	button{
 		color:white;
 		text-align:center;
 		border-radius:5px;
 		height:40px;
+		width:250px;
 		font-size:15px;
 		margin:1px 10px 1px 10px;
 	}
 </style>
 </head>
 <body>
-	<form action="<%=request.getContextPath()%>/signUp.do" method="post">
+	<form name="form" action="<%=request.getContextPath()%>/signUp.do" method="post">
 		<div style="border:1px solid gray; height:auto; width:280px;">
 			<div style="margin: 10px 10px 1px 10px;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 			<table>
@@ -34,31 +35,40 @@
 					<td><hr /></td>
 				</tr>
 				<tr>
-					<td><label>닉네임</label></td>
+					<td><label id="text">닉네임</label></td>
 				</tr>
 				<tr>
-					<td><input type="text" name="nickName" id="nickName" placeholder="사용하실 닉네임을 입력해주세요" onchange="checkNickName();"/></td>
+					<td>
+						<input type="text" name="nickName" id="nickName" placeholder="사용하실 닉네임을 입력해주세요" oninput="checkNickName();"/>
+						<label id="labelNickname" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
+					</td>
 				</tr>
 				<tr>
-					<td><label>이메일 주소</label></td>
+					<td><label id="text">이메일 주소</label></td>
 				</tr>
 				<tr>
-					<td><input type="email" name="email" id="email" placeholder="이메일 주소를 입력해주세요" onchange="checkEmail();"/></td>
+					<td><input type="email" name="email" id="email" placeholder="이메일 주소를 입력해주세요" oninput="checkEmail();"/></td>
 				</tr>
 				<tr>
-					<td><input type="email" name="emailCheck" id="emailCheck" placeholder="이메일 주소를 확인합니다" onchange="checkedEmail();"/></td>
+					<td>
+						<input type="email" name="emailCheck" id="emailCheck" placeholder="이메일 주소를 확인합니다" oninput="checkedEmail();"/>
+						<label id="labelEmail" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >이메일 형식에 맞지 않습니다.</label>
+					</td>
 				</tr>
 				<tr>
-					<td><label>비밀번호</label></td>
+					<td><label id="text">비밀번호</label></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요" onchange="checkedPassword();"/></td>
+					<td><input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요" oninput="checkedPassword();"/></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호를 확인합니다" onchange="checkedPassword();"/></td>
+					<td>
+						<input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호를 확인합니다" oninput="checkedPassword();"/>
+						<label id="labelPwd" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함</label>
+					</td>
 				</tr>
 				<tr>
-					<td><input type="submit" id="submit" value="회원가입" style="border:1px solid gray; background-color:gray;" disabled /></td>
+					<td><button name="submit" id="submit" style="border:1px solid gray; background-color:gray;" onclick="singUpCheck();" disabled>회원가입</button></td>
 				</tr>
 				<tr>
 					<td><hr /></td>
@@ -84,13 +94,36 @@
 				success : function(data) {
 					if(nickname == "") {
 						$("#nickName").css("background-color", "white");
+						$("#labelNickname").css("visibility", "visible");
+						$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
 						nnChk = 0;
+						
+						memberVerify();
 					} else if(data == "success") {
-						nnChk = 1;
-						$("#nickName").css("background-color", "#B7F400");
+						// 닉네임 체크 성공시 정규식으로 한번더 검사해서 성공할 경우 아래 실행
+						var regNickname = /^[가-힣|ㄱ-ㅎ|a-z|A-Z|0-9]{2,10}$/;
+						
+						if(regNickname.test(nickname)) {
+							nnChk = 1;
+							$("#nickName").css("background-color", "#B7F400");
+							$("#labelNickname").css("visibility", "hidden");
+							
+							memberVerify();
+						} else {
+							nnChk = 0;
+							$("#nickName").css("background-color", "#FFA5A5");
+							$("#labelNickname").css("visibility", "visible");
+							$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
+							
+							memberVerify();
+						}
 					} else {
 						nnChk = 0;
 						$("#nickName").css("background-color", "#FFA5A5");
+						$("#labelNickname").css("visibility", "visible");
+						$("#labelNickname").text('중복된 닉네임 입니다.');
+						
+						memberVerify();
 					}
 				}
 			});
@@ -106,13 +139,71 @@
 				success : function(data) {
 					if(email == "") {
 						$("#email").css("background-color", "white");
+						$("#labelEmail").css("visibility", "visible");
+						$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
 						eChk = 0;
+						
+						memberVerify();
 					} else if(data == "success") {
-						eChk = 1;
-						$("#email").css("background-color", "#B7F400");
+						// 이메일 체크 성공시 정규식으로 한번더 검사
+						var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+						
+						if(regEmail.test(email)) {
+							
+							var emailChk = $("#emailCheck").val();
+							
+							if(emailChk == "") {
+								$("#email").css("background-color", "white");
+								$("#labelEmail").css("visibility", "visible");
+								eChk = 0;
+								
+								memberVerify();
+							} else if(email == emailChk) {
+								$("#email").css("background-color", "#B7F400");
+								$("#labelEmail").css("visibility", "hidden");
+								eChk = 1;
+								
+								memberVerify();
+							} else {
+								$("#email").css("background-color", "#FFA5A5");
+								$("#labelEmail").css("visibility", "visible");
+								eChk = 0;
+								
+								memberVerify();
+							}
+							
+							eChk = 1;
+							$("#email").css("background-color", "#B7F400");	
+							$("#labelEmail").css("visibility", "visible");
+							
+							if($("#emailCheck").val() == null) {
+								$("#labelEmail").text('이메일 확인부분 미입력');
+								$("#emailCheck").css("background-color", "#FFA5A5");
+								
+								memberVerify();
+							} else {
+								$("#labelEmail").text('이메일 확인부분 미입력');
+								$("#emailCheck").css("background-color", "#FFA5A5");
+								
+								memberVerify();
+							}
+							
+							memberVerify();
+						} else {
+							eChk = 0;
+							$("#email").css("background-color", "#FFA5A5");
+							$("#labelEmail").css("visibility", "visible");
+							$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
+							
+							memberVerify();
+						}
 					} else {
 						eChk = 0;
 						$("#email").css("background-color", "#FFA5A5");
+						$("#labelEmail").css("visibility", "visible");
+						$("#labelEmail").text('중복된 이메일 입니다.');
+						
+						memberVerify();
 					}
 				}
 			});		
@@ -122,39 +213,74 @@
 		function checkedEmail() {
 			var email = $("#email").val();
 			var emailChk = $("#emailCheck").val();
+			var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 			
-			if(emailChk == "") {
+			if(emailChk == "" && regEmail.test(email)) {
 				$("#emailCheck").css("background-color", "white");
+				$("#labelEmail").css("visibility", "visible");
+				$("#labelEmail").text('이메일 확인부분 미입력');
+				eChk = 0;
+				
+				memberVerify();
 			} else if(email == emailChk) {
 				$("#emailCheck").css("background-color", "#B7F400");
+				$("#labelEmail").css("visibility", "hidden");
+				eChk = 1;
+				
+				memberVerify();
 			} else {
 				$("#emailCheck").css("background-color", "#FFA5A5");
+				$("#labelEmail").css("visibility", "visible");
+				$("#labelEmail").text('이메일 미일치');
+				eChk = 0;
+				
+				memberVerify();
 			}
 			memberVerify();
 		}
+		
 		
 		function checkedPassword() {
 			var pwd = $("#password").val();
 			var pwdChk = $("#passwordCheck").val();
 			
-			if(pwd != "" && pwdChk != "" && pwd == pwdChk) {
-				pChk = 1;
-				//$("#password").css("background-color", "#B7F400");
-				$("#passwordCheck").css("background-color", "#B7F400");
-			} else if(pwdChk == "") {
+			if (pwd != "" && pwdChk != "" && pwd == pwdChk) {
+				// 비밀번호 정규식으로 검사
+				var regPwd = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,12}$/;
+				
+				if(regPwd.test(pwd)) {
+					pChk = 1;
+					$("#passwordCheck").css("background-color", "#B7F400");
+					$("#labelPwd").css("visibility", "hidden");
+					
+					memberVerify();
+				} else {
+					pChk = 0;
+					$("#passwordCheck").css("background-color", "#FFA5A5");
+					$("#labelPwd").css("visibility", "visible");
+					
+					memberVerify();
+				}
+				
+			} else if (pwdChk == "" || pwd == "") {
 				$("#passwordCheck").css("background-color", "white");
+				$("#labelPwd").css("visibility", "visible");
 				pChk = 0;
+				
+				memberVerify();
 			} else {
 				pChk = 0;
-				//$("#password").css("background-color", "#FFA5A5");
 				$("#passwordCheck").css("background-color", "#FFA5A5");
+				$("#labelPwd").css("visibility", "visible");
+				
+				memberVerify();
 			}
-			
+
 			memberVerify();
 		}
-		
-		function memberVerify(){
-			if(nnChk == 1 && eChk == 1 && pChk == 1){
+
+		function memberVerify() {
+			if (nnChk == 1 && eChk == 1 && pChk == 1) {
 				$("#submit").removeAttr("disabled");
 				$("#submit").css("background-color", "tomato");
 				$("#submit").css("border", "1px solid tomato");
@@ -164,7 +290,12 @@
 				$("#submit").css("border", "1px solid gray");
 			}
 		}
-		
+
+		function singUpCheck() {
+
+			$("#form").submit();
+
+		}
 	</script>
 </body>
 </html>
