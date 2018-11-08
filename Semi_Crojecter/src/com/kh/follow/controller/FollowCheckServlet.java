@@ -14,7 +14,7 @@ import com.kh.follow.model.service.FollowService;
 /**
  * Servlet implementation class FollowCheckServlet
  */
-@WebServlet("/checkFollow.fo")
+@WebServlet("/fCheck.fo")
 public class FollowCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

@@ -49,7 +49,7 @@
 		background : red;
 	}
 	
-	.disactive {
+	.unfollowBtn {
 		background : yellow;
 	}
 	
@@ -109,7 +109,7 @@
 			
 			<br>
 			
-			<button type="button" class="followBtn disactive" onclick="followWriter(this);">팔로우</button>
+			<button type="button" class="followBtn">팔로우</button>
 	
 		</div>
 
@@ -117,20 +117,18 @@
 
 	<script>
 
-
 		$(function() {
 				$.ajax({
-					url : "/crojecter/checkFollow.fo",
+					url : "/crojecter/fCheck.fo",
 					type : "get",
 					data : {
 						wid : <%=g.getBwriter()%>,
 						mid : <%=m.getMid()%>
 					},
 					success : function(data) {
-	
 						if(data == 'ok') {
 							console.log("이미 팔로우 한 상태");
-							$('.followBtn').removeClass('disactive');
+							$('.followBtn').attr('class','unfollowBtn');
 						} else if(data == 'no') {
 							console.log("아직 팔로우하지 않은 상태");
 						}
@@ -141,22 +139,20 @@
 				});
 		})
 
-	
-	
 		
-<%-- 		$("followBtn").click(function(){
+ 		$(".followBtn").click(function(){
 			$.ajax({
-				url : "/crojecter/check.fo",
+				url : "/crojecter/fInsert.fo",
 				type : "get",
 				data : {
-					bid : <%=g.getBid()%>,
+					wid : <%=g.getBwriter()%>,
+					mid : <%=m.getMid()%>
 				}, 
 				success : function(data){
 					
 					if(data == 'ok') {
 						console.log('ok');
-						$('followBtn').css('display', 'none');
-						$('unfollowBtn').css('display', 'inline');
+						$('.followBtn').attr('class','unfollowBtn');
 					} else {
 						console.log('no');
 					}
@@ -167,14 +163,32 @@
 				}
 			});
 		}); 
---%>
-		
+
+		$(".unfollowBtn").click(function(){
+			$.ajax({
+				url : "/crojecter/fDelete.fo",
+				type : "get",
+				data : {
+					wid : <%=g.getBwriter()%>,
+					mid : <%=m.getMid()%>
+				}, 
+				success : function(data){
+					
+					if(data == 'ok') {
+						console.log('ok');
+						$('.unfollowBtn').attr('class','followBtn');
+					} else {
+						console.log('no');
+					}
+				}, 
+				error : function(data){
+					console.log("follow 테스트 실패");
+				}
+			});
+		}); 
 		
 		
 	</script>
 	
-
-
-
 </body>
 </html>
