@@ -1,28 +1,23 @@
 package com.kh.board.gallery.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
-
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class GalleryUpdateServlet
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/gUpdate.ga")
+public class GalleryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public GalleryUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,27 +27,10 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		// 원글 내용 가져오고 수정 후 수정한 내용 DB에 저장
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		GalleryForDetail gfd = new GalleryService().selectOneGFD(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
-		
-		
-		String page = "";
-		if(gfd != null) {
-			
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			request.setAttribute("gfd", gfd);
-			//request.setAttribute("clist", clist);
-			
-		} else {
-			
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
-		}
-		
+		String page = "views/board/galleryDetail.jsp";
+
 		request.getRequestDispatcher(page).forward(request, response);
 		
 	}

@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.gallery.model.vo.*" %>
+<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member" %>
 
 <%
-	GalleryForDetail gfd = (GalleryForDetail)request.getAttribute("gallery");
+	Member m = (Member)session.getAttribute("member");
+	System.out.println("m : " + m);
 
-	// 댓글 리스트
+	Gallery g = (Gallery)request.getAttribute("gallery");
+	GalleryForDetail gfd = (GalleryForDetail)request.getAttribute("gfd");
+	
+	System.out.println("g : " + g);
+	System.out.println("gfd : " + gfd);
+	
 	//ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 %>
     
@@ -44,7 +50,6 @@
 </head>
 <body>
 
-<% //if(m != null ) { %>
 	<div class="outer">
 		<br>
 		<h2 align="center">게시글 내용</h2>
@@ -53,21 +58,21 @@
 			<table align="center" width="800px">
 				<tr>
 					<td>제목 </td>
-					<td colspan="5"><span><%= gfd.getBtitle() %></span></td>
+					<td colspan="5"><span><%= g.getBtitle() %></span></td>
 				</tr>
 				<tr>
 					<td>작성자 </td>
 					<td><span><%= gfd.getMname() %></span></td>
 					<td>작성일</td>
-					<td><span><%= gfd.getBdate() %></span></td>
+					<td><span><%= g.getBdate() %></span></td>
 					<td>조회수 </td>
-					<td><span><%= gfd.getBcount() %></span></td>
+					<td><span><%= g.getBcount() %></span></td>
 				</tr>
 				<tr>
 					<td>카테고리 </td>
 					<td><span><%= gfd.getGcategory() %></span></td>
 					<td>태그</td>
-					<td><span><%= gfd.getGtag() %></span></td>
+					<td><span><%= g.getGtag() %></span></td>
 					<td>ccl </td>
 					<td><span><%= gfd.getCclname() %></span></td>
 				</tr>
@@ -76,7 +81,7 @@
 				</tr>
 				<tr>
 					<td colspan="6">
-					<p id="content"><%= gfd.getBcontent() %>
+					<p id="content"><%= g.getBcontent() %>
 					</td>
 				</tr>
 			</table>
@@ -86,11 +91,24 @@
 		<div align="center">
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">팔로우</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">좋아요</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">목록</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">수정하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">후원하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
+			<button onclick="location.href='/crojecter/main.html'">목록</button>
+			
+			<% if(m != null && m.getMname().equals(gfd.getMname())){ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=gfd.getBid()%>">수정하기</button>
+			<% } %>
+
 		</div>
 		
 	</div>
+	
+	
+	<script>
+	
+	
+	
+	</script>
 
 
 </body>
