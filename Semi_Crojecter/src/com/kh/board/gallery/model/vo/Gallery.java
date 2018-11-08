@@ -7,7 +7,7 @@ import com.kh.board.common.model.Board;
 public class Gallery extends Board implements Serializable {
 
 	private int gid;
-	private String gcategory;
+	private int gcategory;
 	private String gtag;
 	private int glike;
 	private int cclid;
@@ -16,7 +16,7 @@ public class Gallery extends Board implements Serializable {
 		super();
 	}
 	
-	public Gallery(int gid, String gcategory, String gtag, int glike, int cclid) {
+	public Gallery(int gid, int gcategory, String gtag, int glike, int cclid) {
 		super();
 		this.gid = gid;
 		this.gcategory = gcategory;
@@ -33,11 +33,11 @@ public class Gallery extends Board implements Serializable {
 		this.gid = gid;
 	}
 
-	public String getGcategory() {
+	public int getGcategory() {
 		return gcategory;
 	}
 
-	public void setGcategory(String gcategory) {
+	public void setGcategory(int gcategory) {
 		this.gcategory = gcategory;
 	}
 

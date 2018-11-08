@@ -1,37 +1,24 @@
 package com.kh.board.gallery.model.vo;
 
-import java.sql.Date;
-
 public class GalleryForDetail {
 
 	private int bid;
 	private int gid;
-	private String btitle;
-	private String bcontent;
 	private String mprofile;
 	private String mname;
 	private String gcategory;
 	private String cclname;
-	private String gtag;
-	private int bcount;
-	private Date bdate;
 	
 	public GalleryForDetail() {}
 	
-	public GalleryForDetail(int bid, int gid, String btitle, String bcontent, String mprofile, String mname,
-			String gcategory, String cclname, String gtag, int bcount, Date bdate) {
+	public GalleryForDetail(int bid, int gid, String mprofile, String mname, String gcategory, String cclname) {
 		super();
 		this.bid = bid;
 		this.gid = gid;
-		this.btitle = btitle;
-		this.bcontent = bcontent;
 		this.mprofile = mprofile;
 		this.mname = mname;
 		this.gcategory = gcategory;
 		this.cclname = cclname;
-		this.gtag = gtag;
-		this.bcount = bcount;
-		this.bdate = bdate;
 	}
 
 	public int getBid() {
@@ -48,22 +35,6 @@ public class GalleryForDetail {
 
 	public void setGid(int gid) {
 		this.gid = gid;
-	}
-
-	public String getBtitle() {
-		return btitle;
-	}
-
-	public void setBtitle(String btitle) {
-		this.btitle = btitle;
-	}
-
-	public String getBcontent() {
-		return bcontent;
-	}
-
-	public void setBcontent(String bcontent) {
-		this.bcontent = bcontent;
 	}
 
 	public String getMprofile() {
@@ -98,35 +69,10 @@ public class GalleryForDetail {
 		this.cclname = cclname;
 	}
 
-	public String getGtag() {
-		return gtag;
-	}
-
-	public void setGtag(String gtag) {
-		this.gtag = gtag;
-	}
-	
-	public int getBcount() {
-		return bcount;
-	}
-
-	public void setBcount(int bcount) {
-		this.bcount = bcount;
-	}
-
-	public Date getBdate() {
-		return bdate;
-	}
-
-	public void setBdate(Date bdate) {
-		this.bdate = bdate;
-	}
-
 	@Override
 	public String toString() {
-		return "GalleryForDetail [bid=" + bid + ", gid=" + gid + ", btitle=" + btitle + ", bcontent=" + bcontent
-				+ ", mprofile=" + mprofile + ", mname=" + mname + ", gcategory=" + gcategory + ", cclname=" + cclname
-				+ ", gtag=" + gtag + ", bcount=" + bcount + ", bdate=" + bdate + "]";
+		return "GalleryForDetail [bid=" + bid + ", gid=" + gid + ", mprofile=" + mprofile + ", mname=" + mname
+				+ ", gcategory=" + gcategory + ", cclname=" + cclname + "]";
 	}
 
 }
