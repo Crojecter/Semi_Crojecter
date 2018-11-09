@@ -45,4 +45,19 @@ public class Service {
 		
 	}
 
+	public String searchNickName(String email) {
+
+		String result = null;
+		
+		con = getConnection();
+		
+		result = dao.searchNickName(con, email);
+		
+		if(result != null) commit(con);
+		else rollback(con);
+		
+		return result;
+		
+	}
+
 }
