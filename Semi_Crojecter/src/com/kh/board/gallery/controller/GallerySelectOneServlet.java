@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 /**
  * Servlet implementation class GallerySelectOneServlet
@@ -35,20 +34,16 @@ public class GallerySelectOneServlet extends HttpServlet {
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
 		Gallery g = new GalleryService().selectOne(bid);
-		GalleryForDetail gfd = new GalleryService().selectOneGFD(bid);
 		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
 		
 		
 		String page = "";
-		if(gfd != null) {
-			
+		if(g != null) {
 			page = "views/board/galleryDetail.jsp";
 			request.setAttribute("gallery", g);
-			request.setAttribute("gfd", gfd);
 			//request.setAttribute("clist", clist);
 			
 		} else {
-			
 			page = "views/common/errorPage.jsp";
 			request.setAttribute("msg", "갤러리 상세보기 실패!");
 		}

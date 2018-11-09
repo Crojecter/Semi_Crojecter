@@ -7,22 +7,26 @@ import com.kh.board.common.model.Board;
 public class Gallery extends Board implements Serializable {
 
 	private int gid;
-	private int gcategory;
+	private int gcategoryid;
 	private String gtag;
 	private int glike;
 	private int cclid;
+	private String gcategoryname;
+	private String cclname;
 	
 	public Gallery() {
 		super();
 	}
-	
-	public Gallery(int gid, int gcategory, String gtag, int glike, int cclid) {
+
+	public Gallery(int gid, int gcategoryid, String gtag, int glike, int cclid, String gcategoryname, String cclname) {
 		super();
 		this.gid = gid;
-		this.gcategory = gcategory;
+		this.gcategoryid = gcategoryid;
 		this.gtag = gtag;
 		this.glike = glike;
 		this.cclid = cclid;
+		this.gcategoryname = gcategoryname;
+		this.cclname = cclname;
 	}
 
 	public int getGid() {
@@ -33,12 +37,12 @@ public class Gallery extends Board implements Serializable {
 		this.gid = gid;
 	}
 
-	public int getGcategory() {
-		return gcategory;
+	public int getGcategoryid() {
+		return gcategoryid;
 	}
 
-	public void setGcategory(int gcategory) {
-		this.gcategory = gcategory;
+	public void setGcategoryid(int gcategoryid) {
+		this.gcategoryid = gcategoryid;
 	}
 
 	public String getGtag() {
@@ -65,14 +69,31 @@ public class Gallery extends Board implements Serializable {
 		this.cclid = cclid;
 	}
 
+	public String getGcategoryname() {
+		return gcategoryname;
+	}
+
+	public void setGcategoryname(String gcategoryname) {
+		this.gcategoryname = gcategoryname;
+	}
+
+	public String getCclname() {
+		return cclname;
+	}
+
+	public void setCclname(String cclname) {
+		this.cclname = cclname;
+	}
+
 	@Override
 	public String toString() {
-		return "Gallery [gid=" + gid + ", gcategory=" + gcategory + ", gtag=" + gtag + ", glike=" + glike + ", cclid="
-				+ cclid + ", getBid()=" + getBid() + ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle()
-				+ ", getBcontent()=" + getBcontent() + ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate()
-				+ ", getBstatus()=" + getBstatus() + ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount()
-				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ "]";
-	}	
+		return "Gallery [gid=" + gid + ", gcategoryid=" + gcategoryid + ", gtag=" + gtag + ", glike=" + glike
+				+ ", cclid=" + cclid + ", gcategoryname=" + gcategoryname + ", cclname=" + cclname + ", getBid()="
+				+ getBid() + ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle() + ", getBcontent()="
+				+ getBcontent() + ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate() + ", getBstatus()="
+				+ getBstatus() + ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString() + "]";
+	}
+	
 	
 }

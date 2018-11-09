@@ -7,7 +7,6 @@ import java.sql.Connection;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 public class GalleryService {
 	
@@ -25,16 +24,6 @@ public class GalleryService {
 		return g;
 	}
 	
-	public GalleryForDetail selectOneGFD(int bid) {
-
-		Connection con = getConnection();
-		
-		GalleryForDetail gfd = gDao.selectOneGFD(con, bid);
-		
-		close(con);
-		
-		return gfd;
-	}
 
 	public Gallery updateView(int bid) {
 		
