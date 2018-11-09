@@ -18,6 +18,20 @@ public class GalleryForDetail {
 	
 	public GalleryForDetail() {}
 	
+	public GalleryForDetail(int bid, int gid, String btitle, String bcontent, String mname, String gcategory, String gtag, int bcount,
+			Date bdate) {
+		super();
+		this.bid = bid;
+		this.gid = gid;
+		this.btitle = btitle;
+		this.bcontent = bcontent;
+		this.mname = mname;
+		this.gcategory = gcategory;
+		this.gtag = gtag;
+		this.bcount = bcount;
+		this.bdate = bdate;
+	}
+
 	public GalleryForDetail(int bid, int gid, String btitle, String bcontent, String mprofile, String mname,
 			String gcategory, String cclname, String gtag, int bcount, Date bdate) {
 		super();
