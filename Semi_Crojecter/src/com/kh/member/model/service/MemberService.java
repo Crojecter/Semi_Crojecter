@@ -44,13 +44,13 @@ public class MemberService {
 
 	}
 
-	public int sendEmail(Member m) {
+	public int selectEmail(Member m) {
 		
 		int result = 0;
 		
 		con = getConnection();
 		
-		result = mDao.sendEmail(con, m);
+		result = mDao.selectEmail(con, m);
 		
 		if(result > 0) commit(con);
 		else rollback(con);
@@ -60,13 +60,13 @@ public class MemberService {
 		return result;
 	}
 
-	public int rndPwd(String tempPassword, Member m) {
+	public int updateRandomPwd(String tempPassword, Member m) {
 		
 		int result = 0;
 		
 		con = getConnection();
 		
-		result = mDao.rndPwd(con, tempPassword, m);
+		result = mDao.updateRandomPwd(con, tempPassword, m);
 		
 		if(result > 0) commit(con);
 		else rollback(con);

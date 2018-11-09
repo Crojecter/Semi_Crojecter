@@ -109,7 +109,7 @@ public class MemberDao {
 		
 	}
 
-	public int sendEmail(Connection con, Member m) {
+	public int selectEmail(Connection con, Member m) {
 
 		int result = 0;
 		
@@ -138,7 +138,7 @@ public class MemberDao {
 		
 	}
 
-	public int rndPwd(Connection con, String tempPassword, Member m) {
+	public int updateRandomPwd(Connection con, String tempPassword, Member m) {
 		
 		int result = 0;
 		
