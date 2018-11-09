@@ -1,8 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.spon.model.vo.*"
-    import = "com.kh.payment.model.vo.*"%>
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
+    import = "com.kh.payment.model.vo.*, com.kh.member.model.vo.*, com.kh.spon.model.vo.*, java.util.*"%>
+<% 
 	Member m = (Member)session.getAttribute("member");
+	ArrayList<Spon> slist = (ArrayList<Spon>)request.getAttribute("list");
+	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("list"); 
 %>
 <!DOCTYPE html>
 <html>
@@ -28,47 +29,48 @@
 </head>
 <body>
 <label>후원 내역</label>
+<form id="sponForm" action="<%=request.getContextPath()%>/sponSelect.do" method="post">
 <table class="sponTable">
 	<thead class="sThead">
 	<tr> 
 		<th>날짜</th>
 		<th>내용</th>
 		<th>사용내역</th>
-		<th>잔액</th>
 		<th>비고</th>
 	</tr>
 	</thead>
 	<tbody>
+	<% for(Spon s : slist){ %>
 	<tr>
-		<td value=""></td>
-		<td value=""></td>
-		<td value=""></td>
-		<td value=""></td>
+		<td><%=s.getSdate() %></td>
+		<td><%=s.getSreceivername() %></td>
+		<td><%=s.getShodu() %></td>
 		<td></td>
 	</tr>
+	<% } %>
 	</tbody>
 </table>
 <label>충전 내역</label>
+<form id="paymentForm" action="<%=request.getContextPath()%>/paymentSelect.do" method="post">
 <table class="paymentTable">
 	<thead class="pThead">
 	<tr> 
 		<th>날짜</th>
-		<th>내용</th>
 		<th>충전내역</th>
-		<th>잔액</th>
 		<th>비고</th>
 	</tr>
+	
 	</thead>
 	<tbody>
+	<% for(Payment p : plist){ %>
 	<tr>
-		<td value=""></td>
-		<td value=""></td>
-		<td value=""></td>
-		<td value=""></td>
+		<td><%=p.getPdate() %></td>
+		<td><%=p.getPmoney() %></td>
 		<td></td>
 	</tr>
+	<% } %>
 	</tbody>
 </table>
-<label>호두 잔액</label><input type="text" value="개">
+<label>현재 호두 잔액</label><input <%=m.getMhodu() %>>
 </body>
 </html>

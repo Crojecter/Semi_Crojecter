@@ -6,12 +6,9 @@
 	System.out.println("m : " + m);
 
 	Gallery g = (Gallery)request.getAttribute("gallery");
-	GalleryForDetail gfd = (GalleryForDetail)request.getAttribute("gfd");
+	//ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 	
 	System.out.println("g : " + g);
-	System.out.println("gfd : " + gfd);
-	
-	//ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 %>
     
 <!DOCTYPE html>
@@ -71,7 +68,7 @@
 				</tr>
 				<tr>
 					<td>작성자 </td>
-					<td><span><%= gfd.getMname() %></span></td>
+					<td><span><%= g.getMname() %></span></td>
 					<td>작성일</td>
 					<td><span><%= g.getBdate() %></span></td>
 					<td>조회수 </td>
@@ -79,11 +76,11 @@
 				</tr>
 				<tr>
 					<td>카테고리 </td>
-					<td><span><%= gfd.getGcategory() %></span></td>
+					<td><span><%= g.getGcategoryname() %></span></td>
 					<td>태그</td>
 					<td><span><%= g.getGtag() %></span></td>
 					<td>ccl </td>
-					<td><span><%= gfd.getCclname() %></span></td>
+					<td><span><%= g.getCclname() %></span></td>
 				</tr>
 				<tr>
 					<td colspan="6">내용 </td>
@@ -103,8 +100,8 @@
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
 			<button onclick="location.href='/crojecter/main.html'">목록</button>
 			
-			<% if(m != null && m.getMname().equals(gfd.getMname())){ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=gfd.getBid()%>">수정하기</button>
+			<% if(m != null && m.getMid() == g.getBwriter()){ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
 			<% } %>
 			
 			<br>

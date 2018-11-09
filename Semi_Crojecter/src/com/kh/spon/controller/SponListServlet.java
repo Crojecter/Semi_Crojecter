@@ -1,6 +1,7 @@
-package com.kh.board.gallery.controller;
+package com.kh.spon.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.spon.model.service.SponService;
+import com.kh.spon.model.vo.Spon;
 
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class SelectPaymentList
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/sponSelect.do")
+public class SponListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public SponListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,25 +31,20 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		ArrayList<Spon> list = null;
+		SponService ss = new SponService();
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
+		list = ss.selectlist();
 		
-		
-		String page = "";
-		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
+		if(list != null){
+			
+			request.setAttribute("list", list);
 			
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
+			
+			request.setAttribute("msg", "조회 실패!");
+			
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
 		
 	}
 

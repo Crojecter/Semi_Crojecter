@@ -1,6 +1,7 @@
 package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,16 +13,16 @@ import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
 
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class SelectGalleryListServlet
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/selectList.ga")
+public class SelectGalleryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public SelectGalleryListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +31,23 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		// 갤러리 목록조회 서블릿
+		ArrayList<Gallery> list = null;
+		list = new GalleryService().selectGalleryList();
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
-		
+		System.out.println(list);
 		
 		String page = "";
-		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
+		
+		if (list != null){
+			page = "galleryMain.jsp";
+			request.setAttribute("list", list);
 			
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
+			request.setAttribute("msg", "갤러리 목록조회 실패");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**
