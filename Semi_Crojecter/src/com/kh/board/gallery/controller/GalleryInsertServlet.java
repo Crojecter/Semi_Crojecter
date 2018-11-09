@@ -92,7 +92,7 @@ public class GalleryInsertServlet extends HttpServlet {
 			g.setBtitle(mrequest.getParameter("title"));
 			g.setBcontent(mrequest.getParameter("content"));
 			g.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
-			g.setGcategory(Integer.parseInt(mrequest.getParameter("category")));
+			g.setGcategoryid(Integer.parseInt(mrequest.getParameter("category")));
 			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
 			g.setGtag(mrequest.getParameter("tags"));
 			

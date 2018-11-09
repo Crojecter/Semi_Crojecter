@@ -44,7 +44,7 @@ public class sendEmail extends HttpServlet {
 		int result = ms.sendEmail(m);
 		
 		// 임시비밀번호 발생
-		String tempPassword = "";
+		/*String tempPassword = "";
 
 		for (int i = 0; i < 8; i++) {
 
@@ -58,14 +58,16 @@ public class sendEmail extends HttpServlet {
 				tempPassword += (char) (rndVal + 55);
 			}
 
-		}
+		}*/
 		
-		request.setAttribute("tempPassword", tempPassword);
+		//request.setAttribute("tempPassword", tempPassword);
 		
 		if(result > 0) {
 			
 			// 임시비밀번호로 업데이트 (업데이트하고난 후 로그인 안됨)
 			String tempPwd = request.getParameter("tempPassword");
+			String whatPwd = request.getParameter("tempPwd");
+			System.out.println("임시 비밀번호 : " + whatPwd);
 			
 			int resultPwd = ms.rndPwd(tempPwd, m);
 			

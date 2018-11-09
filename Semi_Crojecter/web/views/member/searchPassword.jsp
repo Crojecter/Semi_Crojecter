@@ -1,6 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% String tempPwd = (String)request.getAttribute("tempPassword"); %>
+<%
+	String tempPassword = "";
+
+	for (int i = 0; i < 8; i++) {
+
+		int rndVal = (int) (Math.random() * 62);
+
+		if (rndVal < 10) {
+			tempPassword += rndVal;
+		} else if (rndVal > 35) {
+			tempPassword += (char) (rndVal + 61);
+		} else {
+			tempPassword += (char) (rndVal + 55);
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +59,10 @@
 		<form action="<%=request.getContextPath()%>/send.do">
 			<input type="text" name="nickName" placeholder="가입하신 닉네임" style="width:250px; font-size:20px; margin-bottom:10px;" /><br>
 			<input type="email" name="email" placeholder="가입하신 이메일 주소" style="width:250px; font-size:20px;" /><br>
+			<input type="text" name="tempPassword" style="visibility:hidden;" value="<%= tempPassword %>"/>
+			<input type="text" name="tempPwd" style="visibility:hidden;" value="<%= tempPassword %>"/>
 			<input type="submit" id="submit" value="임시 비밀번호 받기" />
 		</form>
-		<label name="tempPassword" style="visibility:hidden;"><%= tempPwd %></label>
 	</div>
 </body>
 </html>
