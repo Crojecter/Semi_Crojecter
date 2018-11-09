@@ -5,9 +5,12 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.vo.Gallery;
@@ -73,6 +76,52 @@ public class GalleryDao {
 		}
 		
 		return g;
+	}
+
+	public ArrayList<Gallery> selectList(Connection con) {
+		Statement stmt = null;
+		ArrayList<Gallery> list = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			stmt = con.createStatement();
+		
+			rset = stmt.executeQuery(sql);
+			
+			list = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setBcontent(rset.getString("BCONTENT"));
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BTYPE"));
+				
+				list.add(g);
+			}
+			
+		} catch (SQLException e) {
+		 
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
 	}
 
 }

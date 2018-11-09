@@ -3,159 +3,96 @@
 
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Gallery Main</title>
+	<head>
 	<meta charset="UTF-8">
-<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	bootstrap css include
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/main.css">
-	bootstrap js include
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-	<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>-->
-	<style>
-	</style> 
-</head>
-<body>
-		<!-- 헤더 -->
-		<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a href="mainLink"><img src="../resource/image/LogoImage.png" style="height:50px"></a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-		
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				왼쪽&nbsp;&nbsp;&nbsp;
-				<ul class="navbar-nav mr-auto">
-					갤러리
-					<li class="galleryLink">
-					<h4><a class="galleryLink" href="galleryLink">갤러리</a> &nbsp;&nbsp;&nbsp;</h4>
-					</li>
-					프로젝트
-					<li class="projectLink">
-					<h4><a class="projectLink" href="projectLink">프로젝트</a></h4>
-					</li>
-				</ul>
-				오른쪽
-				<form class="form-inline my-2 my-lg-0">
-					<ul class="navbar-nav mr-auto">
-						알람
-						<li>
-						<button type="button" class="btn btn-primary" data-toggle="tooltip" title="" 
-						data-original-title="읽지않은 알림메세지가 있을수도 있고 없을수도 있습니다.">
-						<img src="../resource/image/alarm.png" style="height:30px"><span class="badge badge-light">0</span>
-						<span class="sr-only">unread messages</span>
-						</button>
-						<script>
-							$(document).ready(function(){
-								$('[data-toggle="tooltip"]').tooltip(); 
-							});
-						</script>	
-						프로필
-						<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="../resource/image/user.png" style="height: 30px;">
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<a class="dropdown-item" href="walnut">호두충전</a>
-							<a class="dropdown-item" href="myPageLink">마이페이지</a>
-							<a class="dropdown-item" href="logout">로그아웃</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><img src="../resource/image/gal/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
-						</div>
-					</ul>
-					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit"><img src="../resource/image/gal/search.png" alt="" style="height:20px;"></button> &nbsp;
-					<button class="btn btn-outline-success my-2 my-sm-0" type="button"><a href="writePage"><img src="../resource/image/gal/upload.png" alt="" style="height:20px;"></a></button>
-				</form>
-			</div>
-		</nav> -->
+	<title>Gallery Main</title>
+		<meta charset="UTF-8">
+	<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+		bootstrap css include
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/main.css">
+		bootstrap js include
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	
+		<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>-->
+		<style>
+		.d-block w-100{ height:300px;}
+		</style> 
+	</head>
+	<body>
 		<%@ include file="views/common/header.jsp" %>
 		<!-- 슬라이드 -->
-		<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleCaptions" data-slide-to="0" class=""></li>
-				<li data-target="#carouselExampleCaptions" data-slide-to="1" class=""></li>
-				<li data-target="#carouselExampleCaptions" data-slide-to="2" class="active"></li>
-			</ol>
-		<div class="carousel-inner">
-		
-		<div class="carousel-item">
-		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=777&amp;fg=555&amp;text=First slide" alt="First slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02514%20text%20%7B%20fill%3A%23555%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02514%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22285.9296875%22%20y%3D%22217.75625%22%3EFirst%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-		<div class="carousel-caption d-none d-md-block">
-		<h5>First slide label</h5>
-		<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-		</div>
-		</div>
-		
-		<div class="carousel-item">
-		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=666&amp;fg=444&amp;text=Second slide" alt="Second slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02516%20text%20%7B%20fill%3A%23444%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02516%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23666%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22247.3203125%22%20y%3D%22217.75625%22%3ESecond%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-		<div class="carousel-caption d-none d-md-block">
-		<h5>Second slide label</h5>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-		</div>
-		</div>
-		
-		<div class="carousel-item active">
-		<img class="d-block w-100" data-src="holder.js/800x400?auto=yes&amp;bg=555&amp;fg=333&amp;text=Third slide" alt="Third slide [800x400]" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f1f02517%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f1f02517%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277.0078125%22%20y%3D%22217.75625%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
-		<div class="carousel-caption d-none d-md-block">
-		<h5>Third slide label</h5>
-		<p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-		</div>
-		</div>
-		</div>
-		
-		<a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="sr-only">Previous</span>
-		</a>
-		<a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="sr-only">Next</span>
-		</a>
-		</div>
-		
-		
-		
-		
-		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-			<table>
-			<tr>
-			<td id="content">제목 및 세부사항이 있을거에요</td>
-			<td >
-			<ol class="carousel-indicators">
-				<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-				<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-			</ol>
-			<div class="carousel-inner">
-				<div class="carousel-item active">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono1.jpg" alt="First slide">
-				</div>
-				<div class="carousel-item">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono2.jpg" alt="Second slide">
-				</div>
-				<div class="carousel-item">
-				<img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/bonobono3.jpg" alt="Third slide">
-				</div>
+
+
+		<div id="demo1" class="carousel slide" data-ride="carousel">
+		  <ul class="carousel-indicators" style="z-index:1">
+		    <li data-target="#demo1" data-slide-to="0" class="active"></li>
+		    <li data-target="#demo1" data-slide-to="1" class=""></li>
+		    <li data-target="#demo1" data-slide-to="2" class=""></li>
+		    <li data-target="#demo1" data-slide-to="3" class="active"></li>
+		    <li data-target="#demo1" data-slide-to="4" class=""></li>
+		    <li data-target="#demo1" data-slide-to="5" class=""></li>
+		  </ul>
+		  <div class="carousel-inner">
+		    <div class="carousel-item active">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg1.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>11111111</h3>
+		        <p>We had such a great time in LA!</p>
+		      </div>   
+		    </div>
+		    <div class="carousel-item">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg2.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>2222222</h3>
+		        <p>Thank you, Chicago!</p>
+		      </div>   
+		    </div>
+		    <div class="carousel-item">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg3.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>3333333</h3>
+		        <p>We love the Big Apple!</p>
+		      </div>   
+		    </div>
+		    <div class="carousel-item">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg4.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>4444444</h3>
+		        <p>Thank you, Chicago!</p>
+		      </div>   
+		    </div>  
+		    <div class="carousel-item">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg5.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>5555555</h3>
+		        <p>Thank you, Chicago!</p>
+		      </div>   
+		    </div>  
+		    <div class="carousel-item">
+		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg6.jpg" alt="" data-holder-rendered="true">
+		      <div class="carousel-caption">
+		        <h3>6666666</h3>
+		        <p>Thank you, Chicago!</p>
+		      </div>   
+		    </div>
 			</div>
-			</td>
-			</tr>
-			</table>
-			<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-				<span class="sr-only">Previous</span>
-			</a>
-			<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-				<span class="carousel-control-next-icon" aria-hidden="true"></span>
-				<span class="sr-only">Next</span>
-			</a>
+		
+		
+		  <a class="carousel-control-prev" href="#demo1" data-slide="prev">
+		    <span class="carousel-control-prev-icon"></span>
+		  </a>
+		  <a class="carousel-control-next" href="#demo1" data-slide="next">
+		    <span class="carousel-control-next-icon"></span>
+		  </a>
 		</div>
+
+
+
+
 		<!-- 인기태그 -->
 
 

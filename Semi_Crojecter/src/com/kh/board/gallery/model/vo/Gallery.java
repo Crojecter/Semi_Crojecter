@@ -6,16 +6,24 @@ import com.kh.board.common.model.Board;
 
 public class Gallery extends Board implements Serializable {
 
-	private int gid;
-	private int gcategoryid;
-	private String gtag;
-	private int glike;
-	private int cclid;
-	private String gcategoryname;
-	private String cclname;
+	private int gid;				// 게시글 id
+	private int gcategoryid;		// 게시글 종류 id
+	private String gtag;			// 게시글 태그
+	private int glike;				// 게시글 좋아요 
+	private int cclid;				// 게시글 저작권정보 id
+	private String gcategoryname;	// 게시글 종류명
+	private String cclname;			// 게시글 저작권정보명
 	
 	public Gallery() {
 		super();
+	}
+  
+	public Gallery(int gid, int gcategoryid, String gtag, int glike) {
+		super();
+		this.gid = gid;
+		this.gcategoryid = gcategoryid;
+		this.gtag = gtag;
+		this.glike = glike;
 	}
 
 	public Gallery(int gid, int gcategoryid, String gtag, int glike, int cclid, String gcategoryname, String cclname) {

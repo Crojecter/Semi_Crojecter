@@ -4,6 +4,7 @@ import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.board.gallery.model.vo.Gallery;
@@ -34,6 +35,21 @@ public class GalleryService {
 		close(con);
 		
 		return g;
+	}
+
+
+
+	public ArrayList<Gallery> selectGalleryList() {
+		// 		Connection con = getConnection();
+		GalleryDao gDao = new GalleryDao();
+				
+		Connection con = getConnection();
+				
+		ArrayList<Gallery> list = gDao.selectList(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 
