@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
-import com.kh.board.attachedmentfile.model.vo.AttachedFile;
+import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
 import com.oreilly.servlet.MultipartRequest;
@@ -23,13 +23,13 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
  * Servlet implementation class GalleryInsertServler
  */
 @WebServlet("/gInsert.ga")
-public class GalleryInsertServler extends HttpServlet {
+public class GalleryInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryInsertServler() {
+    public GalleryInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -92,6 +92,12 @@ public class GalleryInsertServler extends HttpServlet {
 			g.setBtitle(mrequest.getParameter("title"));
 			g.setBcontent(mrequest.getParameter("content"));
 			g.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
+			g.setGcategory(Integer.parseInt(mrequest.getParameter("category")));
+			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
+			g.setGtag(mrequest.getParameter("tags"));
+			
+			System.out.println("tags : " + mrequest.getParameter("tags"));
+			
 			
 			// Attachment에 기록하기 위한 파일 리스트 처리하기
 			ArrayList<AttachedFile> list = new ArrayList<AttachedFile>();

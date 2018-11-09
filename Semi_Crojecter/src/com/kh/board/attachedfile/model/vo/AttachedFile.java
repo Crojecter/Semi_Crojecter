@@ -1,4 +1,4 @@
-package com.kh.board.attachedmentfile.model.vo;
+package com.kh.board.attachedtfile.model.vo;
 
 public class AttachedFile {
 	
