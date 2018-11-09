@@ -5,7 +5,6 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 public class GalleryDao {
 	
@@ -47,13 +48,11 @@ public class GalleryDao {
 				g = new Gallery();
 				
 				g.setGid(rset.getInt("gid"));
-				g.setGcategoryid(rset.getInt("gcategoryid"));
+				g.setGcategory(rset.getInt("gcategory"));
 				g.setGtag(rset.getString("gtag"));
 				g.setGlike(rset.getInt("glike"));
 				g.setBid(rset.getInt("bid"));
 				g.setCclid(rset.getInt("cclid"));
-				g.setGcategoryname(rset.getString("gcategoryname"));
-				g.setCclname(rset.getString("cclname"));
 				g.setBtype(rset.getInt("btype"));
 				g.setBtitle(rset.getString("btitle"));
 				g.setBcontent(rset.getString("bcontent"));
@@ -62,9 +61,6 @@ public class GalleryDao {
 				g.setBstatus(rset.getString("bstatus"));
 				g.setBrcount(rset.getInt("brcount"));
 				g.setBwriter(rset.getInt("bwriter"));
-				g.setMprofile(rset.getString("mprofile"));
-				g.setMname(rset.getString("mname"));
-				
 				
 				//System.out.println("gdao g : " + g);
 			}
@@ -78,50 +74,133 @@ public class GalleryDao {
 		return g;
 	}
 
-	public ArrayList<Gallery> selectList(Connection con) {
-		Statement stmt = null;
-		ArrayList<Gallery> list = null;
-		ResultSet rset = null;
+	public GalleryForDetail selectOneGFD(Connection con, int bid) {
 		
-		String sql = prop.getProperty("selectList");
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		GalleryForDetail gfd = null;
+		
+		String bSql = prop.getProperty("selectOneGfd");
+				
+		try {
+			pstmt = con.prepareStatement(bSql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				gfd = new GalleryForDetail();
+				
+				gfd.setBid(rset.getInt("bid"));
+				gfd.setGid(rset.getInt("gid"));
+				gfd.setMprofile(rset.getString("mprofile"));
+				gfd.setMname(rset.getString("mname"));
+				gfd.setGcategory(rset.getString("gcategory"));
+				gfd.setCclname(rset.getString("cclname"));
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return gfd;
+	}
+
+
+	public int insertGalleryContent(Connection con, Gallery g) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertGallery");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, g.getGcategory());
+			pstmt.setString(2, g.getGtag());
+			pstmt.setInt(3, g.getCclid());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	public int selectCurrentBid(Connection con) {
+		Statement stmt = null;
+		ResultSet rset = null;
+		int bid = 0;
+		
+		String sql = prop.getProperty("selectCurrentBid");
 		
 		try {
 			stmt = con.createStatement();
 		
 			rset = stmt.executeQuery(sql);
 			
-			list = new ArrayList<Gallery>();
-			
-			while(rset.next()){
-				Gallery g = new Gallery();
-				
-				g.setGid(rset.getInt("GID"));
-				g.setGcategoryid(rset.getInt("GCATEGORYID"));
-				g.setGtag(rset.getString("GTAG"));
-				g.setGlike(rset.getInt("GLIKE"));
-				g.setBid(rset.getInt("BID"));
-				g.setBtype(rset.getInt("BTYPE"));
-				g.setBtitle(rset.getString("BTITLE"));
-				g.setBcontent(rset.getString("BCONTENT"));
-				g.setBcount(rset.getInt("BCOUNT"));
-				g.setBdate(rset.getDate("BDATE"));
-				g.setBstatus(rset.getString("BSTATUS"));
-				g.setBwriter(rset.getInt("BTYPE"));
-				
-				list.add(g);
+			if(rset.next()){
+				bid = rset.getInt(1); // "CURRVAL"
+				System.out.println("bid : " + bid);
 			}
 			
 		} catch (SQLException e) {
-		 
+			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
 		} finally {
-			
 			close(rset);
 			close(stmt);
 		}
 		
-		return list;
+		return bid;
 	}
+
+
+	public int insertAttachedfile(Connection con, ArrayList<AttachedFile> list) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertAttachedfile");
+		
+		try{
+			
+			for(int i = 0 ; i < list.size(); i++){
+				
+				pstmt = con.prepareStatement(sql);
+				
+				
+				pstmt.setString(1, list.get(i).getFname());
+				pstmt.setString(2, list.get(i).getFpath());
+				
+				// 첫번째 데이터일 경우 대표 이미지로 level = 0
+				// 나머지 데이터는 일반 이미지로 level = 1
+				int level = 0;
+				if(i != 0 ) level = 1;
+				
+				pstmt.setInt(3, level);
+				pstmt.setInt(4, list.get(i).getBid());
+				
+				result += pstmt.executeUpdate();
+				
+			}
+			
+		} catch (SQLException e) {
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
 
 }

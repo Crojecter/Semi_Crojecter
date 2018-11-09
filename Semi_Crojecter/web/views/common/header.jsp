@@ -124,7 +124,7 @@
 						<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
 					</div>
 					<li>
-					<a href="<%= request.getContextPath()%>/views/board/BoardInsert.jsp">
+					<a href="<%= request.getContextPath()%>/views/board/boardInsert.jsp">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 					&nbsp;&nbsp;</li>
 				</ul>
