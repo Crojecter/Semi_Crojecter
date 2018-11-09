@@ -1,6 +1,16 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,44 +51,26 @@ public class sendEmail extends HttpServlet {
 		m.setMname(nickName);
 		m.setMemail(email);
 		
-		int result = ms.sendEmail(m);
-		
-		// 임시비밀번호 발생
-		String tempPassword = "";
-
-		for (int i = 0; i < 8; i++) {
-
-			int rndVal = (int) (Math.random() * 62);
-
-			if (rndVal < 10) {
-				tempPassword += rndVal;
-			} else if (rndVal > 35) {
-				tempPassword += (char) (rndVal + 61);
-			} else {
-				tempPassword += (char) (rndVal + 55);
-			}
-
-		}
-		
-		request.setAttribute("tempPassword", tempPassword);
+		int result = ms.selectEmail(m);
 		
 		if(result > 0) {
 			
-			// 임시비밀번호로 업데이트 (업데이트하고난 후 로그인 안됨)
+			// 임시비밀번호로 업데이트
 			String tempPwd = request.getParameter("tempPassword");
 			
-			int resultPwd = ms.rndPwd(tempPwd, m);
+			String whatPwd = request.getParameter("tempPwd");
+			System.out.println("임시 비밀번호 : " + whatPwd);
+			
+			int resultPwd = ms.updateRandomPwd(tempPwd, m);
 			
 			if(resultPwd > 0) {
 				System.out.println("임시비밀번호로 수정 성공");
+				// 이메일 전송
+				gmailSend(nickName,whatPwd, email);
+				
 			} else {
 				System.out.println("임시비밀번호로 수정 실패");
 			}
-			
-			// 이메일 전송
-			
-			
-			System.out.println("이메일 전송 성공");
 		} else {
 			System.out.println("이메일 전송 실패");
 		}
@@ -93,4 +85,53 @@ public class sendEmail extends HttpServlet {
 		doGet(request, response);
 	}
 
+	public static void gmailSend(String id, String pwd, String email) {
+		String user = "crojecter@gmail.com";
+		String password = "gooCrojecter1!";
+
+		// SMTP 서버 정보를 설정한다.
+		Properties prop = new Properties();
+		prop.put("mail.smtp.host", "smtp.gmail.com");
+		prop.put("mail.smtp.port", 465);
+		prop.put("mail.smtp.auth", "true");
+		prop.put("mail.smtp.ssl.enable", "true");
+		prop.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+
+		Session session = Session.getDefaultInstance(prop, new javax.mail.Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(user, password);
+			}
+		});
+
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(user));
+
+			// 수신자메일주소
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+
+			// 메일 제목을 입력
+			message.setSubject("Crojecter 임시 비밀번호 발송");
+
+			// 메일 내용을 입력
+			message.setText(id + "님의 임시 비밀번호는 ' " + pwd + " ' 입니다.");
+
+			// 전송
+			Transport.send(message);
+			System.out.println("이메일 전송 성공");
+			
+		} catch (AddressException e) {
+
+			e.printStackTrace();
+			System.out.println("이메일 전송 실패");
+			
+		} catch (MessagingException e) {
+
+			e.printStackTrace();
+			System.out.println("이메일 전송 실패");
+			
+		}
+		
+	}
+	
 }

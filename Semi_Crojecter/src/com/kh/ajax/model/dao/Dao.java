@@ -88,4 +88,38 @@ public class Dao {
 		
 	}
 
+	public String searchNickName(Connection con, String email) {
+		
+		String result = null;
+
+		String sql = prop.getProperty("searchNickName");
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, email);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+
+				result = rset.getString(1);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			close(pstmt);
+
+		}
+
+		return result;
+
+	}
+
 }

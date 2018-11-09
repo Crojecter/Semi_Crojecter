@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
-<%
+<%-- <%
 	Member m = (Member)request.getAttribute("member");
-%>
+%> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +10,12 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-	input, #text{
+	.inputContent{
 		width:250px;
 		height:25px;
 		margin:1px 10px 1px 10px;
 	}
-	button{
+	#submit{
 		color:white;
 		text-align:center;
 		border-radius:5px;
@@ -24,53 +24,52 @@
 		font-size:15px;
 		margin:1px 10px 1px 10px;
 	}
-	#profile:hover{
-		opacity:0.3;
-	}
-	img{
-		width:100px;
-		height:100px;
-		border-radius:50px;
-		border:0.5px solid black;
+	.label{
+		color:red;
+		text-align:center;
+		font-size:10px;
+		width:auto;
+		margin:1px 10px 1px 10px;
 	}
 </style>
 </head>
 <body>
+	<%@ include file="../common/header.jsp" %>
 	<form name="form" action="<%=request.getContextPath()%>/signUp.do" method="post">
-		<div style="border:1px solid gray; height:auto; width:280px;">
+		<div style="border:1px solid gray;">
 			<div style="margin: 10px 10px 1px 10px;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-			<table>
+			<table style="boarder:1px solid black;">
 				<tr>
-					<td><label id="text">닉네임</label></td>
+					<td><label class="inputContent">닉네임</label></td>
 				</tr>
 				<tr>
 					<td>
-						<input type="text" name="nickName" id="nickName" placeholder="사용하실 닉네임을 입력해주세요" oninput="checkNickName();"/>
-						<label id="labelNickname" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
+						<input type="text" name="nickName" id="nickName" class="inputContent" placeholder="사용하실 닉네임을 입력해주세요" oninput="checkNickName();"/><br>
+						<label id="labelNickname" class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
 					</td>
 				</tr>
 				<tr>
-					<td><label id="text">이메일 주소</label></td>
+					<td><label class="inputContent">이메일 주소</label></td>
 				</tr>
 				<tr>
-					<td><input type="email" name="email" id="email" placeholder="이메일 주소를 입력해주세요" oninput="checkEmail();"/></td>
+					<td><input type="email" name="email" id="email" class="inputContent" placeholder="이메일 주소를 입력해주세요" oninput="checkEmail();"/></td>
 				</tr>
 				<tr>
 					<td>
-						<input type="email" name="emailCheck" id="emailCheck" placeholder="이메일 주소를 확인합니다" oninput="checkedEmail();"/>
-						<label id="labelEmail" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >이메일 형식에 맞지 않습니다.</label>
+						<input type="email" name="emailCheck" id="emailCheck" class="inputContent" placeholder="이메일 주소를 확인합니다" oninput="checkedEmail();"/><br>
+						<label id="labelEmail" class="label">이메일 형식에 맞지 않습니다.</label>
 					</td>
 				</tr>
 				<tr>
-					<td><label id="text">비밀번호</label></td>
+					<td><label class="inputContent">비밀번호</label></td>
 				</tr>
 				<tr>
-					<td><input type="password" name="password" id="password" placeholder="비밀번호를 입력해주세요" oninput="checkedPassword();"/></td>
+					<td><input type="password" name="password" id="password" class="inputContent" placeholder="비밀번호를 입력해주세요" oninput="checkedPassword();"/></td>
 				</tr>
 				<tr>
 					<td>
-						<input type="password" name="passwordCheck" id="passwordCheck" placeholder="비밀번호를 확인합니다" oninput="checkedPassword();"/>
-						<label id="labelPwd" style="color:red; text-align:center; font-size:10px; width:auto; margin:1px 10px 1px 10px;" >6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함</label>
+						<input type="password" name="passwordCheck" id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다" oninput="checkedPassword();"/><br>
+						<label id="labelPwd" class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함</label>
 					</td>
 				</tr>
 				<tr>
@@ -86,6 +85,7 @@
 			</table>
 		</div>
 	</form>
+	<%@ include file="../common/footer.jsp" %>
 	<script>
 		var nnChk = 0;
 		var eChk = 0;
