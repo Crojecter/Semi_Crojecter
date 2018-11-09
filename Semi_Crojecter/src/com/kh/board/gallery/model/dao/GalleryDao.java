@@ -18,6 +18,8 @@ import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 public class GalleryDao {
 	
+	// 깃허브 확인용 주석입니다 (지우셔도 무관해요!)
+	
 	private Properties prop = new Properties();
 	
 	public GalleryDao() {
@@ -71,7 +73,7 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		
-		return g;
+		return g;   
 	}
 
 	public GalleryForDetail selectOneGFD(Connection con, int bid) {
