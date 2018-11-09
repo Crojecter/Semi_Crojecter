@@ -15,5 +15,14 @@ public class Notice extends Board implements Serializable {
 			int bwriter, int brcount) {
 		super(bid, btype, btitle, bcontent, bcount, bdate, bstatus, bwriter, brcount);
 	}
+
+	@Override
+	public String toString() {
+		return "Notice [getBid()=" + getBid() + ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle()
+				+ ", getBcontent()=" + getBcontent() + ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate()
+				+ ", getBstatus()=" + getBstatus() + ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount()
+				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + ", toString()=" + super.toString()
+				+ "]";
+	}
 		
 }
