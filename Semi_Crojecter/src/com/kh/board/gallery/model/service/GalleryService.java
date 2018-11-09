@@ -8,26 +8,41 @@ import java.util.ArrayList;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
+
 
 public class GalleryService {
 	
 	private GalleryDao gDao = new GalleryDao();
 
-	public GalleryForDetail selectOneGFD(int bid) {
-
+	
+	public Gallery selectOne(int bid) {
+		
 		Connection con = getConnection();
 		
-		GalleryForDetail gfd = gDao.selectOneGFD(con, bid);
+		Gallery g = gDao.selectOne(con, bid);
 		
 		close(con);
 		
-		return gfd;
+		return g;
 	}
+	
+
+	public Gallery updateView(int bid) {
+		
+		Connection con = getConnection();
+		
+		Gallery g = gDao.selectOne(con, bid);
+		
+		close(con);
+		
+		return g;
+	}
+
+
 
 	public ArrayList<Gallery> selectGalleryList() {
 		// 		Connection con = getConnection();
-		private GalleryDao gDao = new GalleryDao();
+		GalleryDao gDao = new GalleryDao();
 				
 		Connection con = getConnection();
 				

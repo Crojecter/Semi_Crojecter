@@ -1,4 +1,4 @@
-package com.kh.board.gallery.controller;
+package com.kh.follow.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.follow.model.service.FollowService;
 
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class FollowCheckServlet
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/fCheck.fo")
+public class FollowCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public FollowCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,25 +30,14 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+	
+		String wid = request.getParameter("wid"); //글쓴이
+		String mid = request.getParameter("mid"); //로그인한회원
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
+		int result = new FollowService().checkFollow(wid, mid);
+		System.out.println("result : " + result);
 		
-		
-		String page = "";
-		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
-			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
-		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
 		
 	}
 

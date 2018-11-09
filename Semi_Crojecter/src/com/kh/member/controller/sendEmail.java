@@ -32,6 +32,8 @@ public class sendEmail extends HttpServlet {
 		
 		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
+		// getParameter() 로 가져온 부분만 암호화 복호화가 됨.
+		// jsp 부분에서 임시비밀번호 발생시켜서 가져오기.
 		
 		MemberService ms = new MemberService();
 		Member m = new Member();
@@ -41,27 +43,31 @@ public class sendEmail extends HttpServlet {
 		
 		int result = ms.sendEmail(m);
 		
+		// 임시비밀번호 발생
+		String tempPassword = "";
+
+		for (int i = 0; i < 8; i++) {
+
+			int rndVal = (int) (Math.random() * 62);
+
+			if (rndVal < 10) {
+				tempPassword += rndVal;
+			} else if (rndVal > 35) {
+				tempPassword += (char) (rndVal + 61);
+			} else {
+				tempPassword += (char) (rndVal + 55);
+			}
+
+		}
+		
+		request.setAttribute("tempPassword", tempPassword);
+		
 		if(result > 0) {
 			
-			// 임시비밀번호 발생
-			String tempPassword = "";
-
-			for(int i=0; i<8; i++) {
-
-				int rndVal = (int)(Math.random() * 62);
-
-				if (rndVal < 10) {
-					tempPassword += rndVal;
-				} else if (rndVal > 35) {
-					tempPassword += (char)(rndVal + 61);
-				} else { 
-					tempPassword += (char)(rndVal + 55);
-				}
-
-			}
-			
 			// 임시비밀번호로 업데이트 (업데이트하고난 후 로그인 안됨)
-			int resultPwd = ms.rndPwd(tempPassword, m);
+			String tempPwd = request.getParameter("tempPassword");
+			
+			int resultPwd = ms.rndPwd(tempPwd, m);
 			
 			if(resultPwd > 0) {
 				System.out.println("임시비밀번호로 수정 성공");

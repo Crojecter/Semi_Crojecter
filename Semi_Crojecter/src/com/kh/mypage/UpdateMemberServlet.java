@@ -1,27 +1,27 @@
-package com.kh.board.gallery.controller;
+package com.kh.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class UpdateMemberServlet
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/mUpdate.do")
+public class UpdateMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public UpdateMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,25 +30,28 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		String mname = request.getParameter("nickName");
+		String memail = request.getParameter("email");
+		String mpwd = request.getParameter("password");
 
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		MemberService ms = new MemberService();
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
+		HttpSession session = request.getSession(false);
+		Member m = (Member)session.getAttribute("member");
+		m.setMname(mname);
+		m.setMemail(memail);
+		m.setMpwd(mpwd);
 		
+		ms.updateMember(m);
 		
-		String page = "";
-		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
-			
+		if(m != null){
+			System.out.println("회원정보 수정 성공!");
 		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
+			System.out.println("회원정보 수정 실패");
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		System.out.println(m);
 		
 	}
 

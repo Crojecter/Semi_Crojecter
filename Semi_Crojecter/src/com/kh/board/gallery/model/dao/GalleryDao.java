@@ -1,8 +1,11 @@
 package com.kh.board.gallery.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,9 +14,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
-
-import static com.kh.common.JDBCTemplate.*;
 
 public class GalleryDao {
 	
@@ -28,44 +28,54 @@ public class GalleryDao {
 			e.printStackTrace();			
 		}
 	}
-
-	public GalleryForDetail selectOneGFD(Connection con, int bid) {
+	
+	
+	public Gallery selectOne(Connection con, int bid) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		GalleryForDetail gfd = null;
+		Gallery g = null;
 		
-		String bSql = prop.getProperty("selectOneGfd");
-				
+		String sql = prop.getProperty("selectOne");
+		
 		try {
-			pstmt = con.prepareStatement(bSql);
+			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, bid);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				gfd = new GalleryForDetail();
+				g = new Gallery();
 				
-				gfd.setBid(rset.getInt("bid"));
-				gfd.setGid(rset.getInt("gid"));
-				gfd.setBtitle(rset.getString("btitle"));
-				gfd.setBcontent(rset.getString("bcontent"));
-				gfd.setMprofile(rset.getString("mprofile"));
-				gfd.setMname(rset.getString("mname"));
-				gfd.setGcategory(rset.getString("gcategory"));
-				gfd.setCclname(rset.getString("cclname"));
-				gfd.setGtag(rset.getString("gtag"));
-				gfd.setBdate(rset.getDate("bdate"));
+				g.setGid(rset.getInt("gid"));
+				g.setGcategoryid(rset.getInt("gcategoryid"));
+				g.setGtag(rset.getString("gtag"));
+				g.setGlike(rset.getInt("glike"));
+				g.setBid(rset.getInt("bid"));
+				g.setCclid(rset.getInt("cclid"));
+				g.setGcategoryname(rset.getString("gcategoryname"));
+				g.setCclname(rset.getString("cclname"));
+				g.setBtype(rset.getInt("btype"));
+				g.setBtitle(rset.getString("btitle"));
+				g.setBcontent(rset.getString("bcontent"));
+				g.setBcount(rset.getInt("bcount"));
+				g.setBdate(rset.getDate("bdate"));
+				g.setBstatus(rset.getString("bstatus"));
+				g.setBrcount(rset.getInt("brcount"));
+				g.setBwriter(rset.getInt("bwriter"));
+				g.setMprofile(rset.getString("mprofile"));
+				g.setMname(rset.getString("mname"));
 				
+				
+				//System.out.println("gdao g : " + g);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
 		
-		return gfd;
+		return g;
 	}
 
 	public ArrayList<Gallery> selectList(Connection con) {
@@ -83,19 +93,22 @@ public class GalleryDao {
 			list = new ArrayList<Gallery>();
 			
 			while(rset.next()){
-				GalleryForDetail g = new GalleryForDetail();
+				Gallery g = new Gallery();
 				
-				g.setBid(rset.getInt("BID"));
 				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
 				g.setBtitle(rset.getString("BTITLE"));
 				g.setBcontent(rset.getString("BCONTENT"));
-				g.setBwriter(rset.getInt("BWRITER"));
-				g.setGcategory(rset.getString("GCATEGORY"));
-				g.setGtag(rset.getString("GTAG"));
 				g.setBcount(rset.getInt("BCOUNT"));
 				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BTYPE"));
 				
-				list.add(t);
+				list.add(g);
 			}
 			
 		} catch (SQLException e) {

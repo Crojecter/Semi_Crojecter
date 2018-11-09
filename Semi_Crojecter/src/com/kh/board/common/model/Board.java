@@ -3,15 +3,17 @@ package com.kh.board.common.model;
 import java.sql.Date;
 
 public class Board {
-	private int bid; 
-	private int btype;
-	private String btitle;
-	private String bcontent;
-	private int bcount;
-	private Date bdate;
-	private String bstatus;
-	private int bwriter;
-	private int brcount;
+	private int bid; 			//		
+	private int btype;			//
+	private String btitle;		//
+	private String bcontent;	//
+	private int bcount;			//
+	private Date bdate;			//
+	private String bstatus;		//
+	private int bwriter;		//
+	private int brcount;		//
+	private String mprofile;
+	private String mname;
 	
 	public Board() {}
 	
@@ -101,13 +103,22 @@ public class Board {
 		this.brcount = brcount;
 	}
 
-	@Override
-	public String toString() {
-		return "Board [bid=" + bid + ", btype=" + btype + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcount="
-				+ bcount + ", bdate=" + bdate + ", bstatus=" + bstatus + ", bwriter=" + bwriter + ", brcount=" + brcount
-				+ "]";
+	public String getMprofile() {
+		return mprofile;
 	}
 
+	public void setMprofile(String mprofile) {
+		this.mprofile = mprofile;
+	}
+
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
 	
+
 }
 

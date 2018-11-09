@@ -1,27 +1,27 @@
-package com.kh.board.gallery.controller;
+package com.kh.mypage;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class GallerySelectOneServlet
+ * Servlet implementation class DeleteMemberServlet
  */
-@WebServlet("/gSelectOne.ga")
-public class GallerySelectOneServlet extends HttpServlet {
+@WebServlet("/mDelete.do")
+public class DeleteMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GallerySelectOneServlet() {
+    public DeleteMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,26 +30,26 @@ public class GallerySelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		MemberService ms = new MemberService();
+		HttpSession session = request.getSession(false);
 		
-		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
+		Member m = (Member)session.getAttribute("member");
 		
 		
-		String page = "";
-		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
+		try{
+			ms.deleteMember(m.getMemail());
+		
+			System.out.println("회원 탈퇴 완료! : "+m);
 			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
+			session.invalidate();
+			
+			response.sendRedirect("main.html");
+			
+		} catch(Exception e) {
+			
+			request.setAttribute("msg", "회원 탈퇴 중 에러가 발생하였습니다.");
+			
 		}
-		
-		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**
