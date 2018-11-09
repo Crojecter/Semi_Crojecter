@@ -24,6 +24,15 @@
 		font-size:15px;
 		margin:1px 10px 1px 10px;
 	}
+	#profile:hover{
+		opacity:0.3;
+	}
+	img{
+		width:100px;
+		height:100px;
+		border-radius:50px;
+		border:0.5px solid black;
+	}
 </style>
 </head>
 <body>
@@ -31,9 +40,6 @@
 		<div style="border:1px solid gray; height:auto; width:280px;">
 			<div style="margin: 10px 10px 1px 10px;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 			<table>
-				<tr>
-					<td><hr /></td>
-				</tr>
 				<tr>
 					<td><label id="text">닉네임</label></td>
 				</tr>
@@ -153,39 +159,26 @@
 							var emailChk = $("#emailCheck").val();
 							
 							if(emailChk == "") {
-								$("#email").css("background-color", "white");
+								$("#email").css("background-color", "#B7F400");
+								$("#emailCheck").css("background-color", "white");
 								$("#labelEmail").css("visibility", "visible");
 								eChk = 0;
 								
-								memberVerify();
+								checkedEmail()
 							} else if(email == emailChk) {
 								$("#email").css("background-color", "#B7F400");
+								$("#emailCheck").css("background-color", "#B7F400");
 								$("#labelEmail").css("visibility", "hidden");
 								eChk = 1;
 								
-								memberVerify();
+								checkedEmail()
 							} else {
-								$("#email").css("background-color", "#FFA5A5");
+								$("#email").css("background-color", "#B7F400");
+								$("#emailCheck").css("background-color", "#FFA5A5");
 								$("#labelEmail").css("visibility", "visible");
 								eChk = 0;
 								
-								memberVerify();
-							}
-							
-							eChk = 1;
-							$("#email").css("background-color", "#B7F400");	
-							$("#labelEmail").css("visibility", "visible");
-							
-							if($("#emailCheck").val() == null) {
-								$("#labelEmail").text('이메일 확인부분 미입력');
-								$("#emailCheck").css("background-color", "#FFA5A5");
-								
-								memberVerify();
-							} else {
-								$("#labelEmail").text('이메일 확인부분 미입력');
-								$("#emailCheck").css("background-color", "#FFA5A5");
-								
-								memberVerify();
+								checkedEmail()
 							}
 							
 							memberVerify();
@@ -223,11 +216,21 @@
 				
 				memberVerify();
 			} else if(email == emailChk) {
-				$("#emailCheck").css("background-color", "#B7F400");
-				$("#labelEmail").css("visibility", "hidden");
-				eChk = 1;
+				if(regEmail.test(emailChk)) {
+					$("#emailCheck").css("background-color", "#B7F400");
+					$("#labelEmail").css("visibility", "hidden");
+					eChk = 1;
+					
+					memberVerify();
+				} else {
+					$("#emailCheck").css("background-color", "#FFA5A5");
+					$("#labelEmail").css("visibility", "visible");
+					$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
+					eChk = 0;
+					
+					memberVerify();
+				}
 				
-				memberVerify();
 			} else {
 				$("#emailCheck").css("background-color", "#FFA5A5");
 				$("#labelEmail").css("visibility", "visible");
