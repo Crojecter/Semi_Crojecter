@@ -3,15 +3,15 @@ package com.kh.board.common.model;
 import java.sql.Date;
 
 public class Board {
-	private int bid; 			//		
-	private int btype;			//
-	private String btitle;		//
-	private String bcontent;	//
-	private int bcount;			//
-	private Date bdate;			//
-	private String bstatus;		//
-	private int bwriter;		//
-	private int brcount;		//
+	private int bid; 
+	private int btype;
+	private String btitle;
+	private String bcontent;
+	private int bcount;
+	private Date bdate;
+	private String bstatus;
+	private int bwriter;
+	private int brcount;
 	private String mprofile;
 	private String mname;
 	

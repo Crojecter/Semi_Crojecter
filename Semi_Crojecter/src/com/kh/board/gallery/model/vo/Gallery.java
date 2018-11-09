@@ -17,7 +17,7 @@ public class Gallery extends Board implements Serializable {
 	public Gallery() {
 		super();
 	}
-	
+  
 	public Gallery(int gid, int gcategoryid, String gtag, int glike) {
 		super();
 		this.gid = gid;

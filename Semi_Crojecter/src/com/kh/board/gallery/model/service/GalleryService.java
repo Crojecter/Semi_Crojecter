@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.board.gallery.model.vo.Gallery;
 
-
 public class GalleryService {
 	
 	private GalleryDao gDao = new GalleryDao();
@@ -52,5 +51,7 @@ public class GalleryService {
 		
 		return list;
 	}
+
+
 
 }
