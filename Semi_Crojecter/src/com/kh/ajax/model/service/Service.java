@@ -3,6 +3,8 @@ package com.kh.ajax.model.service;
 import java.sql.Connection;
 
 import com.kh.ajax.model.dao.Dao;
+import com.kh.member.model.vo.Member;
+import com.kh.payment.model.vo.Payment;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -54,6 +56,21 @@ public class Service {
 		result = dao.searchNickName(con, email);
 		
 		if(result != null) commit(con);
+		else rollback(con);
+		
+		return result;
+		
+	}
+
+	public int insertHodu(Member m, Payment p) {
+		
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = dao.insertHodu(con, m, p);
+		
+		if(result > 0) commit(con);
 		else rollback(con);
 		
 		return result;

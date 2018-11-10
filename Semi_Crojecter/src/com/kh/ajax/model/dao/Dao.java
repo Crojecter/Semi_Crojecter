@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.kh.member.model.dao.MemberDao;
+import com.kh.member.model.vo.Member;
+import com.kh.payment.model.vo.Payment;
+
 import static com.kh.common.JDBCTemplate.*;
 
 public class Dao {
@@ -120,6 +123,54 @@ public class Dao {
 
 		return result;
 
+	}
+
+	public int insertHodu(Connection con, Member m, Payment p) {
+		
+		int resultAll = 0;
+		
+		String sql = prop.getProperty("insertHodu");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, p.getPmoney());
+			pstmt.setInt(2, p.getMid());
+			
+			int result = pstmt.executeUpdate();
+			
+			if(result > 0) {
+				
+				String sql2 = prop.getProperty("updateHodu");
+				
+				PreparedStatement pstmt2 = null;
+				
+				pstmt2 = con.prepareStatement(sql2);
+				
+				pstmt2.setInt(1, m.getMhodu());
+				pstmt2.setInt(2, p.getMid());
+				
+				resultAll = pstmt2.executeUpdate();
+				
+			} else {
+				
+				System.out.println("호두 업데이트 실패");
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return resultAll;
+		
 	}
 
 }
