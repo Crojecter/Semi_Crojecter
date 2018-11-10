@@ -57,9 +57,9 @@
 			    if ( rsp.success ) {
 			    	// 결제 완료시
 			        var msg = '결제가 완료되었습니다.';
-			        // ajax async 속성 으로 처리
+					// ajax async 속성 으로 처리
 			        $.ajax({
-			        	data : { Mhodu : hodu },
+			        	data : { Mhodu : hodu, Mid : <%= m.getMid() %>, Mprice : price },
 						url : "/crojecter/inserthodu.pm",
 						type : "post",
 						success : function(data) {
