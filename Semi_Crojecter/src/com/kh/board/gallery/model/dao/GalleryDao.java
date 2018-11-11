@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.GalleryForDetail;
 
 public class GalleryDao {
 	
@@ -48,7 +47,7 @@ public class GalleryDao {
 				g = new Gallery();
 				
 				g.setGid(rset.getInt("gid"));
-				g.setGcategory(rset.getInt("gcategory"));
+				g.setGcategoryid(rset.getInt("gcategoryid"));
 				g.setGtag(rset.getString("gtag"));
 				g.setGlike(rset.getInt("glike"));
 				g.setBid(rset.getInt("bid"));
@@ -74,41 +73,6 @@ public class GalleryDao {
 		return g;
 	}
 
-	public GalleryForDetail selectOneGFD(Connection con, int bid) {
-		
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		GalleryForDetail gfd = null;
-		
-		String bSql = prop.getProperty("selectOneGfd");
-				
-		try {
-			pstmt = con.prepareStatement(bSql);
-			pstmt.setInt(1, bid);
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				gfd = new GalleryForDetail();
-				
-				gfd.setBid(rset.getInt("bid"));
-				gfd.setGid(rset.getInt("gid"));
-				gfd.setMprofile(rset.getString("mprofile"));
-				gfd.setMname(rset.getString("mname"));
-				gfd.setGcategory(rset.getString("gcategory"));
-				gfd.setCclname(rset.getString("cclname"));
-				
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return gfd;
-	}
-
-
 	public int insertGalleryContent(Connection con, Gallery g) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -118,7 +82,7 @@ public class GalleryDao {
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, g.getGcategory());
+			pstmt.setInt(1, g.getGcategoryid());
 			pstmt.setString(2, g.getGtag());
 			pstmt.setInt(3, g.getCclid());
 			
