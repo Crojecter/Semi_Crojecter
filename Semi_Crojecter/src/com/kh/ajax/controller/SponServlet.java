@@ -31,9 +31,9 @@ public class SponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int giver = Integer.parseInt(request.getParameter(""));
-		int receiver = Integer.parseInt(request.getParameter(""));
-		int hodu = Integer.parseInt(request.getParameter(""));
+		int giver = Integer.parseInt(request.getParameter("Sgiver"));
+		int receiver = Integer.parseInt(request.getParameter("Sreceiver"));
+		int hodu = Integer.parseInt(request.getParameter("Shodu"));
 		int hoduId = 0;
 		switch(hodu){
 			case 10 : hoduId = 1; break;
