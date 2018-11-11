@@ -5,6 +5,7 @@ import java.sql.Connection;
 import com.kh.ajax.model.dao.Dao;
 import com.kh.member.model.vo.Member;
 import com.kh.payment.model.vo.Payment;
+import com.kh.spon.model.vo.Spon;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -58,6 +59,8 @@ public class Service {
 		if(result != null) commit(con);
 		else rollback(con);
 		
+		close(con);
+		
 		return result;
 		
 	}
@@ -73,8 +76,27 @@ public class Service {
 		if(result > 0) commit(con);
 		else rollback(con);
 		
+		close(con);
+		
 		return result;
 		
 	}
 
+	public int spon(Spon s, int hoduId) {
+
+		int result = 0;
+		
+		Connection con = getConnection();
+		
+		result = dao.spon(con, s, hoduId);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		
+	}
+	
 }
