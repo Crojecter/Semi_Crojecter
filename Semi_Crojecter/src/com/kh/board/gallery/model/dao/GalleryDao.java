@@ -52,6 +52,9 @@ public class GalleryDao {
 				g.setGlike(rset.getInt("glike"));
 				g.setBid(rset.getInt("bid"));
 				g.setCclid(rset.getInt("cclid"));
+				g.setGcategoryname(rset.getString("gcategoryname"));
+				g.setCclname(rset.getString("cclname"));
+				
 				g.setBtype(rset.getInt("btype"));
 				g.setBtitle(rset.getString("btitle"));
 				g.setBcontent(rset.getString("bcontent"));
@@ -60,6 +63,8 @@ public class GalleryDao {
 				g.setBstatus(rset.getString("bstatus"));
 				g.setBrcount(rset.getInt("brcount"));
 				g.setBwriter(rset.getInt("bwriter"));
+				g.setMprofile(rset.getString("mprofile"));
+				g.setMname(rset.getString("mname"));
 				
 				//System.out.println("gdao g : " + g);
 			}
