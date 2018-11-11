@@ -118,7 +118,13 @@ public class Board {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
-	
 
+	@Override
+	public String toString() {
+		return "Board [bid=" + bid + ", btype=" + btype + ", btitle=" + btitle + ", bcontent=" + bcontent + ", bcount="
+				+ bcount + ", bdate=" + bdate + ", bstatus=" + bstatus + ", bwriter=" + bwriter + ", brcount=" + brcount
+				+ ", mprofile=" + mprofile + ", mname=" + mname + "]";
+	}
+	
 }
 
