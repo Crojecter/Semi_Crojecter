@@ -68,7 +68,7 @@
 				</tr>
 				<tr>
 					<td>작성자 </td>
-					<td><span><%= g.getMname() %></span></td>
+					<td><span id="parentGetName"><%= g.getMname() %></span></td>
 					<td>작성일</td>
 					<td><span><%= g.getBdate() %></span></td>
 					<td>조회수 </td>
@@ -96,7 +96,7 @@
 		
 		<div align="center">
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">좋아요</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">후원하기</button>
+			<button onclick="showSpon();">후원하기</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
 			<button onclick="location.href='/crojecter/main.html'">목록</button>
 			
@@ -112,6 +112,15 @@
 
 	</div>
 	
+	<script>
+		function showSpon(g) {
+			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
+		    xPos += window.screenLeft;
+		    var yPos = (screen.availHeight / 2) - (300 / 2);
+		    
+			window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		}
+	</script>
 	
 </body>
 </html>
