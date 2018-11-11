@@ -11,6 +11,7 @@ import java.util.Properties;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.payment.model.vo.Payment;
+import com.kh.spon.model.vo.Spon;
 
 import static com.kh.common.JDBCTemplate.*;
 
@@ -153,9 +154,75 @@ public class Dao {
 				
 				resultAll = pstmt2.executeUpdate();
 				
+				close(pstmt2);
+				
 			} else {
 				
 				System.out.println("호두 업데이트 실패");
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return resultAll;
+		
+	}
+	
+	public int spon(Connection con, Spon s, int hoduId) {
+
+		int resultAll = 0;
+		
+		String sql = prop.getProperty("insertSpon");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, hoduId);
+			pstmt.setInt(2, s.getSgiverid());
+			pstmt.setInt(3, s.getSreceiverid());
+			
+			int resultSpon = pstmt.executeUpdate();
+			
+			if(resultSpon > 0) {
+				
+				String sql2 = prop.getProperty("updateGiver");
+				String sql3 = prop.getProperty("updateReceiver");
+				
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);
+				pstmt2.setInt(1, s.getShodu());
+				pstmt2.setInt(2, s.getSgiverid());
+				PreparedStatement pstmt3 = con.prepareStatement(sql3);
+				pstmt3.setInt(1, s.getShodu());
+				pstmt3.setInt(2, s.getSreceiverid());
+				
+				int result2 = pstmt2.executeUpdate();
+				int result3 = pstmt3.executeUpdate();
+				
+				if(result2 > 0 && result3 > 0) {
+					
+					System.out.println("후원 성공");
+					
+				} else {
+					
+					System.out.println("후원 실패");
+					
+				}
+				
+				close(pstmt2);
+				close(pstmt3);
+				
+			} else {
+				
+				System.out.println("후원 실패");
 				
 			}
 			
