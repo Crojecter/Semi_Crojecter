@@ -16,13 +16,13 @@ import com.kh.board.gallery.model.vo.Gallery;
  * Servlet implementation class SelectGalleryListServlet
  */
 @WebServlet("/selectList.ga")
-public class SelectGalleryListServlet extends HttpServlet {
+public class GallerySelectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectGalleryListServlet() {
+    public GallerySelectListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
