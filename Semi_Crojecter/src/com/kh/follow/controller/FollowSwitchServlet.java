@@ -1,27 +1,25 @@
 package com.kh.follow.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.follow.model.service.FollowService;
 
 /**
- * Servlet implementation class FollowCheckServlet
+ * Servlet implementation class FollowSwitchServlet
  */
-@WebServlet("/fCheck.fo")
-public class FollowCheckServlet extends HttpServlet {
+@WebServlet("/fSwitch.fo")
+public class FollowSwitchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowCheckServlet() {
+    public FollowSwitchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,14 +28,14 @@ public class FollowCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		
 		String wid = request.getParameter("wid"); //글쓴이
 		String mid = request.getParameter("mid"); //로그인한회원
 		
-		int result = new FollowService().checkFollow(wid, mid);
-		System.out.println("result : " + result);
+		int result = new FollowService().switchFollow(wid, mid);
+		System.out.println("fSwitch.fo result : " + result);
 		
-		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
+		response.getWriter().print((result == 0) ? "error" : (result == 1)? "delete" : "insert");
 	}
 
 	/**
