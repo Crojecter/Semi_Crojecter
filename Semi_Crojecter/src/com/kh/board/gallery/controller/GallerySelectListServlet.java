@@ -33,7 +33,7 @@ public class GallerySelectListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 갤러리 목록조회 서블릿
 		ArrayList<Gallery> list = null;
-		list = new GalleryService().selectGalleryList();
+		//list = new GalleryService().selectGalleryList();
 		
 		System.out.println(list);
 		
