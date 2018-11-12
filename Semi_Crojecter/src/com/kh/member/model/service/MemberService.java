@@ -105,4 +105,17 @@ public class MemberService {
 		
 	}
 
+	public int updateMemberStatus(Member m) {
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDao.updateMemberStatus(con, m);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
 }
