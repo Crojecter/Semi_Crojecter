@@ -52,9 +52,6 @@ public class GalleryDao {
 				g.setGlike(rset.getInt("glike"));
 				g.setBid(rset.getInt("bid"));
 				g.setCclid(rset.getInt("cclid"));
-				g.setGcategoryname(rset.getString("gcategoryname"));
-				g.setCclname(rset.getString("cclname"));
-				
 				g.setBtype(rset.getInt("btype"));
 				g.setBtitle(rset.getString("btitle"));
 				g.setBcontent(rset.getString("bcontent"));
@@ -63,8 +60,6 @@ public class GalleryDao {
 				g.setBstatus(rset.getString("bstatus"));
 				g.setBrcount(rset.getInt("brcount"));
 				g.setBwriter(rset.getInt("bwriter"));
-				g.setMprofile(rset.getString("mprofile"));
-				g.setMname(rset.getString("mname"));
 				
 				//System.out.println("gdao g : " + g);
 			}
@@ -75,10 +70,38 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		
-		return g;
+		return g;   
+	}
+	
+	public int insertBoardContent(Connection con, Gallery g) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertBoard");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, g.getBtype());
+			pstmt.setString(2, g.getBtitle());
+			pstmt.setString(3, g.getBcontent());
+			pstmt.setInt(4, g.getBwriter());			
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		System.out.println("insertBoardContent result : " + result);
+		return result;
 	}
 
-	public int insertGalleryContent(Connection con, Gallery g) {
+
+	public int insertGalleryContent(Connection con, Gallery g, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -89,7 +112,8 @@ public class GalleryDao {
 			
 			pstmt.setInt(1, g.getGcategoryid());
 			pstmt.setString(2, g.getGtag());
-			pstmt.setInt(3, g.getCclid());
+			pstmt.setInt(3, bid);
+			pstmt.setInt(4, g.getCclid());
 			
 			result = pstmt.executeUpdate();
 			
@@ -98,11 +122,11 @@ public class GalleryDao {
 		} finally {
 			close(pstmt);
 		}
-
+		
+		System.out.println("insertGalleryContent result : " + result);
 		return result;
 	}
-
-
+	
 	public int selectCurrentBid(Connection con) {
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -143,23 +167,25 @@ public class GalleryDao {
 			
 			for(int i = 0 ; i < list.size(); i++){
 				
-				pstmt = con.prepareStatement(sql);
-				
+				pstmt = con.prepareStatement(sql);				
 				
 				pstmt.setString(1, list.get(i).getFname());
 				pstmt.setString(2, list.get(i).getFpath());
 				
-				// 첫번째 데이터일 경우 대표 이미지로 level = 0
-				// 나머지 데이터는 일반 이미지로 level = 1
-				int level = 0;
-				if(i != 0 ) level = 1;
+				// 첫번째 데이터일 경우 대표 이미지로 level = 1
+				// 나머지 데이터는 일반 이미지로 level = 2
+				int level = 2;
+				if(i == 0 ) level = 1;
 				
 				pstmt.setInt(3, level);
 				pstmt.setInt(4, list.get(i).getBid());
+				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
+				System.out.println("level : " + level);
 				
 				result += pstmt.executeUpdate();
 				
 			}
+	
 			
 		} catch (SQLException e) {
 			
@@ -167,8 +193,12 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		
+		System.out.println("insertAttachedfile result : " + result);
 		return result;
 	}
+
+
+
 
 	
 
