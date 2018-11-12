@@ -57,4 +57,54 @@ public class FollowDao {
 		return result;
 	}
 
+	public int deleteFollow(Connection con, String wid, String mid) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteFollow");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, mid);
+			pstmt.setString(2, wid);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
+	public int insertFollow(Connection con, String wid, String mid) {
+
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("insertFollow");
+		
+		try {
+		
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, mid);
+			pstmt.setString(2, wid);
+
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 }

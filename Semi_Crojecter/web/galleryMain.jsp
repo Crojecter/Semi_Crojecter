@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.Gallery" %>
+<% ArrayList<Gallery> list = (ArrayList<Gallery>)request.getAttribute("list"); %> 
 <!DOCTYPE html>
 <html>
 	<head>
@@ -96,17 +96,17 @@
 		<!-- 인기태그 -->
 
 
-		<!-- 게시글보기 -->
+		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewImg">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewSound">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewText">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewVidio">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
 				
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
@@ -117,57 +117,17 @@
 							최신순		
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#">최신순</a>
-						<a class="dropdown-item" href="#">좋아요순</a>
-						<a class="dropdown-item active" href="#">조회순</a>
+						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
+						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
+						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
 						</div>			
 					</button>
 				</form>
 			</div>		
 		</nav>
+		
+		<%@ include file="views/board/GalleryList.jsp" %>
 
-		<!-- 게시글 썸네일 -->
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title  <span id="cid" class="badge" style="background:black; color:white;">5</span></a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall4.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">Card title</a></h5>
-				<p class="card-text"><a href="">Some quick example text to build on the card title and make up the bulk of the card's content.</a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 2200</a>
-			</div>
-		</div>
-	
-
-
-		<!-- 페이지 -->
-		<nav aria-label="..." class="pageNav"  style="float: right; position: absolute; left: 40%;">
-			<br>
-			<ul class="pagination" style="text-align: center">
-				<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1">Previous</a>
-				</li>
-				<li class="page-item"><a class="page-link" href="page1">1</a></li>
-				<li class="page-item active"><a class="page-link" href="page2">2<span class="sr-only">(current)</span></a></li>
-				<li class="page-item"><a class="page-link" href="page3">3</a></li>
-				<li class="page-item">
-				<li class="page-item"><a class="page-link" href="page4">4</a></li>
-				<li class="page-item">	
-				<li class="page-item"><a class="page-link" href="page5">5</a></li>
-				<li class="page-item">	
-				<a class="page-link" href="#">Next</a>
-				</li>
-			</ul>
-		</nav>
 		<!-- 리모컨 -->
 		<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
 		<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>
