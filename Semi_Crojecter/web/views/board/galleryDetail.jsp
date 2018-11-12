@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 	.outer{
 		width:800px;
@@ -61,6 +61,7 @@
 		<h2 align="center">게시글 내용</h2>
 		
 		<div class="tableArea">
+			<span id="parentGetmid" style="display:none;"><%= m.getMid() %></span>
 			<table align="center" width="800px">
 				<tr>
 					<td>제목 </td>
@@ -113,12 +114,16 @@
 	</div>
 	
 	<script>
-		function showSpon(g) {
+	
+		var windowObj = null;
+	
+		function showSpon() {
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
 		    
-			window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+
 		}
 	</script>
 	
