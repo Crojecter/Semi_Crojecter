@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="/crojecter/resources/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 	.outer{
 		width:800px;
@@ -67,6 +67,7 @@
 		<h2 align="center">게시글 내용</h2>
 		
 		<div class="tableArea">
+			<span id="parentGetmid" style="display:none;"><%= m.getMid() %></span>
 			<table align="center" width="800px">
 				<tr>
 					<td>제목 </td>
@@ -103,7 +104,7 @@
 		<div align="center">
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">좋아요</button>
 			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport();">신고</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
 			<button onclick="location.href='/crojecter/main.html'">목록</button>
 			
 			<% if(m != null && m.getMid() == g.getBwriter()){ %>
@@ -124,21 +125,17 @@
 
 	</div>
 	
-	<div class="comment-area">
-		<textarea id="commentContent" cols="30" rows="10"></textarea>
-		<button onclick="clickComment();">댓글 쓰기</button>
-	</div>
-	
-	
-	
-	
 	<script>
-		function showSpon(g) {
+	
+		var windowObj = null;
+	
+		function showSpon() {
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
 		    
-			window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+
 		}
 	</script>
 	
@@ -152,7 +149,6 @@
 			alert("본인 작품은 좋아요 할 수 없습니다.");
 		});
 		</script>
-		
 	<%} else if(m != null) { %>
 		<script>
 		$(function(){		
@@ -222,7 +218,6 @@
 			});
 		});
 		</script>	
-		
 	<% } else { %>
 		<script>
 		$('#btnFollow').click(function(){

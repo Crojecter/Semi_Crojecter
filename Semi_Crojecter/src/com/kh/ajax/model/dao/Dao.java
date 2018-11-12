@@ -188,7 +188,7 @@ public class Dao {
 			
 			pstmt.setInt(1, hoduId);
 			pstmt.setInt(2, s.getSgiverid());
-			pstmt.setInt(3, s.getSreceiverid());
+			pstmt.setString(3, s.getSreceivername());
 			
 			int resultSpon = pstmt.executeUpdate();
 			
@@ -200,20 +200,25 @@ public class Dao {
 				PreparedStatement pstmt2 = con.prepareStatement(sql2);
 				pstmt2.setInt(1, s.getShodu());
 				pstmt2.setInt(2, s.getSgiverid());
+				pstmt2.setInt(3, s.getShodu());
 				PreparedStatement pstmt3 = con.prepareStatement(sql3);
 				pstmt3.setInt(1, s.getShodu());
-				pstmt3.setInt(2, s.getSreceiverid());
+				pstmt3.setString(2, s.getSreceivername());
 				
 				int result2 = pstmt2.executeUpdate();
 				int result3 = pstmt3.executeUpdate();
 				
 				if(result2 > 0 && result3 > 0) {
 					
-					System.out.println("후원 성공");
+					System.out.println("Giver Receiver 후원 성공");
+					
+					resultAll = 1;
 					
 				} else {
 					
-					System.out.println("후원 실패");
+					System.out.println("Giver Receiver 후원 실패");
+					
+					resultAll = 0;
 					
 				}
 				
@@ -222,7 +227,8 @@ public class Dao {
 				
 			} else {
 				
-				System.out.println("후원 실패");
+				System.out.println("insertSpon 후원 실패");
+				resultAll = 0;
 				
 			}
 			
