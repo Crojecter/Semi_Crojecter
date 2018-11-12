@@ -103,7 +103,7 @@
 		<div align="center">
 			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">좋아요</button>
 			<button onclick="showSpon();">후원하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/aaa.aa'">신고</button>
+			<button onclick="showReport();">신고</button>
 			<button onclick="location.href='/crojecter/main.html'">목록</button>
 			
 			<% if(m != null && m.getMid() == g.getBwriter()){ %>
@@ -123,6 +123,14 @@
 		</div>
 
 	</div>
+	
+	<div class="comment-area">
+		<textarea id="commentContent" cols="30" rows="10"></textarea>
+		<button onclick="clickComment();">댓글 쓰기</button>
+	</div>
+	
+	
+	
 	
 	<script>
 		function showSpon(g) {
@@ -144,6 +152,7 @@
 			alert("본인 작품은 좋아요 할 수 없습니다.");
 		});
 		</script>
+		
 	<%} else if(m != null) { %>
 		<script>
 		$(function(){		
@@ -213,6 +222,7 @@
 			});
 		});
 		</script>	
+		
 	<% } else { %>
 		<script>
 		$('#btnFollow').click(function(){
