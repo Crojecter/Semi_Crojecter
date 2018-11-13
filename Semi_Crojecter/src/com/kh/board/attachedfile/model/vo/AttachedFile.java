@@ -1,6 +1,8 @@
 package com.kh.board.attachedfile.model.vo;
 
-public class AttachedFile {
+import java.io.Serializable;
+
+public class AttachedFile implements Serializable{
 	
 	private int fid;
 	private String fname;

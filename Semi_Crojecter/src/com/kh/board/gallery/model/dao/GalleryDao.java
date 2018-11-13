@@ -79,7 +79,7 @@ public class GalleryDao {
 		return g;   
 	}
 	
-	public int insertBoardContent(Connection con, Gallery g) {
+	public int insertBoardContent(Connection con, Gallery g, int bid) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -88,11 +88,12 @@ public class GalleryDao {
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, g.getBtype());
-			pstmt.setString(2, g.getBtitle());
-			pstmt.setString(3, g.getBcontent());
-			pstmt.setInt(4, g.getBwriter());			
+					
+			pstmt.setInt(1, bid);
+			pstmt.setInt(2, g.getBtype());
+			pstmt.setString(3, g.getBtitle());
+			pstmt.setString(4, g.getBcontent());
+			pstmt.setInt(5, g.getBwriter());			
 			
 			result = pstmt.executeUpdate();
 			
