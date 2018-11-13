@@ -1,7 +1,7 @@
-package com.kh.member.controller;
+package com.kh.adminpage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,16 +13,16 @@ import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class signUp
+ * Servlet implementation class SearchMemberServlet
  */
-@WebServlet("/signUp.do")
-public class signUp extends HttpServlet {
+@WebServlet("/searchMember.do")
+public class SearchMemberServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public signUp() {
+    public SearchMemberServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +31,32 @@ public class signUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-		String nickName = request.getParameter("nickName");
-		String email = request.getParameter("email");
-		String password = request.getParameter("password");
-		
-		Member m = new Member(email, password, nickName);
-		
+		// 검색 카테고리
+		String condition = request.getParameter("con");
+				
+		// 검색 키워드
+		String keyword = request.getParameter("keyword");
+				
+		ArrayList<Member> mlist = new ArrayList<Member>();
+				
 		MemberService ms = new MemberService();
-		
-		int result = ms.signUpMember(m);
-		
-		if(result > 0) {
-			System.out.println("회원가입 성공");
-			response.sendRedirect("/crojecter/views/member/login.jsp");
-			request.setAttribute("member", m);
+				
+		mlist = ms.searchMember(condition, keyword);
+				
+		String page = "";
+				
+		if (mlist != null) {
+					
+			page = "views/adminpage/memberlistView.jsp";
+			request.setAttribute("mlist", mlist);
+					
 		} else {
-			
-			out.println("<script>");
-			out.println("alert('회원가입 실패');");
-			out.println("history.back(-1);");
-			out.println("</script>");
-			System.out.println("회원가입 실패");
+					
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "검색 실패!");
 		}
+				
+			request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**

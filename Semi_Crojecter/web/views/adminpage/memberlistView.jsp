@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*, java.util.*"%>
-<%
-	ArrayList<Member> mlist = (ArrayList<Member>)request.getAttribute("mlist");
-	Member m = (Member)session.getAttribute("member");
-%>
 <!DOCTYPE html>
 <html>
 
@@ -37,17 +33,18 @@
 		margin-left:auto;
 		margin-right:auto;
 	}
+
 </style>
 </head>
 <body>
-<div class="searchArea">
-	<select id="searchMember" name="searchMember">
-		<option>---</option>
-		<option value="name">이름</option>
-		<option value="email">이메일</option>
-	</select>
+<%@ include file="../adminpage/common/adminpageHeader.jsp" %>
+	<div class="searchArea">
+		<select id="searchMember" name="searchMember">
+			<option value="name">이름</option>
+			<option value="email">이메일</option>
+		</select>
 		<input type="search">
-		<button type="submit">검색하기</button>
+		<button type="button" onclick="search();">검색하기</button>
 </div>
 <table>
 	<tr>
@@ -121,6 +118,10 @@
     			console.log("실패");
     		}
     	});
+	}
+	
+	function search(){
+		location.href="<%=request.getContextPath()%>/searchMember.do?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 	}
 
 </script>
