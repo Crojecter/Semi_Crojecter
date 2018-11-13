@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member" %>
+<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
 	Member m = (Member)session.getAttribute("member");
 	System.out.println("m : " + m);
 
 	Gallery g = (Gallery)request.getAttribute("gallery");
-	//ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
+	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 	
 	System.out.println("g : " + g);
+	System.out.println("clist : " + clist);
 %>
     
 <!DOCTYPE html>
@@ -19,9 +20,9 @@
 <style>
 	.outer{
 		width:800px;
-		height:500px;
-		background:black;
-		color:white;
+		height:auto;
+		background:lightblue;
+		color:black;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
@@ -54,6 +55,15 @@
 		background: red;
 	}
 	
+	.commentOuter {
+		width:800px;
+		height:auto;
+		background:lightblue;
+		color:black;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:50px;
+	}
 	
 	
 </style>
@@ -125,12 +135,59 @@
 		</div>
 
 	</div>
-	
+
 	<div class="commentOuter">
 	
-	
+		<div class="commentWriteArea" style="display:none;">
+			<form action="/crojecter/cInsert.co" method="post">
+				<input type="hidden" id="cwriter" name="cwriter" value="" /> 
+				<input type="hidden" name="bid" value="<%=g.getBid()%>" /> 
+				<input type="hidden" name="crefmid" value="-1" />
+
+				<div display="inline">
+					<textArea rows="3" cols="80" id="replyContent" name="replyContent"></textArea>
+					<button type="submit" id="addReply">댓글 등록</button>
+				</div>
+				
+			</form>
+		</div>
+		
+		<div class="commentListArea">
+	      <% if( clist != null ) { %>
+	      	<% for(BoardComment bc : clist) { %>
+	      	
+	      	<div class="comment">
+	      		<div class="comment" style="display:inline;">
+	      			<input type="hidden" name="crefmid" value="<%=bc.getCrefmid() %>" />
+	      			<span><%=bc.getCwname() %></span>
+	      			<span><%=bc.getCdate() %></span>
+	      			<%if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 %>
+						<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
+							  
+						<button type="button" class="updateBtn" onclick="updateComment(this);">수정하기</button> &nbsp;&nbsp;
+						<button type="button" class="updateConfirm" onclick="updateConfirm(this);"
+							    style="display:none;" >수정완료</button> &nbsp;&nbsp;
+						<button type="button" class="deleteBtn" onclick="deleteComment(this);">삭제하기</button> &nbsp;&nbsp;
+							
+					<% } else { %>
+						<input type="hidden" name="writer" value="<%=m.getMid()%>"/>
+						<input type="hidden" name="refcno" value="<%= bc.getCid() %>" />
+						
+						<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;				 
+						<button type="button" class="insertConfirm" onclick="reConfirm(this);"
+							    style="display:none;" >댓글 추가 완료</button> 
+							
+					<% } %>
+	      		</div>
+	      		<div class="comment commentContent">
+	      			<textarea class="reply-content" cols="105" rows="3" readonly="readonly"><%= bc.getCcontent() %></textarea>
+	      		</div>
+	      	</div>
+	  		<% } } %>
+		</div>
+
 	</div>
-	
+
 	<script>
 	
 		var windowObj = null;
@@ -157,6 +214,15 @@
 	<%} else if(m != null) { %>
 		<script>
 		$(function(){		
+			
+			$('.commentWriteArea').css({
+				'display' : 'block'
+			});
+			
+			$('#cwriter').attr({
+				'value' : '<%= m.getMid() %>'
+			});
+			
 			$.ajax({
 				url : '/crojecter/fCheck.fo',
 				type : 'get',
@@ -175,6 +241,7 @@
 					console.log('팔로우버튼 초기화 에러 발생!');
 				}
 			});
+
 		});
 		
 		$('#btnFollow').click(function(){
