@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
-<% Member m = (Member)session.getAttribute("member"); %>
+<%-- <% Member m = (Member)session.getAttribute("member"); %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,10 +10,9 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-	button{
-		width:180px;
-		height:80px;
-		font-size:20px;
+	.btn{
+		width:300px;
+		height:180px;
 		color:white;
 		text-align:center;
 		border-radius:5px;
@@ -23,23 +22,31 @@
 	p{
 		margin:10px 10px 10px 10px;
 	}
+	.wrapper{
+		width:600px;
+		margin:0 auto;
+		margin-top:120px;
+		margin-bottom:120px;
+	}
 </style>
 </head>
 <body>
-	<div style="width:400px">
-		<p style="font-size:25px; color:orange; text-align:center;">호두 충전하기</p>
-		<p>크리에이터들의 창작활동에 후원을 할 수 있는<br>호두를 충전하세요.</p>
+	<%@ include file="../common/header.jsp" %>
+	<div class="wrapper">
+		<p style="font-size:50px; color:orange; text-align:center;">호두 충전하기</p>
+		<p style="font-size:25px;">크리에이터들의 창작활동에 후원을 할 수 있는 호두를 충전하세요.</p>
 		<table>
 			<tr>
-				<td><button id="pay5500" onclick="pay(100, 50);">50알(5,550원)</button></td>
-				<td><button id="pay11000" onclick="pay(200, 100);">100알(11,000원)</button></td>
+				<td><button class="btn" id="pay5500" onclick="pay(100, 50);" style="font-size:30px;">50알(5,550원)</button></td>
+				<td><button class="btn" id="pay11000" onclick="pay(200, 100);" style="font-size:30px;">100알(11,000원)</button></td>
 			</tr>
 			<tr>
-				<td><button id="pay33000" onclick="pay(300, 300);">300알(33,000원)</button></td>
-				<td><button id="pay55000" onclick="pay(400, 500);">500알(55,000원)</button></td>
+				<td><button class="btn" id="pay33000" onclick="pay(300, 300);" style="font-size:30px;">300알(33,000원)</button></td>
+				<td><button class="btn" id="pay55000" onclick="pay(400, 500);" style="font-size:30px;">500알(55,000원)</button></td>
 			</tr>
 		</table>
 	</div>
+	<%@ include file="../common/footer.jsp" %>
 
 	<script>
 		function pay(price, hodu){
@@ -56,23 +63,24 @@
 			}, function(rsp) {
 			    if ( rsp.success ) {
 			    	// 결제 완료시
-			        var msg = '결제가 완료되었습니다.';
+			    	
 					// ajax async 속성 으로 처리
 			        $.ajax({
 			        	data : { Mhodu : hodu, Mid : <%= m.getMid() %>, Mprice : price },
 						url : "/crojecter/inserthodu.pm",
 						type : "post",
 						success : function(data) {
-							console.log('성공');
+							if(data == "success") {
+								alert("충전에 성공했습니다.");
+							}else if(data == "fail") {
+								alert("충전에 실패했습니다.<br>관리자에게 문의해주세요.");
+							}
 						}
 			        });
 			    } else {
 			    	// 결제 실패시
-			        var msg = '결제에 실패하였습니다.';
-			        
+			        alert('충전에 실패하였습니다.');
 			    }
-
-			    alert(msg);
 			    
 			});
 		}

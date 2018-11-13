@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -40,6 +41,7 @@ public class sendEmail extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
 		// getParameter() 로 가져온 부분만 암호화 복호화가 됨.
@@ -64,15 +66,29 @@ public class sendEmail extends HttpServlet {
 			int resultPwd = ms.updateRandomPwd(tempPwd, m);
 			
 			if(resultPwd > 0) {
+				response.sendRedirect("/crojecter/views/member/login.jsp");
 				System.out.println("임시비밀번호로 수정 성공");
 				// 이메일 전송
 				gmailSend(nickName,whatPwd, email);
 				
 			} else {
+				
+				out.println("<script>");
+				out.println("alert('임시비밀번호 수정 실패');");
+				out.println("history.back(-1);");
+				out.println("</script>");
+				
 				System.out.println("임시비밀번호로 수정 실패");
 			}
 		} else {
+			
+			out.println("<script>");
+			out.println("alert('비밀번호 찾기 실패');");
+			out.println("history.back(-1);");
+			out.println("</script>");
+			
 			System.out.println("이메일 전송 실패");
+			
 		}
 		
 	}

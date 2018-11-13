@@ -31,60 +31,82 @@
 		width:auto;
 		margin:1px 10px 1px 10px;
 	}
+	.wrapper{
+		width:270px;
+		margin:0 auto;
+		margin-top:160px;
+		margin-bottom:160px;
+	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<form name="form" action="<%=request.getContextPath()%>/signUp.do" method="post">
-		<div style="border:1px solid gray;">
-			<div style="margin: 10px 10px 1px 10px;" class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-			<table style="boarder:1px solid black;">
-				<tr>
-					<td><label class="inputContent">닉네임</label></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="text" name="nickName" id="nickName" class="inputContent" placeholder="사용하실 닉네임을 입력해주세요" oninput="checkNickName();"/><br>
-						<label id="labelNickname" class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
-					</td>
-				</tr>
-				<tr>
-					<td><label class="inputContent">이메일 주소</label></td>
-				</tr>
-				<tr>
-					<td><input type="email" name="email" id="email" class="inputContent" placeholder="이메일 주소를 입력해주세요" oninput="checkEmail();"/></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="email" name="emailCheck" id="emailCheck" class="inputContent" placeholder="이메일 주소를 확인합니다" oninput="checkedEmail();"/><br>
-						<label id="labelEmail" class="label">이메일 형식에 맞지 않습니다.</label>
-					</td>
-				</tr>
-				<tr>
-					<td><label class="inputContent">비밀번호</label></td>
-				</tr>
-				<tr>
-					<td><input type="password" name="password" id="password" class="inputContent" placeholder="비밀번호를 입력해주세요" oninput="checkedPassword();"/></td>
-				</tr>
-				<tr>
-					<td>
-						<input type="password" name="passwordCheck" id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다" oninput="checkedPassword();"/><br>
-						<label id="labelPwd" class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함</label>
-					</td>
-				</tr>
-				<tr>
-					<td><button name="submit" id="submit" style="border:1px solid gray; background-color:gray;" onclick="singUpCheck();" disabled>회원가입</button></td>
-				</tr>
-				<tr>
-					<td><hr /></td>
-				</tr>
-				<tr>
-					<td><p align="center">이미 계정이 있으신가요?<br>
-						<a href="./login.jsp" style="color:red; text-decoration:none;">기존 계정으로 로그인하기</a></p></td>
-				</tr>				
-			</table>
-		</div>
-	</form>
+	<div class="wrapper">
+		<form name="form" action="<%=request.getContextPath()%>/signUp.do"
+			method="post">
+			<div style="border: 1px solid gray; border-radius:20px;">
+				<div style="margin: 10px 10px 1px 10px;" class="fb-login-button"
+					data-max-rows="1" data-size="large" data-button-type="login_with"
+					data-show-faces="false" data-auto-logout-link="false"
+					data-use-continue-as="false"></div>
+				<table style="boarder: 1px solid black;">
+					<tr>
+						<td><label class="inputContent">닉네임</label></td>
+					</tr>
+					<tr>
+						<td><input type="text" name="nickName" id="nickName"
+							class="inputContent" placeholder="사용하실 닉네임을 입력해주세요"
+							oninput="checkNickName();" /><br> <label id="labelNickname"
+							class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label></td>
+					</tr>
+					<tr>
+						<td><label class="inputContent">이메일 주소</label></td>
+					</tr>
+					<tr>
+						<td><input type="email" name="email" id="email"
+							class="inputContent" placeholder="이메일 주소를 입력해주세요"
+							oninput="checkEmail();" /></td>
+					</tr>
+					<tr>
+						<td><input type="email" name="emailCheck" id="emailCheck"
+							class="inputContent" placeholder="이메일 주소를 확인합니다"
+							oninput="checkedEmail();" /><br> <label id="labelEmail"
+							class="label">이메일 형식에 맞지 않습니다.</label></td>
+					</tr>
+					<tr>
+						<td><label class="inputContent">비밀번호</label></td>
+					</tr>
+					<tr>
+						<td><input type="password" name="password" id="password"
+							class="inputContent" placeholder="비밀번호를 입력해주세요"
+							oninput="checkedPassword();" /></td>
+					</tr>
+					<tr>
+						<td><input type="password" name="passwordCheck"
+							id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다"
+							oninput="checkedPassword();" /><br> <label id="labelPwd"
+							class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
+								특수문자 숫자 최소 1개 이상 포함
+						</label></td>
+					</tr>
+					<tr>
+						<td><button name="submit" id="submit"
+								style="border: 1px solid gray; background-color: gray;"
+								onclick="singUpCheck();" disabled>회원가입</button></td>
+					</tr>
+					<tr>
+						<td><hr /></td>
+					</tr>
+					<tr>
+						<td><p align="center">
+								이미 계정이 있으신가요?<br> <a href="./login.jsp"
+									style="color: red; text-decoration: none;">기존 계정으로 로그인하기</a>
+							</p></td>
+					</tr>
+				</table>
+			</div>
+		</form>
+	</div>
 	<%@ include file="../common/footer.jsp" %>
 	<script>
 		var nnChk = 0;

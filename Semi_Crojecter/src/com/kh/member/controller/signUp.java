@@ -1,6 +1,7 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +31,8 @@ public class signUp extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		PrintWriter out = response.getWriter();
 		String nickName = request.getParameter("nickName");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
@@ -42,9 +45,14 @@ public class signUp extends HttpServlet {
 		
 		if(result > 0) {
 			System.out.println("회원가입 성공");
-			response.sendRedirect("/crojecter");
+			response.sendRedirect("/crojecter/views/member/login.jsp");
 			request.setAttribute("member", m);
 		} else {
+			
+			out.println("<script>");
+			out.println("alert('회원가입 실패');");
+			out.println("history.back(-1);");
+			out.println("</script>");
 			System.out.println("회원가입 실패");
 		}
 	}
