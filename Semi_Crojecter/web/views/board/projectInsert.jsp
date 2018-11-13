@@ -77,6 +77,7 @@ body {
 				<input class="sidebar" name="date" type="date" min="" max="">
 				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
+				<input type="text" value="Amsterdam,Washington" data-role="tagsinput" >
 				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
@@ -90,57 +91,58 @@ body {
 	%>
 
 	<script type="text/javascript">
-	$(document).ready(function() {
-	      $('#summernote').summernote({
-	        height: 300,
-	        minHeight: null,
-	        maxHeight: null,
-	        focus: true,
-	        callbacks: {
-	          onImageUpload: function(files, editor, welEditable) {
-	            for (var i = files.length - 1; i >= 0; i--) {
-	              sendFile(files[i], this);
-	            }
-	          }
-	        }		      
-	      });
-	    });
-	
-	$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
-	    var el = this, type = $(el).attr('type');
-	    
-	    var today = new Date();
-	    var dd = today.getDate();
-	    var mm = today.getMonth()+2; //January is 0!
-	    var yyyy = today.getFullYear();	    
-	    
-	    if(dd<10){
-	        dd='0'+dd;
-	    } 	    
-	    if(mm>12){
-	    	mm=mm-11;
-	    }	    
-	    if(mm<10){
-	        mm='0'+mm;
-	    } 	
-	    
-	    today = yyyy+'-'+mm+'-'+dd;
-	    alert('max 날짜 : ' + today);
-	    $(el).attr('max', today);	    
-	    
-	    if ($(el).val() == ''){
-	    	$(el).attr('type', 'text');	    
-	    	$(el).attr('placeholder', '마감일 선택');	
-	    }
-	    $(el).focus(function() {
-	        $(el).attr('type', type);
-	        el.click();	       
-	        
-	    });
-	    $(el).blur(function() {
-	        if ($(el).val() == '') $(el).attr('type', 'text');
-	    });
-	});
+		$(document).ready(function() {
+		      $('#summernote').summernote({
+		        height: 300,
+		        minHeight: null,
+		        maxHeight: null,
+		        focus: true,
+		        callbacks: {
+		          onImageUpload: function(files, editor, welEditable) {
+		            for (var i = files.length - 1; i >= 0; i--) {
+		              sendFile(files[i], this);
+		            }
+		          }
+		        }		      
+		      });
+		});
+		
+		$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
+		    var el = this, type = $(el).attr('type');
+		    
+		    var today = new Date();
+		    var dd = today.getDate();
+		    var mm = today.getMonth()+2; //January is 0!
+		    var yyyy = today.getFullYear();	    
+		    
+		    if(dd<10){
+		        dd='0'+dd;
+		    } 	    
+		    if(mm>12){
+		    	mm=mm-11;
+		    }	    
+		    if(mm<10){
+		        mm='0'+mm;
+		    } 	
+		    
+		    today = yyyy+'-'+mm+'-'+dd;
+		    alert('max 날짜 : ' + today);
+		    $(el).attr('max', today);	    
+		    
+		    if ($(el).val() == ''){
+		    	$(el).attr('type', 'text');	    
+		    	$(el).attr('placeholder', '마감일 선택');	
+		    }
+		    $(el).focus(function() {
+		        $(el).attr('type', type);
+		        el.click();	       
+		        
+		    });
+		    $(el).blur(function() {
+		        if ($(el).val() == '') $(el).attr('type', 'text');
+		    });
+		});
+		
     
 		function sendFile(file, el) {
 				var form_data = new FormData();
@@ -164,6 +166,14 @@ body {
 					}
 				});
 			}
+		
+		$('input').tagsinput({
+			  typeahead: {
+			    source: function(query) {
+			      return $.getJSON('citynames.json');
+			    }
+			  }
+			});
 		</script>
 
 </body>
