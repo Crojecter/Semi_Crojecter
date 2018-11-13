@@ -2,7 +2,7 @@ package com.kh.board.gallery.model.vo;
 
 import java.io.Serializable;
 
-import com.kh.board.common.model.Board;
+import com.kh.board.common.model.vo.Board;
 
 public class Gallery extends Board implements Serializable {
 

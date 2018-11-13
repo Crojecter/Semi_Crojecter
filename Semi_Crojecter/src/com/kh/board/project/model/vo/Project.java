@@ -3,7 +3,7 @@ package com.kh.board.project.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-import com.kh.board.common.model.Board;
+import com.kh.board.common.model.vo.Board;
 
 public class Project extends Board implements Serializable {
 

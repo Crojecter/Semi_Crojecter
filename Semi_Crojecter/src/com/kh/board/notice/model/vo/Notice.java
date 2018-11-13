@@ -3,7 +3,7 @@ package com.kh.board.notice.model.vo;
 import java.io.Serializable;
 import java.sql.Date;
 
-import com.kh.board.common.model.Board;
+import com.kh.board.common.model.vo.Board;
 
 public class Notice extends Board implements Serializable {
 

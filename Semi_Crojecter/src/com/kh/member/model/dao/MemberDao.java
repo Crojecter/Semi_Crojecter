@@ -225,4 +225,33 @@ public class MemberDao {
 		return result;
 	}
 
+	public int updateMemberStatus(Connection con, Member m) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMemberStatus");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, m.getMsid());
+			pstmt.setInt(2, m.getMid());
+	
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
 }
