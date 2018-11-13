@@ -10,7 +10,7 @@
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>게시물 업로드 페이지</title>
+<title>프로젝트 업로드 페이지</title>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -75,7 +75,7 @@ body {
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> <select
 					class="sidebar" name="category" id="category">
-					<option value="" disabled selected>카테고리 선택</option>
+					<option value="" disabled selected>기간 선택(최대 30일)</option>
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
 					<option value="3">AUDIO</option>
@@ -116,8 +116,7 @@ body {
 		              sendFile(files[i], this);
 		            }
 		          }
-		        }
-		      
+		        }		      
 		      });
 		    });
     

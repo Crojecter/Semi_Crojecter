@@ -109,16 +109,32 @@ public class GalleryInsertServlet extends HttpServlet {
 			// Attachment에 기록하기 위한 파일 리스트 처리하기
 			ArrayList<AttachedFile> list = new ArrayList<AttachedFile>();
 			
-			for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
-				// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
+			if(!(list.isEmpty())){
+				for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
+						// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
+						AttachedFile af = new AttachedFile();
+						
+						af.setFpath(savePath);
+						af.setFname(saveFiles.get(i));
+						
+						System.out.println("af : " + af);
+						list.add(af);
+				} 
+			} else {
 				AttachedFile af = new AttachedFile();
 				
-				af.setFpath(savePath);
-				af.setFname(saveFiles.get(i));
+				af.setFpath(root + "/images/");
 				
+				switch(g.getGcategoryid()){
+				case 1: af.setFname("textCategoryImage.png"); break;
+				case 3: af.setFname("audioCategoryImage.png"); break;
+				case 4: af.setFname("videoCategoryImage.png"); break;								
+				}
+	
 				System.out.println("af : " + af);
 				list.add(af);
 			}
+			
 			
 			System.out.println("list : " + list);
 			// service로 작성한 내용 전송하기
@@ -126,7 +142,7 @@ public class GalleryInsertServlet extends HttpServlet {
 			int result = gs.insertGallery(g, list);
 			
 			if(result > 0) {
-				response.sendRedirect("gSelectList.ga");
+				response.sendRedirect("selectList.ga");
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");

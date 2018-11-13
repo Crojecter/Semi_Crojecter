@@ -48,10 +48,11 @@ public class GalleryService {
 		
 		System.out.println("g : " + g);
 		
-		int result1 = gDao.insertBoardContent(con, g);
+		int bid = gDao.selectCurrentBid(con);
+		
+		int result1 = gDao.insertBoardContent(con, g, bid);
 		
 		if(result1 > 0){
-			int bid = gDao.selectCurrentBid(con);
 
 			result2 = gDao.insertGalleryContent(con, g, bid);
 						
