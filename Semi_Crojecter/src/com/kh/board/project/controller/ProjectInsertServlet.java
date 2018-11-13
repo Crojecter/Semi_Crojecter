@@ -56,7 +56,7 @@ public class ProjectInsertServlet extends HttpServlet {
 			
 			System.out.println("root 경로 확인 : " + root);
 			
-			String savePath = root + "/projectUploadFiles/";
+			String savePath = root + "/uploadFiles/";
 			
 			MultipartRequest mrequest =
 					new MultipartRequest(request, 
