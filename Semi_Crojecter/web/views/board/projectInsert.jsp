@@ -64,7 +64,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
+	<form action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
@@ -73,24 +73,10 @@ body {
 				<textarea id="summernote" name="content"></textarea>
 			</div>
 			<div class="col-md-2">
-				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> <select
-					class="sidebar" name="category" id="category">
-					<option value="" disabled selected>기간 선택(최대 30일)</option>
-					<option value="1">TEXT</option>
-					<option value="2">IMAGE</option>
-					<option value="3">AUDIO</option>
-					<option value="4">VIDEO</option>
-				</select> <select class="sidebar" name="cclid" id="ccl">
-					<option value="" disabled selected>CCL 선택</option>
-					<option value="1">저작자 표시</option>
-					<option value="2">저작자-비영리</option>
-					<option value="3">저작자-동일조건변경허락</option>
-					<option value="4">저작자-변경금지</option>
-					<option value="5">저작자-비영리-변경금지</option>
-					<option value="6">저작자-비영리-동일조건변경허락</option>
-				</select> <input type="text" name="tags" placeholder="태그 입력(,로 구분)"
+				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
+				<input class="sidebar" name="date" type="date" min="" max="">
+				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
-
 				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
@@ -104,21 +90,57 @@ body {
 	%>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-		      $('#summernote').summernote({
-		        height: 300,
-		        minHeight: null,
-		        maxHeight: null,
-		        focus: true,
-		        callbacks: {
-		          onImageUpload: function(files, editor, welEditable) {
-		            for (var i = files.length - 1; i >= 0; i--) {
-		              sendFile(files[i], this);
-		            }
-		          }
-		        }		      
-		      });
-		    });
+	$(document).ready(function() {
+	      $('#summernote').summernote({
+	        height: 300,
+	        minHeight: null,
+	        maxHeight: null,
+	        focus: true,
+	        callbacks: {
+	          onImageUpload: function(files, editor, welEditable) {
+	            for (var i = files.length - 1; i >= 0; i--) {
+	              sendFile(files[i], this);
+	            }
+	          }
+	        }		      
+	      });
+	    });
+	
+	$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
+	    var el = this, type = $(el).attr('type');
+	    
+	    var today = new Date();
+	    var dd = today.getDate();
+	    var mm = today.getMonth()+2; //January is 0!
+	    var yyyy = today.getFullYear();	    
+	    
+	    if(dd<10){
+	        dd='0'+dd;
+	    } 	    
+	    if(mm>12){
+	    	mm=mm-11;
+	    }	    
+	    if(mm<10){
+	        mm='0'+mm;
+	    } 	
+	    
+	    today = yyyy+'-'+mm+'-'+dd;
+	    alert('max 날짜 : ' + today);
+	    $(el).attr('max', today);	    
+	    
+	    if ($(el).val() == ''){
+	    	$(el).attr('type', 'text');	    
+	    	$(el).attr('placeholder', '마감일 선택');	
+	    }
+	    $(el).focus(function() {
+	        $(el).attr('type', type);
+	        el.click();	       
+	        
+	    });
+	    $(el).blur(function() {
+	        if ($(el).val() == '') $(el).attr('type', 'text');
+	    });
+	});
     
 		function sendFile(file, el) {
 				var form_data = new FormData();
