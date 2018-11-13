@@ -1,6 +1,8 @@
 package com.kh.board.attachedfile.model.vo;
 
-public class AttachedFile {
+import com.kh.board.common.model.vo.Board;
+
+public class AttachedFile extends Board {
 	
 	private int fid;
 	private String fname;
@@ -14,11 +16,11 @@ public class AttachedFile {
 
 	public AttachedFile(int fid, String fname, String fpath, int flevel, int bid) {
 		super();
-		this.fid = fid;
-		this.fname = fname;
-		this.fpath = fpath;
-		this.flevel = flevel;
-		this.bid = bid;
+		this.fid = fid;				// 파일번호
+		this.fname = fname;			// 파일이름
+		this.fpath = fpath;			// 파일경로
+		this.flevel = flevel;		// 파일레벨
+		this.bid = bid;				// 게시글번호
 	}
 
 	public int getFid() {

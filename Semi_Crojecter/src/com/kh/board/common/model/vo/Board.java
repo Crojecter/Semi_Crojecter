@@ -1,4 +1,4 @@
-package com.kh.board.common.model;
+package com.kh.board.common.model.vo;
 
 import java.sql.Date;
 
@@ -20,15 +20,15 @@ public class Board {
 	public Board(int bid, int btype, String btitle, String bcontent, int bcount, Date bdate, String bstatus,
 			int bwriter, int brcount) {
 		super();
-		this.bid = bid;
-		this.btype = btype;
-		this.btitle = btitle;
-		this.bcontent = bcontent;
-		this.bcount = bcount;
-		this.bdate = bdate;
-		this.bstatus = bstatus;
-		this.bwriter = bwriter;
-		this.brcount = brcount;
+		this.bid = bid;					// 게시글 번호
+		this.btype = btype;				// 게시글 타입	
+		this.btitle = btitle;			// 제목
+		this.bcontent = bcontent;		// 내용
+		this.bcount = bcount;			// 조회수
+		this.bdate = bdate;				// 작성일
+		this.bstatus = bstatus;			// 삭제여부
+		this.bwriter = bwriter;			// 작성자(회원번호)
+		this.brcount = brcount;			// 신고횟수
 	}
 
 	public int getBid() {

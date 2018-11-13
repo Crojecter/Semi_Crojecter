@@ -2,7 +2,7 @@ package com.kh.board.gallery.model.vo;
 
 import java.io.Serializable;
 
-import com.kh.board.common.model.Board;
+import com.kh.board.common.model.vo.Board;
 
 public class Gallery extends Board implements Serializable {
 
@@ -16,14 +16,6 @@ public class Gallery extends Board implements Serializable {
 	
 	public Gallery() {
 		super();
-	}
-  
-	public Gallery(int gid, int gcategoryid, String gtag, int glike) {
-		super();
-		this.gid = gid;
-		this.gcategoryid = gcategoryid;
-		this.gtag = gtag;
-		this.glike = glike;
 	}
 
 	public Gallery(int gid, int gcategoryid, String gtag, int glike, int cclid, String gcategoryname, String cclname) {

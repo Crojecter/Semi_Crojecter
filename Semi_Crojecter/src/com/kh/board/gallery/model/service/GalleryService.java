@@ -1,10 +1,6 @@
 package com.kh.board.gallery.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
-
+import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -67,12 +63,36 @@ public class GalleryService {
 		
 		return result;
 	}
+
+	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {
+		
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.selectGalleryList(con, currentPage, limit);
+		
+		close(con);
+		return list;
+	}
 	
+	public int getCountGalleryList() {
+		// TODO Auto-generated method stub
 
+		Connection con = getConnection();
+		int listCount = gDao.getCountGalleryList(con);
+		
+		close(con);		
+		return listCount;
+	}
 
-
-
-
+		
+	public ArrayList<Gallery> top5(){
+		
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.top5(con);
+		
+		close(con);
+		
+		return list;
+	}
 
 
 }
