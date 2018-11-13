@@ -6,6 +6,7 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.member.model.vo.Member;
 import com.kh.payment.model.dao.PaymentDao;
 import com.kh.payment.model.vo.Payment;
 
@@ -25,6 +26,16 @@ private PaymentDao pDao = new PaymentDao();
 		
 		return list;
 
+	}
+
+	public ArrayList<Payment> searchPayment(String condition, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Payment> plist = null;
+		
+		plist = (condition.length() > 0) ? 
+				pDao.searchPayment(con, condition, keyword) : pDao.selectList(con); 
+		
+		return plist;
 	}
 
 }

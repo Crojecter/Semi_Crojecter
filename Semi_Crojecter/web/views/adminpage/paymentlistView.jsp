@@ -39,15 +39,16 @@
 </style>
 </head>
 <body>
+<%@ include file="../mypage/common/mypageHeader.jsp" %>
 <div class="searchArea">
 	<select id="searchMember" name="searchMember">
 		<option>---</option>
 		<option value="name">이름</option>
 		<option value="email">이메일</option>
 	</select>
-
+		<input type="search">
+		<button type="button" onclick="search();">검색하기</button>
 </div>
-
 <table>
 	<tr>
 		<th>날짜</th>
@@ -69,5 +70,10 @@
 	</tr>
 	<% } %>
 </table>
+<script>
+	function search(){
+		location.href="<%=request.getContextPath()%>/searchPayment.do?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+	}
+</script>
 </body>
 </html>
