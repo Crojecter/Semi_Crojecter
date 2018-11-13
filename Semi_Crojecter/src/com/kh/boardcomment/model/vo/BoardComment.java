@@ -11,10 +11,15 @@ public class BoardComment {
 	private int bid;
 	private int cwriter;
 	private int crcount;
+	private int crefmid;
+	private String cwname;
+	private String cfname;
 	
-	public BoardComment() {}
+	public BoardComment() {
+		this.crefmid = -1;
+	}
 	
-	public BoardComment(int cid, String ccontent, Date cdate, String cstatus, int bid, int cwriter, int crcount) {
+	public BoardComment(int cid, String ccontent, Date cdate, String cstatus, int bid, int cwriter, int crcount, int crefmid) {
 		super();
 		this.cid = cid;
 		this.ccontent = ccontent;
@@ -23,6 +28,7 @@ public class BoardComment {
 		this.bid = bid;
 		this.cwriter = cwriter;
 		this.crcount = crcount;
+		this.crefmid = crefmid;
 	}
 
 	public int getCid() {
@@ -81,10 +87,35 @@ public class BoardComment {
 		this.crcount = crcount;
 	}
 
+	public int getCrefmid() {
+		return crefmid;
+	}
+
+	public void setCrefmid(int crefmid) {
+		this.crefmid = crefmid;
+	}
+	
+	public String getCwname() {
+		return cwname;
+	}
+
+	public void setCwname(String cwname) {
+		this.cwname = cwname;
+	}
+
+	public String getCfname() {
+		return cfname;
+	}
+
+	public void setCfname(String cfname) {
+		this.cfname = cfname;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardComment [cid=" + cid + ", ccontent=" + ccontent + ", cdate=" + cdate + ", cstatus=" + cstatus
-				+ ", bid=" + bid + ", cwriter=" + cwriter + ", crcount=" + crcount + "]";
+				+ ", bid=" + bid + ", cwriter=" + cwriter + ", crcount=" + crcount + ", crefmid=" + crefmid
+				+ ", cwname=" + cwname + ", cfname=" + cfname + "]";
 	}
-	
+
 }
