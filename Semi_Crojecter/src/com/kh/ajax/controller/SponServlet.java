@@ -1,6 +1,7 @@
 package com.kh.ajax.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,6 +32,7 @@ public class SponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		int giver = Integer.parseInt(request.getParameter("Smid"));
 		String receiver = request.getParameter("Swriter");
 		int hodu = Integer.parseInt(request.getParameter("Shodu"));
@@ -52,8 +54,13 @@ public class SponServlet extends HttpServlet {
 		int result = s.spon(sp, hoduId);
 		
 		if(result > 0) {
-			System.out.println("후원 성공");
+			out.print("success");
+			System.out.println("후원 성공");			
+		} else if(result == -2) {
+			out.print("-2");
+			System.out.println("남은 호두량 부족");
 		} else {
+			out.print("fail");
 			System.out.println("후원 실패");
 		}
 		

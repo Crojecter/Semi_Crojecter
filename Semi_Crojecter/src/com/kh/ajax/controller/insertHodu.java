@@ -1,6 +1,8 @@
 package com.kh.ajax.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,7 @@ public class insertHodu extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		PrintWriter out = response.getWriter();
 		int pmoney_id = 0;
 		int hodu = Integer.parseInt(request.getParameter("Mhodu"));
 		switch(hodu){
@@ -56,8 +59,11 @@ public class insertHodu extends HttpServlet {
 		int result = sv.insertHodu(m, p);
 		
 		if(result > 0) {
+			out.print("success");
 			System.out.println("호두 충전 완료");
 		} else {
+			out.print("fail");
+			response.sendRedirect("/crojecter/views/payment/payment.jsp");
 			System.out.println("호두 충전 실패");
 		}
 		
