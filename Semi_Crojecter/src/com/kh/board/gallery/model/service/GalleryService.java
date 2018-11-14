@@ -7,6 +7,7 @@ import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.dao.GalleryDao;
@@ -73,6 +74,66 @@ public class GalleryService {
 		close(con);
 		
 		return result;
+	}
+
+
+	public ArrayList<AttachedFile> selectAttachedfileOne(int bid) {
+		
+		Connection con = getConnection();
+		
+		ArrayList<AttachedFile> list = gDao.selectAttachedfileOne(con, bid);
+		
+		close(con);
+		
+		return list;
+	}
+
+
+	public int updateGallery(Gallery g, ArrayList<AttachedFile> list) {
+		Connection con = getConnection();
+		
+		int result = 0;
+
+		System.out.println("g : " + g);
+		
+		int result1 = gDao.updateBoard(con, g);
+		int result2 = gDao.updateGallery(con, g);
+		int result3 = gDao.updateAttachedfile(con, list);
+		
+		if( result1 > 0 && result2 > 0 && result3 > 0) {
+			commit(con);
+			result = 1;
+			
+		} else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+
+	public HashMap<String, Object> selectThumbnailMap(int bid) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	public HashMap<String, Object> selectGalleryMap(int bid) {
+		Connection con = getConnection();
+		HashMap<String, Object> hmap = null;
+		
+		int result = gDao.updateCount(con, bid);
+		
+		if(result > 0) {
+			commit(con);
+			hmap = gDao.selectGalleryMap(con, bid);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return hmap;
 	}
 	
 
