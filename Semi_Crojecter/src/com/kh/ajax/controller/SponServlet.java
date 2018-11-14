@@ -54,13 +54,12 @@ public class SponServlet extends HttpServlet {
 		
 		Service s = new Service();
 		int result = s.spon(sp, hoduId);
-		
+
 		if(result > 0) {
 			out.print("success");
 			System.out.println("후원 성공");			
 		} else if(result == -2) {
-			out.print("-2");
-			request.setAttribute("referrer", referrer);
+			out.print(referrer);
 			System.out.println("남은 호두량 부족");
 			System.out.println("이전 URL : " + referrer);
 		} else {

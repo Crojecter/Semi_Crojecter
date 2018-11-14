@@ -3,7 +3,6 @@
 <%
 	Member m = (Member)session.getAttribute("member");
 	Gallery g = (Gallery)request.getAttribute("gallery");
-	String sponReferrer = (String)request.getAttribute("referrer");
 	Member mHodu = (Member)request.getAttribute("mHodu");
 %>
 <!DOCTYPE html>
@@ -46,6 +45,7 @@
 	</div>
 	<script>
 		var referrer = document.referrer;
+		var sponReferrer = "";
 		
 		$("#childName").text($(opener.document).find("#parentGetName").text());
 		$("#childGiverid").text($(opener.document).find("#parentGetmid").text());
@@ -64,12 +64,18 @@
 					if(data == "success") {
 						alert("후원에 성공했습니다.");
 						close();
-					}else if(data == "-2") {
-						alert("잔여 호두량이 부족합니다.<br>" + sponReferrer);
-						window.opener.location.href = "../payment/payment.jsp";
-						close();
 					}else if(data == "fail") {
 						alert("후원에 실패했습니다.<br>관리자에게 문의해주세요.");
+						close();
+					}else {
+						sponReferrer = data;
+						$.ajax({
+							data : { sponreferrer : sponReferrer },
+							url : "views/payment/payment.jsp"
+						});
+						console.log("sponReferrer : " + sponReferrer);
+						alert("잔여 호두량이 부족합니다.");
+						window.opener.location.href = "../payment/payment.jsp";
 						close();
 					}
 				}

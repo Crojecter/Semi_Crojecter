@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%
-	//String sponReferrer = (String)request.getAttribute("referrer");
-	//System.out.println("sponReferrer : " + sponReferrer);
+	String sponReferrer = request.getParameter("sponreferrer");
+	System.out.println("최종 url 가져온 값 : " + sponReferrer);
 %>
 <!DOCTYPE html>
 <html>
@@ -53,6 +53,11 @@
 
 	<script>
 		var referrer = document.referrer;
+		if(<%= sponReferrer %> != null) {
+			referrer = <%= sponReferrer %>;
+		}
+		// popupSpon.jsp에서 sponReferrer 데이터 가져온값이 있으면
+		// referrer = sponReferrer로 교체, 아니면 그대로 유지
 		console.log("이전 페이지 url : " + referrer);
 		
 		function pay(price, hodu){
@@ -78,12 +83,7 @@
 						success : function(data) {
 							if(data == "success") {
 								alert("충전에 성공했습니다.");
-								if(<%= sponReferrer %> == null){
-									location.href = referrer;
-								}else{
-									location.href = <%= sponReferrer %>;
-								}
-								console.log(<%= sponReferrer %>);
+								location.href = referrer;
 							}if(data == "fail") {
 								alert("충전에 실패했습니다.<br>관리자에게 문의해주세요.");
 							}
