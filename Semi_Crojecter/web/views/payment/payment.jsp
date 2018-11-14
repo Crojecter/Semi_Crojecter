@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
-<%-- <% Member m = (Member)session.getAttribute("member"); %> --%>
+<%
+	//String sponReferrer = (String)request.getAttribute("referrer");
+	//System.out.println("sponReferrer : " + sponReferrer);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,6 +52,9 @@
 	<%@ include file="../common/footer.jsp" %>
 
 	<script>
+		var referrer = document.referrer;
+		console.log("이전 페이지 url : " + referrer);
+		
 		function pay(price, hodu){
 			IMP.init("imp17136479");
 
@@ -72,7 +78,13 @@
 						success : function(data) {
 							if(data == "success") {
 								alert("충전에 성공했습니다.");
-							}else if(data == "fail") {
+								if(<%= sponReferrer %> == null){
+									location.href = referrer;
+								}else{
+									location.href = <%= sponReferrer %>;
+								}
+								console.log(<%= sponReferrer %>);
+							}if(data == "fail") {
 								alert("충전에 실패했습니다.<br>관리자에게 문의해주세요.");
 							}
 						}

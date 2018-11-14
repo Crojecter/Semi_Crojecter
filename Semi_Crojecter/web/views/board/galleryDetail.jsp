@@ -53,9 +53,6 @@
 	.active {
 		background: red;
 	}
-	
-	
-	
 </style>
 
 <title>갤러리 상세보기</title>
@@ -132,7 +129,6 @@
 	</div>
 	
 	<script>
-	
 		var windowObj = null;
 	
 		function showSpon() {

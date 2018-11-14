@@ -3,6 +3,8 @@
 <%
 	Member m = (Member)session.getAttribute("member");
 	Gallery g = (Gallery)request.getAttribute("gallery");
+	String sponReferrer = (String)request.getAttribute("referrer");
+	Member mHodu = (Member)request.getAttribute("mHodu");
 %>
 <!DOCTYPE html>
 <html>
@@ -30,6 +32,7 @@
 	<div align="center" style="width:400px">
 		<span id="childGiverid" style="display:none;"></span>
 		<p style="font-size:20px; text-align:center;"><span style="color:orange;" id="childName"></span> 님에게 <span style="color:orange;">후원</span>하시겠습니까?</p>
+		<p style="font-size:17px; text-align:right;">보유중인 호두 : <span id="hodu" style="color:orange;"></span> 개</p>
 		<table>
 			<tr>
 				<td><button id="spon10" onclick="spon(10);">호두 10알</button></td>
@@ -42,16 +45,19 @@
 		</table>
 	</div>
 	<script>
+		var referrer = document.referrer;
+		
 		$("#childName").text($(opener.document).find("#parentGetName").text());
 		$("#childGiverid").text($(opener.document).find("#parentGetmid").text());
 		var swriter = $("#childName").text();
 		var smid = $("#childGiverid").text();
 		console.log("로그인 : " + smid);
 		console.log("작성자 : " + swriter);
+		console.log("이전 페이지 : " + referrer);
 		
 		function spon(hodu){
 			$.ajax({
-				data : { Shodu : hodu, Smid : smid, Swriter : swriter },
+				data : { Shodu : hodu, Smid : smid, Swriter : swriter, reFerrer : referrer},
 				url : "/crojecter/spon.sp",
 				type : "post",
 				success : function(data) {
@@ -59,7 +65,7 @@
 						alert("후원에 성공했습니다.");
 						close();
 					}else if(data == "-2") {
-						alert("잔여 호두량이 부족합니다.");
+						alert("잔여 호두량이 부족합니다.<br>" + sponReferrer);
 						window.opener.location.href = "../payment/payment.jsp";
 						close();
 					}else if(data == "fail") {
@@ -69,6 +75,16 @@
 				}
 			});
 		}
+		
+		$.ajax({
+			data : { mid : <%= m.getMid() %> },
+			url : "/crojecter/searchHodu.sh",
+			type : "post",
+			success : function(data) {
+				console.log(data);
+				$("#hodu").text(data);
+			}
+		});
 	</script>
 </body>
 </html>

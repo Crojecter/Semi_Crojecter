@@ -33,6 +33,8 @@ public class SponServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PrintWriter out = response.getWriter();
+		
+		String referrer = request.getParameter("reFerrer");
 		int giver = Integer.parseInt(request.getParameter("Smid"));
 		String receiver = request.getParameter("Swriter");
 		int hodu = Integer.parseInt(request.getParameter("Shodu"));
@@ -58,7 +60,9 @@ public class SponServlet extends HttpServlet {
 			System.out.println("후원 성공");			
 		} else if(result == -2) {
 			out.print("-2");
+			request.setAttribute("referrer", referrer);
 			System.out.println("남은 호두량 부족");
+			System.out.println("이전 URL : " + referrer);
 		} else {
 			out.print("fail");
 			System.out.println("후원 실패");
