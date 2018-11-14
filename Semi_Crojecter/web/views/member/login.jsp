@@ -10,6 +10,10 @@
 <!-- 카카오 로그인 JS -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script src="../../resources/js/loginJS/kakaoLogin.js"></script>
+<!-- 구글 로그인 JS -->
+<meta name="google-signin-client_id" content="47962283340-c9v8pn66vso3ktgruqjj7vi40ne4kle3.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js?onload=onLoadGoogleCallback" async defer></script>
+<script src="../../resources/js/loginJS/googleLogin.js"></script>
 <style>
 	.loginInput{
 		width:250px;
@@ -92,15 +96,19 @@
 					<td colspan="2"><hr /></td>
 				</tr>
 				<tr>
-					<td colspan="2" style="font-size:12px;">소셜 계정으로 회원가입 하기</td>
+					<td align="center" colspan="2" style="font-size:12px;">소셜 계정으로 회원가입 하기</td>
 				</tr>
 				<tr>
-					<td>
+					<td align="center">
 						<a id="kakaoLogin" href="javascript:loginWithKakao();">
 						<img class="sns_login" id="kakaoLoginBtn" src="../../resources/images/kakao_btn.png"/>
 						</a>
 					</td>
-					<td></td>
+					<td>
+						<a id="googleLogin" href="javascript:onLoadGoogleCallback();">
+						<img class="sns_login" id="googleLoginBtn" src="../../resources/images/google-plus.png" width = 68; height = 69/>
+						</a>
+					</td>
 				</tr>
 			</table>
 		</form>

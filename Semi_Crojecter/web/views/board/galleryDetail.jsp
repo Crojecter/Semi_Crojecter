@@ -132,11 +132,15 @@
 		var windowObj = null;
 	
 		function showSpon() {
+			<% if(m != null) { %>
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
 		    
 		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		    <% } else { %>
+		    alert("로그인이 필요합니다.");
+		    <% } %>
 		}
 	</script>
 	
