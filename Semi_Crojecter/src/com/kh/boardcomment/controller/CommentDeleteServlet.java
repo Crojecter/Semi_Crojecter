@@ -37,6 +37,8 @@ public class CommentDeleteServlet extends HttpServlet {
 		
 		int result = new BoardCommentService().deleteComment(cid);
 		
+		System.out.println("댓글 삭제 cid : " + cid);
+		
 		if(result > 0) {
 			switch(btype) {
 			case 2: response.sendRedirect("gSelectOne.ga?bid=" + bid); break;
@@ -44,7 +46,7 @@ public class CommentDeleteServlet extends HttpServlet {
 			}
 		} else {
 			request.setAttribute("msg", "댓글 삭제 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}
