@@ -71,7 +71,7 @@
 						sponReferrer = data;
 						$.ajax({
 							data : { sponreferrer : sponReferrer },
-							url : "views/payment/payment.jsp"
+							url : "crojecter/views/payment/payment.jsp"
 						});
 						console.log("sponReferrer : " + sponReferrer);
 						alert("잔여 호두량이 부족합니다.");
