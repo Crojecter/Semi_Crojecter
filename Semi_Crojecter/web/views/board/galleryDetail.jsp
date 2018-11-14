@@ -157,7 +157,7 @@
 	      				
 	      			<% if(m != null) { %>
 	      			<% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우%>	
-	      				<input type="text" name="cid" value="<%=bc.getCid()%>"/>
+	      				<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
 							  
 						<button type="button" class="updateBtn" onclick="updateComment(this);">수정하기</button> &nbsp;&nbsp;
 						<button type="button" class="updateConfirm" onclick="updateConfirm(this);"
