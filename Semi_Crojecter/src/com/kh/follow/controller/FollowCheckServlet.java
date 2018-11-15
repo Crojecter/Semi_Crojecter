@@ -38,7 +38,6 @@ public class FollowCheckServlet extends HttpServlet {
 		System.out.println("result : " + result);
 		
 		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
-		
 	}
 
 	/**

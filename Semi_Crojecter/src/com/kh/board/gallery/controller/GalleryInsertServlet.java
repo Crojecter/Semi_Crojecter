@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.json.simple.JSONObject;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.service.GalleryService;
@@ -43,6 +44,8 @@ public class GalleryInsertServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)){
 			// 만약 multipart/form-data 로 전송이 되었다면 실행해라!
 			
+			System.out.println("서블릿 들어왔니?");
+			
 			// 전송할 파일의 용량 선정
 			int maxSize = 1024 * 1024 * 10;
 			
@@ -51,7 +54,7 @@ public class GalleryInsertServlet extends HttpServlet {
 			
 			System.out.println("root 경로 확인 : " + root);
 			
-			String savePath = root + "/galleryUploadFiles/";
+			String savePath = root + "/uploadFiles/";
 			
 			// 사용자가 저장하는 파일을 서버의 형식에 맞게
 			// 이름을 변경하여 설정하기
@@ -69,26 +72,30 @@ public class GalleryInsertServlet extends HttpServlet {
 										 new DefaultFileRenamePolicy()
 							);
 			
-			
 			// 폼으로 전송된 파일 이름들을 받아온다.
 			Enumeration<String> files = mrequest.getFileNames();
 			
 			ArrayList<String> saveFiles = new ArrayList<String>();
+		
 			
 			while(files.hasMoreElements()){
 				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
-				
 				String name = files.nextElement();
+				String fileName = mrequest.getFilesystemName(name);  
 				
-				System.out.println("name : " + name);
+				System.out.println("name : " + fileName);
 				
-				saveFiles.add(mrequest.getFilesystemName(name));				
-			}
+				saveFiles.add(fileName);				
+			}						
 			
+			System.out.println("savefiles : " + saveFiles);
 			// Gallery 객체 생성 후 DB 전달 VO 설정하기
-			
+			/////
 			Gallery g = new Gallery();
 			
+			System.out.println("userId : " + mrequest.getParameter("userId"));
+			
+			g.setBtype(2);
 			g.setBtitle(mrequest.getParameter("title"));
 			g.setBcontent(mrequest.getParameter("content"));
 			g.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
@@ -96,29 +103,46 @@ public class GalleryInsertServlet extends HttpServlet {
 			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
 			g.setGtag(mrequest.getParameter("tags"));
 			
+			System.out.println("setBcontent : " + mrequest.getParameter("content"));
 			System.out.println("tags : " + mrequest.getParameter("tags"));
-			
 			
 			// Attachment에 기록하기 위한 파일 리스트 처리하기
 			ArrayList<AttachedFile> list = new ArrayList<AttachedFile>();
 			
-			for(int i = saveFiles.size() -1 ; i >= 0 ; i--){
-				// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
+			if(!(list.isEmpty())){
+				for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
+						// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
+						AttachedFile af = new AttachedFile();
+						
+						af.setFpath(savePath);
+						af.setFname(saveFiles.get(i));
+						
+						System.out.println("af : " + af);
+						list.add(af);
+				} 
+			} else {
 				AttachedFile af = new AttachedFile();
 				
-				af.setFpath(savePath);
-				af.setFname(saveFiles.get(i));
+				af.setFpath(root + "/images/");
 				
+				switch(g.getGcategoryid()){
+				case 1: af.setFname("textCategoryImage.png"); break;
+				case 3: af.setFname("audioCategoryImage.png"); break;
+				case 4: af.setFname("videoCategoryImage.png"); break;								
+				}
+	
 				System.out.println("af : " + af);
 				list.add(af);
 			}
 			
+			
+			System.out.println("list : " + list);
 			// service로 작성한 내용 전송하기
 			
 			int result = gs.insertGallery(g, list);
 			
 			if(result > 0) {
-				response.sendRedirect("gSelectList.ga");
+				response.sendRedirect("selectList.ga");
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");

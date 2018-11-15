@@ -2,9 +2,9 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.*" %>
  
 <% ArrayList<Gallery> gList = (ArrayList<Gallery>)request.getAttribute("list"); 
-	System.out.println(gList);
+	System.out.println("GalleryList ArrayList : "+ gList);
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	System.out.println(pi);
+	System.out.println("PageInfo gl : "+ pi);
 	int currentPage = pi.getCurrentPage();
 	int listCount = pi.getListCount();
 	int maxPage = pi.getMaxPage();
@@ -69,11 +69,11 @@
  --%>
 
 		<!-- 페이지 -->
-		<nav aria-label="..." class="pageNav"  style="float: right; position: absolute; left: 40%;">
+		<nav aria-label="..." class="pageNav"  align="center" style="float: right; position: absolute; left: 40%;">
 			<br>
 			<ul class="pagination" style="text-align: center">
 				<li class="page-item disabled">
-				<a class="page-link" href="#" tabindex="-1">Previous</a>
+				<a class="page-link" href="<%= request.getContextPath() %>/gList.ga?currentPage=1'" tabindex="-1">Previous</a>
 				</li>
 				<li class="page-item"><a class="page-link" href="page1">1</a></li>
 				<li class="page-item active"><a class="page-link" href="page2">2<span class="sr-only">(current)</span></a></li>
@@ -87,5 +87,32 @@
 				</li>
 			</ul>
 		</nav>
+<%-- 		
+			<div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1'"><<</button>
+			<%  if(currentPage <= 1){  %>
+			<button disabled><</button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</button>
+			<%  } %>
+			
+			<% for(int p = startPage; p <= endPage; p++){
+					if(p == currentPage){	
+			%>
+				<button disabled><%= p %></button>
+			<%      }else{ %>
+				<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%= p %>'"><%= p %></button>
+			<%      } %>
+			<% } %>
+				
+			<%  if(currentPage >= maxPage){  %>
+			<button disabled>></button>
+			<%  }else{ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>'">></button>
+			<%  } %>
+			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%= maxPage %>'">>></button>
+			
+		</div> 
+--%>
 </body>
 </html>

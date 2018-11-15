@@ -3,19 +3,19 @@
 
 <%
 	Member m = (Member)session.getAttribute("member");
-	System.out.println("m : " + m);
+	System.out.println("Member : " + m);
 
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	//ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 	
-	System.out.println("g : " + g);
+	System.out.println("Gallery : " + g);
 %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 	.outer{
 		width:800px;
@@ -26,6 +26,7 @@
 		margin-right:auto;
 		margin-top:50px;
 	}
+	
 	td {
 		border:1px solid black;
 		background : black;
@@ -42,13 +43,18 @@
 		margin-right:auto;
 	}
 	
-	.followBtn {
-		background : red;
+	.btn {
+		width: 200px;
+		height: 50px;
+		border: 1px solid blue;
+		background: lightyellow;
 	}
 	
-	.unfollowBtn {
-		background : yellow;
+	.active {
+		background: red;
 	}
+	
+	
 	
 </style>
 
@@ -61,6 +67,8 @@
 		<h2 align="center">게시글 내용</h2>
 		
 		<div class="tableArea">
+			<%if(m != null)  {  %>
+			<span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
 			<table align="center" width="800px">
 				<tr>
 					<td>제목 </td>
@@ -105,22 +113,128 @@
 			<% } %>
 			
 			<br>
+
+			<div id="btnFollow" class="btn btn-follow">
+				<p id="p-follow" style="color: black">팔로우</p>
+			</div>
 			
-			<button type="button" class="followBtn">팔로우</button>
+			<div id="btnLikeit" class="btn btn-likeit">
+				<p id="p-likeit" style="color: black">좋아요</p>
+			</div>
 	
 		</div>
 
 	</div>
 	
+	<div class="commentOuter">
+	
+	
+	</div>
+	
 	<script>
-		function showSpon(g) {
+	
+		var windowObj = null;
+	
+		function showSpon() {
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
 		    
-			window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', '후원', 'width=500,height=300,top='+yPos+',left='+xPos+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}
 	</script>
+	
+	
+	<%if(m != null && m.getMid() == g.getBwriter()) { //글쓴이 본인인 경우 %>
+		<script>
+		$('#btnFollow').click(function(){
+			alert("본인은 팔로우할 수 없습니다.");
+		});
+		$('#btnLikeit').click(function(){
+			alert("본인 작품은 좋아요 할 수 없습니다.");
+		});
+		</script>
+	<%} else if(m != null) { %>
+		<script>
+		$(function(){		
+			$.ajax({
+				url : '/crojecter/fCheck.fo',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					wid : '<%= g.getBwriter() %>'
+				}, 
+				success : function(data){
+					if(data == 'ok') {
+						$("#btnFollow").addClass('active');
+						$('#p-follow').html('언팔로우');
+					} else if (data == 'no') {
+						$("#btnFollow").removeClass('active');
+					} 
+				}, error : function(data){
+					console.log('팔로우버튼 초기화 에러 발생!');
+				}
+			});
+		});
+		
+		$('#btnFollow').click(function(){
+			$.ajax({
+				url : '/crojecter/fSwitch.fo',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					wid : '<%= g.getBwriter() %>'
+				}, 
+				success : function(data){
+					if(data == 'insert') {
+						$("#btnFollow").addClass('active');
+						$('#p-follow').html('언팔로우');
+					} else if (data == 'delete') {
+						$("#btnFollow").removeClass('active');
+						$('#p-follow').html('팔로우');
+					} else {
+						console.log('btnFollow() 에러 발생!');
+					}
+				}, error : function(data){
+					console.log('btnFollow() 에러 발생!!');
+				}
+			});
+		});
+		
+		$('#btnLikeit').click(function(){
+			$.ajax({
+				url : '/crojecter/lSwitch.li',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					bid : '<%= g.getBid() %>'
+				}, 
+				success : function(data){
+					if(data == 'insert') {
+						$("#btnLikeit").addClass('active');
+					} else if (data == 'delete') {
+						$("#btnLikeit").removeClass('active');
+					} else {
+						console.log('btnLikeit() 에러 발생!');
+					}
+				}, error : function(data){
+					console.log('btnLikeit() 에러 발생!!');
+				}
+			});
+		});
+		</script>	
+	<% } else { %>
+		<script>
+		$('#btnFollow').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
+		$('#btnLikeit').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
+		</script>
+	<% } %>
+
+		
 	
 </body>
 </html>

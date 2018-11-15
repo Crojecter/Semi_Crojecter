@@ -3,6 +3,7 @@ package com.kh.member.model.service;
 import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
@@ -104,5 +105,29 @@ public class MemberService {
 		return result;
 		
 	}
+
+	public int updateMemberStatus(Member m) {
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDao.updateMemberStatus(con, m);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
+	public ArrayList<Member> searchMember(String condition, String keyword) {
+		Connection con = getConnection();
+		ArrayList<Member> mlist = null;
+		
+		mlist = (condition.length() > 0) ? 
+				mDao.searchMember(con, condition, keyword) : mDao.selectList(con); 
+		
+		return mlist;
+	}
+
 
 }

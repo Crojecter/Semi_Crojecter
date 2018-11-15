@@ -1,8 +1,13 @@
 package com.kh.board.attachedfile.model.vo;
 
+
 import com.kh.board.common.model.vo.Board;
 
-public class AttachedFile extends Board {
+
+import java.io.Serializable;
+
+public class AttachedFile extends Board implements Serializable{
+
 	
 	private int fid;
 	private String fname;

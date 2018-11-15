@@ -31,21 +31,21 @@ public class SponServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int giver = Integer.parseInt(request.getParameter("Sgiver"));
-		int receiver = Integer.parseInt(request.getParameter("Sreceiver"));
+		int giver = Integer.parseInt(request.getParameter("Smid"));
+		String receiver = request.getParameter("Swriter");
 		int hodu = Integer.parseInt(request.getParameter("Shodu"));
 		int hoduId = 0;
 		switch(hodu){
 			case 10 : hoduId = 1; break;
 			case 30 : hoduId = 2; break;
-			case 40 : hoduId = 3; break;
+			case 50 : hoduId = 3; break;
 			case 100 : hoduId = 4; break;
 		}
 		
 		Spon sp = new Spon();
 		
 		sp.setSgiverid(giver);
-		sp.setSreceiverid(receiver);
+		sp.setSreceivername(receiver);
 		sp.setShodu(hodu);
 		
 		Service s = new Service();

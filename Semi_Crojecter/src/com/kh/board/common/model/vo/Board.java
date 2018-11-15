@@ -20,6 +20,7 @@ public class Board {
 	public Board(int bid, int btype, String btitle, String bcontent, int bcount, Date bdate, String bstatus,
 			int bwriter, int brcount) {
 		super();
+
 		this.bid = bid;					// 게시글 번호
 		this.btype = btype;				// 게시글 타입	
 		this.btitle = btitle;			// 제목
@@ -29,6 +30,7 @@ public class Board {
 		this.bstatus = bstatus;			// 삭제여부
 		this.bwriter = bwriter;			// 작성자(회원번호)
 		this.brcount = brcount;			// 신고횟수
+
 	}
 
 	public int getBid() {

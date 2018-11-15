@@ -1,8 +1,9 @@
 package com.kh.payment.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Payment {
+public class Payment implements Serializable{
 
 	private int pid;
 	private int pmoney;

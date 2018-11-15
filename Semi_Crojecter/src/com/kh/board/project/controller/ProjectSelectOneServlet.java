@@ -1,6 +1,7 @@
 package com.kh.board.project.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProjectSelectOneServlet
+ * Servlet implementation class NoticeSelectOneServlet
  */
-@WebServlet("/selectOne.pr")
+@WebServlet("/jSelectOne.pr")
 public class ProjectSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

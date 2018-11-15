@@ -23,6 +23,7 @@ public class GalleryService {
 		
 		return g;
 	}
+	
 
 	public Gallery updateView(int bid) {
 		
@@ -39,21 +40,27 @@ public class GalleryService {
 		Connection con = getConnection();
 		
 		int result = 0;
+		int result2 =0;
 		
-		int result1 = gDao.insertGalleryContent(con, g);
+		System.out.println("insertGallery : " + g);
+		
+		int bid = gDao.selectCurrentBid(con);
+		
+		int result1 = gDao.insertBoardContent(con, g, bid);
 		
 		if(result1 > 0){
-			int bid = gDao.selectCurrentBid(con);
-			
+
+			result2 = gDao.insertGalleryContent(con, g, bid);
+						
 			for(int i = 0; i < list.size(); i++){
 				list.get(i).setBid(bid);
 			}
 			
 		}
 		
-		int result2 = gDao.insertAttachedfile(con, list);
+		int result3 = gDao.insertAttachedfile(con, list);
 		
-		if( result1 > 0 && result2 > 0) {
+		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);
 			result = 1;
 			
@@ -65,7 +72,7 @@ public class GalleryService {
 	}
 
 	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {
-		
+		// 게시판 목록
 		Connection con = getConnection();
 		ArrayList<Gallery> list = gDao.selectGalleryList(con, currentPage, limit);
 		
@@ -74,7 +81,7 @@ public class GalleryService {
 	}
 	
 	public int getCountGalleryList() {
-		// TODO Auto-generated method stub
+		// 게시판 페이지
 
 		Connection con = getConnection();
 		int listCount = gDao.getCountGalleryList(con);
@@ -85,7 +92,7 @@ public class GalleryService {
 
 		
 	public ArrayList<Gallery> top5(){
-		
+		// 게시글 순
 		Connection con = getConnection();
 		ArrayList<Gallery> list = gDao.top5(con);
 		
@@ -93,6 +100,5 @@ public class GalleryService {
 		
 		return list;
 	}
-
 
 }

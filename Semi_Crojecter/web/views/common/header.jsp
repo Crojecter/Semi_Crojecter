@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
-<% Member m = (Member)session.getAttribute("member"); %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
+<% Member m = (Member)session.getAttribute("member"); 
+	System.out.println("member : "+ m);
+/*    
+	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("list"); 
+	System.out.println("Header alist : "+ alarmList);	
+	Alarm al = (Alarm) request.getAttribute("Alarm");
+	String AFlag = al.getAFlag();
+*/	
+%>
 
 <!DOCTYPE html>
 <html>
@@ -42,9 +50,9 @@
 				<h4><a href="<%= request.getContextPath()%>/views/projectBoard/projectPage.jsp">프로젝트</a></h4>
 				</li>
 			</ul>
-
+				
 				<div class="loginArea">
-				<%if ( m == null ) { %>
+					<%if ( m == null ) { %>
 					<form id="loginForm" action="/myWeb/login.me" method="post">
 						<a class="btn btn-primary" href="<%= request.getContextPath()%>/views/member/login.jsp">
 						Sign In</a>
@@ -54,39 +62,44 @@
 					</form>
 					<% } else { %>
 					<ul class="navbar-nav mr-auto">
+						<li><%= m.getMemail() %>(Mid : <%= m.getMid() %>)님 환영합니다.</li>
+						
 						<!-- 알람 -->
 						<li>
-						<span data-original-title="읽지않은 알림메세지가  <%= 10%>개 있습니다." data-toggle="tooltip">
-						<button type="button" class="btn btn-primary" 
-						data-toggle="modal" data-target="#exampleModal" data-whatever="1">
+						<button title="읽지않은 알림메세지가  <%= 0%>개 있습니다." type="button" data-target="#myModal" 
+						onclick="location.href='<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>'"
+						class="btn btn-primary" data-toggle="modal">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/alarm.png" style="height:30px">
-						<span class="badge badge-light"> <%= 10%></span>
-						<span class="sr-only">unread messages</span>
+						<span class="badge badge-light"> <%= 3%></span>
 						</button>
-						</span>
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" role="document">
+  						<a href="#" data-toggle="tooltip" title="Hooray!"></a>
+						<!-- Modal -->
+						<div id="myModal" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						
+						    <!-- Modal content-->
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">알람 메세지 목록</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title">알람메세지 목록</h4>
 						      </div>
 						      <div class="modal-body">
-						        <form>
-						          <%@ include file="../../views/alarm/alarmDetail.jsp" %>
-						        </form>
+						        <p><%@ include file="../alarm/alarmDetail.jsp" %></p>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						      </div>
 						    </div>
+						
 						  </div>
 						</div>
-						
 						<script>
 							$(document).ready(function(){
 								$('[data-toggle="tooltip"]').tooltip(); 
 							});
 						</script>	
+						
+						
 						<!-- 프로필 -->
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="<%= request.getContextPath()%>#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -117,8 +130,7 @@
 				  <input type="text" class="search-query" placeholder="Search">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
-				</form>
-			</form>		
+				</form>			
 		</div>
 	</nav>
 	<!-- 리모컨 -->
@@ -127,5 +139,6 @@
 	<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
 	</div>
 	<a name="bottom"></a>
+	<input type="hidden" value="<%= m.getMid() %>" name="Mid"/>
 </body>
 </html>

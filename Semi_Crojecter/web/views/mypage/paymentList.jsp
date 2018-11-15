@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
     import = "com.kh.payment.model.vo.*, com.kh.member.model.vo.*, com.kh.spon.model.vo.*, java.util.*"%>
 <% 
-	Member m = (Member)session.getAttribute("member");
 	ArrayList<Spon> slist = (ArrayList<Spon>)request.getAttribute("list");
 	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("list"); 
 %>
@@ -28,6 +27,7 @@
 </style>
 </head>
 <body>
+<%@ include file="../mypage/common/mypageHeader.jsp" %>
 <label>후원 내역</label>
 <form id="sponForm" action="<%=request.getContextPath()%>/sponSelect.do" method="post">
 <table class="sponTable">
