@@ -68,6 +68,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			// 폼으로 전송된 파일 이름들을 받아온다.
 			
 			int bid = Integer.parseInt(mrequest.getParameter("bid"));
+			System.out.println("bid : " + bid);
 			HashMap<String, Object> gal = gs.selectGalleryMap(bid);
 			
 			ArrayList<String> saveFiles = new ArrayList<String>();
@@ -82,7 +83,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 				
 				saveFiles.add(fileName);				
 			}						
-			
+			 
 			System.out.println("savefiles : " + saveFiles);
 			// Gallery 객체 생성 후 DB 전달 VO 설정하기
 
@@ -95,7 +96,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			g.setGtag(mrequest.getParameter("tags"));
 			
 			// Attachment에 기록하기 위한 파일 리스트 처리하기
-			ArrayList<AttachedFile> list = new ArrayList<AttachedFile>();
+			ArrayList<AttachedFile> list = (ArrayList<AttachedFile>)gal.get("attachedfile");
 
 			AttachedFile af = new AttachedFile();
 				
@@ -113,17 +114,6 @@ public class GalleryUpdateServlet extends HttpServlet {
 						af.setFpath(savePath);
 						System.out.println("af : " + af);
 						list.add(af);											
-					}
-					for(int i = originFiles.size() -1 ; i >= 0 ; i--){
-						int j = originFiles.size() - i - 1;
-						if(originFiles.get(i) != null) {
-							new File(savePath+list.get(j).getChangeName()).delete();
-							
-							list.get(j).setFilePath(savePath);
-							list.get(j).setOriginName(originFiles.get(i));
-							list.get(j).setChangeName(saveFiles.get(i));
-							
-						}
 					}
 					break;
 				case 3: 

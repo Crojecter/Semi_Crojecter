@@ -76,19 +76,6 @@ public class GalleryService {
 		return result;
 	}
 
-
-	public ArrayList<AttachedFile> selectAttachedfileOne(int bid) {
-		
-		Connection con = getConnection();
-		
-		ArrayList<AttachedFile> list = gDao.selectAttachedfileOne(con, bid);
-		
-		close(con);
-		
-		return list;
-	}
-
-
 	public int updateGallery(Gallery g, ArrayList<AttachedFile> list) {
 		Connection con = getConnection();
 		
@@ -111,13 +98,6 @@ public class GalleryService {
 		return result;
 	}
 
-
-	public HashMap<String, Object> selectThumbnailMap(int bid) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
 	public HashMap<String, Object> selectGalleryMap(int bid) {
 		Connection con = getConnection();
 		HashMap<String, Object> hmap = null;
@@ -127,6 +107,8 @@ public class GalleryService {
 		if(result > 0) {
 			commit(con);
 			hmap = gDao.selectGalleryMap(con, bid);
+			
+			System.out.println("service hamp : " + hmap);
 		}else {
 			rollback(con);
 		}

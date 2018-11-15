@@ -68,7 +68,7 @@ body {
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=g.getBwriter() %>" /> 
-				<input type="hidden" id="bid" name="bid" value="<%=g.getBid() %>>" /> 
+				<input type="hidden" id="bid" name="bid" value="<%=g.getBid() %>" /> 
 				<select class="sidebar" name="category" id="category">
 					<option value="<%=g.getGcategoryid()%>" disabled selected>카테고리 : <%=g.getGcategoryname() %></option>
 					<option value="1">TEXT</option>
