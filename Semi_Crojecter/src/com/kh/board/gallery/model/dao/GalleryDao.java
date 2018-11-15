@@ -203,10 +203,117 @@ public class GalleryDao {
 		System.out.println("insertAttachedfile result : " + result);
 		return result;
 	}
+	public ArrayList<Gallery> selectGalleryList(Connection con, int currentPage, int limit) {
+		
+		ArrayList<Gallery> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+				
+		String sql = prop.getProperty("selectGalleryList");		
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);			
+			
+			int startRow = (currentPage -1) * limit +1;	
+			int endRow = startRow + limit -1;
+			
+			rset = pstmt.executeQuery();			
+			list = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				
+				Gallery g = new Gallery();
+				// 갤러리분
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				// 상속분
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				// 
+				
+				
+				list.add(g);
+				System.out.println("selectGalleryList Dao : "+ list);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+				
 
 
+		public int getCountGalleryList(Connection con) {
+		// 
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countGalleryList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			if(rset.next()){
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return listCount;
+	}
 
+	public ArrayList<Gallery> top5(Connection con) {
+		// 
+		Statement stmt = null;
+		ResultSet rset = null;
+		ArrayList<Gallery> list = null;
+		
+		String sql = prop.getProperty("selectGalleryTop5");
+		
+		try {
+			
+			stmt = con.createStatement();
+			
+			rset = stmt.executeQuery(sql);
+			
+			list = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setBid(rset.getInt("BID"));
+				
+				list.add(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return list;
+	}
 
-	
 
 }

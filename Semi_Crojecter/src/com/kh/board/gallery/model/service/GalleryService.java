@@ -1,10 +1,6 @@
 package com.kh.board.gallery.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
-
+import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -46,7 +42,7 @@ public class GalleryService {
 		int result = 0;
 		int result2 =0;
 		
-		System.out.println("g : " + g);
+		System.out.println("insertGallery : " + g);
 		
 		int bid = gDao.selectCurrentBid(con);
 		
@@ -74,12 +70,35 @@ public class GalleryService {
 		
 		return result;
 	}
+
+	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {
+		// 게시판 목록
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.selectGalleryList(con, currentPage, limit);
+		
+		close(con);
+		return list;
+	}
 	
+	public int getCountGalleryList() {
+		// 게시판 페이지
 
+		Connection con = getConnection();
+		int listCount = gDao.getCountGalleryList(con);
+		
+		close(con);		
+		return listCount;
+	}
 
-
-
-
-
+		
+	public ArrayList<Gallery> top5(){
+		// 게시글 순
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.top5(con);
+		
+		close(con);
+		
+		return list;
+	}
 
 }

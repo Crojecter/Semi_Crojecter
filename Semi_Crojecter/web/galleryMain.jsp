@@ -1,25 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.Gallery" %>
-<% ArrayList<Gallery> list = (ArrayList<Gallery>)request.getAttribute("list"); %> 
+    pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.* " %>
 <!DOCTYPE html>
 <html>
 	<head>
 	<meta charset="UTF-8">
 	<title>Gallery Main</title>
 		<meta charset="UTF-8">
-	<!-- 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	
-		bootstrap css include
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-		<link rel="stylesheet" href="css/main.css">
-		bootstrap js include
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	
-		<script src="/myWeb/resources/js/jquery-3.3.1.min.js"></script>-->
 		<style>
-		.d-block w-100{ height:300px;}
+		#slide{ height:400px;}
 		</style> 
 	</head>
 	<body>
@@ -27,7 +15,7 @@
 		<!-- 슬라이드 -->
 
 
-		<div id="demo1" class="carousel slide" data-ride="carousel">
+		<div id="demo1" class="carousel slide" data-ride="carousel" style="display: inline-block;">
 		  <ul class="carousel-indicators" style="z-index:1">
 		    <li data-target="#demo1" data-slide-to="0" class="active"></li>
 		    <li data-target="#demo1" data-slide-to="1" class=""></li>
@@ -38,44 +26,44 @@
 		  </ul>
 		  <div class="carousel-inner">
 		    <div class="carousel-item active">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg1.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg1.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>11111111</h3>
-		        <p>We had such a great time in LA!</p>
+		        <h3>One</h3>
+		        <p>수달은 즐겁다</p>
 		      </div>   
 		    </div>
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg2.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide"  class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg2.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>2222222</h3>
-		        <p>Thank you, Chicago!</p>
+		        <h3>Two</h3>
+		        <p>나는 안즐겁다</p>
 		      </div>   
 		    </div>
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg3.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide"  class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg3.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>3333333</h3>
+		        <h3>Three</h3>
 		        <p>We love the Big Apple!</p>
 		      </div>   
 		    </div>
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg4.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg4.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>4444444</h3>
+		        <h3>Four</h3>
 		        <p>Thank you, Chicago!</p>
 		      </div>   
 		    </div>  
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg5.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg5.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>5555555</h3>
+		        <h3>Five</h3>
 		        <p>Thank you, Chicago!</p>
 		      </div>   
 		    </div>  
 		    <div class="carousel-item">
-		      <img class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg6.jpg" alt="" data-holder-rendered="true">
+		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg6.jpg" alt="" data-holder-rendered="true">
 		      <div class="carousel-caption">
-		        <h3>6666666</h3>
+		        <h3>Six</h3>
 		        <p>Thank you, Chicago!</p>
 		      </div>   
 		    </div>
@@ -89,7 +77,9 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-
+		 <div style="background:violet; width: 300px; height: 300px;">
+		
+		</div>
 
 
 
@@ -113,20 +103,20 @@
 				<ul class="navbar-nav mr-auto"></ul>
 				<form class="form-inline my-2 my-lg-0">
 					<button class="nav-item dropdown" type="submit">
-						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							최신순		
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
 						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
 						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
-						</div>			
+						</div>
 					</button>
 				</form>
 			</div>		
 		</nav>
-		
-		<%@ include file="views/board/GalleryList.jsp" %>
+		<!-- 갤러리 내용 -->
+		<%@ include file="views/board/galleryList.jsp" %>
 
 		<!-- 리모컨 -->
 		<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">

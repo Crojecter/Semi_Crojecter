@@ -1,4 +1,4 @@
-package com.kh.follow.model.dao;
+package com.kh.likeit.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
 
@@ -12,13 +12,13 @@ import java.util.Properties;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
 
-public class FollowDao {
-	
+public class LikeitDao {
+
 	private Properties prop = new Properties();
 	
-	public FollowDao() {
+	public LikeitDao() {
 		
-		String filePath = GalleryDao.class.getResource("/config/follow-query.properties").getPath();
+		String filePath = GalleryDao.class.getResource("/config/likeit-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));		
 		} catch (IOException e) {			
@@ -27,19 +27,19 @@ public class FollowDao {
 	}
 	
 
-	public int checkFollow(Connection con, String wid, String mid) {
+	public int checkLikeit(Connection con, int mid, int bid) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
-		String sql = prop.getProperty("isFollow");
+		String sql = prop.getProperty("isLikeit");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, mid);
-			pstmt.setString(2, wid);
+			pstmt.setInt(1, mid);
+			pstmt.setInt(2, bid);
 
 			rset = pstmt.executeQuery();
 			
@@ -55,18 +55,18 @@ public class FollowDao {
 		return result;
 	}
 
-	public int deleteFollow(Connection con, String wid, String mid) {
+	public int deleteLikeit(Connection con, int mid, int bid) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = prop.getProperty("deleteFollow");
+		String sql = prop.getProperty("deleteLikeit");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, mid);
-			pstmt.setString(2, wid);
+			pstmt.setInt(1, mid);
+			pstmt.setInt(2, bid);
 
 			result = pstmt.executeUpdate();
 			
@@ -80,19 +80,19 @@ public class FollowDao {
 	}
 
 
-	public int insertFollow(Connection con, String wid, String mid) {
+	public int insertLikeit(Connection con, int mid, int bid) {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String sql = prop.getProperty("insertFollow");
+		String sql = prop.getProperty("insertLikeit");
 		
 		try {
 		
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, mid);
-			pstmt.setString(2, wid);
+			pstmt.setInt(1, mid);
+			pstmt.setInt(2, bid);
 
 			result = pstmt.executeUpdate();
 			
@@ -104,5 +104,4 @@ public class FollowDao {
 		
 		return result;
 	}
-
 }

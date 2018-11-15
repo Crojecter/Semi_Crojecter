@@ -1,11 +1,16 @@
 package com.kh.alarm.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.alarm.model.service.AlarmService;
+import com.kh.alarm.model.vo.Alarm;
 
 /**
  * Servlet implementation class alarmListServlet
@@ -26,8 +31,27 @@ public class AlarmListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 게시판 요소
+			ArrayList<Alarm> alarmList = null;
+			AlarmService as = new AlarmService();
+			
+			//System.out.println("Mid ser : "+ request.getParameter("Mid"));
+			
+			alarmList = as.selectAlarmList(request.getParameter("Mid"));
+			//System.out.println("AlarmListServlet alist : "+ alarmList);
+			
+			String page = "";
+			
+			if (alarmList != null){
+				page = "views/alarm/alarmDetail.jsp";
+				request.setAttribute("alarmList", alarmList);
+				
+			} else {
+				page = "views/common/errorPage.jsp";
+				request.setAttribute("msg", "알람목록 조회실패");
+			}
+			request.getRequestDispatcher(page).forward(request, response);
+				
 	}
 
 	/**
