@@ -35,11 +35,10 @@ public class AlarmListServlet extends HttpServlet {
 			ArrayList<Alarm> alarmList = null;
 			AlarmService as = new AlarmService();
 			
-			//int Mid = Integer.parseInt(request.getAttribute("Mid"));
-			System.out.println("Mid ser : "+ request.getParameter("Mid"));
+			//System.out.println("Mid ser : "+ request.getParameter("Mid"));
 			
 			alarmList = as.selectAlarmList(request.getParameter("Mid"));
-			System.out.println("AlarmListServlet alist : "+ alarmList);
+			//System.out.println("AlarmListServlet alist : "+ alarmList);
 			
 			String page = "";
 			

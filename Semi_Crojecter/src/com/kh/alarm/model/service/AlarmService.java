@@ -26,7 +26,7 @@ public class AlarmService {
 		Connection con = getConnection();
 		ArrayList<Alarm> alarmList = aDao.selectAlarmList(con, Integer.parseInt(Mid));
 		
-		System.out.println("selectAlarmList s : "+ alarmList);
+		//System.out.println("selectAlarmList s : "+ alarmList);
 		
 		close(con);
 		return alarmList;

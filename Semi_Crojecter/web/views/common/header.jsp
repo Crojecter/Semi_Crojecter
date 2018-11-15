@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
 <% Member m = (Member)session.getAttribute("member"); 
-	System.out.println("member : "+ m);
+	
 /*    
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("list"); 
 	System.out.println("Header alist : "+ alarmList);	
@@ -32,7 +32,8 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
-		<a href="<%= request.getContextPath()%>/galleryMain.jsp">
+		<!-- 로고 -->
+		<a href="<%= request.getContextPath()%>/gList.ga">
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -50,7 +51,7 @@
 				<h4><a href="<%= request.getContextPath()%>/views/projectBoard/projectPage.jsp">프로젝트</a></h4>
 				</li>
 			</ul>
-				
+				<!-- 오른쪽 -->
 				<div class="loginArea">
 					<%if ( m == null ) { %>
 					<form id="loginForm" action="/myWeb/login.me" method="post">
@@ -84,7 +85,7 @@
 						        <h4 class="modal-title">알람메세지 목록</h4>
 						      </div>
 						      <div class="modal-body">
-						        <p><%@ include file="../alarm/alarmDetail.jsp" %></p>
+						        <%-- <p><%@ include file="../alarm/alarmDetail.jsp" %></p> --%>
 						      </div>
 						      <div class="modal-footer">
 						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -139,6 +140,5 @@
 	<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
 	</div>
 	<a name="bottom"></a>
-	<input type="hidden" value="<%= m.getMid() %>" name="Mid"/>
 </body>
 </html>

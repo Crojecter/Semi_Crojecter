@@ -1,5 +1,7 @@
 package com.kh.alarm.model.dao;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,12 +15,17 @@ import static com.kh.common.JDBCTemplate.*;
 
 public class AlarmDao{
 	
-	
-	
 	private Properties prop = new Properties();
 	private PreparedStatement pstmt = null;
 	
-	public AlarmDao(){}
+	public AlarmDao(){
+		String filePath = AlarmDao.class.getResource("/config/alarm-query.properties").getPath();
+		try {
+			prop.load(new FileReader(filePath));		
+		} catch (IOException e) {			
+			e.printStackTrace();			
+		}
+	}
 	
 	public int countUnReadAlarm(Connection con) {
 		// 
@@ -71,7 +78,7 @@ public class AlarmDao{
 				al.setAFlag(rset.getString("AFLAG"));
 				
 				alarmList.add(al);
-				System.out.println("selectAlarmList dao : "+ alarmList);
+				//System.out.println("selectAlarmList dao : "+ alarmList);
 			}
 			
 		} catch (SQLException e) {
