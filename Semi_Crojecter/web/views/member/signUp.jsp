@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
-<%-- <%
-	Member m = (Member)request.getAttribute("member");
-%> --%>
+<%
+	String nickName = request.getParameter("nickName");
+	String email = request.getParameter("email");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,23 +56,30 @@
 						<td><label class="inputContent">닉네임</label></td>
 					</tr>
 					<tr>
-						<td><input type="text" name="nickName" id="nickName"
+						<td>
+							
+							<input type="text" name="nickName" id="nickName"
 							class="inputContent" placeholder="사용하실 닉네임을 입력해주세요"
-							oninput="checkNickName();" /><br> <label id="labelNickname"
+							oninput="checkNickName();" <% if(nickName != null) { %> value="<%= nickName %>"/>
+							<% } %>
+							<br> <label id="labelNickname"
 							class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label></td>
 					</tr>
 					<tr>
 						<td><label class="inputContent">이메일 주소</label></td>
 					</tr>
 					<tr>
-						<td><input type="email" name="email" id="email"
+						<td>
+							
+							<input type="email" name="email" id="email"
 							class="inputContent" placeholder="이메일 주소를 입력해주세요"
-							oninput="checkEmail();" /></td>
+							oninput="checkEmail();"<% if(email != null) { %> value="<%= email %>" /></td>
+							<% } %>
 					</tr>
 					<tr>
 						<td><input type="email" name="emailCheck" id="emailCheck"
 							class="inputContent" placeholder="이메일 주소를 확인합니다"
-							oninput="checkedEmail();" /><br> <label id="labelEmail"
+							oninput="checkedEmail();" <% if(email != null) { %> value="<%= email %>" <% } %>/><br> <label id="labelEmail"
 							class="label">이메일 형식에 맞지 않습니다.</label></td>
 					</tr>
 					<tr>
@@ -85,7 +93,7 @@
 					<tr>
 						<td><input type="password" name="passwordCheck"
 							id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다"
-							oninput="checkedPassword();" /><br> <label id="labelPwd"
+							oninput="checkedPassword();" /><br><label id="labelPwd"
 							class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
 								특수문자 숫자 최소 1개 이상 포함
 						</label></td>
@@ -113,9 +121,14 @@
 		var nnChk = 0;
 		var eChk = 0;
 		var pChk = 0;
+		<% if(nickName != null) { %>
+		window.onload = function() { 
+			
+		};
+		<% } %>
 		
 		function checkNickName() {
-			var nickname = $("#nickName").val();
+			var nickname = $("#nickName").val();			
 			$.ajax({
 				data : { nickName : nickname },
 				url : "/crojecter/checkNickName.do",
@@ -321,6 +334,93 @@
 
 			$("#form").submit();
 
+		}
+		
+		function apiNickNameCheck() {
+			$.ajax({
+				data : { nickName : "<%=nickName%>" },
+				url : "/crojecter/checkNickName.do",
+				type : "post",
+				success : function(data) {
+					if(data == "success") {
+						// 닉네임 체크 성공시 정규식으로 한번더 검사해서 성공할 경우 아래 실행
+						var regNickname = /^[가-힣|ㄱ-ㅎ|a-z|A-Z|0-9]{2,10}$/;
+						
+						if(regNickname.test("<%=nickName%>")) {
+							nnChk = 1;
+							$("#nickName").css("background-color", "#B7F400");
+							$("#labelNickname").css("visibility", "hidden");
+							
+							memberVerify();
+						} else {
+							nnChk = 0;
+							$("#nickName").css("background-color", "#FFA5A5");
+							$("#labelNickname").css("visibility", "visible");
+							$("#labelNickname").text('2~10 글자의 닉네임을 입력하세요. 특수문자 불가');
+							
+							memberVerify();
+						}
+					} else {
+						nnChk = 0;
+						$("#nickName").css("background-color", "#FFA5A5");
+						$("#labelNickname").css("visibility", "visible");
+						$("#labelNickname").text('중복된 닉네임 입니다.');
+						
+						memberVerify();
+					}
+				}
+			});
+		}
+		
+		function apiEmailCheck(){
+			$.ajax({
+				data : { eMail : <%= email %> },
+				url : "/crojecter/checkEmail.do",
+				type : "post",
+				success : function(data) {
+					if(data == "success") {
+						// 이메일 체크 성공시 정규식으로 한번더 검사
+						var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+						
+						if(regEmail.test("<%=email%>") {
+							
+							var emailChk = "<%=email%>";
+							
+							if(email == emailChk) {
+								$("#email").css("background-color", "#B7F400");
+								$("#emailCheck").css("background-color", "#B7F400");
+								$("#labelEmail").css("visibility", "hidden");
+								eChk = 1;
+								
+								checkedEmail()
+							} else {
+								$("#email").css("background-color", "#B7F400");
+								$("#emailCheck").css("background-color", "#FFA5A5");
+								$("#labelEmail").css("visibility", "visible");
+								eChk = 0;
+								
+								checkedEmail()
+							}
+							
+							memberVerify();
+						} else {
+							eChk = 0;
+							$("#email").css("background-color", "#FFA5A5");
+							$("#labelEmail").css("visibility", "visible");
+							$("#labelEmail").text('이메일 형식에 맞지 않습니다.');
+							
+							memberVerify();
+						}
+					} else {
+						eChk = 0;
+						$("#email").css("background-color", "#FFA5A5");
+						$("#labelEmail").css("visibility", "visible");
+						$("#labelEmail").text('중복된 이메일 입니다.');
+						
+						memberVerify();
+					}
+				}
+			});	
 		}
 	</script>
 </body>

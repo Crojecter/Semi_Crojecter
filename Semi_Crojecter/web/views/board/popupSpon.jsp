@@ -12,7 +12,7 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>후원하기</title>
 <style>
-	button{
+	.sponBtn{
 		width:180px;
 		height:80px;
 		font-size:20px;
@@ -22,7 +22,7 @@
 		background-color:#30B2A0;
 		border:1px solid #30B2A0;
 	}
-	p{
+	.sponP{
 		margin:10px 10px 10px 10px;
 	}
 </style>
@@ -30,16 +30,16 @@
 <body style="width:400px; margin:auto; margin-top:40px;">
 	<div align="center" style="width:400px">
 		<span id="childGiverid" style="display:none;"></span>
-		<p style="font-size:20px; text-align:center;"><span style="color:orange;" id="childName"></span> 님에게 <span style="color:orange;">후원</span>하시겠습니까?</p>
-		<p style="font-size:17px; text-align:right;">보유중인 호두 : <span id="hodu" style="color:orange;"></span> 개</p>
+		<p class="sponP" style="font-size:20px; text-align:center;"><span style="color:orange;" id="childName"></span> 님에게 <span style="color:orange;">후원</span>하시겠습니까?</p>
+		<p class="sponP" style="font-size:17px; text-align:right;">보유중인 호두 : <span id="hodu" style="color:orange;"></span> 개</p>
 		<table>
 			<tr>
-				<td><button id="spon10" onclick="spon(10);">호두 10알</button></td>
-				<td><button id="spon30" onclick="spon(30);">호두 30알</button></td>
+				<td><button id="spon10" class="sponBtn" onclick="spon(10);">호두 10알</button></td>
+				<td><button id="spon30" class="sponBtn" onclick="spon(30);">호두 30알</button></td>
 			</tr>
 			<tr>
-				<td><button id="spon50" onclick="spon(50);">호두 50알</button></td>
-				<td><button id="spon100" onclick="spon(100);">호두 100알</button></td>
+				<td><button id="spon50" class="sponBtn" onclick="spon(50);">호두 50알</button></td>
+				<td><button id="spon100" class="sponBtn" onclick="spon(100);">호두 100알</button></td>
 			</tr>
 		</table>
 	</div>

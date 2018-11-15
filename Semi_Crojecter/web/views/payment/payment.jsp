@@ -13,7 +13,7 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-	.btn{
+	.payBtn{
 		width:300px;
 		height:180px;
 		color:white;
@@ -40,12 +40,12 @@
 		<p style="font-size:25px;">크리에이터들의 창작활동에 후원을 할 수 있는 호두를 충전하세요.</p>
 		<table>
 			<tr>
-				<td><button class="btn" id="pay5500" onclick="pay(100, 50);" style="font-size:30px;">50알(5,550원)</button></td>
-				<td><button class="btn" id="pay11000" onclick="pay(200, 100);" style="font-size:30px;">100알(11,000원)</button></td>
+				<td><button class="payBtn" id="pay5500" onclick="pay(100, 50);" style="font-size:30px;">50알(5,550원)</button></td>
+				<td><button class="payBtn" id="pay11000" onclick="pay(200, 100);" style="font-size:30px;">100알(11,000원)</button></td>
 			</tr>
 			<tr>
-				<td><button class="btn" id="pay33000" onclick="pay(300, 300);" style="font-size:30px;">300알(33,000원)</button></td>
-				<td><button class="btn" id="pay55000" onclick="pay(400, 500);" style="font-size:30px;">500알(55,000원)</button></td>
+				<td><button class="payBtn" id="pay33000" onclick="pay(300, 300);" style="font-size:30px;">300알(33,000원)</button></td>
+				<td><button class="payBtn" id="pay55000" onclick="pay(400, 500);" style="font-size:30px;">500알(55,000원)</button></td>
 			</tr>
 		</table>
 	</div>
