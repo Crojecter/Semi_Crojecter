@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
-<% Member m = (Member)session.getAttribute("member"); %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
+<% Member m = (Member)session.getAttribute("member"); 
+	
+/*    
+	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("list"); 
+	System.out.println("Header alist : "+ alarmList);	
+	Alarm al = (Alarm) request.getAttribute("Alarm");
+	String AFlag = al.getAFlag();
+*/	
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- bootstrap css include -->
@@ -16,12 +26,14 @@
 
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 	<style>
-		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
+		
 	</style>
+	
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
-		<a href="<%= request.getContextPath()%>/galleryMain.jsp">
+		<!-- 로고 -->
+		<a href="<%= request.getContextPath()%>/gList.ga">
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -32,104 +44,16 @@
 			<ul class="navbar-nav mr-auto">
 				<!-- 갤러리 -->
 				<li class="galleryLink">
-				<h4><a href="<%= request.getContextPath()%>/galleryMain.jsp">갤러리</a> &nbsp;&nbsp;&nbsp;</h4>
+				<h4><a href="<%= request.getContextPath()%>/gList.ga">갤러리</a> &nbsp;&nbsp;&nbsp;</h4>
 				</li>
 				<!-- 프로젝트 -->
 				<li class="projectLink">
 				<h4><a href="<%= request.getContextPath()%>/views/projectBoard/projectPage.jsp">프로젝트</a></h4>
 				</li>
 			</ul>
-			
-			<form class="form-inline my-2 my-lg-0">
-				<ul class="navbar-nav mr-auto">
-					<!-- 알람 -->
-					<li>
-					<span data-original-title="읽지않은 알림메세지가  <%= 10%>개 있습니다." data-toggle="tooltip">
-					<button type="button" class="btn btn-primary" 
-					data-toggle="modal" data-target="#exampleModal" data-whatever="1">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/alarm.png" style="height:30px">
-					<span class="badge badge-light"> <%= 10%></span>
-					<span class="sr-only">unread messages</span>
-					</button>
-					</span>
-					<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					  <div class="modal-dialog" role="document">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <h5 class="modal-title" id="exampleModalLabel">알람 메세지 목록</h5>
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					          <span aria-hidden="true">&times;</span>
-					        </button>
-					      </div>
-					      <div class="modal-body">
-					        <form>
-					          <table>
-					            <tr> 
-						            <td>작성자</td>
-						            <td>내용</td>
-						            <td>날짜</td>
-						            <td>확인</td>
-					          	</tr>
-					          	<tr>
-						          	<td>관리자</td>
-						          	<td><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-						          	<td><label id="adate"><span>SYSDATE</span></label></td>
-						          	<td><label id="aflag"><span>모름</span></label></td>
-					          	</tr>
-					          	<tr>
-						          	<td>관리자</td>
-						          	<td><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-						          	<td><label id="adate"><span>SYSDATE</span></label></td>
-						          	<td><label id="aflag"><span>모름</span></label></td>
-					          	</tr>
-					          	<tr>
-						          	<td>관리자</td>
-						          	<td><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-						          	<td><label id="adate"><span>SYSDATE</span></label></td>
-						          	<td><label id="aflag"><span>모름</span></label></td>
-					          	</tr>
-					          	<tr>
-						          	<td>관리자</td>
-						          	<td><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-						          	<td><label id="adate"><span>SYSDATE</span></label></td>
-						          	<td><label id="aflag"><span>모름</span></label></td>
-					          	</tr>								
-					          </table>
-					        </form>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-					
-					<script>
-						$(document).ready(function(){
-							$('[data-toggle="tooltip"]').tooltip(); 
-						});
-					</script>	
-					<!-- 프로필 -->
-					<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="<%= request.getContextPath()%>#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img src="<%= request.getContextPath()%>/resources/images/defaultImg.jpg" style="height: 30px;" class="rounded-circle" alt="Cinque Terre">
-					</a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-						<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypage.jsp">마이페이지</a>
-						<div class="dropdown-item" onclick='logout();'>로그아웃</div>
-						<script>
-						function logout(){
-							location.href="/crojecter/logout.me";
-						}
-						</script>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
-					</div>
-					<li>
-					<a href="<%= request.getContextPath()%>/views/board/noticeInsert.jsp">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
-					&nbsp;&nbsp;</li>
-				</ul>
+				<!-- 오른쪽 -->
 				<div class="loginArea">
-				<%if ( m == null ) { %>
+					<%if ( m == null ) { %>
 					<form id="loginForm" action="/myWeb/login.me" method="post">
 						<a class="btn btn-primary" href="<%= request.getContextPath()%>/views/member/login.jsp">
 						Sign In</a>
@@ -139,70 +63,44 @@
 					</form>
 					<% } else { %>
 					<ul class="navbar-nav mr-auto">
+						<li><%= m.getMemail() %>(Mid : <%= m.getMid() %>)님 환영합니다.</li>
+						
 						<!-- 알람 -->
 						<li>
-						<span data-original-title="읽지않은 알림메세지가  <%= 10%>개 있습니다." data-toggle="tooltip">
-						<button type="button" class="btn btn-primary" 
-						data-toggle="modal" data-target="#exampleModal" data-whatever="1">
+						<button title="읽지않은 알림메세지가  <%= 0%>개 있습니다." type="button" data-target="#myModal" 
+						onclick="location.href='<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>'"
+						class="btn btn-primary" data-toggle="modal">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/alarm.png" style="height:30px">
-						<span class="badge badge-light"> <%= 10%></span>
-						<span class="sr-only">unread messages</span>
+						<span class="badge badge-light"> <%= 3%></span>
 						</button>
-						</span>
-						<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" role="document">
+  						<a href="#" data-toggle="tooltip" title="Hooray!"></a>
+						<!-- Modal -->
+						<div id="myModal" class="modal fade" role="dialog">
+						  <div class="modal-dialog">
+						
+						    <!-- Modal content-->
 						    <div class="modal-content">
 						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">알람 메세지 목록</h5>
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
+						        <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        <h4 class="modal-title">알람메세지 목록</h4>
 						      </div>
 						      <div class="modal-body">
-						        <form>
-						          <table id="alarmTB">
-						            <tr id="alarmTR"> 
-							            <td id="alarmTD">작성자</td>
-							            <td id="alarmTD">내용</td>
-							            <td id="alarmTD">날짜</td>
-							            <td id="alarmTD">확인</td>
-						          	</tr>
-						          	<tr id="alarmTR">
-							          	<td id="alarmTD">관리자</td>
-							          	<td id="alarmTD"><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-							          	<td id="alarmTD"><label id="adate"><span>SYSDATE</span></label></td>
-							          	<td id="alarmTD"><label id="aflag"><span>모름</span></label></td>
-						          	</tr>
-						          	<tr id="alarmTR">
-							          	<td id="alarmTD">관리자</td>
-							          	<td id="alarmTD"><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-							          	<td id="alarmTD"><label id="adate"><span>SYSDATE</span></label></td>
-							          	<td id="alarmTD"><label id="aflag"><span>모름</span></label></td>
-						          	</tr>
-						          	<tr id="alarmTR">
-							          	<td id="alarmTD">관리자</td>
-							          	<td id="alarmTD"><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-							          	<td id="alarmTD"><label id="adate"><span>SYSDATE</span></label></td>
-							          	<td id="alarmTD"><label id="aflag"><span>모름</span></label></td>
-						          	</tr>
-						          	<tr id="alarmTR" >
-							          	<td id="alarmTD">관리자</td>
-							          	<td id="alarmTD"><label id="amsg"><span>눈사람도 법인격이 있는건가요</span></label></td>
-							          	<td id="alarmTD"><label id="adate"><span>SYSDATE</span></label></td>
-							          	<td id="alarmTD"><label id="aflag"><span>모름</span></label></td>
-						          	</tr>								
-						          </table>
-						        </form>
+						        <%-- <p><%@ include file="../alarm/alarmDetail.jsp" %></p> --%>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 						      </div>
 						    </div>
+						
 						  </div>
 						</div>
-						
 						<script>
 							$(document).ready(function(){
 								$('[data-toggle="tooltip"]').tooltip(); 
 							});
 						</script>	
+						
+						
 						<!-- 프로필 -->
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="<%= request.getContextPath()%>#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -221,7 +119,8 @@
 							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
 						</div>
 						<li>
-						<a href="<%= request.getContextPath()%>/views/board/BoardInsert.jsp">
+						<!-- 글쓰기 -->
+						<a href="<%= request.getContextPath()%>/views/board/boardInsert.jsp">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>
@@ -232,8 +131,7 @@
 				  <input type="text" class="search-query" placeholder="Search">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
-				</form>
-			</form>		
+				</form>			
 		</div>
 	</nav>
 	<!-- 리모컨 -->

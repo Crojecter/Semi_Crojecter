@@ -17,17 +17,22 @@
 
 		}
 		.profileMenu{
-			border: solid 1px black;
+			border: solid 1px gray;
 			text-decoration: none;
-			color:black;
-			background-color: lightgray;
-			margin-left:10px;
-			
+			color:white;
+			background-color: gray;
+			text-align:center;
+			border-radius:5px;
+			height:40px;
+			width:120px;
+			font-size:15px;
+			margin:1px 10px 1px 10px;		
 		}
 
 		.menu{
 			border:1px solid black;
 		}
+		
 
 		.menuMenu a{
 			text-decoration: none;
@@ -48,7 +53,6 @@
 			border-radius: 50px;
 			margin-top:10px;
 			margin-left:10px;
-
 		}
 
 </style>
@@ -59,20 +63,23 @@
 	<img src="../resources/images/icon/likeSelect.png" class="profilePic">
 	<p id="profileName"> <%=m.getMname()%>님의 페이지</p>
 	<a class="profileMenu" href="/views/mypage/paymentList.jsp">결제내역</a>
-	<a class="profileMenu" href="/views/mypage/mypage.jsp">내정보</a>
+	<a class="profileMenu" href="/views/mypage/mypage.jsp">정보수정</a>
 	<br><br>
 </div>
 <br>
 <div class="menu">
 	<table>
 		<tr>
-			<td class="menuMenu"><a>About</a></td>
-			<td class="menuMenu"><a href="/views/mypage/">Works</a></td>
-			<td class="menuMenu"><a href="/views/mypage/">Collect</a></td>
-			<td class="menuMenu"><a href="/views/mypage/">Followings</a></td>
-			<td class="menuMenu"><a href="/views/mypage/">Followers</a></td>
+			<td class="menuMenu"><a href="/view/mypage/">About</a></td>
+			<td class="menuMenu"><a href="/views/mypage/myworkList.jsp">Works</a></td>
+			<td class="menuMenu"><a href="/views/mypage/mycollectList.jsp">Collect</a></td>
+			<td class="menuMenu"><a href="/views/mypage/followingList.jsp">Followings</a></td>
+			<td class="menuMenu"><a href="/views/mypage/followerList.jsp">Followers</a></td>
 		</tr>
 	</table>
 </div>
+<script>
+
+</script>
 </body>
 </html>

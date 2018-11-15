@@ -1,6 +1,7 @@
 package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.boardcomment.model.service.BoardCommentService;
+import com.kh.boardcomment.model.vo.BoardComment;
 
 /**
  * Servlet implementation class GallerySelectOneServlet
@@ -34,14 +37,13 @@ public class GallerySelectOneServlet extends HttpServlet {
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
 		Gallery g = new GalleryService().selectOne(bid);
-		//ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
-		
+		ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
 		
 		String page = "";
 		if(g != null) {
 			page = "views/board/galleryDetail.jsp";
 			request.setAttribute("gallery", g);
-			//request.setAttribute("clist", clist);
+			request.setAttribute("clist", clist);
 			
 		} else {
 			page = "views/common/errorPage.jsp";
