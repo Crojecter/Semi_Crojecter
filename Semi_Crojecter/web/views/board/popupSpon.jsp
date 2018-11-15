@@ -68,14 +68,9 @@
 						alert("후원에 실패했습니다.<br>관리자에게 문의해주세요.");
 						close();
 					}else {
-						sponReferrer = data;
-						$.ajax({
-							data : { sponreferrer : sponReferrer },
-							url : "crojecter/views/payment/payment.jsp"
-						});
 						console.log("sponReferrer : " + sponReferrer);
 						alert("잔여 호두량이 부족합니다.");
-						window.opener.location.href = "../payment/payment.jsp";
+						window.opener.location.href = "../payment/payment.jsp?beforeUrl="+referrer;
 						close();
 					}
 				}

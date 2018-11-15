@@ -122,8 +122,9 @@
 		var eChk = 0;
 		var pChk = 0;
 		<% if(nickName != null) { %>
-		window.onload = function() { 
-			
+		window.onload = function() {
+			apiNickNameCheck();
+			apiEmailCheck();
 		};
 		<% } %>
 		
@@ -374,7 +375,7 @@
 		
 		function apiEmailCheck(){
 			$.ajax({
-				data : { eMail : <%= email %> },
+				data : { eMail : "<%= email %>" },
 				url : "/crojecter/checkEmail.do",
 				type : "post",
 				success : function(data) {
@@ -382,7 +383,7 @@
 						// 이메일 체크 성공시 정규식으로 한번더 검사
 						var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
 						
-						if(regEmail.test("<%=email%>") {
+						if(regEmail.test("<%=email%>")) {
 							
 							var emailChk = "<%=email%>";
 							
@@ -420,7 +421,7 @@
 						memberVerify();
 					}
 				}
-			});	
+			});
 		}
 	</script>
 </body>

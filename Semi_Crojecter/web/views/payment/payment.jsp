@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
 <%
-	String sponReferrer = (String)request.getAttribute("sponreferrer");
+	String sponReferrer = (String)request.getParameter("beforeUrl");
 	System.out.println("최종 url 가져온 값 : " + sponReferrer);
 %>
 <!DOCTYPE html>
@@ -54,6 +54,9 @@
 
 	<script>
 		var referrer = document.referrer;
+		<% if(sponReferrer != null) { %>
+		referrer = "<%= sponReferrer %>";
+		<% } %>
 		// popupSpon.jsp에서 sponReferrer 데이터 가져온값이 있으면
 		// referrer = sponReferrer로 교체, 아니면 그대로 유지
 		console.log("이전 페이지 url : " + referrer);
