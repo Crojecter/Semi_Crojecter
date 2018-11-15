@@ -39,10 +39,13 @@
 		height:25px;
 	}
 	.wrapper{
-		width:270px;
+		width:290px;
 		margin:0 auto;
-		margin-top:300px;
-		margin-bottom:300px;
+		margin-top:230px;
+		margin-bottom:230px;
+		border:1px solid black;
+		border-radius:20px;
+		padding:10px 10px 10px 10px;
 	}
 </style>
 </head>
@@ -81,9 +84,9 @@
 				</tr>
 				<tr style="font-size: 12px;">
 					<td align="left"><a href="./searchPassword.jsp"
-						style="text-decoration: none;">닉네임/비밀번호 찾기</a></td>
+						style="padding-left:20px; text-decoration: none;">내정보 찾기</a></td>
 					<td align=right><a href="./signUp.jsp"
-						style="text-decoration: none;">회원가입</a></td>
+						style="padding-right:20px; text-decoration: none;">회원가입</a></td>
 				</tr>
 				<tr>
 					<td colspan="2"><hr /></td>

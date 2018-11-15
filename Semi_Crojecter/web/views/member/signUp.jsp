@@ -32,10 +32,11 @@
 		margin:1px 10px 1px 10px;
 	}
 	.wrapper{
-		width:270px;
+		width:290px;
 		margin:0 auto;
 		margin-top:160px;
 		margin-bottom:160px;
+		padding:10px 10px 10px 10px;
 	}
 </style>
 </head>
