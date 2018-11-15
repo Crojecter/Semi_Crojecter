@@ -31,17 +31,17 @@ public class CommentInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int cwriter = Integer.parseInt(request.getParameter("cwriter"));
-		String ccontent = request.getParameter("commentContent");
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		int btype = Integer.parseInt(request.getParameter("btype"));
+		int cwriter = Integer.parseInt(request.getParameter("cwriter"));
+		String ccontent = request.getParameter("ccontent");
 		int crefmid = Integer.parseInt(request.getParameter("crefmid"));
 		
 		BoardComment bc = new BoardComment();
+		bc.setBid(bid);
 		bc.setCwriter(cwriter);
 		bc.setCcontent(ccontent);
-		bc.setBid(bid);
-		
+		bc.setCrefmid(crefmid);
 		
 		int result = new BoardCommentService().insertComment(bc);
 		
