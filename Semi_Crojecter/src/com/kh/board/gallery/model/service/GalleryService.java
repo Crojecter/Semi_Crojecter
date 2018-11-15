@@ -85,6 +85,7 @@ public class GalleryService {
 		
 		int result1 = gDao.updateBoard(con, g);
 		int result2 = gDao.updateGallery(con, g);
+				
 		int result3 = gDao.updateAttachedfile(con, list);
 		
 		if( result1 > 0 && result2 > 0 && result3 > 0) {

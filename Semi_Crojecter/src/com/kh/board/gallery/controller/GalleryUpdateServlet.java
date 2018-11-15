@@ -65,17 +65,11 @@ public class GalleryUpdateServlet extends HttpServlet {
 										 new DefaultFileRenamePolicy()
 							);
 			
-			// 폼으로 전송된 파일 이름들을 받아온다.
-			
-			int bid = Integer.parseInt(mrequest.getParameter("bid"));
-			System.out.println("bid : " + bid);
-			HashMap<String, Object> gal = gs.selectGalleryMap(bid);
-			
 			ArrayList<String> saveFiles = new ArrayList<String>();
 			Enumeration<String> files = mrequest.getFileNames();
 			
 			while(files.hasMoreElements()){
-				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
+				// 새로 입력된 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
 				String name = files.nextElement();
 				String fileName = mrequest.getFilesystemName(name);  
 				
@@ -85,8 +79,14 @@ public class GalleryUpdateServlet extends HttpServlet {
 			}						
 			 
 			System.out.println("savefiles : " + saveFiles);
-			// Gallery 객체 생성 후 DB 전달 VO 설정하기
+			
+			// selectGalleryMap(bid) : galleryUpdate.jap에서 받아온 bid로 Gallery와 AttachedFile을 불러온다.
+			int bid = Integer.parseInt(mrequest.getParameter("bid"));
+			System.out.println("bid : " + bid);
 
+			HashMap<String, Object> gal = gs.selectGalleryMap(bid);
+			
+			// 기존 bid의 gallery 객체 불러와서 업데이트 하기 
 			Gallery g = (Gallery)gal.get("gallery");
 
 			g.setBtitle(mrequest.getParameter("title"));
@@ -95,7 +95,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
 			g.setGtag(mrequest.getParameter("tags"));
 			
-			// Attachment에 기록하기 위한 파일 리스트 처리하기
+			/// 기존 bid의 AttachedFile 객체 불러와서 업데이트 하기 
 			ArrayList<AttachedFile> list = (ArrayList<AttachedFile>)gal.get("attachedfile");
 
 			AttachedFile af = new AttachedFile();
@@ -109,9 +109,13 @@ public class GalleryUpdateServlet extends HttpServlet {
 				case 2: 
 					for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
 						// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
-						af = new AttachedFile();												
+						af = new AttachedFile();
+						
+						af.setFid(list.get(i).getFid()+1);
 						af.setFname(saveFiles.get(i));
 						af.setFpath(savePath);
+						af.setBid(bid);
+						
 						System.out.println("af : " + af);
 						list.add(af);											
 					}

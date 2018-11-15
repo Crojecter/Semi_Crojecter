@@ -183,8 +183,8 @@ public class GalleryDao {
 
 				pstmt.setInt(3, level);
 				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
-				System.out.println("level : " + level);
+				System.out.println("list.get(" + i + ").getBid() : " + list.get(i).getBid());
+				System.out.println("insertAttachedfile"+i+"번 flevel : " + level);
 
 				result += pstmt.executeUpdate();
 
@@ -261,7 +261,7 @@ public class GalleryDao {
 
 				pstmt = con.prepareStatement(sql);
 				
-				System.out.println("list.get(i) : " + list.get(i));
+				System.out.println("list.get(" + i + ") : " + list.get(i));
 				pstmt.setString(1, list.get(i).getFname());
 				pstmt.setString(2, list.get(i).getFpath());
 
@@ -272,7 +272,7 @@ public class GalleryDao {
 
 				pstmt.setInt(3, level);
 				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
+				System.out.println("updateAttachedfile의 list.get(" + i + ").getBid() : " + list.get(i).getBid());
 				System.out.println("level : " + level);
 
 				result += pstmt.executeUpdate();
@@ -322,6 +322,7 @@ public class GalleryDao {
 		AttachedFile af = null;
 		ArrayList<AttachedFile> list = null;
 		
+		System.out.println("selectGalleryMap 진입");
 		String sql = prop.getProperty("selectGalleryOne");
 				
 		try {
@@ -338,13 +339,10 @@ public class GalleryDao {
 				g.setGcategoryid(rset.getInt("gcategoryid"));
 				g.setGtag(rset.getString("gtag"));
 				g.setGlike(rset.getInt("glike"));
-				System.out.println("1");
 				g.setCclid(rset.getInt("cclid"));
 				
 				g.setBid(rset.getInt("bid"));
-				System.out.println("2");
 				g.setBtype(rset.getInt("btype"));
-				System.out.println("3");
 				g.setBtitle(rset.getString("btitle"));
 				g.setBcontent(rset.getString("bcontent"));
 				g.setBcount(rset.getInt("bcount"));
@@ -353,9 +351,6 @@ public class GalleryDao {
 				g.setBrcount(rset.getInt("brcount"));
 				g.setBwriter(rset.getInt("bwriter"));
 				g.setMname(rset.getString("mname"));
-				//g.setMprofile(rset.getString("mprofile"));
-				
-				System.out.println("102번 bid gal : " + g);
 				
 				af = new AttachedFile();
 				af.setBid(bid);
@@ -363,6 +358,9 @@ public class GalleryDao {
 				af.setFlevel(rset.getInt("flevel"));
 				af.setFname(rset.getString("fname"));
 				af.setFpath(rset.getString("fpath"));
+				
+				System.out.println("selectGalleryMap의 g : " + g);
+				System.out.println("selectGalleryMap의 af : " + af);
 				
 				list.add(af);
 				
