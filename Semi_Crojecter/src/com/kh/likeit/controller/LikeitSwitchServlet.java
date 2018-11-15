@@ -1,4 +1,4 @@
-package com.kh.follow.controller;
+package com.kh.likeit.controller;
 
 import java.io.IOException;
 
@@ -8,20 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.follow.model.service.FollowService;
+import com.kh.likeit.model.service.LikeitService;
 
 /**
- * Servlet implementation class FollowCheckServlet
+ * Servlet implementation class LikeitSwitchServlet
  */
-@WebServlet("/fCheck.fo")
-public class FollowCheckServlet extends HttpServlet {
+@WebServlet("/lSwitch.li")
+public class LikeitSwitchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowCheckServlet() {
+    public LikeitSwitchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,13 +29,14 @@ public class FollowCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		String wid = request.getParameter("wid"); //글쓴이
-		String mid = request.getParameter("mid"); //로그인한회원
 		
-		int result = new FollowService().checkFollow(wid, mid);
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int bid = Integer.parseInt(request.getParameter("bid")); 
 		
-		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
+		int result = new LikeitService().switchLikeit(mid, bid);
+		System.out.println("lSwitch.li result : " + result);
+		
+		response.getWriter().print((result == 0) ? "error" : (result == 1)? "delete" : "insert");
 	}
 
 	/**

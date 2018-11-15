@@ -51,7 +51,7 @@ public class CommentUpdateServlet extends HttpServlet {
 			}
 		} else {
 			request.setAttribute("msg", "댓글 수정 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 
