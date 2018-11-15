@@ -5,12 +5,14 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.member.model.vo.Member;
 import com.kh.payment.model.dao.PaymentDao;
 import com.kh.payment.model.vo.Payment;
 
@@ -71,6 +73,59 @@ private Properties prop = null;
 		}
 		
 		return list;
+	}
+
+
+	public ArrayList<Payment> searchPayment(Connection con, String condition, String keyword) {
+		ArrayList<Payment> plist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = null;
+		
+		switch(condition) {
+		case "name" :
+			sql = prop.getProperty("pSearchByName"); break;
+		case "email" :
+			sql = prop.getProperty("pSearchByEmail"); break;
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			plist = new ArrayList<Payment>();
+			
+			while(rset.next()){
+				
+				Payment p = new Payment();
+				
+				p.setPid(rset.getInt("pid"));
+				p.setPmoney(rset.getInt("pmoney"));
+				p.setPdate(rset.getDate("pdate"));
+				p.setMid(rset.getInt("mid"));
+				
+				plist.add(p);
+				
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		// 확인용 출력문
+		for(Payment p : plist) System.out.println(p);
+		
+		return plist;
 	}
 
 }

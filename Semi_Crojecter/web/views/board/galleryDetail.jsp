@@ -4,7 +4,6 @@
 <%
 	Member m = (Member)session.getAttribute("member");
 	System.out.println("m : " + m);
-
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 	
@@ -33,7 +32,6 @@
 		background : black;
 		color: white;
 	}
-
 	.tableArea {
 		border:1px solid black;
 		background : white;
@@ -126,9 +124,7 @@
 			<% } %>	
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
-
 	</div>
-
 	<div class="commentOuter" style="padding:5px;">
 		<div class="commentWriteArea" style="display:inline;">
 			<div><input type="hidden" name="crefmid" value="-1" /></div>

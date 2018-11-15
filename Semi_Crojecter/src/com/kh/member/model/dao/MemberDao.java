@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.member.model.vo.Member;
@@ -253,5 +255,103 @@ public class MemberDao {
 		
 		return result;
 		
+	}
+
+	public ArrayList<Member> searchMember(Connection con, String condition, String keyword) {
+		ArrayList<Member> mlist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = null;
+		
+		switch(condition) {
+		case "name" :
+			sql = prop.getProperty("mSearchByName"); break;
+		case "email" :
+			sql = prop.getProperty("mSearchByEmail"); break;
+		}
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			
+			rset = pstmt.executeQuery();
+			
+			mlist = new ArrayList<Member>();
+			
+			while(rset.next()){
+				
+				Member m = new Member();
+				
+				m.setMid(rset.getInt("mid"));
+				m.setMprofile(rset.getString("mprofile"));
+				m.setMemail(rset.getString("memail"));
+				m.setMpwd(rset.getString("mpwd"));
+				m.setMname(rset.getString("mname"));
+				m.setMdate(rset.getDate("mdate"));
+				m.setMhodu(rset.getInt("mhodu"));
+				m.setMsid(rset.getInt("msid"));
+				
+				mlist.add(m);
+				
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		// 확인용 출력문
+		for(Member m : mlist) System.out.println(m);
+		
+		return mlist;
+	}
+
+	public ArrayList<Member> selectList(Connection con) {
+		ArrayList<Member> mlist = null;
+		Statement stmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectList");
+		
+		try {
+			
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			
+			mlist = new ArrayList<Member>();
+			
+			while(rset.next()){
+				
+				Member m = new Member();
+				
+				m.setMid(rset.getInt("mid"));
+				m.setMprofile(rset.getString("mprofile"));
+				m.setMemail(rset.getString("memail"));
+				m.setMpwd(rset.getString("mpwd"));
+				m.setMname(rset.getString("mname"));
+				m.setMdate(rset.getDate("mdate"));
+				m.setMhodu(rset.getInt("mhodu"));
+				m.setMsid(rset.getInt("msid"));
+				
+				mlist.add(m);
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		
+		return mlist;
 	}
 }

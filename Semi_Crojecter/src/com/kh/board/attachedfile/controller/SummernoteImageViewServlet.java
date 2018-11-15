@@ -49,8 +49,8 @@ public class SummernoteImageViewServlet extends HttpServlet {
 
 			System.out.println("root 경로 확인 : " + root);
 
-			String url = request.getContextPath() + "/resources/galleryUploadFiles/";
-			String savePath = root + "/galleryUploadFiles/";
+			String url = request.getContextPath() + "/resources/uploadFiles/";
+			String savePath = root + "/uploadFiles/";
 
 			// 사용자가 저장하는 파일을 서버의 형식에 맞게
 			// 이름을 변경하여 설정하기

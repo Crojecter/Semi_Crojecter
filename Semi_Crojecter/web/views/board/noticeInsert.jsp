@@ -10,7 +10,7 @@
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>갤러리 업로드 페이지</title>
+<title>공지사항 업로드 페이지</title>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -64,7 +64,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
+	<form action="<%=request.getContextPath()%>/nInsert.no" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
@@ -73,7 +73,7 @@ body {
 				<textarea id="summernote" name="content"></textarea>
 			</div>
 			<div class="col-md-2">
-				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
+				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
 				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
