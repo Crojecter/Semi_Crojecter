@@ -122,18 +122,16 @@
 			
 			<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
 			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
 			<% } %>	
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 
 	</div>
-	
-	
 
-	<div class="commentOuter">
-	
+	<div class="commentOuter" style="padding:5px;">
 		<div class="commentWriteArea" style="display:inline;">
-			<div><input type="text" name="crefmid" value="-1" /></div>
+			<div><input type="hidden" name="crefmid" value="-1" /></div>
 			<div display="inline">
 				<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>
 				<button id="addComment" onclick="insertComment(this);">댓글 등록</button>
@@ -143,12 +141,11 @@
 		<div class="commentListArea">
 	      <% if( clist != null ) { %>
 	      	<% for(BoardComment bc : clist) { %>
-	      	
 	      	<div class="comment">
 	      		<div class="commentInfo" style="display:inline;">
 	      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
-	      			<span><%=bc.getCwname() %></span>
-	      			<span><%=bc.getCdate() %></span>
+	      			<span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
+	      			<span>작성날짜 : <%=bc.getCdate() %></span>
 	      				
 	      			<% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
 	      			<% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>	 
@@ -157,209 +154,212 @@
 						    style="display:none;" >수정완료</button> &nbsp;&nbsp;
 					<button type="button" class="deleteBtn" onclick="deleteComment(this);">삭제하기</button> &nbsp;&nbsp;
 	      			<% } %>
-					<input type="text" name="crefmid" value="<%= bc.getCwriter() %>" />
+					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
 					<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
-	      			<textarea class="comment-content" cols="105" rows="3" readonly="readonly"><%= bc.getCcontent() %></textarea>
+	      			<textarea class="comment-content" cols="105" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
+	      			<p style="border:1px solid gray; background:white; height:70px;">
+	      				<% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
+	      				<%= bc.getCcontent() %>
+	      			</p>
 	      		</div>
+	      		<hr />
 	      	</div>
 	  		<% } } %>
 		</div>
 	</div>
 
-
 	<% if(m != null) { // 회원 %>
 	<script> 
-	// 초기화 함수
-	$(function(){		
-		// 팔로우 버튼 초기화
-		$.ajax({
-			url : '/crojecter/fCheck.fo',
-			type : 'get',
-			data : {
-				mid : '<%= m.getMid() %>',
-				wid : '<%= g.getBwriter() %>'
-			}, 
-			success : function(data){
-				if(data == 'ok') {
-					$("#btnFollow").addClass('active');
-					$('#p-follow').html('언팔로우');
-				} else if (data == 'no') {
-					$("#btnFollow").removeClass('active');
-				} 
-			}, error : function(data){
-				console.log('팔로우버튼 초기화 에러 발생!');
-			}
+		// 초기화 함수
+		$(function(){		
+			// 팔로우 버튼 초기화
+			$.ajax({
+				url : '/crojecter/fCheck.fo',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					wid : '<%= g.getBwriter() %>'
+				}, 
+				success : function(data){
+					if(data == 'ok') {
+						$("#btnFollow").addClass('active');
+						$('#p-follow').html('언팔로우');
+					} else if (data == 'no') {
+						$("#btnFollow").removeClass('active');
+					} 
+				}, error : function(data){
+					console.log('팔로우버튼 초기화 에러 발생!');
+				}
+			});
+			
+			// 좋아요 버튼 초기화
+			$.ajax({
+				url : '/crojecter/lCheck.li',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					bid : '<%= g.getBid() %>'
+				}, 
+				success : function(data){
+					if(data == 'ok') {
+						$("#btnLikeit").addClass('active');
+					} else if (data == 'no') {
+						$("#btnLikeit").removeClass('active');
+					} 
+				}, error : function(data){
+					console.log('좋아요버튼 초기화 에러 발생!');
+				}
+			});
 		});
 		
-		// 좋아요 버튼 초기화
-		$.ajax({
-			url : '/crojecter/lCheck.li',
-			type : 'get',
-			data : {
-				mid : '<%= m.getMid() %>',
-				bid : '<%= g.getBid() %>'
-			}, 
-			success : function(data){
-				if(data == 'ok') {
-					$("#btnLikeit").addClass('active');
-				} else if (data == 'no') {
-					$("#btnLikeit").removeClass('active');
-				} 
-			}, error : function(data){
-				console.log('좋아요버튼 초기화 에러 발생!');
-			}
-		});
-	});
+		// 댓글 삽입 
+		function insertComment(obj) {
 	
-	// 댓글 삽입 
-	function insertComment(obj) {
-
-		var bid = '<%= g.getBid() %>';
-		var btype = '<%= g.getBtype() %>';
-		var cwriter = '<%= m.getMid() %>';
-		var ccontent = $(obj).siblings('textarea').val();
-		var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
+			var bid = '<%= g.getBid() %>';
+			var btype = '<%= g.getBtype() %>';
+			var cwriter = '<%= m.getMid() %>';
+			var ccontent = $(obj).siblings('textarea').val();
+			var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
+			
+				location.href='/crojecter/cInsert.co?bid=' + bid
+		           + '&btype=' + btype + '&cwriter=' + cwriter
+		           + '&ccontent=' + ccontent + '&crefmid=' + crefmid;
+		}
 		
-			location.href='/crojecter/cInsert.co?bid=' + bid
-	           + '&btype=' + btype + '&cwriter=' + cwriter
-	           + '&ccontent=' + ccontent + '&crefmid=' + crefmid;
-	}
-	
-	// 댓글 수정
-	function updateComment(obj) {	
-		$(obj).parent().parent().find('textarea').removeAttr('readonly');
-		$(obj).siblings('.updateConfirm').css('display','inline');
-		$(obj).css('display', 'none');
-	}
-	
-	// 댓글 수정 완료 
-	function updateConfirm(obj) {
-		var cid = $(obj).siblings('input[name="cid"]').val();
-		var bid = '<%=g.getBid()%>';
-		var btype = '<%= g.getBtype() %>';
-		var content = $(obj).parent().parent().find('textarea').val();
+		// 댓글 수정
+		function updateComment(obj) {	
+			$(obj).parent().parent().find('textarea').css('display', 'block');
+			$(obj).parent().parent().find('p').css('display', 'none');
+			$(obj).siblings('.updateConfirm').css('display','inline');
+			$(obj).css('display', 'none');
+		}
 		
-		location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
-	}
-	
-	// 댓글 삭제 
-	function deleteComment(obj) {
-		var cid = $(obj).siblings('input[name="cid"]').val();
-		var bid = '<%= g.getBid() %>';
-		var btype = '<%= g.getBtype() %>';
+		// 댓글 수정 완료 
+		function updateConfirm(obj) {
+			var cid = $(obj).siblings('input[name="cid"]').val();
+			var bid = '<%=g.getBid()%>';
+			var btype = '<%= g.getBtype() %>';
+			var content = $(obj).parent().parent().find('textarea').val();
+			
+			location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
+		}
 		
-		location.href="/crojecter/cDelete.co?cid="+cid+"&bid="+bid+"&btype="+btype;
-	}
-	
-	// 대댓글
-	function reComment(obj){
-		// 클릭한 버튼 숨기기
-		$(obj).css('display', 'none');
+		// 대댓글
+		function reComment(obj){
+			// 클릭한 버튼 숨기기
+			$(obj).css('display', 'none');
+			
+			// 내용 입력 공간 만들기
+			var htmlForm = '<div display="inline" style="padding-left:20px;">'
+				+ '<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>'
+				+ '<button id="addComment" onclick="insertComment(this);">댓글 등록</button>'
+				+ '</div>';
+			
+			$(obj).parents('.comment').append(htmlForm);
+		}		
 		
-		// 내용 입력 공간 만들기
-		var htmlForm = '<div display="inline" style="padding-left:20px;">'
-			+ '<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>'
-			+ '<button id="addComment" onclick="insertComment(this);">댓글 등록</button>'
-			+ '</div>';
-		
-		$(obj).parents('.comment').append(htmlForm);
-	}
-
+		// 댓글 삭제 
+		function deleteComment(obj) {
+			var cid = $(obj).siblings('input[name="cid"]').val();
+			var bid = '<%= g.getBid() %>';
+			var btype = '<%= g.getBtype() %>';
+			
+			location.href="/crojecter/cDelete.co?cid="+cid+"&bid="+bid+"&btype="+btype;
+		}	
 	</script>
 	
 	<% if(m.getMid() == g.getBwriter()) { // 글쓴이 본인 %>	 
 	<script>
-	$('#btnFollow').click(function(){
-		alert("본인은 팔로우할 수 없습니다.");
-	});
-	$('#btnLikeit').click(function(){
-		alert("본인 작품은 좋아요 할 수 없습니다.");
-	});
-	function showSpon() {
-		alert("본인에게는 후원할 수 없습니다.");
-	}
-	function showReport() {
-		alert("본인은 신고할 수 없습니다.");
-	}	
+		$('#btnFollow').click(function(){
+			alert("본인은 팔로우할 수 없습니다.");
+		});
+		$('#btnLikeit').click(function(){
+			alert("본인 작품은 좋아요 할 수 없습니다.");
+		});
+		function showSpon() {
+			alert("본인에게는 후원할 수 없습니다.");
+		}
+		function showReport() {
+			alert("본인은 신고할 수 없습니다.");
+		}	
 	</script>
 	<% } else { // 뷰어 입장 %>
 	<script>
-	var windowObj = null;
-	
-	// 후원하기
-	function showSpon() {
-		var xPos = (document.body.clientWidth / 2) - (500 / 2); 
-	    xPos += window.screenLeft;
-	    var yPos = (screen.availHeight / 2) - (300 / 2);
-	    
-	    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', 
-	    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
-	    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
-	}
-	
-	// 팔로우 버튼 클릭
-	$('#btnFollow').click(function(){
-		$.ajax({
-			url : '/crojecter/fSwitch.fo',
-			type : 'get',
-			data : {
-				mid : '<%= m.getMid() %>',
-				wid : '<%= g.getBwriter() %>'
-			}, 
-			success : function(data){
-				if(data == 'insert') {
-					$("#btnFollow").addClass('active');
-					$('#p-follow').html('언팔로우');
-				} else if (data == 'delete') {
-					$("#btnFollow").removeClass('active');
-					$('#p-follow').html('팔로우');
-				} else {
-					console.log('btnFollow() 에러 발생!');
+		var windowObj = null;
+		
+		// 후원하기
+		function showSpon() {
+			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
+		    xPos += window.screenLeft;
+		    var yPos = (screen.availHeight / 2) - (300 / 2);
+		    
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', 
+		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
+		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		}
+		
+		// 팔로우 버튼 클릭
+		$('#btnFollow').click(function(){
+			$.ajax({
+				url : '/crojecter/fSwitch.fo',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					wid : '<%= g.getBwriter() %>'
+				}, 
+				success : function(data){
+					if(data == 'insert') {
+						$("#btnFollow").addClass('active');
+						$('#p-follow').html('언팔로우');
+					} else if (data == 'delete') {
+						$("#btnFollow").removeClass('active');
+						$('#p-follow').html('팔로우');
+					} else {
+						console.log('btnFollow() 에러 발생!');
+					}
+				}, error : function(data){
+					console.log('btnFollow() 에러 발생!!');
 				}
-			}, error : function(data){
-				console.log('btnFollow() 에러 발생!!');
-			}
+			});
 		});
-	});
-	
-	// 좋아요 버튼 클릭
-	$('#btnLikeit').click(function(){
-		$.ajax({
-			url : '/crojecter/lSwitch.li',
-			type : 'get',
-			data : {
-				mid : '<%= m.getMid() %>',
-				bid : '<%= g.getBid() %>'
-			}, 
-			success : function(data){
-				if(data == 'insert') {
-					$("#btnLikeit").addClass('active');
-				} else if (data == 'delete') {
-					$("#btnLikeit").removeClass('active');
-				} else {
-					console.log('btnLikeit() 에러 발생!');
+		
+		// 좋아요 버튼 클릭
+		$('#btnLikeit').click(function(){
+			$.ajax({
+				url : '/crojecter/lSwitch.li',
+				type : 'get',
+				data : {
+					mid : '<%= m.getMid() %>',
+					bid : '<%= g.getBid() %>'
+				}, 
+				success : function(data){
+					if(data == 'insert') {
+						$("#btnLikeit").addClass('active');
+					} else if (data == 'delete') {
+						$("#btnLikeit").removeClass('active');
+					} else {
+						console.log('btnLikeit() 에러 발생!');
+					}
+				}, error : function(data){
+					console.log('btnLikeit() 에러 발생!!');
 				}
-			}, error : function(data){
-				console.log('btnLikeit() 에러 발생!!');
-			}
+			});
 		});
-	});
 	
 	</script>
-	<% } } else { // 비회원 %>
+	<% } %> <% } else { // 비회원 %>
 	<script>
-	$('button').click(function(){
-		alert("로그인이 필요한 기능입니다.");
-	});
-	$('.btn').click(function(){
-		alert("로그인이 필요한 기능입니다.");
-	});
+		$('button').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
+		$('.btn').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
 	</script>
 	<% } %>
-	
 	
 	
 </body>
