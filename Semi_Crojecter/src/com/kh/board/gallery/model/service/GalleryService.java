@@ -119,6 +119,37 @@ public class GalleryService {
 		return hmap;
 	}
 	
+	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {
+		// 게시판 목록
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.selectGalleryList(con, currentPage, limit);
+		
+		close(con);
+		return list;
+	}
+	
+	public int getCountGalleryList() {
+		// 게시판 페이지
+
+		Connection con = getConnection();
+		int listCount = gDao.getCountGalleryList(con);
+		
+		close(con);		
+		return listCount;
+	}
+
+		
+	public ArrayList<Gallery> top5(){
+		// 게시글 순
+		Connection con = getConnection();
+		ArrayList<Gallery> list = gDao.top5(con);
+		
+		close(con);
+		
+		return list;
+	}
+	
+	
 
 
 
