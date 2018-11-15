@@ -158,7 +158,7 @@ public class Dao {
 				
 			} else {
 				
-				System.out.println("호두 업데이트 실패");
+				System.out.println("호두 충전 실패");
 				
 			}
 			
@@ -218,7 +218,7 @@ public class Dao {
 					
 					System.out.println("Giver Receiver 후원 실패");
 					
-					resultAll = 0;
+					resultAll = -2;
 					
 				}
 				
@@ -244,6 +244,74 @@ public class Dao {
 		
 		return resultAll;
 		
+	}
+
+	public String searchEmail(Connection con, String nickName) {
+
+		String result = null;
+
+		String sql = prop.getProperty("searchEmail");
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, nickName);
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+
+				result = rset.getString(1);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+
+		} finally {
+
+			close(pstmt);
+
+		}
+
+		return result;
+		
+	}
+
+	public Member selectHodu(Connection con, int mid) {
+		
+		Member m = null;
+		
+		String sql = prop.getProperty("selectHodu");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				
+				m = new Member();
+				
+				m.setMhodu(rset.getInt(1));
+				
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return m;
 	}
 
 }

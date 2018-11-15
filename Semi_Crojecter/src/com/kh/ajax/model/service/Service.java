@@ -98,5 +98,34 @@ public class Service {
 		return result;
 		
 	}
+
+	public String searchEmail(String nickName) {
+
+		String result = null;
+		
+		con = getConnection();
+		
+		result = dao.searchEmail(con, nickName);
+		
+		if(result != null) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+		
+	}
+
+	public Member selectHodu(int mid) {
+				
+		con = getConnection();
+		
+		Member m = dao.selectHodu(con, mid);
+		
+		close(con);
+		
+		return m;
+		
+	}
 	
 }
