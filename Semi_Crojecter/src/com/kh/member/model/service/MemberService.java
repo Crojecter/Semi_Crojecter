@@ -5,8 +5,10 @@ import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.follow.model.vo.Follow;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.report.model.vo.Report;
 
 public class MemberService {
 	
@@ -127,6 +129,28 @@ public class MemberService {
 				mDao.searchMember(con, condition, keyword) : mDao.selectList(con); 
 		
 		return mlist;
+	}
+
+	public ArrayList<Member> selectlist() {
+		ArrayList<Member> mlist = null;
+		Connection con = getConnection();
+		
+		mlist = mDao.selectList(con);
+		
+		close(con);
+		
+		return mlist;
+	}
+
+	public ArrayList<Member> searchMypage() {
+		ArrayList<Member> list = null;
+		Connection con = getConnection();
+		
+		list = mDao.selectMypage(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 

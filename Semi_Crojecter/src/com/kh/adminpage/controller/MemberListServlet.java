@@ -1,4 +1,4 @@
-package com.kh.payment.model.controller;
+package com.kh.adminpage.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.payment.model.service.PaymentService;
-import com.kh.payment.model.vo.Payment;
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+import com.kh.report.model.service.ReportService;
+import com.kh.report.model.vo.Report;
 
 /**
- * Servlet implementation class PaymentListServlet
+ * Servlet implementation class MemberListServlet
  */
-@WebServlet("/paymentSelect.do")
-public class PaymentListServlet extends HttpServlet {
+@WebServlet("/mListView.do")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentListServlet() {
+    public MemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,22 @@ public class PaymentListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Payment> list = null;
-		PaymentService ps = new PaymentService();
+		ArrayList<Member> mlist = null;
+		MemberService ms = new MemberService();
 		
-		list = ps.selectlist();
+		mlist = ms.selectlist();
 		
-		if(list != null){
+		if(mlist != null){
 			
-			request.setAttribute("list", list);
+			request.setAttribute("mlist", mlist);
+			request.getRequestDispatcher("views/adminpage/memberlistView.jsp").forward(request, response);
 			
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");
 			
 		}
-		
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

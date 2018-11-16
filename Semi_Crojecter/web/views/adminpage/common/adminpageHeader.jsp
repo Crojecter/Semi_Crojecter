@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*, java.util.*"%>
 <%
-	ArrayList<Member> mlist = (ArrayList<Member>)request.getAttribute("mlist");
+	
 	Member m = (Member)session.getAttribute("member");
 %>
 <!DOCTYPE html>
@@ -50,7 +50,6 @@
 			border-radius: 50px;
 			margin-top:10px;
 			margin-left:10px;
-
 		}
 </style>
 <body>
@@ -62,12 +61,11 @@
 	<div class="menu">
 		<table>
 			<tr>
-				<td class="menuMenu"><a href="../views/adminpage/memberlistView.jsp">회원관리</a></td>
-				<td class="menuMenu"><a href="../views/adminpage/paymentlistView.jsp">결제리스트</a></td>
-				<td class="menuMenu"><a href="../views/adminpage/reportlistView.jsp">신고리스트</a></td>
+				<td class="menuMenu"><a href="/crojecter/mListView.do">회원관리</a></td>
+				<td class="menuMenu"><a href="/crojecter/paymentSelect.do">결제리스트</a></td>
+				<td class="menuMenu"><a href="/crojecter/reportList.do">신고리스트</a></td>
 			</tr>
 		</table>
 	</div><br>
-
 </body>
 </html>

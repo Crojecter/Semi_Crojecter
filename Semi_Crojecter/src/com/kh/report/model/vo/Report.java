@@ -12,12 +12,15 @@ public class Report implements Serializable{
 	private int mid;
 	private int cid;
 	private int bid;
+	private String mname;
+	private String cwriter;
 
 	public Report() {
 		super();
 	}
 
-	public Report(int rid, int rreason, String retc, Date rdate, int mid, int cid, int bid) {
+	public Report(int rid, int rreason, String retc, Date rdate, int mid, int cid, int bid, String mname,
+			String cwriter) {
 		super();
 		this.rid = rid;
 		this.rreason = rreason;
@@ -26,7 +29,11 @@ public class Report implements Serializable{
 		this.mid = mid;
 		this.cid = cid;
 		this.bid = bid;
+		this.mname = mname;
+		this.cwriter = cwriter;
 	}
+	
+	
 
 	public int getRid() {
 		return rid;
@@ -84,11 +91,29 @@ public class Report implements Serializable{
 		this.bid = bid;
 	}
 
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getCwriter() {
+		return cwriter;
+	}
+
+	public void setCwriter(String cwriter) {
+		this.cwriter = cwriter;
+	}
+
 	@Override
 	public String toString() {
 		return "Report [rid=" + rid + ", rreason=" + rreason + ", retc=" + retc + ", rdate=" + rdate + ", mid=" + mid
-				+ ", cid=" + cid + ", bid=" + bid + "]";
+				+ ", cid=" + cid + ", bid=" + bid + ", mname=" + mname + ", cwriter=" + cwriter + "]";
 	}
 	
 	
 }
+
+	

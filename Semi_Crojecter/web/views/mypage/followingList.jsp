@@ -21,6 +21,7 @@
 </head>
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp"%>
+<form action="<%=request.getContextPath()%>/followingView.do" method="post">
 <div class="followList">
 	<table>  
 		<% for(Follow f : flist){ %>

@@ -319,6 +319,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
+		System.out.println("sql : " + sql);
 		
 		try {
 			
@@ -353,5 +354,10 @@ public class MemberDao {
 		}
 		
 		return mlist;
+	}
+
+	public ArrayList<Member> selectMypage(Connection con) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

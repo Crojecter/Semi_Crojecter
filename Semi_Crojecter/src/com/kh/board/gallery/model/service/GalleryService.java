@@ -1,6 +1,10 @@
 package com.kh.board.gallery.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -99,6 +103,16 @@ public class GalleryService {
 		close(con);
 		
 		return list;
+	}
+
+
+	public ArrayList<Gallery> searchGallery(int mid) {
+		Connection con = getConnection();
+		ArrayList<Gallery> glist = gDao.searchGallery(con, mid);
+
+		close(con);
+		
+		return glist;
 	}
 
 }

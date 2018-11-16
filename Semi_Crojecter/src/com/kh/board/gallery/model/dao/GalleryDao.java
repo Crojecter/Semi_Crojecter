@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.member.model.vo.Member;
 
 public class GalleryDao {
 	
@@ -313,6 +314,45 @@ public class GalleryDao {
 		}
 		
 		return list;
+	}
+
+
+	public ArrayList<Gallery> searchGallery(Connection con, int mid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Gallery> glist = null;
+		
+		String sql = prop.getProperty("selectMyworkList");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+			
+			glist = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setBwriter(rset.getInt("BWRITER"));
+				g.setMname(rset.getString("MNAME"));
+				g.setBtitle(rset.getString("BTITLE"));
+				
+				
+				glist.add(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return glist;
 	}
 
 

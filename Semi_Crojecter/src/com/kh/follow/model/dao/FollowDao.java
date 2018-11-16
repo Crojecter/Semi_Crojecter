@@ -8,9 +8,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
+import com.kh.follow.model.vo.Follow;
+import com.kh.spon.model.vo.Spon;
 
 public class FollowDao {
 	
@@ -103,6 +107,43 @@ public class FollowDao {
 		}
 		
 		return result;
+	}
+
+
+	public ArrayList<Follow> selectList(Connection con) {
+		ArrayList<Follow> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("viewFollow");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Follow>();
+			
+			while(rset.next()){
+				
+				Follow f = new Follow();
+				
+				f.setFollowid(rset.getInt("followid"));
+				
+				list.add(f);
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

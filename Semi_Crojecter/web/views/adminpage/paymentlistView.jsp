@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*, java.util.*"%>
+    pageEncoding="UTF-8" import="com.kh.payment.model.vo.*, java.util.*"%>
 <%
-	ArrayList<Member> mlist = (ArrayList<Member>)request.getAttribute("mlist"); 
+	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("list"); 
+	System.out.println("plist : " + plist);
 %>
 <!DOCTYPE html>
 <html>
@@ -52,23 +53,25 @@
 <table>
 	<tr>
 		<th>날짜</th>
-		<th>이름</th>
+		<th>닉네임</th>
 		<th>이메일</th>
-		<th>내용</th>
-		<th>사용내역</th>
-		<th>잔액</th>
-		
+		<th>충전금액</th>
+		<th>충전호두</th>
     </tr>
-    <% for(Member m : mlist){ %>
+    
+    <% for(Payment p : plist){ %>
 	<tr>
-		<td><%= %></td>
-		<td><%= %></td>
-		<td><%= %></td>
-		<td><%= %></td>	
-		<td><%= %></td>
-		<td><%= %></td>	
+		<td><%= p.getPdate() %></td>
+		<td><%= p.getMname() %></td>
+		<td><%= p.getMemail() %></td>
+		<td><%= p.getPmoney() %></td>	
+		<td><%= p.getPhodu() %></td>		
 	</tr>
 	<% } %>
+    
+    
+    
+
 </table>
 <script>
 	function search(){
