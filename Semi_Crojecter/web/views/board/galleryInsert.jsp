@@ -2,44 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ page
 	import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member"%>
-<%
+<%-- <%
 	Member m = (Member) session.getAttribute("member");
 	System.out.println("m : " + m);
-%>
+%> --%>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
 <title>갤러리 업로드 페이지</title>
-
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- 폰트 설정 -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
 
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-<!-- include summernote css/js-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
 <style>
 body {
@@ -61,6 +36,7 @@ body {
 
 
 <body>
+<%@ include file="../common/header.jsp" %>
 	<%
 		if (m != null) {
 	%>
@@ -143,6 +119,6 @@ body {
 				});
 			}
 		</script>
-
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
