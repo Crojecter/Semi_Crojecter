@@ -115,7 +115,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			int result = ps.insertNotice(n, list);
 			
 			if(result > 0) {
-				response.sendRedirect("selectList.no");
+				response.sendRedirect("nSelectOne.ga?bid="+result);
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");

@@ -45,7 +45,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 		if(ServletFileUpload.isMultipartContent(request)){
 			// 만약 multipart/form-data 로 전송이 되었다면 실행해라!
 			
-			System.out.println("서블릿 들어왔니?");
+			System.out.println("GalleryUpdateServlet 서블릿 들어왔니?");
 			
 			// 전송할 파일의 용량 선정
 			int maxSize = 1024 * 1024 * 10;
@@ -81,7 +81,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			System.out.println("savefiles : " + saveFiles);
 			
 			// selectGalleryMap(bid) : galleryUpdate.jap에서 받아온 bid로 Gallery와 AttachedFile을 불러온다.
-			int bid = Integer.parseInt(mrequest.getParameter("bid"));
+			int bid = Integer.parseInt(request.getParameter("bid"));
 			System.out.println("bid : " + bid);
 
 			HashMap<String, Object> gal = gs.selectGalleryMap(bid);
@@ -138,17 +138,17 @@ public class GalleryUpdateServlet extends HttpServlet {
 		
 		if( result > 0 ) {
 			
-			page = "views/board/galleryDetail.jsp";
-			request.setAttribute("gallery", g);
+			response.sendRedirect("gSelectOne.ga?bid="+g.getBid());
 			
 		} else {
 			
 			page= "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 수정 실패!!");
+			request.getRequestDispatcher(page).forward(request, response);
 			
 		}
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		
 		
 		}
 	}

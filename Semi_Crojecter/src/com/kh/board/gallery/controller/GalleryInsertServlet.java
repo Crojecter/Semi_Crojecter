@@ -142,9 +142,10 @@ public class GalleryInsertServlet extends HttpServlet {
 			// service로 작성한 내용 전송하기
 			
 			int result = gs.insertGallery(g, list);
+			System.out.println("보내자 : " + g.getBid());
 			
 			if(result > 0) {
-				response.sendRedirect("selectList.ga");
+				response.sendRedirect("gSelectOne.ga?bid="+result);
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");

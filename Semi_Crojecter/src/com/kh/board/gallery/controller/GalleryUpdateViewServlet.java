@@ -34,6 +34,7 @@ public class GalleryUpdateViewServlet extends HttpServlet {
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
 		Gallery g = new GalleryService().updateView(bid);
+		System.out.println("g: " + g);
 		
 		String page = "";
 		if(g != null) {

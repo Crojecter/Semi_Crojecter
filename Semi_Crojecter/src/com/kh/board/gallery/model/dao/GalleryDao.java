@@ -84,6 +84,7 @@ public class GalleryDao {
 		int result = 0;
 
 		String sql = prop.getProperty("insertBoard");
+		System.out.println("insertBoardContent DAO bid 확인 : " + bid);
 
 		try {
 			pstmt = con.prepareStatement(sql);

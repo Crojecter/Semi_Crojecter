@@ -134,11 +134,11 @@ body {
 				});
 			}
 		function complete(){
-			$("#updateForm").attr("action","<%= request.getContextPath()%>/gUpdate.ga");
+			$("#updateForm").attr("action","<%= request.getContextPath()%>/gUpdate.ga?bid=<%=g.getBid()%>");
 		}
 		
 		function deleteBoard(){
-			$("#updateForm").attr("action","<%= request.getContextPath()%>/gDelete.ga");
+			$("#updateForm").attr("action","<%= request.getContextPath()%>/gDelete.ga?bid=<%=g.getBid()%>");
 		}
 		</script>
 

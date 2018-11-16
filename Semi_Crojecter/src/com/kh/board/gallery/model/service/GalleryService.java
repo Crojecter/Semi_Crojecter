@@ -73,7 +73,7 @@ public class GalleryService {
 		
 		close(con);
 		
-		return result;
+		return result*bid;
 	}
 
 	public int updateGallery(Gallery g, ArrayList<AttachedFile> list) {

@@ -26,37 +26,58 @@ body {
 	height: 50px;
 }
 
+.thumbnailArea {
+	width: 100%;
+	height: 150px;
+	border: 1px solid lightgray; 
+	text-align: center;
+}
+
 #insertBtn {
 	width: 100%;
 	height: 50px;
 	font-size: 20px;
+}
+
+#titleImg {
+	width: 100%;
+	height: 100%;
+	border: none;
 }
 </style>
 </head>
 
 
 <body>
-<%@ include file="../common/header.jsp" %>
+<%@ include file="../../common/header.jsp" %>
 	<%
 		if (m != null) {
 	%>
 	<form action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
+			<div id="fileArea">
+				<input type="file" id="thumbnailInput" multiple="multiple" onchange="LoadImg(this)">
+			</div>
+			
 			<div class="col-md-6">
 				<input type="text" class="form-control" id="title" name="title"
 					placeholder="제목을 입력하세요.">
 				<textarea id="summernote" name="content"></textarea>
 			</div>
 			<div class="col-md-2">
-				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> <select
-					class="sidebar" name="category" id="category">
+				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">				
+					<label id="thumbnailLabel">대표이미지 설정</label>
+					<img id="titleImg" style="border: white;"></div>
+				<select class="sidebar" name="category" id="category">
 					<option value="" disabled selected>카테고리 선택</option>
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
 					<option value="3">AUDIO</option>
 					<option value="4">VIDEO</option>
-				</select> <select class="sidebar" name="cclid" id="ccl">
+				</select> 
+				<select class="sidebar" name="cclid" id="ccl">
 					<option value="" disabled selected>CCL 선택</option>
 					<option value="1">저작자 표시</option>
 					<option value="2">저작자-비영리</option>
@@ -68,6 +89,7 @@ body {
 					style="width: 100%; height: 150px">
 
 				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -91,7 +113,11 @@ body {
 		            for (var i = files.length - 1; i >= 0; i--) {
 		              sendFile(files[i], this);
 		            }
-		          }
+		          },
+		      		onMediaDelete : function(target) {
+	                // alert(target[0].src) 
+	                deleteFile(target[0].src);
+	            }
 		        }		      
 		      });
 		    });
@@ -109,16 +135,50 @@ body {
 					processData : false,
 					success : function(url) {
 						url.replace("\/","/");
-						alert(url);
-						
+						alert(url);						
 						$(el).summernote('editor.insertImage', url);
 					}, error : function(){						
-						console.log("실패!!");
-						
+						console.log("실패!!");						
 					}
 				});
 			}
+		
+		// 아직 구현중
+		function deleteFile(src) {
+		    $.ajax({
+		        data: {src : src},
+		        type: "POST",
+		        url: "/crojecter/resources/uploadFiles/"+src, // replace with your url
+		        cache: false,
+		        success: function(resp) {
+		            console.log(resp);
+		        }
+		    });
+		}
+		
+		$(function(){
+			$('#fileArea').hide();
+			
+			$('#thumbnailArea').click(() => {
+				$('#thumbnailInput').click();
+				$('#thumbnailLabel').hide();
+			});
+		});
+		function LoadImg(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e){					
+					$('#titleImg').attr('src', e.target.result);	
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+		
+		
+		
 		</script>
-<%@ include file="../common/footer.jsp" %>
+<%@ include file="../../common/footer.jsp" %>
 </body>
 </html>

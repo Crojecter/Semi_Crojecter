@@ -153,7 +153,7 @@
 						</div>
 						<li>
 						<!-- 글쓰기 -->
-						<a href="<%= request.getContextPath()%>/views/board/boardInsert.jsp">
+						<a href="<%= request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>
