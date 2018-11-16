@@ -1,16 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member"%>
+	import="com.kh.board.gallery.model.vo.*"%>
 <%
-	Member m = (Member) session.getAttribute("member");
-	System.out.println("m : " + m);
+	Gallery g = (Gallery)request.getAttribute("gallery");
 %>
 <!DOCTYPE html>
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
-<title>갤러리 업로드 페이지</title>
+<title>갤러리 수정 페이지</title>
 
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet"
@@ -59,54 +58,44 @@ body {
 </style>
 </head>
 
-
 <body>
-	<%
-		if (m != null) {
-	%>
-	<form action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
+	<form id="updateForm" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
-				<input type="text" class="form-control" id="title" name="title"
-					placeholder="제목을 입력하세요.">
-				<textarea id="summernote" name="content"></textarea>
+				<input type="text" class="form-control" id="title" name="title" value="<%= g.getBtitle()%>">
+				<textarea id="summernote" name="content"><%=g.getBcontent()%></textarea>
 			</div>
 			<div class="col-md-2">
-				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> <select
-					class="sidebar" name="category" id="category">
-					<option value="" disabled selected>카테고리 선택</option>
+				<input type="hidden" id="userId" name="userId" value="<%=g.getBwriter() %>" /> 
+				<input type="hidden" id="bid" name="bid" value="<%=g.getBid() %>" /> 
+				<select class="sidebar" name="category" id="category">
+					<option value="<%=g.getGcategoryid()%>" disabled selected>카테고리 : <%=g.getGcategoryname() %></option>
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
 					<option value="3">AUDIO</option>
 					<option value="4">VIDEO</option>
-				</select> <select class="sidebar" name="cclid" id="ccl">
-					<option value="" disabled selected>CCL 선택</option>
+				</select> 
+				<select class="sidebar" name="cclid" id="ccl">
+					<option value="g.getCclid()" disabled selected>CCL 표시 : <%=g.getCclname() %></option>
 					<option value="1">저작자 표시</option>
 					<option value="2">저작자-비영리</option>
 					<option value="3">저작자-동일조건변경허락</option>
 					<option value="4">저작자-변경금지</option>
 					<option value="5">저작자-비영리-변경금지</option>
 					<option value="6">저작자-비영리-동일조건변경허락</option>
-				</select> <input type="text" name="tags" placeholder="태그 입력(,로 구분)"
-					style="width: 100%; height: 150px">
+				</select> 
+				<input type="text" name="tags" value="<%= g.getGtag()%>"style="width: 100%; height: 150px">
 
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn"  onclick="complete();">수정완료</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
 	</form>
-
-	<%
-		} else {
-			request.getRequestDispatcher("../member/login.jsp").forward(request, response);
-		}
-	%>
-
 	<script type="text/javascript">
 		$(document).ready(function() {
 		      $('#summernote').summernote({
-		        height: 300,
+		        height: 500,
 		        minHeight: null,
 		        maxHeight: null,
 		        focus: true,
@@ -116,8 +105,10 @@ body {
 		              sendFile(files[i], this);
 		            }
 		          }
-		        }		      
+		        }
 		      });
+		      
+		      
 		    });
     
 		function sendFile(file, el) {
@@ -142,6 +133,13 @@ body {
 					}
 				});
 			}
+		function complete(){
+			$("#updateForm").attr("action","<%= request.getContextPath()%>/gUpdate.ga?bid=<%=g.getBid()%>");
+		}
+		
+		function deleteBoard(){
+			$("#updateForm").attr("action","<%= request.getContextPath()%>/gDelete.ga?bid=<%=g.getBid()%>");
+		}
 		</script>
 
 </body>

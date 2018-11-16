@@ -1,6 +1,7 @@
 package com.kh.board.attachedfile.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -78,15 +79,15 @@ public class SummernoteImageViewServlet extends HttpServlet {
 
 			jobj.put("url", uploadPath);
 
-			System.out.println("uploadPath : " + uploadPath);
-			System.out.println("name : " + fileName);
+			System.out.println("summernote stream uploadPath : " + uploadPath);
+			System.out.println("summernote stream upload img name : " + fileName);
 
 			response.setContentType("text/html; application/json; charset=UTF-8"); // 데이터 타입을 json으로 설정하기															// 위한 세팅
 
 			//response.getWriter().print(jobj.toJSONString());
 			response.getWriter().print(uploadPath);
 			
-			System.out.println(jobj.toJSONString());
+			
 
 		} else {
 			System.out.println("섬머노트 이 바보야!!!");

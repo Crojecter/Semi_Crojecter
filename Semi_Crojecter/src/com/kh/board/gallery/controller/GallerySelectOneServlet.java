@@ -41,7 +41,7 @@ public class GallerySelectOneServlet extends HttpServlet {
 		
 		String page = "";
 		if(g != null) {
-			page = "views/board/galleryDetail.jsp";
+			page = "views/board/galleryboard/galleryDetail.jsp";
 			request.setAttribute("gallery", g);
 			request.setAttribute("clist", clist);
 			
