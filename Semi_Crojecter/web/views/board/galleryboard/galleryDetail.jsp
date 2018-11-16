@@ -151,7 +151,8 @@
 					<button type="button" class="deleteBtn" onclick="deleteComment(this);">삭제하기</button> &nbsp;&nbsp;
 	      			<% } %>
 					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
-					<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;				 
+					<button type="button" class="insertBtn" onclick="reComment(this);">댓글달기</button>&nbsp;&nbsp;
+					<button type="button" class="reportBtn" onclick="showReport();">신고</button>				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
@@ -220,9 +221,9 @@
 			var ccontent = $(obj).siblings('textarea').val();
 			var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
 			
-				location.href='/crojecter/cInsert.co?bid=' + bid
-		           + '&btype=' + btype + '&cwriter=' + cwriter
-		           + '&ccontent=' + ccontent + '&crefmid=' + crefmid;
+			location.href='/crojecter/cInsert.co?bid=' + bid
+					+ '&btype=' + btype + '&cwriter=' + cwriter
+					+ '&ccontent=' + ccontent + '&crefmid=' + crefmid;
 		}
 		
 		// 댓글 수정
@@ -292,7 +293,7 @@
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
 		    
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', 
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}

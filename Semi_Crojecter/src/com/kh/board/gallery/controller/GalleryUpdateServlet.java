@@ -29,7 +29,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 
 		// 원글 내용 가져오고 수정 후 수정한 내용 DB에 저장
 		
-		String page = "views/board/galleryDetail.jsp";
+		String page = "views/board/galleryboard/galleryDetail.jsp";
 
 		request.getRequestDispatcher(page).forward(request, response);
 		

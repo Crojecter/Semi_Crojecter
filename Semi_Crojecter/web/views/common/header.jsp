@@ -108,7 +108,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-							<a class="dropdown-item" href="<%= request.getContextPath()%>myPageLink">마이페이지</a>
+							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypageView.jsp">마이페이지</a>
 							<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 							<script>
 							function logout(){
@@ -120,7 +120,7 @@
 						</div>
 						<li>
 						<!-- 글쓰기 -->
-						<a href="<%= request.getContextPath()%>/views/board/boardInsert.jsp">
+						<a href="<%= request.getContextPath()%>/views/board//galleryboard/galleryInsert.jsp">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>

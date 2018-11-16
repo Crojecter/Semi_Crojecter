@@ -1,4 +1,4 @@
-package com.kh.payment.model.controller;
+package com.kh.payment.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,6 +33,7 @@ public class PaymentListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		ArrayList<Payment> list = null;
 		PaymentService ps = new PaymentService();
 		
@@ -41,6 +42,7 @@ public class PaymentListServlet extends HttpServlet {
 		if(list != null){
 			
 			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/adminpage/paymentlistView.jsp").forward(request, response);
 			
 		} else {
 			

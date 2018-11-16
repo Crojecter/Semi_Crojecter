@@ -68,7 +68,7 @@ public class GalleryService {
 		
 		close(con);
 		
-		return result;
+		return result*bid;
 	}
 
 	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {

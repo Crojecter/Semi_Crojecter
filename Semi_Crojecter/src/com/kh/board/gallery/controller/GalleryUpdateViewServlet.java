@@ -38,7 +38,7 @@ public class GalleryUpdateViewServlet extends HttpServlet {
 		String page = "";
 		if(g != null) {
 			
-			page = "views/board/galleryUpdate.jsp";
+			page = "views/board/galleryboard/galleryUpdate.jsp";
 			request.setAttribute("board", g);
 			
 		} else {
