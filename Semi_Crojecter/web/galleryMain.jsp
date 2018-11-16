@@ -77,7 +77,9 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-		 <div style="background:violet; width: 300px; height: 300px;">
+			<div style="background:violet; width: 300px; height: 300px;">
+				<h4> = 자주 사용한 태그 = </h4>
+			</div>
 		
 		</div>
 

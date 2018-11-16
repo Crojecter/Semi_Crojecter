@@ -1,27 +1,30 @@
 package com.kh.board.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.common.model.vo.Board;
 import com.kh.board.notice.model.service.NoticeService;
 import com.kh.board.notice.model.vo.Notice;
 
+
+
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/nSelectOne.no")
-public class NoticeSelectOneServlet extends HttpServlet {
+@WebServlet("/nList.no")
+public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOneServlet() {
+    public NoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,24 +33,24 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 
-		System.out.println("nsv bid : "+ request.getParameter("bid"));
-		int bid = Integer.parseInt(request.getParameter("bid"));
-		
+		//
+		ArrayList<Notice> noticeList = null;
 		NoticeService ns = new NoticeService();
 		
-		Notice n = ns.noticeSelectOne(bid);
-
-		String page = "";		
-		if(n != null){
-			page = "views/notice/noticeDetail.jsp";
-			request.setAttribute("notice", n);
+		//System.out.println("Mid ser : "+ request.getParameter("Mid"));
+		
+		noticeList = ns.selectNoticeList();
+		System.out.println();
+		String page = "";
+		
+		if (noticeList != null){
+			page = "views/noticeBoard/noticePage.jsp";
+			request.setAttribute("noticeList", noticeList);
 			
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
-		}		
-		
+			request.setAttribute("msg", "공지목록 조회실패");
+		}
 		request.getRequestDispatcher(page).forward(request, response);
 	}
 

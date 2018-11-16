@@ -26,7 +26,6 @@ public class EncryptWrapper extends HttpServletRequestWrapper {
 		if (name != null && (name.equals("password") || name.equals("tempPassword"))){
 			// 암호화 된 비밀번호를 전달한다.
 			value = getSHA512(super.getParameter(name));
-			
 		} else {
 		    // 원래의 값을 전달한다.
 			value = super.getParameter(name);

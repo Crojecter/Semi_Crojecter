@@ -38,9 +38,52 @@
 					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 22</button>
 			</div>
 		</div>
- 		<%-- 
+
 		<div class="galleryList">
+ 		
+		<% if(gList != null){ %>
+			<table align="center" id="noticeList" style="background:lightblue">
+			<tr id="noticeTR">
+
+				<th id="noticeTH" width="50px">갤러리 id</th>
+				<th id="noticeTH" width="50px">갤러리 종류</th>
+				<th id="noticeTH" width="50px">갤러리 태그</th>
+				<th id="noticeTH" width="50px">갤러리 좋아요</th>
+				<th id="noticeTH" width="50px">보드명</th>
+				<th id="noticeTH" width="50px">보드 타입</th>
+				<th id="noticeTH" width="50px">게시글 제목</th>
+				<th id="noticeTH" width="50px">조회수</th>
+				<th id="noticeTH" width="50px">작성일</th>
+				<th id="noticeTH" width="50px">상태</th>
+				<th id="noticeTH" width="50px">작성자</th>
+				
+			</tr>
+			<% for(Gallery gal : gList){ %>
+			<tr id="noticeTR">				
+				<td id="noticeTD"><%= gal.getGid() %></td>
+				<td id="noticeTD"><%= gal.getGcategoryid() %></td>
+				<td id="noticeTD"><%= gal.getGtag() %></td>
+				<td id="noticeTD"><%= gal.getGlike() %></td>
+				<td id="noticeTD"><%= gal.getBid() %></td>
+				<td id="noticeTD"><%= gal.getBtype() %></td>
+				<td id="noticeTD"><%= gal.getBtitle() %></td>
+				<td id="noticeTD"><%= gal.getBcount() %></td>
+				<td id="noticeTD"><%= gal.getBdate() %></td>
+				<td id="noticeTD"><%= gal.getBstatus() %></td>
+				<td id="noticeTD"><%= gal.getBwriter() %></td>
+			</tr>
+			<% } %>
+	
+			</table>
+		<% } else { %>
+				현재 갤러리 내용이 없습니다.
+		<% } %>
+		</div>	
+		
+		 
+		
 		<% for (Gallery gal : gList) { %>
+			<% System.out.println("gList jsp : "+gList); %>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png"
@@ -50,7 +93,7 @@
 					<p class="card-text"><a href="">내용이 들어갈 부분입니다. 안들어갈수도 있어요.</a></p>
 					<button disabled class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= gal.getBcount() %></button>
-					<button onclick="addLike*();" class="btn btn-primary">
+					<button onclick="addLike();" class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"><%= gal.getGlike() %></button>
 					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 22</button>
 				</div>
@@ -66,7 +109,7 @@
 				})
 			});
 		</script>
- --%>
+
 
 		<!-- 페이지 -->
 		<nav aria-label="..." class="pageNav"  align="center" style="float: right; position: absolute; left: 40%;">
