@@ -9,7 +9,6 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <!-- 카카오 로그인 JS -->
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="../../resources/js/loginJS/kakaoLogin.js"></script>
 <!-- 구글 로그인 JS -->
 <meta name="google-signin-client_id" content="47962283340-c9v8pn66vso3ktgruqjj7vi40ne4kle3.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=onLoadGoogleCallback" async defer></script>
@@ -102,7 +101,7 @@
 				</tr>
 				<tr>
 					<td align="center" style="width:50%;">
-						<a id="kakaoLogin" href="javascript:loginWithKakao();">
+						<a id="kakaoLogin" onclick="loginWithKakao();" style="cursor:pointer">
 						<img class="sns_login" id="kakaoLoginBtn" src="../../resources/images/kakao_btn.png" width="68" height="69"/>
 						</a>
 					</td>
@@ -157,6 +156,43 @@
 
 		element = document.getElementById('googleLogin');
 	}
+	
+	//<![CDATA[
+	// 사용할 앱의 JavaScript 키를 설정해 주세요.
+	Kakao.init('f4ec76ed4dda9e7827bf8bd07f28db6a');
+	// 카카오 로그인 함수입니다.
+    function loginWithKakao() {
+      	// 로그인 창을 띄웁니다.
+      	Kakao.Auth.login({
+        success: function(authObj) {
+          //alert(JSON.stringify(authObj));
+          console.log(authObj);
+          // https://developers.kakao.com/docs/restapi/user-management#%EC%82%AC%EC%9A%A9%EC%9E%90-%EC%A0%95%EB%B3%B4-%EC%9A%94%EC%B2%AD
+          Kakao.API.request({
+              url: '/v1/user/me',
+              success: function(res) {
+            	//console.log(JSON.stringify(authObj.accessToken));
+                console.log(JSON.stringify(res.kaccount_email)); // 이메일
+                //console.log(JSON.stringify(res.id));
+                //console.log(JSON.stringify(res.properties.profile_image));
+                console.log(JSON.stringify(res.properties.nickname)); // 닉네임
+                
+                window.location.href="./signUp.jsp?nickName="+res.properties.nickname+"&email="+res.kaccount_email;
+                
+              },
+              fail: function(error) {
+                alert("1" + JSON.stringify(error));
+              }
+            });
+       		// 한번 로그인했던 계정에 대한 자동로그인 막기
+          	Kakao.API.request({url: '/v1/user/logout'});
+        },
+        fail: function(err) {
+          alert("2" + JSON.stringify(err));
+        }
+      });
+    };
+  //]]>
 	</script>
 	<!-- <div id="container" style="display:none;"></div> -->
 </body>
