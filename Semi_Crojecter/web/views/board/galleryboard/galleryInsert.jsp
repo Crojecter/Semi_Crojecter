@@ -53,7 +53,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
+	<form id="insertform" action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div id="fileArea">
@@ -77,7 +77,7 @@ body {
 					<option value="3">AUDIO</option>
 					<option value="4">VIDEO</option>
 				</select> 
-				<select class="sidebar" name="cclid" id="ccl">
+				<select class="sidebar" name="cclid" id="cclid">
 					<option value="" disabled selected>CCL 선택</option>
 					<option value="1">저작자 표시</option>
 					<option value="2">저작자-비영리</option>
@@ -88,7 +88,7 @@ body {
 				</select> <input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
 
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn" onclick="insertMember();">업로드</button>
 				
 			</div>
 			<div class="col-md-2"></div>
@@ -115,7 +115,7 @@ body {
 		            }
 		          },
 		      		onMediaDelete : function(target) {
-	                // alert(target[0].src) 
+	                alert(target[0].src); 
 	                deleteFile(target[0].src);
 	            }
 		        }		      
@@ -175,6 +175,31 @@ body {
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
+		
+		function insertMember() {
+			$("#insertform").submit();
+		}
+		
+		$("#insertform").submit(function(event){
+			
+			if(title.legnth < 0){
+				alert("제목을 입력해주세요.");
+			}
+			else if($("#summernote").val == null){
+				alert("내용을 입력해주세요.");	
+			}
+			else if($("#titleImg").val == null){
+				alert("대표 이미지를 설정해주세요.");	
+			}
+			else if($("#category").val() == null) {
+				alert("카테고리를 선택해주세요.");				
+			}
+			else if($('#cclid').val() == null) {
+				alert("ccl을 선택해주세요.");				
+			}
+			else return;
+			event.preventDefault();
+		});
 		
 		
 		
