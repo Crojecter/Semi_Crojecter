@@ -40,8 +40,19 @@ public class GalleryService {
 		
 		return g;
 	}
+	
+	public AttachedFile updateViewAf(int bid){
+		
+		Connection con = getConnection();
+		
+		AttachedFile af = gDao.selectOneAf(con, bid);
+		
+		close(con);
+		
+		return af;
+	}
 
-	public int insertGallery(Gallery g, ArrayList<AttachedFile> list) {
+	public int insertGallery(Gallery g, AttachedFile af) {
 		Connection con = getConnection();
 		
 		int result = 0;
@@ -56,14 +67,10 @@ public class GalleryService {
 		if(result1 > 0){
 
 			result2 = gDao.insertGalleryContent(con, g, bid);
-						
-			for(int i = 0; i < list.size(); i++){
-				list.get(i).setBid(bid);
-			}
-			
+
 		}
 		
-		int result3 = gDao.insertAttachedfile(con, list);
+		int result3 = gDao.insertAttachedfile(con, af, bid);
 		
 		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);
@@ -76,7 +83,7 @@ public class GalleryService {
 		return result*bid;
 	}
 
-	public int updateGallery(Gallery g, ArrayList<AttachedFile> list) {
+	public int updateGallery(Gallery g, AttachedFile af) {
 		Connection con = getConnection();
 		
 		int result = 0;
@@ -86,7 +93,7 @@ public class GalleryService {
 		int result1 = gDao.updateBoard(con, g);
 		int result2 = gDao.updateGallery(con, g);
 				
-		int result3 = gDao.updateAttachedfile(con, list);
+		int result3 = gDao.updateAttachedfile(con, af, g.getBid());
 		
 		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);

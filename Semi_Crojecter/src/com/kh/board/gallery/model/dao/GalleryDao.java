@@ -77,6 +77,39 @@ public class GalleryDao {
 
 		return g;
 	}
+	
+	public AttachedFile selectOneAf(Connection con, int bid) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		AttachedFile af = null;
+
+		String sql = prop.getProperty("selectOneAf");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				af = new AttachedFile();
+				
+				af.setBid(bid);
+				af.setFid(rset.getInt("fid"));
+				af.setFlevel(rset.getInt("flevel"));
+				af.setFname(rset.getString("fname"));
+				af.setFpath(rset.getString("fpath"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return af;
+	}
 
 	public int insertBoardContent(Connection con, Gallery g, int bid) {
 
@@ -160,7 +193,7 @@ public class GalleryDao {
 		return bid;
 	}
 
-	public int insertAttachedfile(Connection con, ArrayList<AttachedFile> list) {
+	public int insertAttachedfile(Connection con, AttachedFile af, int bid) {
 
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -169,27 +202,15 @@ public class GalleryDao {
 
 		try {
 
-			for (int i = 0; i < list.size(); i++) {
-
 				pstmt = con.prepareStatement(sql);
 
-				pstmt.setString(1, list.get(i).getFname());
-				pstmt.setString(2, list.get(i).getFpath());
-
-				// 첫번째 데이터일 경우 대표 이미지로 level = 1
-				// 나머지 데이터는 일반 이미지로 level = 2
-				int level = 2;
-				if (i == 0)
-					level = 1;
-
-				pstmt.setInt(3, level);
-				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(" + i + ").getBid() : " + list.get(i).getBid());
-				System.out.println("insertAttachedfile"+i+"번 flevel : " + level);
+				pstmt.setString(1, af.getFname());
+				pstmt.setString(2, af.getFpath());
+				pstmt.setInt(3, 1);
+				pstmt.setInt(4, bid);
 
 				result += pstmt.executeUpdate();
 
-			}
 
 		} catch (SQLException e) {
 
@@ -250,35 +271,19 @@ public class GalleryDao {
 		return result;
 	}
 
-	public int updateAttachedfile(Connection con, ArrayList<AttachedFile> list) {
+	public int updateAttachedfile(Connection con, AttachedFile af, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
 		String sql = prop.getProperty("updateAttachedfile");
 
 		try {
-
-			for (int i = 0; i < list.size(); i++) {
-
 				pstmt = con.prepareStatement(sql);
-				
-				System.out.println("list.get(" + i + ") : " + list.get(i));
-				pstmt.setString(1, list.get(i).getFname());
-				pstmt.setString(2, list.get(i).getFpath());
+			
+				pstmt.setString(1, af.getFname());
+				pstmt.setInt(2, bid);
 
-				// 첫번째 데이터일 경우 대표 이미지로 level = 1
-				// 나머지 데이터는 일반 이미지로 level = 2
-				int level = 2;
-				if (i == 0) level = 1;
-
-				pstmt.setInt(3, level);
-				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("updateAttachedfile의 list.get(" + i + ").getBid() : " + list.get(i).getBid());
-				System.out.println("level : " + level);
-
-				result += pstmt.executeUpdate();
-
-			}
+				result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -321,7 +326,6 @@ public class GalleryDao {
 		HashMap<String, Object> hmap = null;
 		Gallery g = null;
 		AttachedFile af = null;
-		ArrayList<AttachedFile> list = null;
 		
 		System.out.println("selectGalleryMap 진입");
 		String sql = prop.getProperty("selectGalleryOne");
@@ -331,7 +335,7 @@ public class GalleryDao {
 			pstmt.setInt(1, bid);
 			rset = pstmt.executeQuery();
 			
-			list = new ArrayList<AttachedFile>();
+			af = new AttachedFile();
 			
 			while(rset.next()){
 				
@@ -363,14 +367,12 @@ public class GalleryDao {
 				System.out.println("selectGalleryMap의 g : " + g);
 				System.out.println("selectGalleryMap의 af : " + af);
 				
-				list.add(af);
-				
 			}
 			
 			hmap = new HashMap<String, Object>();
 			
 			hmap.put("gallery", g);
-			hmap.put("attachedfile", list);
+			hmap.put("attachedfile", af);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -493,5 +495,7 @@ public class GalleryDao {
 		
 		return list;
 	}
+
+	
 	
 }

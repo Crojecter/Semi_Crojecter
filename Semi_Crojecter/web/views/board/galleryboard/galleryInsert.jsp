@@ -29,7 +29,7 @@ body {
 .thumbnailArea {
 	width: 100%;
 	height: 150px;
-	border: 1px solid lightgray; 
+	border: 1px solid lightgray;
 	text-align: center;
 }
 
@@ -49,35 +49,38 @@ body {
 
 
 <body>
-<%@ include file="../../common/header.jsp" %>
+	<%@ include file="../../common/header.jsp"%>
 	<%
 		if (m != null) {
 	%>
-	<form id="insertform" action="<%=request.getContextPath()%>/gInsert.ga" method="post" encType="multipart/form-data">
+	<form id="insertform" action="<%=request.getContextPath()%>/gInsert.ga"
+		method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div id="fileArea">
-				<input type="file" id="thumbnailInput" multiple="multiple" onchange="LoadImg(this)">
+				<input type="file" name="thumbnailInput" id="thumbnailInput"
+					onchange="LoadImg(this)">
 			</div>
-			
+
 			<div class="col-md-6">
 				<input type="text" class="form-control" id="title" name="title"
 					placeholder="제목을 입력하세요.">
 				<textarea id="summernote" name="content"></textarea>
 			</div>
 			<div class="col-md-2">
-				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
-				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">				
-					<label id="thumbnailLabel">대표이미지 설정</label>
-					<img id="titleImg" style="border: white;"></div>
+				<input type="hidden" id="userId" name="userId"
+					value="<%=m.getMid()%>" />
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">
+					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
+						style="border: white;">
+				</div>
 				<select class="sidebar" name="category" id="category">
 					<option value="" disabled selected>카테고리 선택</option>
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
 					<option value="3">AUDIO</option>
 					<option value="4">VIDEO</option>
-				</select> 
-				<select class="sidebar" name="cclid" id="cclid">
+				</select> <select class="sidebar" name="cclid" id="cclid">
 					<option value="" disabled selected>CCL 선택</option>
 					<option value="1">저작자 표시</option>
 					<option value="2">저작자-비영리</option>
@@ -88,8 +91,8 @@ body {
 				</select> <input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
 
-				<button class="btn btn-success" id="insertBtn" onclick="insertMember();">업로드</button>
-				
+				<button class="btn btn-success" id="insertBtn"
+					onclick="insertMember();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -114,10 +117,6 @@ body {
 		              sendFile(files[i], this);
 		            }
 		          },
-		      		onMediaDelete : function(target) {
-	                alert(target[0].src); 
-	                deleteFile(target[0].src);
-	            }
 		        }		      
 		      });
 		    });
@@ -135,26 +134,14 @@ body {
 					processData : false,
 					success : function(url) {
 						url.replace("\/","/");
-						alert(url);						
+						alert(url);
 						$(el).summernote('editor.insertImage', url);
+						//$('#deletefile').attr(url);
 					}, error : function(){						
 						console.log("실패!!");						
 					}
 				});
 			}
-		
-		// 아직 구현중
-		function deleteFile(src) {
-		    $.ajax({
-		        data: {src : src},
-		        type: "POST",
-		        url: "/crojecter/resources/uploadFiles/"+src, // replace with your url
-		        cache: false,
-		        success: function(resp) {
-		            console.log(resp);
-		        }
-		    });
-		}
 		
 		$(function(){
 			$('#fileArea').hide();
@@ -199,11 +186,15 @@ body {
 			}
 			else return;
 			event.preventDefault();
+			
+			//File file = new File(url);
+			//file.delete();
+			
 		});
 		
 		
 		
 		</script>
-<%@ include file="../../common/footer.jsp" %>
+	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

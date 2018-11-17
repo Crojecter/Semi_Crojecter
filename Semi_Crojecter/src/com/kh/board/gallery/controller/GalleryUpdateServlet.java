@@ -26,7 +26,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 @WebServlet("/gUpdate.ga")
 public class GalleryUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+      
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -65,22 +65,17 @@ public class GalleryUpdateServlet extends HttpServlet {
 										 new DefaultFileRenamePolicy()
 							);
 			
-			ArrayList<String> saveFiles = new ArrayList<String>();
-			Enumeration<String> files = mrequest.getFileNames();
+			// 대표 이미지 영역의 파일만 불러온다.
+			File savefile = mrequest.getFile("thumbnailInput");
+			System.out.println("thumbnailInput file : " + savefile);
+
+			String path = savefile.getPath();
+			String fileName = savefile.getName();  
 			
-			while(files.hasMoreElements()){
-				// 새로 입력된 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
-				String name = files.nextElement();
-				String fileName = mrequest.getFilesystemName(name);  
-				
-				System.out.println("name : " + fileName);
-				
-				saveFiles.add(fileName);				
-			}						
-			 
-			System.out.println("savefiles : " + saveFiles);
+			System.out.println("GalleryUpdateServlet path : " + path);				
+			System.out.println("GalleryUpdateServlet fileName : " + fileName);										 
 			
-			// selectGalleryMap(bid) : galleryUpdate.jap에서 받아온 bid로 Gallery와 AttachedFile을 불러온다.
+			// selectGalleryMap(bid) : galleryUpdate.jsp에서 받아온 bid로 Gallery와 AttachedFile을 불러온다.
 			int bid = Integer.parseInt(request.getParameter("bid"));
 			System.out.println("bid : " + bid);
 
@@ -96,43 +91,28 @@ public class GalleryUpdateServlet extends HttpServlet {
 			g.setGtag(mrequest.getParameter("tags"));
 			
 			/// 기존 bid의 AttachedFile 객체 불러와서 업데이트 하기 
-			ArrayList<AttachedFile> list = (ArrayList<AttachedFile>)gal.get("attachedfile");
-
-			AttachedFile af = new AttachedFile();
+			AttachedFile af= (AttachedFile)gal.get("attachedfile");
 				
 			switch(g.getGcategoryid()){
 				case 1: 
 					af.setFname("textCategoryImage.png"); 
-					af.setFpath(savePath);
-					list.add(af); 
+					af.setFpath(savePath); 
 					break;
 				case 2: 
-					for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
-						// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
-						af = new AttachedFile();
-						
-						af.setFid(list.get(i).getFid()+1);
-						af.setFname(saveFiles.get(i));
-						af.setFpath(savePath);
-						af.setBid(bid);
-						
-						System.out.println("af : " + af);
-						list.add(af);											
-					}
+					af.setFname(fileName);
+					af.setFpath(path);											
 					break;
 				case 3: 
 					af.setFname("audioCategoryImage.png"); 
-					af.setFpath(savePath);
-					list.add(af); 
+					af.setFpath(savePath);; 
 					break;
 				case 4: 
 					af.setFname("videoCategoryImage.png"); 
-					af.setFpath(savePath);
-					list.add(af); 
+					af.setFpath(savePath); 
 					break;								
 			}
 
-		int result = gs.updateGallery(g, list);
+		int result = gs.updateGallery(g, af);
 		
 		String page = "";
 		
