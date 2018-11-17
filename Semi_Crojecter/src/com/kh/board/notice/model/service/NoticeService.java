@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.notice.model.dao.NoticeDao;
 import com.kh.board.notice.model.vo.Notice;
+import com.kh.board.project.model.vo.Project;
 
 public class NoticeService {
 	
@@ -37,6 +38,35 @@ public class NoticeService {
 		close(con);
 		
 		return result*bid;
+	}
+
+	public Notice selectOne(int bid) {
+		
+		Connection con = getConnection();
+		
+		Notice n = nDao.selectOne(con, bid);
+		
+		close(con);
+		
+		return n;
+	}
+
+	public int updateNotice(Notice n) {
+		Connection con = getConnection();
+		
+		int result = 0;
+		
+		int result1 = nDao.updateBoard(con, n);
+		
+		if( result1 > 0 ) {
+			commit(con);
+			result = 1;
+			
+		} else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 

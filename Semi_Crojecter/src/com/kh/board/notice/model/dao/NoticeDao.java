@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.notice.model.vo.Notice;
+import com.kh.board.project.model.vo.Project;
 
 public class NoticeDao {
 	
@@ -81,6 +82,67 @@ private Properties prop = new Properties();
 		}
 
 		System.out.println("NoticeDao insertBoardContent result : " + result);
+		return result;
+	}
+
+	public Notice selectOne(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice n = null;
+
+		String sql = prop.getProperty("selectOne");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				n = new Notice();
+                
+				n.setBtype(rset.getInt("btype"));
+				n.setBtitle(rset.getString("btitle"));
+				n.setBcontent(rset.getString("bcontent"));
+				n.setBcount(rset.getInt("bcount"));
+				n.setBdate(rset.getDate("bdate"));
+				n.setBstatus(rset.getString("bstatus"));
+				n.setBrcount(rset.getInt("brcount"));
+				n.setBwriter(rset.getInt("bwriter"));
+				//n.setMname(rset.getString("mname"));
+				//n.setMprofile(rset.getString("mprofile"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return n;
+	}
+
+	public int updateBoard(Connection con, Notice n) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String sql = prop.getProperty("updateBoard");
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, n.getBtitle());
+			pstmt.setString(2, n.getBcontent());
+			pstmt.setInt(3, n.getBid());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		return result;
 	}
 
