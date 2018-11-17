@@ -59,32 +59,19 @@ public class ProjectInsertServlet extends HttpServlet {
 			String savePath = root + "/uploadFiles/";
 			
 			MultipartRequest mrequest =
-					new MultipartRequest(request, 
-										 savePath,
-										 maxSize,
-										 "UTF-8",
-										 new DefaultFileRenamePolicy()
-							);
+					new MultipartRequest(request,savePath,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 			
-			// 폼으로 전송된 파일 이름들을 받아온다.
-			Enumeration<String> files = mrequest.getFileNames();
-			
-			ArrayList<String> saveFiles = new ArrayList<String>();
-		
-			
-			while(files.hasMoreElements()){
-				// 각 파일의 정보를 가져와서 DB에 저장할 내용을 추출한다.
-				String name = files.nextElement();
-				String fileName = mrequest.getFilesystemName(name);  
-				
-				System.out.println("name : " + fileName);
-				
-				saveFiles.add(fileName);				
-			}						
-			
-			System.out.println("savefiles : " + saveFiles);
-			// Project 객체 생성 후 DB 전달 VO 설정하기
+			// 대표 이미지 영역의 파일만 불러온다.
+			File savefile = mrequest.getFile("thumbnailInput");
+			System.out.println("thumbnailInput file : " + savefile);
 
+			String path = savefile.getPath();
+			String fileName = savefile.getName();  
+			
+			System.out.println("path : " + path);				
+			System.out.println("fileName : " + fileName);
+			
+			// Project 객체 생성 후 DB 전달 VO 설정하기
 			Project p = new Project();
 			
 			System.out.println("userId : " + mrequest.getParameter("userId"));
@@ -110,39 +97,24 @@ public class ProjectInsertServlet extends HttpServlet {
 			System.out.println("setBcontent : " + mrequest.getParameter("content"));
 			System.out.println("tags : " + mrequest.getParameter("tags"));
 			
-			// Attachment에 기록하기 위한 파일 리스트 처리하기
-			ArrayList<AttachedFile> list = new ArrayList<AttachedFile>();
-			
+			// Attachment 객체 생성 후 DB 전달 값 설정
+			AttachedFile af = new AttachedFile();
 
-			for(int i = saveFiles.size()-1 ; i >= 0 ; i--){
-				// 기존에 역순으로 저장된 파일 리스트를 올바른 순서로 재정렬하기
-				AttachedFile af = new AttachedFile();
-						
-				af.setFpath(savePath);
-				af.setFname(saveFiles.get(i));
-						
-				System.out.println("af : " + af);
-				list.add(af);
-			} 
-			
-			
-			System.out.println("list : " + list);
+			af.setFname(fileName);		
+			af.setFpath(savePath);
+
 			// service로 작성한 내용 전송하기
 			
-			int result = ps.insertProject(p, list);
+			int result = ps.insertProject(p, af);
 			
 			if(result > 0) {
-				response.sendRedirect("selectList.ga");
+				response.sendRedirect("jSelectOne.pr?bid="+result);
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");
 				
 				// 실패했을 때 이전 파일 정보 삭제하기
-				for(int i = 0; i < saveFiles.size() ; i++){
-					File file = new File(savePath+saveFiles.get(i));
-					
-					System.out.println(i+"번 파일 삭제 : " + file.delete());
-				}
+				savefile.delete();
 				
 				request.getRequestDispatcher("views/common/errorPage.jsp")
 				.forward(request, response);

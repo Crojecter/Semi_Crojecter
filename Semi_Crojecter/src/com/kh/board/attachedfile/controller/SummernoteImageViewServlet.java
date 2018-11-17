@@ -1,7 +1,7 @@
 package com.kh.board.attachedfile.controller;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -84,6 +84,7 @@ public class SummernoteImageViewServlet extends HttpServlet {
 
 			response.setContentType("text/html; application/json; charset=UTF-8"); // 데이터 타입을 json으로 설정하기															// 위한 세팅
 
+			
 			//response.getWriter().print(jobj.toJSONString());
 			response.getWriter().print(uploadPath);
 			

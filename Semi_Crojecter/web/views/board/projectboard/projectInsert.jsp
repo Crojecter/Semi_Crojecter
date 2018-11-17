@@ -1,46 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page
-	import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member"%>
-<%
-	Member m = (Member) session.getAttribute("member");
-	System.out.println("m : " + m);
-%>
+	import="com.kh.board.project.model.vo.*, com.kh.member.model.vo.Member"%>
+	
 <!DOCTYPE html>
 <html lang="kr">
 <head>
 <meta charset="UTF-8">
 <title>프로젝트 업로드 페이지</title>
 
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- 폰트 설정 -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
-
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-<!-- include summernote css/js-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-
+	
 <style>
 body {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -56,17 +28,35 @@ body {
 	height: 50px;
 	font-size: 20px;
 }
+
+.thumbnailArea {
+	width: 100%;
+	height: 150px;
+	border: 1px solid lightgray;
+	text-align: center;
+}
+
+#titleImg {
+	width: 100%;
+	height: 100%;
+	border: none;
+}
 </style>
 </head>
 
 
 <body>
+	<%@ include file="../../common/header.jsp"%>
 	<%
 		if (m != null) {
 	%>
 	<form action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
+			<div id="fileArea">
+				<input type="file" name="thumbnailInput" id="thumbnailInput"
+					onchange="LoadImg(this)">
+			</div>
 			<div class="col-md-6">
 				<input type="text" class="form-control" id="title" name="title"
 					placeholder="제목을 입력하세요.">
@@ -74,15 +64,20 @@ body {
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">
+					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
+						style="border: white;">
+				</div>
 				<input class="sidebar" name="date" type="date" min="" max="">
 				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
-				<input type="text" value="Amsterdam,Washington" data-role="tagsinput" >
 				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
 	</form>
+	
+	<%@ include file="../../common/footer.jsp"%>
 
 	<%
 		} else {
@@ -93,7 +88,7 @@ body {
 	<script type="text/javascript">
 		$(document).ready(function() {
 		      $('#summernote').summernote({
-		        height: 300,
+		        height: 500,
 		        minHeight: null,
 		        maxHeight: null,
 		        focus: true,
@@ -126,7 +121,6 @@ body {
 		    } 	
 		    
 		    today = yyyy+'-'+mm+'-'+dd;
-		    alert('max 날짜 : ' + today);
 		    $(el).attr('max', today);	    
 		    
 		    if ($(el).val() == ''){
@@ -166,14 +160,55 @@ body {
 					}
 				});
 			}
-		
-		$('input').tagsinput({
-			  typeahead: {
-			    source: function(query) {
-			      return $.getJSON('citynames.json');
-			    }
-			  }
+		$(function(){
+			$('#fileArea').hide();
+			
+			$('#thumbnailArea').click(() => {
+				$('#thumbnailInput').click();
+				$('#thumbnailLabel').hide();
 			});
+		});
+		function LoadImg(value) {
+			if(value.files && value.files[0]) {
+				var reader = new FileReader();
+				
+				reader.onload = function(e){					
+					$('#titleImg').attr('src', e.target.result);	
+				}
+				
+				reader.readAsDataURL(value.files[0]);
+			}
+		}
+		
+		function insertMember() {
+			$("#insertform").submit();
+		}
+		
+		$("#insertform").submit(function(event){
+			
+			if(title.legnth < 0){
+				alert("제목을 입력해주세요.");
+			}
+			else if($("#summernote").val == null){
+				alert("내용을 입력해주세요.");	
+			}
+			else if($("#titleImg").val == null){
+				alert("대표 이미지를 설정해주세요.");	
+			}
+			else if($("#category").val() == null) {
+				alert("카테고리를 선택해주세요.");				
+			}
+			else if($('#cclid').val() == null) {
+				alert("ccl을 선택해주세요.");				
+			}
+			else return;
+			event.preventDefault();
+			
+			//File file = new File(url);
+			//file.delete();
+			
+		});
+		
 		</script>
 
 </body>

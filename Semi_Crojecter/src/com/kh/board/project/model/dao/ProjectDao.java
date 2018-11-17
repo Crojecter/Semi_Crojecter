@@ -10,9 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
+import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.project.model.vo.Project;
 
 public class ProjectDao {
@@ -111,36 +113,24 @@ public class ProjectDao {
 		return result;
 	}
 
-	public int insertAttachedfile(Connection con, ArrayList<AttachedFile> list) {
+	public int insertAttachedfile(Connection con, AttachedFile af) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
 		String sql = prop.getProperty("insertAttachedfile");
 		
 		try{
-			
-			for(int i = 0 ; i < list.size(); i++){
-				
-				pstmt = con.prepareStatement(sql);				
-				
-				pstmt.setString(1, list.get(i).getFname());
-				pstmt.setString(2, list.get(i).getFpath());
-				
-				// 첫번째 데이터일 경우 대표 이미지로 level = 1
-				// 나머지 데이터는 일반 이미지로 level = 2
-				int level = 2;
-				if(i == 0 ) level = 1;
-				
-				pstmt.setInt(3, level);
-				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
-				System.out.println("level : " + level);
-				
-				result += pstmt.executeUpdate();
-				
-			}
 	
-			
+			pstmt = con.prepareStatement(sql);				
+				
+			pstmt.setString(1, af.getFname());
+			pstmt.setString(2, af.getFpath());
+				
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, af.getBid());
+				
+			result += pstmt.executeUpdate();
+		
 		} catch (SQLException e) {
 			
 		} finally {
@@ -148,6 +138,207 @@ public class ProjectDao {
 		}
 		
 		System.out.println("ProjectDao insertAttachedfile result : " + result);
+		return result;
+	}
+
+	public Project selectOne(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Project p = null;
+
+		String sql = prop.getProperty("selectOne");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				p = new Project();
+
+				p.setJid(rset.getInt("jid"));
+				p.setJend(rset.getDate("jend"));
+				p.setJtag(rset.getString("jtag"));
+				p.setBid(rset.getInt("bid"));
+                
+				p.setBtype(rset.getInt("btype"));
+				p.setBtitle(rset.getString("btitle"));
+				p.setBcontent(rset.getString("bcontent"));
+				p.setBcount(rset.getInt("bcount"));
+				p.setBdate(rset.getDate("bdate"));
+				p.setBstatus(rset.getString("bstatus"));
+				p.setBrcount(rset.getInt("brcount"));
+				p.setBwriter(rset.getInt("bwriter"));
+				p.setMname(rset.getString("mname"));
+				p.setMprofile(rset.getString("mprofile"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return p;
+	}
+
+	public int updateCount(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updateCount");
+		
+		try{
+			
+			pstmt = con.prepareStatement(sql);
+				
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("updateCount result : "  + result);
+			
+		} catch (SQLException e) {
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public HashMap<String, Object> selectProjectMap(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HashMap<String, Object> hmap = null;
+		Project p = null;
+		AttachedFile af = null;
+		
+		System.out.println("selectProjectMap 진입");
+		String sql = prop.getProperty("selectProjectOne");
+				
+		try {
+			pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+			
+			af = new AttachedFile();
+			
+			while(rset.next()){
+				
+				p = new Project();
+				p.setJid(rset.getInt("jid"));
+				p.setJend(rset.getDate("jend"));
+				p.setJtag(rset.getString("jtag"));
+				p.setBid(rset.getInt("bid"));
+                
+				p.setBtype(rset.getInt("btype"));
+				p.setBtitle(rset.getString("btitle"));
+				p.setBcontent(rset.getString("bcontent"));
+				p.setBcount(rset.getInt("bcount"));
+				p.setBdate(rset.getDate("bdate"));
+				p.setBstatus(rset.getString("bstatus"));
+				p.setBrcount(rset.getInt("brcount"));
+				p.setBwriter(rset.getInt("bwriter"));
+				p.setMname(rset.getString("mname"));
+				p.setMprofile(rset.getString("mprofile"));
+				
+				af = new AttachedFile();
+				af.setBid(bid);
+				af.setFid(rset.getInt("fid"));
+				af.setFlevel(rset.getInt("flevel"));
+				af.setFname(rset.getString("fname"));
+				af.setFpath(rset.getString("fpath"));
+				
+				System.out.println("selectProjectMap의 p : " + p);
+				System.out.println("selectProjectMap의 af : " + af);
+				
+			}
+			
+			hmap = new HashMap<String, Object>();
+			
+			hmap.put("project", p);
+			hmap.put("attachedfile", af);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return hmap;
+	}
+
+	public int updateBoard(Connection con, Project p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String sql = prop.getProperty("updateBoard");
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, p.getBtitle());
+			pstmt.setString(2, p.getBcontent());
+			pstmt.setInt(3, p.getBid());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateProject(Connection con, Project p) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String sql = prop.getProperty("updateProject");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setDate(1, p.getJend());
+			pstmt.setString(2, p.getJtag());
+			pstmt.setInt(3, p.getBid());
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
+
+	public int updateAttachedfile(Connection con, AttachedFile af) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String sql = prop.getProperty("updateAttachedfile");
+
+		try {
+				pstmt = con.prepareStatement(sql);
+			
+				pstmt.setString(1, af.getFname());
+				pstmt.setInt(2, af.getBid());
+
+				result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+		} finally {
+			close(pstmt);
+		}
+
+		System.out.println("updateAttachedfile result : " + result);
 		return result;
 	}
 
