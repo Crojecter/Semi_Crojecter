@@ -16,11 +16,10 @@ public class NoticeService {
 	
 	private NoticeDao nDao = new NoticeDao();
 
-	public int insertNotice(Notice n, ArrayList<AttachedFile> list) {
+	public int insertNotice(Notice n) {
 		Connection con = getConnection();
 		
 		int result = 0;
-		int result2 = 0;
 		
 		System.out.println("n : " + n);
 		
@@ -28,19 +27,8 @@ public class NoticeService {
 		
 		int result1 = nDao.insertBoardContent(con, n, bid);
 		
-		if(result1 > 0){
-						
-			for(int i = 0; i < list.size(); i++){
-				list.get(i).setBid(bid);
-			}
-			
-			int result23 = nDao.insertAttachedfile(con, list);
-			
-		}
 		
-		
-		
-		if( result1 > 0 && result2 > 0 ) {
+		if( result1 > 0) {
 			commit(con);
 			result = 1;
 			
@@ -48,7 +36,8 @@ public class NoticeService {
 		
 		close(con);
 		
-		return result;
+		return result*bid;
 	}
+
 
 }

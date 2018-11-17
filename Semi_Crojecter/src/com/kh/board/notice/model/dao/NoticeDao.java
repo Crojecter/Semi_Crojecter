@@ -84,46 +84,6 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public int insertAttachedfile(Connection con, ArrayList<AttachedFile> list) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql = prop.getProperty("insertAttachedfile");
-		
-		try{
-			
-			for(int i = 0 ; i < list.size(); i++){
-				
-				pstmt = con.prepareStatement(sql);				
-				
-				pstmt.setString(1, list.get(i).getFname());
-				pstmt.setString(2, list.get(i).getFpath());
-				
-				// 첫번째 데이터일 경우 대표 이미지로 level = 1
-				// 나머지 데이터는 일반 이미지로 level = 2
-				int level = 2;
-				if(i == 0 ) level = 1;
-				
-				pstmt.setInt(3, level);
-				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
-				System.out.println("level : " + level);
-				
-				result += pstmt.executeUpdate();
-				
-			}
-	
-			
-		} catch (SQLException e) {
-			
-		} finally {
-			close(pstmt);
-		}
-		
-		System.out.println("NoticeDao insertAttachedfile result : " + result);
-		return result;
-	}
-
 
 
 }
