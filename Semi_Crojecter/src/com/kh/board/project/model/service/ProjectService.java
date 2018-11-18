@@ -9,7 +9,6 @@ import java.sql.Connection;
 import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.project.model.dao.ProjectDao;
 import com.kh.board.project.model.vo.Project;
 
