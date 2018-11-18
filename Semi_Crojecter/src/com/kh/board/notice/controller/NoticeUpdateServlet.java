@@ -1,31 +1,26 @@
 package com.kh.board.notice.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import com.kh.board.notice.model.service.NoticeService;
 import com.kh.board.notice.model.vo.Notice;
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
- * Servlet implementation class NoticeInsertServlet
+ * Servlet implementation class NoticeUpdateServlet
  */
-@WebServlet("/nInsert.no")
-public class NoticeInsertServlet extends HttpServlet {
+@WebServlet("/nUpdate.no")
+public class NoticeUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeInsertServlet() {
+    public NoticeUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,37 +30,38 @@ public class NoticeInsertServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeService ns = new NoticeService();
+	
+		System.out.println("NoticeUpdateServlet 들어왔니?");
 		
-	
-			
-			System.out.println("NoticeInsertServlet 들어왔니?");
-			
-			// Notice 객체 생성 후 DB 전달 VO 설정하기
-			Notice n = new Notice();
-			
-			System.out.println("userId : " + request.getParameter("userId"));
-			
-			n.setBtype(1);
-			n.setBtitle(request.getParameter("title"));
-			n.setBcontent(request.getParameter("content"));
-			n.setBwriter(Integer.parseInt(request.getParameter("userId")));
-			
-			System.out.println("setBcontent : " + request.getParameter("content"));			
+		int bid = Integer.parseInt(request.getParameter("bid"));
+		System.out.println("bid : " + bid);
+		
+		// Notice 객체 생성 후 DB 전달 VO 설정하기
+		Notice n = ns.selectOne(bid);
+		
+		System.out.println("userId : " + request.getParameter("userId"));
+		System.out.println("notice : " + n);
+		
+		n.setBtype(1);
+		n.setBtitle(request.getParameter("title"));
+		n.setBcontent(request.getParameter("content"));
+		n.setBwriter(Integer.parseInt(request.getParameter("userId")));
+		
+		System.out.println("setBcontent : " + request.getParameter("content"));			
 
-			// service로 작성한 내용 전송하기
+		// service로 작성한 내용 전송하기
+		
+		int result = ns.updateNotice(n);
+		
+		if(result > 0) {
+			response.sendRedirect("nSelectOne.ga?bid="+(result*bid));
 			
-			int result = ns.insertNotice(n);
-			
-			if(result > 0) {
-				response.sendRedirect("nSelectOne.ga?bid="+result);
-				
-			} else {
+		} else {
 
-				request.getRequestDispatcher("views/common/errorPage.jsp")
-				.forward(request, response);
-			}
+			request.getRequestDispatcher("views/common/errorPage.jsp")
+			.forward(request, response);
 		}
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
