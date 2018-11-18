@@ -70,7 +70,7 @@
 					}else {
 						console.log("sponReferrer : " + sponReferrer);
 						alert("잔여 호두량이 부족합니다.");
-						window.opener.location.href = "../payment/payment.jsp?beforeUrl="+referrer;
+						window.opener.location.href = "../../payment/payment.jsp?beforeUrl="+referrer;
 						close();
 					}
 				}

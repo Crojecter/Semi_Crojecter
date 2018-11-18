@@ -14,7 +14,7 @@ public class ReportService {
 
 	ReportDao rDao = new ReportDao();
 
-	public int insertBoard(Report r) {
+	public int insertReport(Report r) {
 		Connection con = getConnection();
 
 		int result = rDao.insertReport(con, r);
@@ -27,7 +27,7 @@ public class ReportService {
 		return result;
 	}
 
-	public int deleteBoard(int rid) {
+	public int deleteReport(int rid) {
 		Connection con = getConnection();
 
 		int result = rDao.deleteReport(con, rid);

@@ -284,19 +284,30 @@
 		}	
 	</script>
 	<% } else { // 뷰어 입장 %>
-	<script>
-		var windowObj = null;
-		
+	<script>		
 		// 후원하기
 		function showSpon() {
-			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
+			var windowObj = null;
+			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
-		    var yPos = (screen.availHeight / 2) - (300 / 2);
+		    var yPos = (screen.availHeight / 2) - 150;
 		    
 		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}
+		
+		// 신고하기
+		function showReport() {
+			var windowObj = null;
+			var xPos = (document.body.clientWidth / 2) - 250; 
+		    xPos += window.screenLeft;
+		    var yPos = (screen.availHeight / 2) - 150;
+		    
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp', 
+		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
+		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		}	
 		
 		// 팔로우 버튼 클릭
 		$('#btnFollow').click(function(){

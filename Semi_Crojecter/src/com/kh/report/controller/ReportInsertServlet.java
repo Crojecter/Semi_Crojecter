@@ -1,7 +1,6 @@
-package com.kh.board.project.controller;
+package com.kh.report.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.project.model.service.ProjectService;
-import com.kh.board.project.model.vo.Project;
-import com.kh.boardcomment.model.service.BoardCommentService;
-import com.kh.boardcomment.model.vo.BoardComment;
+import com.kh.report.model.service.ReportService;
+import com.kh.report.model.vo.Report;
 
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class ReportInsertServlet
  */
-@WebServlet("/jSelectOne.pr")
-public class ProjectSelectOneServlet extends HttpServlet {
+@WebServlet("/rInsert.re")
+public class ReportInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProjectSelectOneServlet() {
+    public ReportInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +31,24 @@ public class ProjectSelectOneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int rreason = Integer.parseInt(request.getParameter("rreason"));
+		String retc = request.getParameter("retc");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int cid = Integer.parseInt(request.getParameter("cid"));
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Project p = new ProjectService().selectOne(bid);
-		ArrayList<BoardComment> clist = new BoardCommentService().selectList(bid);
+		Report r = new Report();
+		r.setRreason(rreason);
+		r.setRetc(retc);
+		r.setMid(mid);
+		r.setCid(cid);
+		r.setBid(bid);
 		
-		String page = "";
-		if(p != null) {
-			page = "views/board/projectboard/projectDetail.jsp";
-			request.setAttribute("project", p);
-			request.setAttribute("clist", clist);
-			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "갤러리 상세보기 실패!");
-		}
+		int result = new ReportService().insertReport(r);
 		
-		request.getRequestDispatcher(page).forward(request, response);
+		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
 		
 	}
-	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
