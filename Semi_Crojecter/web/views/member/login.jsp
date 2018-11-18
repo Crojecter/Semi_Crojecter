@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"%>
-<%-- <% Member m = (Member)session.getAttribute("member"); %> --%>
+<%-- <% System.out.println("URL : " + request.getHeader("referer")); %> --%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,18 +43,25 @@
 	.wrapper{
 		width:290px;
 		margin:0 auto;
-		margin-top:230px;
-		margin-bottom:230px;
+		margin-top:210px;
+		margin-bottom:220px;
 		border:1px solid black;
 		border-radius:20px;
 		padding:10px 10px 10px 10px;
+	}
+	.label{
+		color:red;
+		text-align:center;
+		font-size:10px;
+		width:auto;
+		margin:1px 10px 1px 10px;
 	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
 	<div class="wrapper">
-		<form action="<%=request.getContextPath()%>/login.do" method="post">
+		<form action="<%=request.getContextPath()%>/login.do" method="post" id="login" name="login">
 			<table>
 				<tr>
 					<td colspan="2" align="center"><label id="loginLabel">COPYRIGHT</label></td>
@@ -62,18 +69,24 @@
 				<tr>
 					<td colspan="2" align="center"><img
 						src="<%=request.getContextPath()%>/resources/images/user.png"
-						class="loginImg" /> <input type="email" name="email"
-						class="loginInput" placeholder="User-email" style="width: 180px" />
+						class="loginImg" /> <input type="email" name="email" id="email"
+						class="loginInput" placeholder="User-email" style="width: 180px"/>
 					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><label id="labelEmail" class="label" style="display:none;"></label></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><img
 						src="<%=request.getContextPath()%>/resources/images/pw.png"
-						class="loginImg" /> <input type="password" name="password"
+						class="loginImg" /> <input type="password" name="password" id="password"
 						class="loginInput" placeholder="****" style="width: 180px" /></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
+					<td colspan="2"><label id="labelPwd" class="label" style="display:none;"></label></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="button" onclick="goSubmit();"
 						class="loginInput submit" value="로그인" /></td>
 				</tr>
 				<tr>
@@ -112,12 +125,33 @@
 					</td>
 				</tr>
 			</table>
+			<input type="hidden" name="url" value="<%= request.getHeader("referer") %>"/>
 		</form>
 	</div>
 
 	<div id="fb-root"></div>
 	<%@ include file="../common/footer.jsp" %>
 	<script>
+	function goSubmit() {
+		if($("#email").val() == "") {
+			alert("이메일을 입력하세요.");
+			$("#email").focus();
+		} else if($("#email").val() != "") {
+			var regEmail = /^[a-zA-Z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/;
+			if(!regEmail.test($("#email").val())) {
+				alert("이메일형식이 아닙니다.");
+				$("#email").focus();
+			}else{
+				if($("#password").val() == "") {
+					alert("비밀번호를 입력하세요.");
+					$("#password").focus();
+				} else {
+					$("#login").submit();
+				}
+			}
+		}
+	}
+	
 	// 구글 로그인 관련 설정
 	// http://hyunwoona.tistory.com/entry/%EA%B5%AC%EA%B8%80-%EB%A1%9C%EA%B7%B8%EC%9D%B8API-%EC%97%B0%EB%8F%99
 	// 구글 커스텀 버튼 적용
@@ -163,7 +197,7 @@
 	// 카카오 로그인 함수입니다.
     function loginWithKakao() {
       	// 로그인 창을 띄웁니다.
-      	Kakao.Auth.login({
+      	Kakao.Auth.loginForm({
         success: function(authObj) {
           //alert(JSON.stringify(authObj));
           console.log(authObj);
@@ -176,9 +210,15 @@
                 //console.log(JSON.stringify(res.id));
                 //console.log(JSON.stringify(res.properties.profile_image));
                 console.log(JSON.stringify(res.properties.nickname)); // 닉네임
-                
-                window.location.href="./signUp.jsp?nickName="+res.properties.nickname+"&email="+res.kaccount_email;
-                
+                var nickname = res.properties.nickname;
+                var email = res.kaccount_email;
+                Kakao.Auth.logout(function(obj) {
+                		if(obj==true){
+							location.href="./signUp.jsp?nickName="+nickname+"&email="+email;
+                		}
+                	}
+                );
+                //window.location.href="./signUp.jsp?nickName="+nickname+"&email="+email;
               },
               fail: function(error) {
                 alert("1" + JSON.stringify(error));

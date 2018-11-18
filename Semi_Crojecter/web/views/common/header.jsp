@@ -30,7 +30,7 @@
 	</style>
 	
 </head>
-<body>
+<body style="position:absolute; width:100%;">
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
 		<!-- 로고 -->
 		<a href="<%= request.getContextPath()%>/gList.ga">
