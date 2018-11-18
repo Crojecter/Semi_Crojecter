@@ -28,7 +28,7 @@
 			<input type="radio" name="rReason" value="3"> 특정인 대상의 비방/욕설 <br />
 			<input type="radio" name="rReason" value="4"> 저작권 침해 <br />
 			<input type="radio" name="rReason" value="5"> 기타 <br />
-			<textarea id="" cols="40" rows="5" style="resize:none;"></textarea>
+			<textarea id="rEtc" cols="40" rows="5" style="resize:none;"></textarea>
 		</fieldset>
 		<button onclick="doReport();">신고하기</button>
 	</div>
@@ -42,11 +42,11 @@
 		function doReport() {
 			$.ajax({
 				data : { 
-					rreason : ,
-					retc : ,
+					rreason : '',
+					retc : $('#rEtc').val,
 					mid : '<%= m.getMid() %>',
-					cid : ,
-					bid : 
+					cid : '',
+					bid : ''
 				},
 				url : "/crojecter/rInsert.re",
 				type : "post",

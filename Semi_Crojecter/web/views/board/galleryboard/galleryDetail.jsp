@@ -125,6 +125,7 @@
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 	</div>
+	
 	<div class="commentOuter" style="padding:5px;">
 		<div class="commentWriteArea" style="display:inline;">
 			<div><input type="hidden" name="crefmid" value="-1" /></div>
