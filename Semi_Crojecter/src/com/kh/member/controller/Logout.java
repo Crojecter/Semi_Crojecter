@@ -31,7 +31,7 @@ public class Logout extends HttpServlet {
 		
 		if(session != null) session.invalidate();
 		
-		response.sendRedirect("galleryMain.jsp");
+		response.sendRedirect("gList.ga");
 		System.out.println("로그아웃 완료");
 	}
 

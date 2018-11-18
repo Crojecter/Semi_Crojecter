@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
-<%
-	Member m = (Member)session.getAttribute("member");
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +56,7 @@
 </head>
 
 <body>
+<%@ include file="../../common/header.jsp" %>
 <div class="profileArea">
 	<img src="../resources/images/icon/likeSelect.png" class="profilePic">
 	<p id="profileName"> <%=m.getMname()%>님의 페이지</p>
