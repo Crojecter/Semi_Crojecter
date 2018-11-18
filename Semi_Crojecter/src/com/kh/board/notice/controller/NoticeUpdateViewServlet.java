@@ -1,8 +1,6 @@
-package com.kh.board.gallery.controller;
+package com.kh.board.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.notice.model.service.NoticeService;
+import com.kh.board.notice.model.vo.Notice;
 
 /**
- * Servlet implementation class GalleryUpdateViewServlet
+ * Servlet implementation class NoticeUpdateViewServlet
  */
-@WebServlet("/gUpView.ga")
-public class GalleryUpdateViewServlet extends HttpServlet {
+@WebServlet("/nUpView.no")
+public class NoticeUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryUpdateViewServlet() {
+    public NoticeUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,18 +32,16 @@ public class GalleryUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Gallery g = new GalleryService().updateView(bid);
-		AttachedFile af = new GalleryService().updateViewAf(bid);	
+		Notice n = new NoticeService().selectOne(bid);	
 		
 		String page = "";
-		if(g != null) {
+		if(n != null) {
 			
-			page = "views/board/galleryboard/galleryUpdate.jsp";
-			request.setAttribute("gallery", g);
-			request.setAttribute("attachedfile", af);
+			page = "views/board/noticeboard/noticeUpdate.jsp";
+			request.setAttribute("notice", n);
 			
 		} else {
 			
@@ -54,7 +51,6 @@ public class GalleryUpdateViewServlet extends HttpServlet {
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-		
 	}
 
 	/**

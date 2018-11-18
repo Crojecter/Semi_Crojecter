@@ -1,8 +1,13 @@
 package com.kh.board.gallery.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.dao.GalleryDao;
@@ -35,14 +40,25 @@ public class GalleryService {
 		
 		return g;
 	}
+	
+	public AttachedFile updateViewAf(int bid){
+		
+		Connection con = getConnection();
+		
+		AttachedFile af = gDao.selectOneAf(con, bid);
+		
+		close(con);
+		
+		return af;
+	}
 
-	public int insertGallery(Gallery g, ArrayList<AttachedFile> list) {
+	public int insertGallery(Gallery g, AttachedFile af) {
 		Connection con = getConnection();
 		
 		int result = 0;
 		int result2 =0;
 		
-		System.out.println("insertGallery : " + g);
+		System.out.println("g : " + g);
 		
 		int bid = gDao.selectCurrentBid(con);
 		
@@ -51,14 +67,33 @@ public class GalleryService {
 		if(result1 > 0){
 
 			result2 = gDao.insertGalleryContent(con, g, bid);
-						
-			for(int i = 0; i < list.size(); i++){
-				list.get(i).setBid(bid);
-			}
-			
+
 		}
 		
-		int result3 = gDao.insertAttachedfile(con, list);
+		int result3 = gDao.insertAttachedfile(con, af, bid);
+		
+		if( result1 > 0 && result2 > 0 && result3 > 0) {
+			commit(con);
+			result = 1;
+			
+		} else rollback(con);
+		
+		close(con);
+		
+		return result*bid;
+	}
+
+	public int updateGallery(Gallery g, AttachedFile af) {
+		Connection con = getConnection();
+		
+		int result = 0;
+
+		System.out.println("g : " + g);
+		
+		int result1 = gDao.updateBoard(con, g);
+		int result2 = gDao.updateGallery(con, g);
+				
+		int result3 = gDao.updateAttachedfile(con, af, g.getBid());
 		
 		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);
@@ -71,6 +106,26 @@ public class GalleryService {
 		return result;
 	}
 
+	public HashMap<String, Object> selectGalleryMap(int bid) {
+		Connection con = getConnection();
+		HashMap<String, Object> hmap = null;
+		
+		int result = gDao.updateCount(con, bid);
+		
+		if(result > 0) {
+			commit(con);
+			hmap = gDao.selectGalleryMap(con, bid);
+			
+			System.out.println("service hamp : " + hmap);
+		}else {
+			rollback(con);
+		}
+		
+		close(con);
+		
+		return hmap;
+	}
+	
 	public ArrayList<Gallery> selectGalleryList(int currentPage, int limit) {
 		// 게시판 목록
 		Connection con = getConnection();
@@ -100,5 +155,13 @@ public class GalleryService {
 		
 		return list;
 	}
+	
+	
+
+
+
+
+
+
 
 }

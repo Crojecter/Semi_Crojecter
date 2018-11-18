@@ -1,8 +1,6 @@
-package com.kh.board.gallery.controller;
+package com.kh.board.project.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,19 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.project.model.service.ProjectService;
+import com.kh.board.project.model.vo.Project;
 
 /**
  * Servlet implementation class GalleryUpdateViewServlet
  */
-@WebServlet("/gUpView.ga")
-public class GalleryUpdateViewServlet extends HttpServlet {
+@WebServlet("/jUpView.pr")
+public class ProjectUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryUpdateViewServlet() {
+    public ProjectUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,14 +35,14 @@ public class GalleryUpdateViewServlet extends HttpServlet {
 
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Gallery g = new GalleryService().updateView(bid);
+		Project p = new ProjectService().selectOne(bid);
 		AttachedFile af = new GalleryService().updateViewAf(bid);	
 		
 		String page = "";
-		if(g != null) {
+		if(p != null) {
 			
-			page = "views/board/galleryboard/galleryUpdate.jsp";
-			request.setAttribute("gallery", g);
+			page = "views/board/projectboard/projectUpdate.jsp";
+			request.setAttribute("project", p);
 			request.setAttribute("attachedfile", af);
 			
 		} else {
