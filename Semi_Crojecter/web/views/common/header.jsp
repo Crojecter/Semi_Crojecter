@@ -56,20 +56,22 @@
 	</style>
 	
 </head>
-<body>
+<body style="position:absolute; width:100%;">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-2">
-		<!-- 로고 -->
+	<div class="col-md-2">
 		<a href="<%= request.getContextPath()%>/gList.ga">
+		
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
-		</div>
-	<div class="col-md-6">	
+	</div>
+	<div class="col-md-10">
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
+		<!-- 로고 -->
+		
 		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
-		</button>	
+		</button>
+	
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<!-- 왼쪽 -->&nbsp;&nbsp;&nbsp;
 			<ul class="navbar-nav mr-auto">
@@ -140,7 +142,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-							<a class="dropdown-item" href="<%= request.getContextPath()%>myPageLink">마이페이지</a>
+							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypage.jsp">마이페이지</a>
 							<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 							<script>
 							function logout(){
@@ -152,7 +154,7 @@
 						</div>
 						<li>
 						<!-- 글쓰기 -->
-						<a href="<%= request.getContextPath()%>/views/board/galleryInsert.jsp">
+						<a href="<%= request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>
@@ -171,7 +173,7 @@
 				</script>
 		</div>
 	</nav>
-		<div class="col-md-2"></div>
+	</div>
 	</div>
 	<!-- 리모컨 -->
 	<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
@@ -179,6 +181,5 @@
 	<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
 	</div>
 	<a name="bottom"></a>
-	</div>
 </body>
 </html>

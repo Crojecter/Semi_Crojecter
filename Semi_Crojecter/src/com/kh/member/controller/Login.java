@@ -36,30 +36,40 @@ public class Login extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("password");
+		String url = request.getParameter("url");
 		
-		Member m = new Member(email,pwd);
-		MemberService ms = new MemberService();
+		System.out.println(email);
+		System.out.println(pwd);
 		
-		m = ms.selectMember(m);
-		
-		System.out.println(m);
-		if(m != null) {
+		if(email == ""){
+			System.out.println("이메일을 입력하세요.");
+		}else if(pwd == null){
+			System.out.println("비밀번호를 입력하세요.");
+		}else{
+			Member m = new Member(email,pwd);
+			MemberService ms = new MemberService();
 			
-			HttpSession session = request.getSession();
-			session.setAttribute("member", m);
-			response.sendRedirect("/crojecter");
-			System.out.println("로그인 성공");
+			m = ms.selectMember(m);
 			
-		} else {
-			
-			out.println("<script>");
-			out.println("alert('로그인 실패');");
-			out.println("history.back(-1);");
-			out.println("</script>");
-
-			System.out.println("로그인 실패");
+			System.out.println(m);
+			if(m != null) {
+				
+				HttpSession session = request.getSession();
+				session.setAttribute("member", m);
+				response.sendRedirect(url.substring(21));
+				System.out.println("로그인 성공");
+				
+			} else {
+				
+				out.println("<script>");
+				out.println("location.href='views/member/login.jsp';");
+				out.println("alert('로그인 실패\\n이메일 또는 비밀번호가 일치하지 않습니다.');");
+				out.println("</script>");
+				//response.sendRedirect("views/member/login.jsp");
+				System.out.println("로그인 실패");
+			}
 		}
-		
+				
 	}
 
 	/**

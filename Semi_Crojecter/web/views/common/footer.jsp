@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
+    pageEncoding="UTF-8"%>
 
-<footer style="background-color: gray; color: white; text-align: center; height:100px; margin-top:100px">
+<footer style="background-color: gray; color: white; text-align: center; height:100px; width:100%; position:absolute;">
 	<h4 style="padding-top:34px; padding-bottom:34px;">
 		<a href="<%= request.getContextPath()%>/views/noticeBoard/createrPage.jsp">CopyLight by Crojector</a> |
 		<a href="<%= request.getContextPath()%>/nList.no">공지사항</a> |

@@ -1,9 +1,11 @@
-package com.kh.board.gallery.controller;
+package com.kh.board.project.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Enumeration;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,25 +14,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-import org.json.simple.JSONObject;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
-import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.project.model.service.ProjectService;
+import com.kh.board.project.model.vo.Project;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 /**
- * Servlet implementation class GalleryInsertServler
+ * Servlet implementation class ProjectUpdateServlet
  */
-@WebServlet("/gInsert.ga")
-public class GalleryInsertServlet extends HttpServlet {
+@WebServlet("/jUpdate.pr")
+public class ProjectUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryInsertServlet() {
+    public ProjectUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +41,7 @@ public class GalleryInsertServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		GalleryService gs = new GalleryService();
+		ProjectService ps = new ProjectService();
 		
 		if(ServletFileUpload.isMultipartContent(request)){
 			// 만약 multipart/form-data 로 전송이 되었다면 실행해라!
@@ -56,21 +58,8 @@ public class GalleryInsertServlet extends HttpServlet {
 			
 			String savePath = root + "/uploadFiles/";
 			
-			// 사용자가 저장하는 파일을 서버의 형식에 맞게
-			// 이름을 변경하여 설정하기
-			// ex) kakaoTalk_20181029_00000.jpg
-			
-			// DefaultFileRenamePolicy 의 경우 같은 파일이 이미 존재하는 지 검사한 후에
-			// 만약 존재한다면 파일명 뒤에 숫자를 붙여서 이름을 변경한다.
-			// abc.zip --> abc1.zip ---> abc2.zip
-			
 			MultipartRequest mrequest =
-					new MultipartRequest(request, 
-										 savePath,
-										 maxSize,
-										 "UTF-8",
-										 new DefaultFileRenamePolicy()
-							);
+					new MultipartRequest(request,savePath,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 			
 			// 대표 이미지 영역의 파일만 불러온다.
 			File savefile = mrequest.getFile("thumbnailInput");
@@ -80,55 +69,47 @@ public class GalleryInsertServlet extends HttpServlet {
 			String fileName = savefile.getName();  
 			
 			System.out.println("path : " + path);				
-			System.out.println("fileName : " + fileName);							
-
-			// Gallery 객체 생성 후 DB 전달 VO 설정하기
-			/////
-			Gallery g = new Gallery();
+			System.out.println("fileName : " + fileName);
+			
+			// selectProjectMap(bid) : projectUpdate.jsp에서 받아온 bid로 Project와 AttachedFile을 불러온다.
+			int bid = Integer.parseInt(request.getParameter("bid"));
+			System.out.println("bid : " + bid);
+			
+			HashMap<String, Object> prj = ps.selectProjectMap(bid);
+			
+			// Project 객체 생성 후 DB 전달 VO 설정하기
+			Project p = (Project)prj.get("project");
 			
 			System.out.println("userId : " + mrequest.getParameter("userId"));
 			
-			g.setBtype(2);
-			g.setBtitle(mrequest.getParameter("title"));
-			g.setBcontent(mrequest.getParameter("content"));
-			g.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
-			g.setGcategoryid(Integer.parseInt(mrequest.getParameter("category")));
-			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
-			g.setGtag(mrequest.getParameter("tags"));
-			
-			System.out.println("setBcontent : " + mrequest.getParameter("content"));
-			System.out.println("tags : " + mrequest.getParameter("tags"));
+			p.setBtype(3);
+			p.setBtitle(mrequest.getParameter("title"));
+			p.setBcontent(mrequest.getParameter("content"));
+			p.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
+			p.setJtag(mrequest.getParameter("tags"));
+			 
+		    String endDate = mrequest.getParameter("date");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		    Date jend;
+			try {
+				jend = new Date(sdf.parse(endDate).getTime());
+				p.setJend(jend);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}	
 			
 			// Attachment 객체 생성 후 DB 전달 값 설정
-			AttachedFile af = new AttachedFile();
+			AttachedFile af= (AttachedFile)prj.get("attachedfile");
 			
-			switch(g.getGcategoryid()){
-			case 1: 
-				af.setFname("textCategoryImage.png"); 
-				af.setFpath(savePath); 
-				break;
-			case 2: 									
-					af.setFname(fileName);
-					af.setFpath(path);										
-				
-				break;
-			case 3: 
-				af.setFname("audioCategoryImage.png"); 
-				af.setFpath(savePath);
-				break;
-			case 4: 
-				af.setFname("videoCategoryImage.png"); 
-				af.setFpath(savePath); 
-				break;								
-		}			
-			
-			//System.out.println("list : " + list);
+			af.setFname(fileName); 
+			af.setFpath(savePath); 
+
 			// service로 작성한 내용 전송하기
 			
-			int result = gs.insertGallery(g, af);
+			int result = ps.updateProject(p, af);
 			
 			if(result > 0) {
-				response.sendRedirect("gSelectOne.ga?bid="+result);
+				response.sendRedirect("jSelectOne.pr?bid="+result*bid);
 				
 			} else {
 				request.setAttribute("msg", "파일 전송 실패!");
@@ -136,8 +117,7 @@ public class GalleryInsertServlet extends HttpServlet {
 				// 실패했을 때 이전 파일 정보 삭제하기
 				savefile.delete();
 				
-				request.getRequestDispatcher("views/common/errorPage.jsp")
-				.forward(request, response);
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
 		}
 	}
