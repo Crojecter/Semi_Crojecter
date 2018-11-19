@@ -99,5 +99,24 @@ public class ProjectService {
 		return result;
 	}
 
+	public ArrayList<Project> selectProjectList(int currentPage, int limit) {
+		// 게시판 목록
+		Connection con = getConnection();
+		ArrayList<Project> list = pDao.selectProjectList(con, currentPage, limit);
+		
+		close(con);
+		return list;
+	}
+	
+	public int getCountProjectList() {
+		// 게시판 페이지
+
+		Connection con = getConnection();
+		int listCount = pDao.getCountProjectList(con);
+		
+		close(con);		
+		return listCount;
+	}
+
 
 }

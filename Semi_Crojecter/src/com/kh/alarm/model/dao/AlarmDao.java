@@ -68,7 +68,7 @@ public class AlarmDao{
 			rset = pstmt.executeQuery();
 			
 			alarmList = new ArrayList<Alarm>();
-			
+			//
 			while(rset.next()){
 				Alarm al = new Alarm();
 				

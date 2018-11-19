@@ -1,13 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.alarm.model.vo.*, java.util.*" %>
 <% 
-	
+	// 읽지않은 알람목록 조회용
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("alarmList");
 	System.out.println("alarmDetail alist : "+ alarmList);
-		
-/* 	Alarm al = (Alarm) request.getAttribute("Alarm");
-	int Mid = al.getMid();
-	String AFlag = al.getAFlag(); */
 
 %>    
 <!DOCTYPE html>
@@ -44,9 +40,9 @@
 			</tr>
 			<% } %>
 			</table>
-			<% } else { %>
-				현재 전송된 알람이 없습니다.
-			<% } %>
+		<% } else { %>
+			현재 전송된 알람이 없습니다.
+		<% } %>
 		</div>
 		<script>
 			$(function(){

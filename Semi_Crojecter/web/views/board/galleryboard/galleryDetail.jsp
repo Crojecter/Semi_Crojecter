@@ -291,8 +291,13 @@
 			var windowObj = null;
 			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
+<<<<<<< HEAD
 		    var yPos = (screen.availHeight / 2) - 150;
 		    
+=======
+		    var yPos = (screen.availHeight / 2) - (300 / 2);
+
+>>>>>>> refs/heads/master
 		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');

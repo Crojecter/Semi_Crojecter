@@ -11,20 +11,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.notice.model.service.NoticeService;
 import com.kh.board.notice.model.vo.Notice;
-import com.kh.boardcomment.model.service.BoardCommentService;
-import com.kh.boardcomment.model.vo.BoardComment;
+
+
 
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class NoticeListServlet
  */
-@WebServlet("/nSelectOne.no")
-public class NoticeSelectOneServlet extends HttpServlet {
+@WebServlet("/nList.no")
+public class NoticeListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOneServlet() {
+    public NoticeListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,25 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		//
+		ArrayList<Notice> noticeList = null;
+		NoticeService ns = new NoticeService();
 		
-		Notice n = new NoticeService().selectOne(bid);
+		//System.out.println("Mid ser : "+ request.getParameter("Mid"));
 		
+		noticeList = ns.selectNoticeList();
+		System.out.println();
 		String page = "";
-		if(n != null) {
-			page = "views/board/noticeboard/noticeDetail.jsp";
-			request.setAttribute("notice", n);
+		
+		if (noticeList != null){
+			page = "views/noticeBoard/noticePage.jsp";
+			request.setAttribute("noticeList", noticeList);
 			
 		} else {
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
+			request.setAttribute("msg", "공지목록 조회실패");
 		}
-		
 		request.getRequestDispatcher(page).forward(request, response);
-
 	}
 
 	/**

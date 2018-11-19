@@ -1,4 +1,4 @@
-package com.kh.board.notice.controller;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,22 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.notice.model.service.NoticeService;
-import com.kh.board.notice.model.vo.Notice;
-import com.kh.boardcomment.model.service.BoardCommentService;
-import com.kh.boardcomment.model.vo.BoardComment;
+import com.kh.board.gallery.model.service.GalleryService;
+import com.kh.board.gallery.model.vo.Gallery;
+
 
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class NoticeSearchServlet
  */
-@WebServlet("/nSelectOne.no")
-public class NoticeSelectOneServlet extends HttpServlet {
+@WebServlet("/gSearch.ga")
+public class GallerySearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOneServlet() {
+    public GallerySearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +32,35 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		// 검색 서블릿
+		// 검색 카데고리
+		String condition = request.getParameter("con");
+	
+		// 검색 키워드
+		String keyword = request.getParameter("keyword");
 		
-		Notice n = new NoticeService().selectOne(bid);
+		ArrayList<Gallery> searchGalleryList = new ArrayList<Gallery>();
+				
+		GalleryService gs = new GalleryService();
+		
+		searchGalleryList = gs.searchGallery(condition, keyword);
 		
 		String page = "";
-		if(n != null) {
-			page = "views/board/noticeboard/noticeDetail.jsp";
-			request.setAttribute("notice", n);
+		
+		if(searchGalleryList != null){
+			
+			page = "galleryMain.jsp";
+			request.setAttribute("list", searchGalleryList);
 			
 		} else {
+			
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
+			request.setAttribute("msg", "공지사항 검색실패");
+			
 		}
 		
 		request.getRequestDispatcher(page).forward(request, response);
-
+		
 	}
 
 	/**
