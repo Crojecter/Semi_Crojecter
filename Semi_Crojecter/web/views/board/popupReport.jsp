@@ -1,8 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member" %>
+<%@ page import="com.kh.board.notice.model.vo.*, com.kh.board.notice.model.service.*, com.kh.member.model.vo.Member, 
+				 com.kh.boardcomment.model.vo.*, com.kh.boardcomment.model.service.*" %>
 <%
 	Member m = (Member)session.getAttribute("member");
-	Gallery g = (Gallery)request.getAttribute("gallery");
+	int bid = Integer.parseInt(request.getParameter("b"));
+	int cid = Integer.parseInt(request.getParameter("c"));
+	Notice b = new NoticeService().selectOne(bid);
+	BoardComment bc = new BoardCommentService().selectOne(cid);
 %>
 <!DOCTYPE html>
 <html>
@@ -32,21 +36,33 @@
 		</fieldset>
 		<button onclick="doReport();">신고하기</button>
 	</div>
-	<script>
 	
-		console.log("로그인 : " + $(opener.document).find("#parentGetmid").text());
-		console.log("로그인 : <%= m.getMid() %>");
-		console.log("작성자 : " + $(opener.document).find("#parentGetName").text());
-		console.log("이전 페이지 : " + document.referrer);
-		
-		function doReport() {
+	<% if(cid < 1) { %>
+	<script>
+		$(function() {
+			$('#rWriter').text('<%= b.getMname() %>');
+			$('#rContent').text('<%= b.getBtitle() %>');
+		});
+	</script>
+	<% } else {%>
+	<script>
+		$(function() {
+			$('#rWriter').text('<%= bc.getCwname() %>');
+			$('#rContent').text('<%= bc.getCcontent() %>');
+		});
+	</script>
+	<% } %>
+	
+	<script>		
+		function doReport() {	
+			alert($('#rEtc').val());
 			$.ajax({
 				data : { 
-					rreason : '',
-					retc : $('#rEtc').val,
+					rreason : $('input[name="rReason"]:checked').val(),
+					retc : $('#rEtc').val(),
 					mid : '<%= m.getMid() %>',
-					cid : '',
-					bid : ''
+					cid : '<%= cid %>',
+					bid : '<%= bid %>'
 				},
 				url : "/crojecter/rInsert.re",
 				type : "post",
@@ -58,13 +74,9 @@
 						alert("오류가 발생하여 신고를 완료하지 못하였습니다.");
 						close();
 					}
-				},
-				error : function() {
-					alert("오류가 발생하여 신고를 완료하지 못하였습니다!");
-					close();
 				}
 			});
-		}
+		}		
 	</script>
 </body>
 </html>

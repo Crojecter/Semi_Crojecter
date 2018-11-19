@@ -110,11 +110,7 @@
 		</div>
 		
 		<div align="center" style="display:inline;">
-			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
-			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
-			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport();">신고</button>
-			
+			<button onclick="showReport(<%=j.getBid()%>, 0);">신고</button>
 			<% if(m != null && m.getMid() == j.getBwriter()){ // 글쓴이 본인인 경우 %>
 			<button onclick="location.href='<%= request.getContextPath() %>/jUpView.pr?bid='+<%=j.getBid()%>">수정하기</button>
 			<button onclick="location.href='<%= request.getContextPath() %>/jDelete.pr?bid='+<%=j.getBid()%>">삭제하기</button>
@@ -122,10 +118,11 @@
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 	</div>
+	
 	<div class="commentOuter" style="padding:5px;">
-		<div class="commentWriteArea" style="display:inline;">
+		<div class="commentWriteArea">
 			<div><input type="hidden" name="crefmid" value="-1" /></div>
-			<div display="inline">
+			<div style="display:inline;">
 				<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>
 				<button id="addComment" onclick="insertComment(this);">댓글 등록</button>
 			</div>
@@ -149,7 +146,7 @@
 	      			<% } %>
 					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
 					<button type="button" class="insertBtn" onclick="reComment(this);">댓글달기</button>&nbsp;&nbsp;
-					<button type="button" class="reportBtn" onclick="showReport();">신고</button>				 
+					<button type="button" class="reportBtn" onclick="showReport(<%=j.getBid()%>, <%=bc.getCid()%>);">신고</button>				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
@@ -232,13 +229,15 @@
 	<% } else { // 뷰어 입장 %>
 	<script>				
 		// 신고하기
-		function showReport() {
+		function showReport(bid, cid) {
 			var windowObj = null;
 			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - 150;
-		    
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp', 
+		    var b = bid;
+		    var c = cid;
+	
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
 		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}	

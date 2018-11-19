@@ -36,10 +36,14 @@ public class ReportDao {
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setInt(1, r.getRreason());
-			pstmt.setString(2, r.getRetc());
 			pstmt.setInt(3, r.getMid());
-			pstmt.setInt(4, r.getCid());
 			pstmt.setInt(5, r.getBid());
+			
+			if(r.getRreason() != 5) pstmt.setNull(2, java.sql.Types.NULL);
+			else pstmt.setString(2, r.getRetc());
+
+			if(r.getCid() > 0) pstmt.setInt(4, r.getCid());
+			else pstmt.setNull(4, java.sql.Types.NULL);
 			
 			result = pstmt.executeUpdate();
 			

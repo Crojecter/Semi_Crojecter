@@ -46,7 +46,7 @@ public class ReportInsertServlet extends HttpServlet {
 		
 		int result = new ReportService().insertReport(r);
 		
-		response.getWriter().print((result > 0) ? "ok" : "no"); // ok=이미 팔로워 한 상태
+		response.getWriter().print((result > 0) ? "ok" : "no");
 		
 	}
 

@@ -103,7 +103,7 @@ public class GalleryService {
 		
 		close(con);
 		
-		return result*bid;
+		return result;
 	}
 
 	public HashMap<String, Object> selectGalleryMap(int bid) {

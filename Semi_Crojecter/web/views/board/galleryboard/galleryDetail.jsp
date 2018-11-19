@@ -116,7 +116,7 @@
 			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
 			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
 			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport();">신고</button>
+			<button onclick="showReport(<%=g.getBid()%>, 0);">신고</button>
 			
 			<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
 			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
@@ -153,7 +153,7 @@
 	      			<% } %>
 					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
 					<button type="button" class="insertBtn" onclick="reComment(this);">댓글달기</button>&nbsp;&nbsp;
-					<button type="button" class="reportBtn" onclick="showReport();">신고</button>				 
+					<button type="button" class="reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button>				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
@@ -299,13 +299,15 @@
 		}
 		
 		// 신고하기
-		function showReport() {
+		function showReport(bid, cid) {
 			var windowObj = null;
 			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - 150;
-		    
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp', 
+		    var b = bid;
+		    var c = cid;
+
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
 		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}	
