@@ -59,15 +59,13 @@
 <body style="position:absolute; width:100%;">
 	<div class="row">
 	<div class="col-md-2">
+		<!-- 로고 -->
 		<a href="<%= request.getContextPath()%>/gList.ga">
-		
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
 	</div>
 	<div class="col-md-10">
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
-		<!-- 로고 -->
-		
-		
+
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 		</button>
