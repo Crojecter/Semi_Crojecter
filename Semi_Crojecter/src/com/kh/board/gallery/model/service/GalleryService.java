@@ -91,14 +91,27 @@ public class GalleryService {
 	}
 
 		
-	public ArrayList<Gallery> top5(){
-		// 게시글 순
+	public ArrayList<Gallery> galleryTop5(){
+		// 게시글 순위
+		
 		Connection con = getConnection();
-		ArrayList<Gallery> list = gDao.top5(con);
-		
+		ArrayList<Gallery> list = gDao.galleryTop5(con);
+
+		System.out.println("Top5 Ser : " + list);
 		close(con);
-		
 		return list;
+	}
+
+
+	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
+		ArrayList<Gallery> searchGalleryList = null;
+		Connection con = getConnection();
+		
+	
+		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
+				:  gDao.selectGalleryList(con);
+		
+		return searchGalleryList;
 	}
 
 }

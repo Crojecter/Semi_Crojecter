@@ -203,6 +203,7 @@ public class GalleryDao {
 		System.out.println("insertAttachedfile result : " + result);
 		return result;
 	}
+	
 	public ArrayList<Gallery> selectGalleryList(Connection con, int currentPage, int limit) {
 		
 		ArrayList<Gallery> list = null;
@@ -234,15 +235,15 @@ public class GalleryDao {
 				g.setBid(rset.getInt("BID"));
 				g.setBtype(rset.getInt("BTYPE"));
 				g.setBtitle(rset.getString("BTITLE"));
+				g.setBcontent(rset.getString("BCONTENT"));
 				g.setBcount(rset.getInt("BCOUNT"));
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBstatus(rset.getString("BSTATUS"));
 				g.setBwriter(rset.getInt("BWRITER"));
 				// 
 				
-				
 				list.add(g);
-				System.out.println("selectGalleryList Dao : "+ list);
+				//System.out.println("selectGalleryList Dao : "+ list);
 			}
 			
 		} catch (SQLException e) {
@@ -280,7 +281,7 @@ public class GalleryDao {
 		return listCount;
 	}
 
-	public ArrayList<Gallery> top5(Connection con) {
+	public ArrayList<Gallery> galleryTop5(Connection con) {
 		// 
 		Statement stmt = null;
 		ResultSet rset = null;
@@ -300,8 +301,13 @@ public class GalleryDao {
 				Gallery g = new Gallery();
 				
 				g.setBid(rset.getInt("BID"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBcount(rset.getInt("BCOUNT"));
 				
 				list.add(g);
+				System.out.println("Top5 Dao : " + list);
 			}
 		} catch (SQLException e) {
 			
@@ -314,6 +320,77 @@ public class GalleryDao {
 		
 		return list;
 	}
+
+
+	public ArrayList<Gallery> searchGallery(Connection con, String condition, String keyword) {
+		
+		ArrayList<Gallery> searchGalleryList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+				
+		String sql = null;
+		
+		switch(condition){
+		case "image" : 
+			sql = prop.getProperty("searchImage");
+			break;
+		case "audio" :
+			sql = prop.getProperty("searchAudio");
+			break;
+		case "text" : 
+			sql = prop.getProperty("searchText");
+			break;
+		case "vidio" : 
+			sql = prop.getProperty("searchVidio");
+			break;
+		}
+		
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, keyword);
+			rset = pstmt.executeQuery();
+			
+			searchGalleryList = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				
+				Gallery g = new Gallery();
+				// 갤러리분
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				// 상속분
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setBcontent(rset.getString("BCONTENT"));
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				
+				searchGalleryList.add(g); 
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		// 확인용 출력문
+		//for(Notice n : list) System.out.println(list);
+		return searchGalleryList;
+	}
+
+
+
+
+
 
 
 }

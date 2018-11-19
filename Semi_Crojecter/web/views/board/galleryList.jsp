@@ -2,9 +2,9 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.*" %>
  
 <% ArrayList<Gallery> gList = (ArrayList<Gallery>)request.getAttribute("list"); 
-	System.out.println("GalleryList ArrayList : "+ gList);
+	/* System.out.println("GalleryList ArrayList : "+ gList); */
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	System.out.println("PageInfo gl : "+ pi);
+	//System.out.println("PageInfo gl : "+ pi);
 	int currentPage = pi.getCurrentPage();
 	int listCount = pi.getListCount();
 	int maxPage = pi.getMaxPage();
@@ -16,33 +16,27 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 </head>
 <body>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="">제목부분  <span id="cid" class="badge" style="background:black; color:white;">5</span></a></h5>
-				<p class="card-text"><a href="">내용이 들어갈 부분입니다. 안들어갈수도 있어요. </a></p>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/eye.png" alt="" style="height:22px;"> 0000</a>
-				<a href="#" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"></a>
-			</div>
-		</div>
-		<div class="card" style="width: 300px; height: auto; display: inline-block;">
-		<a href="<%= request.getContextPath()%>/views/board/galleryDetail.jsp"><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall4.png" alt="Card image cap" class="gallery"></a>
-			<div class="card-body">
-				<h5 class="card-title"><a href="<%= request.getContextPath()%>/views/board/galleryDetail.jsp">제목부분</a></h5>
-				<p class="card-text"><a href="<%= request.getContextPath()%>/views/board/galleryDetail.jsp">내용이 들어갈 부분입니다. 안들어갈수도 있어요. </a></p>
-					<button disabled class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;">12</button>
-					<button onclick="addLike();" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;">14</button>
-					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 22</button>
-			</div>
-		</div>
+	<!-- 검색 프로토타입 -->
+	<div class="searchArea" align="center">
+		<select id="searchCondition" name="searchCondition">
+			<option>---</option>
+			<option value="writer">작성자</option>
+			<option value="title">제목</option>
+			<option value="content">내용</option>
+		</select>
+		<input type="search">
+		<button type="submit">검색하기</button>
+	</div>
+
 
 		<div class="galleryList">
- 		
+<%-- 
+		<!-- 상세데이터 조회용 코드 -->
 		<% if(gList != null){ %>
-			<table align="center" id="noticeList" style="background:lightblue">
+			
+			<table align="center" id="GlaaeryList" style="background:lightblue">
 			<tr id="noticeTR">
 
 				<th id="noticeTH" width="50px">갤러리 id</th>
@@ -52,6 +46,7 @@
 				<th id="noticeTH" width="50px">보드명</th>
 				<th id="noticeTH" width="50px">보드 타입</th>
 				<th id="noticeTH" width="50px">게시글 제목</th>
+				<th id="noticeTH" width="50px">게시글 내용</th>
 				<th id="noticeTH" width="50px">조회수</th>
 				<th id="noticeTH" width="50px">작성일</th>
 				<th id="noticeTH" width="50px">상태</th>
@@ -67,6 +62,7 @@
 				<td id="noticeTD"><%= gal.getBid() %></td>
 				<td id="noticeTD"><%= gal.getBtype() %></td>
 				<td id="noticeTD"><%= gal.getBtitle() %></td>
+				<td id="noticeTD"><%= gal.getBcontent() %></td>
 				<td id="noticeTD"><%= gal.getBcount() %></td>
 				<td id="noticeTD"><%= gal.getBdate() %></td>
 				<td id="noticeTD"><%= gal.getBstatus() %></td>
@@ -75,27 +71,32 @@
 			<% } %>
 	
 			</table>
+			
 		<% } else { %>
 				현재 갤러리 내용이 없습니다.
 		<% } %>
 		</div>	
 		
-		 
+ --%>
 		
 		<% for (Gallery gal : gList) { %>
-			<% System.out.println("gList jsp : "+gList); %>
+			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png"
 			alt="Card image cap" class="gallery"></a>
 				<div class="card-body">
-					<h5 class="card-title"><a href="">제목부분</a></h5>
-					<p class="card-text"><a href="">내용이 들어갈 부분입니다. 안들어갈수도 있어요.</a></p>
+					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
+					<p class="card-text"><a href=""><%= gal.getGtag() %></p>
 					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= gal.getBcount() %></button>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" 
+					alt="" style="height:22px;"><%= gal.getBcount() %></button>
 					<button onclick="addLike();" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" alt="" style="height:22px;"><%= gal.getGlike() %></button>
-					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary"><img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;"> 22</button>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
+					alt="" style="height:22px;"><%= gal.getGlike() %></button>
+					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
+					alt="" style="height:22px;"> 수</button>
 				</div>
 			</div>
 		<% } %>
@@ -111,7 +112,7 @@
 		</script>
 
 
-		<!-- 페이지 -->
+		<!-- 페이지  UI-->
 		<nav aria-label="..." class="pageNav"  align="center" style="float: right; position: absolute; left: 40%;">
 			<br>
 			<ul class="pagination" style="text-align: center">
@@ -130,13 +131,13 @@
 				</li>
 			</ul>
 		</nav>
-<%-- 		
-			<div class="pagingArea" align="center">
-			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=1'"><<</button>
+		<!-- 페이지  -->
+		<div class="pagingArea" align="center">
+			<button onclick="location.href='<%= request.getContextPath() %>/gList.ga?currentPage=1'">First</button>
 			<%  if(currentPage <= 1){  %>
-			<button disabled><</button>
+			<button disabled style="background:black">Pre</button>
 			<%  }else{ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage - 1 %>'"><</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/gList.ga?currentPage=<%=currentPage - 1 %>'">Pre</button>
 			<%  } %>
 			
 			<% for(int p = startPage; p <= endPage; p++){
@@ -149,13 +150,12 @@
 			<% } %>
 				
 			<%  if(currentPage >= maxPage){  %>
-			<button disabled>></button>
+			<button disabled>Next</button>
 			<%  }else{ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%=currentPage + 1 %>'">></button>
+			<button onclick="location.href='<%= request.getContextPath() %>/gList.ga?currentPage=<%=currentPage + 1 %>'">Next</button>
 			<%  } %>
-			<button onclick="location.href='<%= request.getContextPath() %>/selectList.bo?currentPage=<%= maxPage %>'">>></button>
-			
+			<button onclick="location.href='<%= request.getContextPath() %>/gList.ga?currentPage=<%= maxPage %>'">Last</button>			
 		</div> 
---%>
+
 </body>
 </html>

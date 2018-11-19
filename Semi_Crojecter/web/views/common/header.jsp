@@ -79,7 +79,7 @@
 				</li>
 				<!-- 프로젝트 -->
 				<li class="projectLink">
-				<h4><a href="<%= request.getContextPath()%>/views/projectBoard/projectPage.jsp">프로젝트</a></h4>
+				<h4><a href="<%= request.getContextPath()%>/pList.pr">프로젝트</a></h4>
 				</li>
 			</ul>
 				<!-- 오른쪽 -->
@@ -163,7 +163,12 @@
 				  <input type="text" class="search-query" placeholder="Search">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
-				</form>			
+				</form>
+				<script>
+				function searchImg(){
+					location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+				}
+				</script>
 		</div>
 	</nav>
 		<div class="col-md-2"></div>
