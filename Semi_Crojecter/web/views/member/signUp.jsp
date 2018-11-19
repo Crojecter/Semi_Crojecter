@@ -26,7 +26,6 @@
 		margin:1px 10px 1px 10px;
 	}
 	.label{
-		color:red;
 		text-align:center;
 		font-size:10px;
 		width:auto;
@@ -63,7 +62,7 @@
 							oninput="checkNickName();" <% if(nickName != null) { %> value="<%= nickName %>"/>
 							<% } %>
 							<br> <label id="labelNickname"
-							class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label></td>
+							class="label" style="color:red;">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label></td>
 					</tr>
 					<tr>
 						<td><label class="inputContent">이메일 주소</label></td>
@@ -80,7 +79,7 @@
 						<td><input type="email" name="emailCheck" id="emailCheck"
 							class="inputContent" placeholder="이메일 주소를 확인합니다"
 							oninput="checkedEmail();" <% if(email != null) { %> value="<%= email %>" <% } %>/><br> <label id="labelEmail"
-							class="label">이메일 형식에 맞지 않습니다.</label></td>
+							class="label" style="color:red;">이메일 형식에 맞지 않습니다.</label></td>
 					</tr>
 					<tr>
 						<td><label class="inputContent">비밀번호</label></td>
@@ -94,7 +93,7 @@
 						<td><input type="password" name="passwordCheck"
 							id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다"
 							oninput="checkedPassword();" /><br><label id="labelPwd"
-							class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
+							class="label" style="color:red;">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
 								특수문자 숫자 최소 1개 이상 포함
 						</label></td>
 					</tr>

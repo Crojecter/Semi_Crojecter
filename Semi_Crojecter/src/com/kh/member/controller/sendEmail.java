@@ -83,7 +83,7 @@ public class sendEmail extends HttpServlet {
 		} else {
 			
 			out.println("<script>");
-			out.println("alert('비밀번호 찾기 실패');");
+			out.println("alert('이메일 또는 닉네임이 일치하지 않습니다.');");
 			out.println("history.back(-1);");
 			out.println("</script>");
 			

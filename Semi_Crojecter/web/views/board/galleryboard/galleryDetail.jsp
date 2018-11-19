@@ -291,8 +291,8 @@
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);
-		    
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupSpon.jsp', 
+
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}
