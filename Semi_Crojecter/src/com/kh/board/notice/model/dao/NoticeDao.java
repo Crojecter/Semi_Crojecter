@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.notice.model.vo.Notice;
@@ -197,6 +198,28 @@ private Properties prop = new Properties();
 			close(pstmt);
 		}
 
+		return result;
+	}
+
+	public int deleteNotice(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteNotice");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

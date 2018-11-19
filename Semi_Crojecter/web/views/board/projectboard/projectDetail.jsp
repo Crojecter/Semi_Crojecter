@@ -2,13 +2,10 @@
 <%@ page import="com.kh.board.project.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
-	Member m = (Member)session.getAttribute("member");
-	System.out.println("m : " + m);
 	Project j = (Project)request.getAttribute("project");
-	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
-	
-	System.out.println("j : " + j);
-	System.out.println("clist : " + clist);
+	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 	
+	//System.out.println("j : " + j);
+	//System.out.println("clist : " + clist);
 %>
     
 <!DOCTYPE html>
@@ -69,7 +66,7 @@
 <title>갤러리 상세보기</title>
 </head>
 <body>
-
+	<%@ include file="../../common/header.jsp"%>
 	<div class="outer">
 		<br>
 		<h2 align="center">게시글 내용</h2>

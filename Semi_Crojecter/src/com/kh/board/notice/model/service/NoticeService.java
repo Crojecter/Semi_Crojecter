@@ -8,10 +8,8 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.notice.model.dao.NoticeDao;
 import com.kh.board.notice.model.vo.Notice;
-import com.kh.board.project.model.vo.Project;
 
 public class NoticeService {
 	
@@ -81,22 +79,19 @@ public class NoticeService {
 		return noticeList;
 	}
 
-	public Notice noticeSelectOne(int bid) {
-		// TODO Auto-generated method stub
-		Connection con = getConnection();
 
-		System.out.println("ns bid : "+ bid);
-		int result = 0;
+	public int deleteNotice(int bid) {
 		
-		Notice n = nDao.noticeSelectOne(con, bid);
-		if(n != null){
-			result = nDao.noticeUptdateCount(con, bid);
-
-			if(result > 0) commit(con);
-			else rollback(con);
-		}
+		Connection con = getConnection();
+		
+		int result = nDao.deleteNotice(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
 		close(con);
-		return n;
+		
+		return result;
 	}
 
 }

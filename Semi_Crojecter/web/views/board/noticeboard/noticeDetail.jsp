@@ -2,9 +2,7 @@
 <%@ page import="com.kh.board.notice.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
-	Member m = (Member)session.getAttribute("member");
 	Notice n = (Notice)request.getAttribute("notice");
-	System.out.println("m : " + m);
 %>
     
 <!DOCTYPE html>
@@ -49,6 +47,7 @@
 <title>공지사항 상세보기</title>
 </head>
 <body>
+	<%@ include file="../../common/header.jsp"%>
 
 	<div class="outer">		
 		<div class="tableArea">

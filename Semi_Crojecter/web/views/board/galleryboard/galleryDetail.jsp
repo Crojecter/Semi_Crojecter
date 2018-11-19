@@ -2,13 +2,10 @@
 <%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
-	Member m = (Member)session.getAttribute("member");
-	System.out.println("m : " + m);
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
-	
-	System.out.println("g : " + g);
-	System.out.println("clist : " + clist);
+	//System.out.println("g : " + g);
+	//System.out.println("clist : " + clist);
 %>
     
 <!DOCTYPE html>
@@ -32,12 +29,13 @@
 		background : black;
 		color: white;
 	}
+	
 	.tableArea {
 		border:1px solid black;
 		background : white;
 		color: black;
 		width:800px;
-		height:350px;
+		height:auto;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -69,6 +67,7 @@
 <title>갤러리 상세보기</title>
 </head>
 <body>
+	<%@ include file="../../common/header.jsp"%>
 
 	<div class="outer">
 		<br>
@@ -113,15 +112,14 @@
 		</div>
 		
 		<div align="center" style="display:inline;">
+			<% if(m != null && m.getMid() == g.getBwriter()){ %>
+			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
+			<% } %>	
 			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
 			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
 			<button onclick="showSpon();">후원하기</button>
 			<button onclick="showReport(<%=g.getBid()%>, 0);">신고</button>
-			
-			<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
-			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
-			<% } %>	
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 	</div>
@@ -138,6 +136,7 @@
 		<div class="commentListArea">
 	      <% if( clist != null ) { %>
 	      	<% for(BoardComment bc : clist) { %>
+	      	<hr />
 	      	<div class="comment">
 	      		<div class="commentInfo" style="display:inline;">
 	      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
@@ -163,7 +162,6 @@
 	      				<%= bc.getCcontent() %>
 	      			</p>
 	      		</div>
-	      		<hr />
 	      	</div>
 	  		<% } } %>
 		</div>
