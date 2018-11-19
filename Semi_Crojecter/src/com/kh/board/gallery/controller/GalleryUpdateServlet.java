@@ -65,16 +65,6 @@ public class GalleryUpdateServlet extends HttpServlet {
 										 new DefaultFileRenamePolicy()
 							);
 			
-			// 대표 이미지 영역의 파일만 불러온다.
-			File savefile = mrequest.getFile("thumbnailInput");
-			System.out.println("thumbnailInput file : " + savefile);
-
-			String path = savefile.getPath();
-			String fileName = savefile.getName();  
-			
-			System.out.println("GalleryUpdateServlet path : " + path);				
-			System.out.println("GalleryUpdateServlet fileName : " + fileName);										 
-			
 			// selectGalleryMap(bid) : galleryUpdate.jsp에서 받아온 bid로 Gallery와 AttachedFile을 불러온다.
 			int bid = Integer.parseInt(request.getParameter("bid"));
 			System.out.println("bid : " + bid);
@@ -92,6 +82,17 @@ public class GalleryUpdateServlet extends HttpServlet {
 			
 			/// 기존 bid의 AttachedFile 객체 불러와서 업데이트 하기 
 			AttachedFile af= (AttachedFile)gal.get("attachedfile");
+			
+			if(mrequest.getFile("thumbnailInput") != null){
+				// 대표 이미지 영역의 파일만 불러온다.
+				File savefile = mrequest.getFile("thumbnailInput");
+				System.out.println("thumbnailInput file : " + savefile);
+
+				String path = savefile.getPath();
+				String fileName = savefile.getName();  
+				
+				System.out.println("GalleryUpdateServlet path : " + path);				
+				System.out.println("GalleryUpdateServlet fileName : " + fileName);	
 				
 			switch(g.getGcategoryid()){
 				case 1: 
@@ -111,6 +112,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 					af.setFpath(savePath); 
 					break;								
 			}
+			}
 
 		int result = gs.updateGallery(g, af);
 		
@@ -127,9 +129,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			request.getRequestDispatcher(page).forward(request, response);
 			
 		}
-		
-		
-		
+
 		}
 	}
 

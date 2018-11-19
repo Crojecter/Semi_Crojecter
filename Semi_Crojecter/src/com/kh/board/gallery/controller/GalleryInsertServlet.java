@@ -45,7 +45,7 @@ public class GalleryInsertServlet extends HttpServlet {
 			// 만약 multipart/form-data 로 전송이 되었다면 실행해라!
 			
 			System.out.println("서블릿 들어왔니?");
-			
+			// 야 
 			// 전송할 파일의 용량 선정
 			int maxSize = 1024 * 1024 * 10;
 			

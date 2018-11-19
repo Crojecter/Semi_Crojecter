@@ -92,7 +92,7 @@ body {
 					style="width: 100%; height: 150px">
 
 				<button class="btn btn-success" id="insertBtn"
-					onclick="insertMember();">업로드</button>
+					onclick="insertGallery();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -108,8 +108,8 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
@@ -149,6 +149,7 @@ body {
 			$('#thumbnailArea').click(() => {
 				$('#thumbnailInput').click();
 				$('#thumbnailLabel').hide();
+			      
 			});
 		});
 		function LoadImg(value) {
@@ -157,25 +158,22 @@ body {
 				
 				reader.onload = function(e){					
 					$('#titleImg').attr('src', e.target.result);	
+					alert($('#thumbnailInput').val());
 				}
 				
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
 		
-		function insertMember() {
-			$("#insertform").submit();
-		}
-		
-		$("#insertform").submit(function(event){
-			
-			if(title.legnth < 0){
-				alert("제목을 입력해주세요.");
+		function insertGallery() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
 			}
-			else if($("#summernote").val == null){
+			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
 			}
-			else if($("#titleImg").val == null){
+			else if(!$("#thumbnailInput").val()){
 				alert("대표 이미지를 설정해주세요.");	
 			}
 			else if($("#category").val() == null) {
@@ -184,17 +182,12 @@ body {
 			else if($('#cclid').val() == null) {
 				alert("ccl을 선택해주세요.");				
 			}
-			else return;
-			event.preventDefault();
+			else $("#insertform").submit();
 			
-			//File file = new File(url);
-			//file.delete();
-			
-		});
+			event.preventDefault();			
+		}
 		
-		
-		
-		</script>
+	</script>
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

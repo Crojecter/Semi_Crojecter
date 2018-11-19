@@ -50,7 +50,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
+	<form id="insertform" action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div id="fileArea">
@@ -68,10 +68,10 @@ body {
 					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
 						style="border: white;">
 				</div>
-				<input class="sidebar" name="date" type="date" min="" max="">
+				<input class="sidebar" id="date" name="date" type="date" min="" max="">
 				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
 					style="width: 100%; height: 150px">
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -89,18 +89,18 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
 		            for (var i = files.length - 1; i >= 0; i--) {
 		              sendFile(files[i], this);
 		            }
-		          }
+		          },
 		        }		      
 		      });
-		});
+		    });
 		
 		$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
 		    var el = this, type = $(el).attr('type');
@@ -180,34 +180,24 @@ body {
 			}
 		}
 		
-		function insertMember() {
-			$("#insertform").submit();
-		}
-		
-		$("#insertform").submit(function(event){
-			
-			if(title.legnth < 0){
-				alert("제목을 입력해주세요.");
+		function insertProject() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
 			}
-			else if($("#summernote").val == null){
+			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
 			}
-			else if($("#titleImg").val == null){
+			else if(!$("#thumbnailInput").val()){
 				alert("대표 이미지를 설정해주세요.");	
 			}
-			else if($("#category").val() == null) {
-				alert("카테고리를 선택해주세요.");				
+			else if(!$("#date").val()){
+				alert("마감날짜를 입력해주세요.");	
 			}
-			else if($('#cclid').val() == null) {
-				alert("ccl을 선택해주세요.");				
-			}
-			else return;
-			event.preventDefault();
+			else $("#insertform").submit();
 			
-			//File file = new File(url);
-			//file.delete();
-			
-		});
+			event.preventDefault();			
+		}
 		
 		</script>
 

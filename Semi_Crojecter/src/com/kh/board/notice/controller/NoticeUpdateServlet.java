@@ -54,7 +54,7 @@ public class NoticeUpdateServlet extends HttpServlet {
 		int result = ns.updateNotice(n);
 		
 		if(result > 0) {
-			response.sendRedirect("nSelectOne.ga?bid="+(result*bid));
+			response.sendRedirect("nSelectOne.no?bid="+(result*bid));
 			
 		} else {
 

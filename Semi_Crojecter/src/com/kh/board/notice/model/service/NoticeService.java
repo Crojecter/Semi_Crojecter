@@ -8,8 +8,10 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.notice.model.dao.NoticeDao;
 import com.kh.board.notice.model.vo.Notice;
+import com.kh.board.project.model.vo.Project;
 
 public class NoticeService {
 	
@@ -77,21 +79,6 @@ public class NoticeService {
 		close(con);
 		
 		return noticeList;
-	}
-
-
-	public int deleteNotice(int bid) {
-		
-		Connection con = getConnection();
-		
-		int result = nDao.deleteNotice(con, bid);
-		
-		if(result > 0) commit(con);
-		else rollback(con);
-		
-		close(con);
-		
-		return result;
 	}
 
 }
