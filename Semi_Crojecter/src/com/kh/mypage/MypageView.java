@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.follow.model.service.FollowService;
-import com.kh.follow.model.vo.Follow;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
@@ -45,6 +43,7 @@ public class MypageView extends HttpServlet {
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");
+			request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);
 			
 		}
 	}

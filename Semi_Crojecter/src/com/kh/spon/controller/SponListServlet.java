@@ -33,12 +33,14 @@ public class SponListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Spon> list = null;
 		SponService ss = new SponService();
+		int mid = Integer.parseInt(request.getParameter("mid"));
 		
-		list = ss.selectlist();
+		list = ss.selectlist(mid);
 		
 		if(list != null){
 			
-			request.setAttribute("list", list);
+			request.setAttribute("slist", list);
+			request.getRequestDispatcher("views/mypage/paymentList.jsp").forward(request, response);
 			
 		} else {
 			

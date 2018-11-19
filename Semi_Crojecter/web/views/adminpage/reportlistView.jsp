@@ -39,7 +39,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../mypage/common/mypageHeader.jsp" %>
+<%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 <div class="searchArea">
 	<select id="searchList" name="searchList" type="submit">
 		<option>---</option>

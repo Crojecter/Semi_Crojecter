@@ -2,9 +2,8 @@
     pageEncoding="UTF-8" 
     import="com.kh.follow.model.vo.*, com.kh.member.model.vo.*,
     		com.kh.board.gallery.model.vo.*, java.util.*"%>
-    
 <%
-	ArrayList<Follow> flist = (ArrayList<Follow>)session.getAttribute("flist");
+	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
 	Gallery g = (Gallery)request.getAttribute("gallery");
 %>
 <!DOCTYPE html>
@@ -24,8 +23,9 @@
 <form action="<%=request.getContextPath()%>/followingView.do" method="post">
 <div class="followList">
 	<table>  
-		<% for(Follow f : flist){ %>
-		
+		<% for(Follow f : list){ %>
+		<tr>
+			<th>이름</th>
 		<tr>
 			<td id="name"><%=f.getFollowid() %></td>
 		</tr>

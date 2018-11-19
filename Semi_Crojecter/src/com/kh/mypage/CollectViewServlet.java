@@ -13,9 +13,9 @@ import com.kh.likeit.model.service.LikeitService;
 import com.kh.likeit.model.vo.Likeit;
 
 /**
- * Servlet implementation class MyworkViewServlet
+ * Servlet implementation class CollectViewServlet
  */
-@WebServlet("/colloectView.do")
+@WebServlet("/collectView.do")
 public class CollectViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,10 +32,10 @@ public class CollectViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Likeit> list = null;
-		LikeitService lis = new LikeitService();
+		LikeitService ls = new LikeitService();
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		
-		list = lis.searchLikeit(mid);
+		list = ls.searchLikeit(mid);
 		
 		if(list != null){
 			
@@ -58,4 +58,3 @@ public class CollectViewServlet extends HttpServlet {
 	}
 
 }
-

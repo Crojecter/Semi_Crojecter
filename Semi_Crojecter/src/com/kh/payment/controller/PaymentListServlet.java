@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.payment.model.service.PaymentService;
 import com.kh.payment.model.vo.Payment;
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
 
 /**
  * Servlet implementation class PaymentListServlet

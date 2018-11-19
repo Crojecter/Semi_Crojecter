@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MyworkViewServlet

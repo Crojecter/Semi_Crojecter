@@ -13,16 +13,16 @@ import com.kh.follow.model.service.FollowService;
 import com.kh.follow.model.vo.Follow;
 
 /**
- * Servlet implementation class FollowingViewServlet
+ * Servlet implementation class FollowerViewServlet
  */
 @WebServlet("/followerView.do")
-public class FollowingViewServlet extends HttpServlet {
+public class FollowerViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowingViewServlet() {
+    public FollowerViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,13 +33,14 @@ public class FollowingViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Follow> list = null;
 		FollowService fs = new FollowService();
-		
-		list = fs.searchFollower();
+		int mid = Integer.parseInt(request.getParameter("mid"));
+
+		list = fs.searchFollower(mid);
 		
 		if(list != null){
 			
 			request.setAttribute("list", list);
-			
+			request.getRequestDispatcher("views/mypage/followerList.jsp").forward(request, response);
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");

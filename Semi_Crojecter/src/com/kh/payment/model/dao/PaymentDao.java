@@ -133,4 +133,45 @@ private Properties prop = null;
 		return plist;
 	}
 
+
+	public ArrayList<Payment> searchPayment(Connection con, int mid) {
+		ArrayList<Payment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMypayment");
+
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);		
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Payment>();
+			
+			while(rset.next()){
+				
+				Payment p = new Payment();
+				
+				p.setPdate(rset.getDate("pdate"));
+				p.setPmoney(rset.getInt("pmoney"));
+		
+				list.add(p);
+				
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
 }

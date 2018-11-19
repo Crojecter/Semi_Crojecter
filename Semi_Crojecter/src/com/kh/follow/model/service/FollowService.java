@@ -50,17 +50,29 @@ public class FollowService {
 
 	}
 
-	public ArrayList<Follow> searchFollowing() {
+	public ArrayList<Follow> searchFollowing(int mid) {
 		
-		ArrayList<Follow> list = null;
 		Connection con = getConnection();
-		
-		list = fDao.selectList(con);
+		ArrayList<Follow> list = fDao.selectList(con, mid);
 		
 		close(con);
 		
 		return list;
 		
+	}
+
+	public ArrayList<Follow> searchFollower(int mid) {
+		
+		ArrayList<Follow> list = null;
+		Connection con = getConnection();
+		
+		list = fDao.selectFollowerList(con, mid);
+		
+		close(con);
+		
+		return list;
+
+
 	}
 
 }

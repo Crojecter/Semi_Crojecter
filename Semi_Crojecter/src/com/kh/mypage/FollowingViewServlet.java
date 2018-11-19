@@ -33,17 +33,19 @@ public class FollowingViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ArrayList<Follow> list = null;
 		FollowService fs = new FollowService();
+		int mid = Integer.parseInt(request.getParameter("mid"));
 		
-		list = fs.searchFollowing();
+		list = fs.searchFollowing(mid);
 		
 		if(list != null){
 			
 			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/mypage/followingList.jsp").forward(request, response);
 			
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");
-			
+	
 		}
 	}
 
