@@ -356,8 +356,11 @@ public class MemberDao {
 		return mlist;
 	}
 
+
 	public ArrayList<Member> selectMypage(Connection con) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 }
+

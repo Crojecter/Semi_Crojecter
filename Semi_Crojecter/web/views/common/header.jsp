@@ -25,16 +25,49 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+
+<!-- 부가적인 테마 -->
+<!-- <link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+
+
+
+
+<!-- include libraries(jQuery, bootstrap) -->
+<!-- <script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
+<link
+	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+	rel="stylesheet">
+<script
+	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+<!-- include summernote css/js-->
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
+	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 	<style>
 		
 	</style>
 	
 </head>
-<body>
+<body style="position:absolute; width:100%;">
+	<div class="row">
+	<div class="col-md-2">
+		<a href="<%= request.getContextPath()%>/gList.ga">
+		
+		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
+	</div>
+	<div class="col-md-10">
 	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
 		<!-- 로고 -->
-		<a href="<%= request.getContextPath()%>/gList.ga">
-		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
+		
+		
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 		</button>
@@ -108,7 +141,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-							<a class="dropdown-item" href="<%= request.getContextPath()%>myPageLink">마이페이지</a>
+							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypage.jsp">마이페이지</a>
 							<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 							<script>
 							function logout(){
@@ -120,7 +153,7 @@
 						</div>
 						<li>
 						<!-- 글쓰기 -->
-						<a href="<%= request.getContextPath()%>/views/board/boardInsert.jsp">
+						<a href="<%= request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>
@@ -134,6 +167,8 @@
 				</form>			
 		</div>
 	</nav>
+	</div>
+	</div>
 	<!-- 리모컨 -->
 	<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
 	<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>

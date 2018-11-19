@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.notice.model.vo.Notice;
+import com.kh.board.project.model.vo.Project;
 
 public class NoticeDao {
 	
@@ -84,43 +85,64 @@ private Properties prop = new Properties();
 		return result;
 	}
 
-	public int insertAttachedfile(Connection con, ArrayList<AttachedFile> list) {
+	public Notice selectOne(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice n = null;
+
+		String sql = prop.getProperty("selectOne");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if (rset.next()) {
+				n = new Notice();
+                
+				n.setBtype(rset.getInt("btype"));
+				n.setBtitle(rset.getString("btitle"));
+				n.setBcontent(rset.getString("bcontent"));
+				n.setBcount(rset.getInt("bcount"));
+				n.setBdate(rset.getDate("bdate"));
+				n.setBstatus(rset.getString("bstatus"));
+				n.setBrcount(rset.getInt("brcount"));
+				n.setBwriter(rset.getInt("bwriter"));
+				//n.setMname(rset.getString("mname"));
+				//n.setMprofile(rset.getString("mprofile"));
+
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return n;
+	}
+
+	public int updateBoard(Connection con, Notice n) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
-		String sql = prop.getProperty("insertAttachedfile");
-		
-		try{
-			
-			for(int i = 0 ; i < list.size(); i++){
-				
-				pstmt = con.prepareStatement(sql);				
-				
-				pstmt.setString(1, list.get(i).getFname());
-				pstmt.setString(2, list.get(i).getFpath());
-				
-				// 첫번째 데이터일 경우 대표 이미지로 level = 1
-				// 나머지 데이터는 일반 이미지로 level = 2
-				int level = 2;
-				if(i == 0 ) level = 1;
-				
-				pstmt.setInt(3, level);
-				pstmt.setInt(4, list.get(i).getBid());
-				System.out.println("list.get(i).getBid() : " + list.get(i).getBid());
-				System.out.println("level : " + level);
-				
-				result += pstmt.executeUpdate();
-				
-			}
-	
-			
+
+		String sql = prop.getProperty("updateBoard");
+
+		try {
+
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setString(1, n.getBtitle());
+			pstmt.setString(2, n.getBcontent());
+			pstmt.setInt(3, n.getBid());
+
+			result = pstmt.executeUpdate();
+
 		} catch (SQLException e) {
-			
+			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
-		System.out.println("NoticeDao insertAttachedfile result : " + result);
 		return result;
 	}
 
