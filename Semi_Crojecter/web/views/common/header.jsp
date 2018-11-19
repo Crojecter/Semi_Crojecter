@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
 <% Member m = (Member)session.getAttribute("member"); 
-	
-/*    
-	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("list"); 
-	System.out.println("Header alist : "+ alarmList);	
+    // 읽지않은 알람갯수 조회용
+	ArrayList<Alarm> aList = (ArrayList<Alarm>)request.getAttribute("aList"); 
+	System.out.println("Header alist : "+ aList);	
 	Alarm al = (Alarm) request.getAttribute("Alarm");
-	String AFlag = al.getAFlag();
-*/	
+	
 %>
 
 <!DOCTYPE html>
@@ -26,22 +24,24 @@
 
 	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 	<!-- 합쳐지고 최소화된 최신 CSS -->
-<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"> -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <!-- 부가적인 테마 -->
-<!-- <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-
+<!-- 폰트 설정 -->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
+	rel="stylesheet">
 
 
 <!-- include libraries(jQuery, bootstrap) -->
-<!-- <script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> -->
 <link
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
 	rel="stylesheet">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 <script
 	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
@@ -81,7 +81,7 @@
 				</li>
 				<!-- 프로젝트 -->
 				<li class="projectLink">
-				<h4><a href="<%= request.getContextPath()%>/views/projectBoard/projectPage.jsp">프로젝트</a></h4>
+				<h4><a href="<%= request.getContextPath()%>/pList.pr">프로젝트</a></h4>
 				</li>
 			</ul>
 				<!-- 오른쪽 -->
@@ -96,7 +96,8 @@
 					</form>
 					<% } else { %>
 					<ul class="navbar-nav mr-auto">
-						<li><%= m.getMemail() %>(Mid : <%= m.getMid() %>)님 환영합니다.</li>
+						<li class="alert alert-primary" style="height:45px"><%= m.getMemail() %>
+						(회원번호 : <%= m.getMid() %>)님 환영합니다.</li> &nbsp;&nbsp;&nbsp;
 						
 						<!-- 알람 -->
 						<li>
@@ -164,7 +165,12 @@
 				  <input type="text" class="search-query" placeholder="Search">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
-				</form>			
+				</form>
+				<script>
+				function searchImg(){
+					location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+				}
+				</script>
 		</div>
 	</nav>
 	</div>

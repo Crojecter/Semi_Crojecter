@@ -342,6 +342,81 @@ public class ProjectDao {
 		return result;
 	}
 
+	public ArrayList<Project> selectProjectList(Connection con, int currentPage, int limit) {
+		
+		ArrayList<Project> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+				
+		String sql = prop.getProperty("selectProjectList");		
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);			
+			
+			int startRow = (currentPage -1) * limit +1;	
+			int endRow = startRow + limit -1;
+			
+			rset = pstmt.executeQuery();			
+			list = new ArrayList<Project>();
+			
+			while(rset.next()){
+				
+				Project p = new Project();
+				// 갤러리분
+				p.setJid(rset.getInt("JID"));
+				p.setJend(rset.getDate("GEND"));
+				// 상속분
+				p.setBid(rset.getInt("BID"));
+				p.setBtype(rset.getInt("BTYPE"));
+				p.setBtitle(rset.getString("BTITLE"));
+				p.setBcontent(rset.getString("BCONTENT"));
+				p.setBcount(rset.getInt("BCOUNT"));
+				p.setBdate(rset.getDate("BDATE"));
+				p.setBstatus(rset.getString("BSTATUS"));
+				p.setBwriter(rset.getInt("BWRITER"));
+				// 
+				
+				
+				list.add(p);
+				//System.out.println("selectGalleryList Dao : "+ list);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int getCountProjectList(Connection con) {
+	// 
+		Statement stmt = null;
+		int listCount = 0;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countProjectList");
+		
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+			if(rset.next()){
+				listCount = rset.getInt(1);
+			}
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		System.out.println("현재 프로잭트 갯수 : "+ listCount);
+		return listCount;
+	}
+
+
 
 
 }

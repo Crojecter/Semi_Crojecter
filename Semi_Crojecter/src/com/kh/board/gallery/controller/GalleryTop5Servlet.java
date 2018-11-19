@@ -1,27 +1,29 @@
-package com.kh.board.notice.controller;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.common.model.vo.Board;
-import com.kh.board.notice.model.service.NoticeService;
-import com.kh.board.notice.model.vo.Notice;
+import com.google.gson.Gson;
+import com.kh.board.gallery.model.service.GalleryService;
+import com.kh.board.gallery.model.vo.Gallery;
 
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class GalleryTop5Servlet
  */
-@WebServlet("/nSelectOne.no")
-public class NoticeSelectOneServlet extends HttpServlet {
+@WebServlet("/gTop5.ga")
+public class GalleryTop5Servlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOneServlet() {
+    public GalleryTop5Servlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +33,13 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 
-		System.out.println("nsv bid : "+ request.getParameter("bid"));
-		int bid = Integer.parseInt(request.getParameter("bid"));
+		GalleryService gs = new GalleryService();
 		
-		NoticeService ns = new NoticeService();
+		ArrayList<Gallery> list = gs.galleryTop5();
+		System.out.println("Top5list ser: "+ list);
+		response.setContentType("application/json; charset=UTF-8");
 		
-		Notice n = ns.noticeSelectOne(bid);
-
-		String page = "";		
-		if(n != null){
-			page = "views/notice/noticeDetail.jsp";
-			request.setAttribute("notice", n);
-			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
-		}		
-		
-		request.getRequestDispatcher(page).forward(request, response);
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

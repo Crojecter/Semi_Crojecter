@@ -12,6 +12,59 @@
 	</head>
 	<body>
 		<%@ include file="views/common/header.jsp" %>
+		<table align="center" id="galleryTop5">
+			<thead>
+				<tr>
+					<th>글 번호 |</th>
+					<th>글 제목 |</th>
+					<th>작성자 |</th>
+					<th>작성일 |</th>
+					<th>조회수 |</th>
+				</tr>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>	
+
+
+		<!-- 순위조회용 테스트 코드 -->
+		<script>
+			// Top 5 계산 (TOP-N 분석)
+			$(function(){
+				
+				$.ajax({
+					url : '/crojecter/gTop5.ga',
+					type : 'get',
+					success : function(data){
+						
+						$table = $('#galleryTop5 tbody');
+						
+						for(var i in data){
+							
+							// console.log(data[i]);
+							var $trGallery = $('<tr>');
+							var $tdGalleryGid = $('<td>').text(data[i].bid);
+							var $tdGalleryBTitle = $('<td>').text(data[i].btitle);
+							var $tdGalleryBWriter = $('<td>').text(data[i].bwriter);
+							var $tdGalleryDate = $('<td>').text(data[i].bdate);
+							var $tdGalleryCount = $('<td>').text(data[i].bcount);
+							
+							$trBoard.append($tdGalleryGid)
+							.append($tdGalleryBTitle)
+							.append($tdGalleryBWriter)
+							.append($tdGalleryDate)
+							.append($tdGalleryCount);
+							
+							$table.append($trGallery);
+						}
+					}, error : function(data){
+						console.log("top5 조회 실패!!");
+					}
+				});
+				
+			});
+		</script>
+
 		<!-- 슬라이드 -->
 
 
@@ -77,7 +130,9 @@
 		    <span class="carousel-control-next-icon"></span>
 		  </a>
 		</div>
-		 <div style="background:violet; width: 300px; height: 300px;">
+			<div style="background:violet; width: 300px; height: 300px;">
+				<h4> = 자주 사용한 태그 = </h4>
+			</div>
 		
 		</div>
 
@@ -115,6 +170,61 @@
 				</form>
 			</div>		
 		</nav>
+		
+		
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
+			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
+			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
+			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
+			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
+				
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
+				<ul class="navbar-nav mr-auto"></ul>
+				<form class="form-inline my-2 my-lg-0">
+					<button class="nav-item dropdown" type="submit">
+						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							최신순		
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
+						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
+						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
+						</div>
+					</button>
+				</form>
+			</div>		
+		</nav>
+		
+		<script>
+		function searchImg(){
+			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		}
+		function searchAud(){
+			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		}
+		function searchTxt(){
+			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		}
+		function searchVid(){
+			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		}
+		</script>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>
 
