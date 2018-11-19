@@ -15,7 +15,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
 
-
 <style>
 body {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -82,7 +81,7 @@ body {
 					<option value="5">저작자-비영리-변경금지</option>
 					<option value="6">저작자-비영리-동일조건변경허락</option>
 				</select> 
-				<input type="text" name="tags" value="<%=g.getGtag()%>"style="width: 100%; height: 150px">
+				<input type="text" name="tags" data-role="tagsinput" value="<%=g.getGtag()%>" id="tagsinput" class="tagsinput">
 
 				<button class="btn btn-success" id="insertBtn" onclick="insertGallery();">업로드</button>
 				
@@ -169,9 +168,6 @@ body {
 			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
 			}
-//			else if(!$("#thumbnailInput").val()){
-//				alert("대표 이미지를 설정해주세요.");	
-//			}
 			else if($("#category").val() == null) {
 				alert("카테고리를 선택해주세요.");				
 			}
@@ -181,9 +177,12 @@ body {
 			else $("#insertform").submit();
 			
 			event.preventDefault();			
-		}				
+		}
+		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
 		</script>
+
 <%@ include file="../../common/footer.jsp" %>
 </body>
 </html>

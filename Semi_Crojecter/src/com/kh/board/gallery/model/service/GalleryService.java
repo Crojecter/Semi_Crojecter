@@ -163,18 +163,4 @@ public class GalleryService {
 
 
 
-
-
-
-//	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
-//		ArrayList<Gallery> searchGalleryList = null;
-//		Connection con = getConnection();
-//		
-//	
-//		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
-//				:  gDao.selectGalleryList(con);
-//		
-//		return searchGalleryList;
-//	}
-
 }

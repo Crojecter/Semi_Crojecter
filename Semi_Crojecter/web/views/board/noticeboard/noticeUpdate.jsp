@@ -62,7 +62,7 @@ body {
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertNotice();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -113,6 +113,19 @@ body {
 					}
 				});
 			}
+		
+		function insertNotice() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
+			}
+			else if(!$("#summernote").val()){
+				alert("내용을 입력해주세요.");	
+			}
+			else $("#insertform").submit();
+			
+			event.preventDefault();			
+		}
 		</script>
 
 </body>

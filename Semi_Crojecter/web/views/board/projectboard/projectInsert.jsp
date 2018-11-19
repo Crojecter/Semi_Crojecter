@@ -29,17 +29,27 @@ body {
 	font-size: 20px;
 }
 
-.thumbnailArea {
+#thumbnailArea {
+	position: relative;
 	width: 100%;
 	height: 150px;
 	border: 1px solid lightgray;
-	text-align: center;
 }
 
 #titleImg {
 	width: 100%;
 	height: 100%;
+	vertical-align: middle;	
 	border: none;
+}
+
+#thumbnailLabel {
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
 }
 </style>
 </head>
@@ -65,12 +75,12 @@ body {
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">
-					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
-						style="border: white;">
+					<img id="titleImg" style="border: white;">
+					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				</div>
 				<input class="sidebar" id="date" name="date" type="date" min="" max="">
-				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
-					style="width: 100%; height: 150px">
+				<input type="text" name="tags" placeholder="태그를 입력해주세요!" 
+				data-role="tagsinput" id="tagsinput" class="tagsinput">
 				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
@@ -154,20 +164,21 @@ body {
 						alert(url);
 						
 						$(el).summernote('editor.insertImage', url);
-					}, error : function(){						
+					}, error : function() {						
 						console.log("실패!!");
 						
 					}
 				});
 			}
+		
 		$(function(){
 			$('#fileArea').hide();
 			
 			$('#thumbnailArea').click(() => {
 				$('#thumbnailInput').click();
-				$('#thumbnailLabel').hide();
 			});
 		});
+		
 		function LoadImg(value) {
 			if(value.files && value.files[0]) {
 				var reader = new FileReader();
@@ -177,6 +188,7 @@ body {
 				}
 				
 				reader.readAsDataURL(value.files[0]);
+				$('#thumbnailLabel').attr('style', 'display : none');
 			}
 		}
 		
@@ -198,6 +210,8 @@ body {
 			
 			event.preventDefault();			
 		}
+		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
 		</script>
 
