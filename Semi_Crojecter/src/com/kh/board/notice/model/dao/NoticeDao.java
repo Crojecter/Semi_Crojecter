@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
+import com.kh.board.common.model.vo.Board;
 import com.kh.board.notice.model.vo.Notice;
 import com.kh.board.project.model.vo.Project;
 
@@ -145,6 +146,103 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
+
+	public ArrayList<Notice> selectNoticeList(Connection con) {
+		// 
+		ArrayList<Notice> noticeList = null;
+		// 값이 변하지 않으면 Statememt를 사용하는것이 유리하다.
+		Statement stmt = null;
+		ResultSet rset = null;
+
+		String sql = prop.getProperty("selectNoticeList");
+
+		try {
+			stmt = con.createStatement();
+			rset = stmt.executeQuery(sql);
+
+			noticeList = new ArrayList<Notice>();
+			// next 값이 없을때까지
+			while (rset.next()) {
+				Notice n = new Notice();
+				n.setBid(rset.getInt("BID"));
+				n.setBwriter(rset.getInt("BWRITER"));
+				n.setBtitle(rset.getString("BTITLE"));
+				n.setBcontent(rset.getString("BCONTENT"));
+				n.setBdate(rset.getDate("BDATE"));
+				n.setBcount(rset.getInt("BCOUNT"));	
+				noticeList.add(n);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(stmt);
+		}
+		return noticeList;
+	}
+
+	public Notice noticeSelectOne(Connection con, int bid) {
+		// 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Notice n = null;
+
+		String sql = prop.getProperty("noticeSelectOne");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+			pstmt.setInt(1, bid);
+
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				n = new Notice();
+				n.setBid(rset.getInt("BID"));
+				n.setBwriter(rset.getInt("BWRITER"));
+				n.setBtitle(rset.getString("BTITLE"));
+				n.setBcontent(rset.getString("BCONTENT"));
+				n.setBdate(rset.getDate("BDATE"));
+				n.setBcount(rset.getInt("BCOUNT"));
+				
+				System.out.println("조회할 notice : " + n);
+
+			}
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+	}
+
+	public int noticeUptdateCount(Connection con, int bid) {
+		// 
+		PreparedStatement pstmt = null;
+		int result = 0;
+
+		String sql = prop.getProperty("updateNoticeCount");
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
 
 
 

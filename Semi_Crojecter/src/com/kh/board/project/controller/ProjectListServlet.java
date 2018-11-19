@@ -1,4 +1,4 @@
-package com.kh.board.gallery.controller;
+package com.kh.board.project.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,29 +9,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.gallery.model.vo.PageInfo;
+import com.kh.board.project.model.service.ProjectService;
+import com.kh.board.project.model.vo.Project;
 
 /**
  * Servlet implementation class BoardListServlet
  */
-@WebServlet("/gList.ga")
-public class GalleryListServlet extends HttpServlet {
+@WebServlet("/pList.pr")
+public class ProjectListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryListServlet() {
+    public ProjectListServlet() {
         super();
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 게시글 목록용 서블릿
-		ArrayList<Gallery> list = null;
-		GalleryService gs = new GalleryService();
+		ArrayList<Project> list = null;
+		ProjectService ps = new ProjectService();
 		
 		int startPage;		// 첫 페이지	
 		int endPage;		// 마지막 페이지 
@@ -47,11 +47,11 @@ public class GalleryListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		// 전체 게시글 수 조회하기
-		int countGalleryList = gs.getCountGalleryList();
+		int countProjectList = ps.getCountProjectList();
 		
-		System.out.println("전체 게시글 수 : "+ countGalleryList);
+		System.out.println("전체 게시글 수 : "+ countProjectList);
 					
-		maxPage = (int)((double)countGalleryList / limit + 0.9);
+		maxPage = (int)((double)countProjectList / limit + 0.9);
 		
 		startPage = ((int)((double)currentPage / limit + 1.9) - 1) * limit + 1;
 		
@@ -62,21 +62,21 @@ public class GalleryListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		list = gs.selectGalleryList(currentPage, limit);
+		list = ps.selectProjectList(currentPage, limit);
 		//System.out.println("GalleryListServlet ga : "+ list);
 		String page = "";
 		
 		if(list != null){
 			
-			PageInfo pi = new PageInfo(currentPage, countGalleryList, limit, maxPage, startPage, endPage);
+			PageInfo pi = new PageInfo(currentPage, countProjectList, limit, maxPage, startPage, endPage);
 			
-			page = "galleryMain.jsp";
+			page = "projectPage.jsp";
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);
 		} else {
 			
 			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "게시글 목록 조회실패");
+			request.setAttribute("msg", "프로젝트 목록 조회실패");
 		}
 		request.getRequestDispatcher(page).forward(request, response);		
 		
