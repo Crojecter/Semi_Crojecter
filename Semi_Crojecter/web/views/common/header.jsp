@@ -114,14 +114,15 @@
 								}
 							});
 						});
-					    <script>
+					    
 						function openAlarmList() {
+							
 							// 알람창 크기
-							var xPos = (document.body.clientWidth / 2) - (500 / 2); 
+							var xPos = ((document.body.clientWidth / 2) - (500 / 2)); 
 						    xPos += window.screenLeft;
-						    var yPos = (screen.availHeight / 2) - (300 / 2);
+						    var yPos = ((screen.availHeight / 2) - (300 / 2));
 
-						    window.open('<%= request.getContextPath() %>/views/alarm/alarmDetail.jsp?Mid=<%= m.getMid() %>', 
+						    window.open('<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>', 
 						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
 						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 						}
