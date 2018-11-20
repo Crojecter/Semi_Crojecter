@@ -65,6 +65,7 @@ public class GalleryDao {
 				g.setBwriter(rset.getInt("bwriter"));
 				g.setMname(rset.getString("mname"));
 				g.setMprofile(rset.getString("mprofile"));
+				
 
 				// System.out.println("gdao g : " + g);
 			}
@@ -420,7 +421,7 @@ public class GalleryDao {
 				g.setBstatus(rset.getString("BSTATUS"));
 				g.setBwriter(rset.getInt("BWRITER"));
 				// 
-				
+				g.setFname(rset.getString("FNAME"));
 				
 				list.add(g);
 				System.out.println("selectGalleryList Dao : "+ list);
@@ -485,6 +486,8 @@ public class GalleryDao {
 				g.setBwriter(rset.getInt("BWRITER"));
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBcount(rset.getInt("BCOUNT"));
+				
+				g.setFname(rset.getString("FNAME"));
 				
 				list.add(g);
 				System.out.println("Top5 Dao : " + list);

@@ -288,6 +288,7 @@
 		
 		// 후원하기
 		function showSpon() {
+			// 알람창 크기
 			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - (300 / 2);

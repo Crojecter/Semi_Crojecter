@@ -83,20 +83,20 @@
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png"
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
 			alt="Card image cap" class="gallery"></a>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
-					<p class="card-text"><a href=""><%= gal.getGtag() %></p>
+					<p class="card-text"><a href=""><%= gal.getGtag() %></a></p>
 					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" 
-					alt="" style="height:22px;"><%= gal.getBcount() %></button>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= gal.getBcount() %>
+					</button>
 					<button onclick="addLike();" class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;"><%= gal.getGlike() %></button>
+					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= gal.getGlike() %></button>
 					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;"> 수</button>
+					alt="" style="height:22px;">수</button>
 				</div>
 			</div>
 		<% } %>

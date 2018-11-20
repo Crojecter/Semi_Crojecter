@@ -6,6 +6,7 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;

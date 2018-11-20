@@ -4,7 +4,8 @@
 	// 읽지않은 알람목록 조회용
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("alarmList");
 	System.out.println("alarmDetail alist : "+ alarmList);
-
+	int mid = Integer.parseInt(request.getParameter("Mid"));
+	int result = 0;
 %>    
 <!DOCTYPE html>
 <html>
@@ -14,7 +15,6 @@
 	<style>
 		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
 	</style>
-
 </head>
 
 	<div class="outer">
@@ -51,9 +51,18 @@
 					location.href="<%=request.getContextPath()%>/aList.al?Aid=" + Aid;
 				});
 			});
+			
+			var result = 0;
+			$(document).ready(function(){
+				$.ajax({
+					data : { Mid : <%= mid %>},
+					url : "/crojecter/aList.al",
+					type : "post"
+					success : function(data){}
+				});
+			});
 		</script>
 
 
-	</table>
 </body>
 </html>

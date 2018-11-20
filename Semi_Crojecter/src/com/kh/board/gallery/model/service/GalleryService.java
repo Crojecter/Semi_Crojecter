@@ -157,14 +157,6 @@ public class GalleryService {
 		return list;
 	}
 	
-	
-
-
-
-
-
-
-
 
 	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
 		ArrayList<Gallery> searchGalleryList = null;
