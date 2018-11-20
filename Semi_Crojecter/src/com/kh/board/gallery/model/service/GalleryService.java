@@ -169,4 +169,11 @@ public class GalleryService {
 		return searchGalleryList;
 	}
 
+
+	public int updateAlarm(int aid) {
+		// 
+		
+		return 0;
+	}
+
 }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.gallery.model.service.GalleryService;
+
 /**
  * Servlet implementation class AlarmUpdateServlet
  */
@@ -27,7 +29,16 @@ public class AlarmUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 
+		int Aid = Integer.parseInt(request.getParameter("Aid"));
 		
+		int result = new GalleryService().updateAlarm(Aid);
+		
+		if(result > 0) {
+			response.sendRedirect("gSelectOne.ga?bid="+Aid);
+		} else {
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
+		}
 	}
 
 	/**
