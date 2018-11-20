@@ -1,8 +1,7 @@
 package com.kh.alarm.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.alarm.model.service.AlarmService;
-import com.kh.alarm.model.vo.Alarm;
 
 /**
  * Servlet implementation class alarmRead
@@ -35,11 +33,19 @@ public class AlarmReadServlet extends HttpServlet {
 		AlarmService as = new AlarmService();
 		
 		int unReadAlarm = 0;
+		System.out.println("countUnreadAlarm : "+ unReadAlarm);
 		
-		unReadAlarm = as.countUnReadAlarm();
+		int mid = Integer.parseInt(request.getParameter("Mid"));
 		
-		request.setAttribute("unReadAlarm", unReadAlarm);
+		unReadAlarm = as.countUnReadAlarm(mid);
 		
+		if(unReadAlarm < 0){
+			System.out.println("조회할 알람메세지가 없습니다.");
+		}
+		else{
+			PrintWriter out = response.getWriter();
+			out.print(unReadAlarm);
+		}
 	}
 
 	/**

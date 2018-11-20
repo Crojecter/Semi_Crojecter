@@ -45,7 +45,7 @@ public class GalleryInsertServlet extends HttpServlet {
 			// 만약 multipart/form-data 로 전송이 되었다면 실행해라!
 			
 			System.out.println("서블릿 들어왔니?");
-			
+			// 야 
 			// 전송할 파일의 용량 선정
 			int maxSize = 1024 * 1024 * 10;
 			
@@ -71,16 +71,6 @@ public class GalleryInsertServlet extends HttpServlet {
 										 "UTF-8",
 										 new DefaultFileRenamePolicy()
 							);
-			
-			// 대표 이미지 영역의 파일만 불러온다.
-			File savefile = mrequest.getFile("thumbnailInput");
-			System.out.println("thumbnailInput file : " + savefile);
-
-			String path = savefile.getPath();
-			String fileName = savefile.getName();  
-			
-			System.out.println("path : " + path);				
-			System.out.println("fileName : " + fileName);							
 
 			// Gallery 객체 생성 후 DB 전달 VO 설정하기
 			/////
@@ -101,7 +91,23 @@ public class GalleryInsertServlet extends HttpServlet {
 			
 			// Attachment 객체 생성 후 DB 전달 값 설정
 			AttachedFile af = new AttachedFile();
+			File savefile = null;
+			String path = null;
+			String fileName = null;
 			
+			if(mrequest.getFile("thumbnailInput") != null){
+			// 대표 이미지 영역의 파일만 불러온다.
+			savefile = mrequest.getFile("thumbnailInput");
+			System.out.println("thumbnailInput file : " + savefile);
+
+			path = savefile.getPath();
+			fileName = savefile.getName();  
+						
+			System.out.println("path : " + path);				
+			System.out.println("fileName : " + fileName);			
+			
+			}
+
 			switch(g.getGcategoryid()){
 			case 1: 
 				af.setFname("textCategoryImage.png"); 

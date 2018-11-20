@@ -4,7 +4,7 @@
 	import="com.kh.board.notice.model.vo.*, com.kh.member.model.vo.Member"%>
 <% 
 	Notice n = (Notice)request.getAttribute("notice"); 
-	System.out.println("bid : "+n.getBid());
+	System.out.println("NoticeUpdate.jsp bid : "+n);
 %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -58,11 +58,11 @@ body {
 			<div class="col-md-2"></div>
 			<div class="col-md-6">
 				<input type="text" class="form-control" id="title" name="title" value="<%=n.getBtitle()%>">
-				<textarea id="summernote" name="content">><%=n.getBcontent()%></textarea>
+				<textarea id="summernote" name="content"><%=n.getBcontent()%></textarea>
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertNotice();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -78,15 +78,15 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
 		            for (var i = files.length - 1; i >= 0; i--) {
 		              sendFile(files[i], this);
 		            }
-		          }
+		          },
 		        }		      
 		      });
 		    });
@@ -113,6 +113,19 @@ body {
 					}
 				});
 			}
+		
+		function insertNotice() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
+			}
+			else if(!$("#summernote").val()){
+				alert("내용을 입력해주세요.");	
+			}
+			else $("#insertform").submit();
+			
+			event.preventDefault();			
+		}
 		</script>
 
 </body>

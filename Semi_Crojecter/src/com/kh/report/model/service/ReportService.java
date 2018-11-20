@@ -1,7 +1,6 @@
 package com.kh.report.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -11,7 +10,33 @@ import com.kh.report.model.vo.Report;
 
 public class ReportService {
 
-	private ReportDao rDao = new ReportDao();
+	ReportDao rDao = new ReportDao();
+
+	public int insertReport(Report r) {
+		Connection con = getConnection();
+
+		int result = rDao.insertReport(con, r);
+
+		if (result > 0) commit(con);
+		else rollback(con);
+
+		close(con);
+
+		return result;
+	}
+
+	public int deleteReport(int rid) {
+		Connection con = getConnection();
+
+		int result = rDao.deleteReport(con, rid);
+
+		if (result > 0) commit(con);
+		else rollback(con);
+
+		close(con);
+
+		return result;
+	}
 	public ArrayList<Report> selectlist() {
 		ArrayList<Report> list = null;
 		Connection con = getConnection();

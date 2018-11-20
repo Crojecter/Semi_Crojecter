@@ -14,6 +14,19 @@ public class Gallery extends Board implements Serializable {
 	private String gcategoryname;	// 게시글 종류명
 	private String cclname;			// 게시글 저작권정보명
 	
+	
+	
+	// 파일경로 조회용 코드
+	private String fname;
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	//
+	
+	
 	public Gallery() {
 		super();
 	}

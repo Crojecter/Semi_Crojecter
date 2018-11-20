@@ -10,17 +10,19 @@ public class Project extends Board implements Serializable {
 	private int jid;
 	private Date jend;
 	private String jtag;
+	private int dday;
 	
 	
 	public Project() {
 		super();
 	}
 
-	public Project(int jid, Date jend,  String jtag) {
+	public Project(int jid, Date jend,  String jtag, int dday) {
 		super();
 		this.jid = jid;
 		this.jend = jend;
-		this.jtag = jtag;		
+		this.jtag = jtag;	
+		this.dday = dday;
 	}
 
 	public int getJid() {
@@ -47,14 +49,22 @@ public class Project extends Board implements Serializable {
 		this.jtag = jtag;
 	}
 
+	public int getDday() {
+		return dday;
+	}
+
+	public void setDday(int dday) {
+		this.dday = dday;
+	}
+
 	@Override
 	public String toString() {
-		return "Project [getJid()=" + getJid() + ", getJend()=" + getJend() + ", getJtag()=" + getJtag() + ", getBid()="
-				+ getBid() + ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle() + ", getBcontent()="
-				+ getBcontent() + ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate() + ", getBstatus()="
-				+ getBstatus() + ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount()
-				+ ", getMprofile()=" + getMprofile() + ", getMname()=" + getMname() + ", toString()=" + super.toString()
-				+ ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Project [jid=" + jid + ", jend=" + jend + ", jtag=" + jtag + ", dday=" + dday + ", getBid()=" + getBid()
+				+ ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle() + ", getBcontent()=" + getBcontent()
+				+ ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate() + ", getBstatus()=" + getBstatus()
+				+ ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount() + ", getMprofile()="
+				+ getMprofile() + ", getMname()=" + getMname() + ", toString()=" + super.toString() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + "]";
 	}
-	
+
 }

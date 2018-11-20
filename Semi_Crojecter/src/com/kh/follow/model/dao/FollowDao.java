@@ -8,8 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
@@ -23,7 +21,7 @@ public class FollowDao {
 	
 	public FollowDao() {
 		
-		String filePath = GalleryDao.class.getResource("/config/follow-query.properties").getPath();
+		String filePath = FollowDao.class.getResource("/config/follow-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));		
 		} catch (IOException e) {			

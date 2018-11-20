@@ -146,18 +146,42 @@ public class GalleryService {
 	}
 
 		
-	public ArrayList<Gallery> top5(){
-		// 게시글 순
+	public ArrayList<Gallery> galleryTop5(){
+		// 게시글 순위
+		
 		Connection con = getConnection();
-		ArrayList<Gallery> list = gDao.top5(con);
-		
+		ArrayList<Gallery> list = gDao.galleryTop5(con);
+
+		System.out.println("Top5 Ser : " + list);
 		close(con);
-		
 		return list;
 	}
 	
-	
 
+	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
+		ArrayList<Gallery> searchGalleryList = null;
+		Connection con = getConnection();
+		
+	
+		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
+				:  gDao.selectGalleryList(con);
+		
+		return searchGalleryList;
+	}
+
+	public int deleteGallery(int bid) {
+		
+		Connection con = getConnection();
+		
+		int result = gDao.deleteGallery(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 	public ArrayList<Gallery> searchGallery(int mid) {
 		Connection con = getConnection();

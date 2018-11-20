@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.report.model.vo.*, java.util.*"%>
 <%
+<<<<<<< HEAD
 	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list"); 
+=======
+	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
+	System.out.println("rlist : " + rlist);
+>>>>>>> refs/remotes/origin/master
 %>
 <!DOCTYPE html>
 <html>

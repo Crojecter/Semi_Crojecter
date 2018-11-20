@@ -21,7 +21,7 @@ public class LikeitDao {
 	
 	public LikeitDao() {
 		
-		String filePath = GalleryDao.class.getResource("/config/likeit-query.properties").getPath();
+		String filePath = LikeitDao.class.getResource("/config/likeit-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));		
 		} catch (IOException e) {			

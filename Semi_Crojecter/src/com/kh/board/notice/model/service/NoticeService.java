@@ -69,5 +69,30 @@ public class NoticeService {
 		return result;
 	}
 
+	public ArrayList<Notice> selectNoticeList() {
+		// 
+		Connection con = getConnection();
+		ArrayList<Notice> noticeList = null;
+		
+		noticeList = nDao.selectNoticeList(con);
+		
+		close(con);
+		
+		return noticeList;
+	}
+	
+	public int deleteNotice(int bid) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.deleteNotice(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

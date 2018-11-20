@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.alarm.model.vo.*, java.util.*" %>
 <% 
-	
+	// 읽지않은 알람목록 조회용
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("alarmList");
 	System.out.println("alarmDetail alist : "+ alarmList);
-		
-/* 	Alarm al = (Alarm) request.getAttribute("Alarm");
-	int Mid = al.getMid();
-	String AFlag = al.getAFlag(); */
-
+	int mid = Integer.parseInt(request.getParameter("Mid"));
+	int result = 0;
 %>    
 <!DOCTYPE html>
 <html>
@@ -18,7 +15,6 @@
 	<style>
 		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
 	</style>
-
 </head>
 
 	<div class="outer">
@@ -44,9 +40,9 @@
 			</tr>
 			<% } %>
 			</table>
-			<% } else { %>
-				현재 전송된 알람이 없습니다.
-			<% } %>
+		<% } else { %>
+			현재 전송된 알람이 없습니다.
+		<% } %>
 		</div>
 		<script>
 			$(function(){
@@ -55,9 +51,18 @@
 					location.href="<%=request.getContextPath()%>/aList.al?Aid=" + Aid;
 				});
 			});
+			
+			var result = 0;
+			$(document).ready(function(){
+				$.ajax({
+					data : { Mid : <%= mid %>},
+					url : "/crojecter/aList.al",
+					type : "post"
+					success : function(data){}
+				});
+			});
 		</script>
 
 
-	</table>
 </body>
 </html>

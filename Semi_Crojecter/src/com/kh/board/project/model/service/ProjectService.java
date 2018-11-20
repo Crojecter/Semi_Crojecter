@@ -6,10 +6,10 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.project.model.dao.ProjectDao;
 import com.kh.board.project.model.vo.Project;
 
@@ -94,6 +94,38 @@ public class ProjectService {
 			result = 1;
 			
 		} else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
+	public ArrayList<Project> selectProjectList(int currentPage, int limit) {
+		// 게시판 목록
+		Connection con = getConnection();
+		ArrayList<Project> list = pDao.selectProjectList(con, currentPage, limit);
+		
+		close(con);
+		return list;
+	}
+	
+	public int getCountProjectList() {
+		// 게시판 페이지
+
+		Connection con = getConnection();
+		int listCount = pDao.getCountProjectList(con);
+		
+		close(con);		
+		return listCount;
+	}
+	
+	public int deleteProject(int bid) {
+		Connection con = getConnection();
+		
+		int result = pDao.deleteProject(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
 		
 		close(con);
 		

@@ -7,10 +7,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.board.common.model.vo.Board;
+import com.kh.board.notice.model.service.NoticeService;
+import com.kh.board.notice.model.vo.Notice;
+
 /**
  * Servlet implementation class NoticeSelectOneServlet
  */
-@WebServlet("/NoticeSelectOneServlet")
+@WebServlet("/nSelectOne.no")
 public class NoticeSelectOneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -26,8 +30,25 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// 
+		System.out.println("nsv bid : "+ request.getParameter("bid"));
+		int bid = Integer.parseInt(request.getParameter("bid"));
+		
+		NoticeService ns = new NoticeService();
+		
+		Notice n = ns.selectOne(bid);
+
+		String page = "";		
+		if(n != null){
+			page = "views/board/noticeboard/noticeDetail.jsp";
+			request.setAttribute("notice", n);
+			
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "공지사항 상세보기 실패!");
+		}		
+		
+		request.getRequestDispatcher(page).forward(request, response);
 	}
 
 	/**
