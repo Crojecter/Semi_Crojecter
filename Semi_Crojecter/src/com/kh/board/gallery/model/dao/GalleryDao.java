@@ -543,7 +543,6 @@ public class GalleryDao {
 		
 		return glist;
 	}
-
 	
 	public int deleteGallery(Connection con, int bid) {
 		PreparedStatement pstmt = null;
@@ -566,8 +565,6 @@ public class GalleryDao {
 		
 		return result;
 	}
-
-
 
 	public ArrayList<Gallery> searchGallery(Connection con, String condition, String keyword) {
 		
