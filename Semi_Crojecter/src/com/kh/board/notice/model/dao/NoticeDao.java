@@ -249,7 +249,7 @@ private Properties prop = new Properties();
 				n.setBtitle(rset.getString("btitle"));
 				n.setBdate(rset.getDate("bdate"));
 				n.setBid(rset.getInt("bid"));
-				n.set
+				//n.set
 			
 				list.add(n);
 			} 
