@@ -181,7 +181,7 @@
 							}
 							</script>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
+							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">:<%= m.getMhodu() %>개</a>
 						</div>
 						<li>
 						<!-- 글쓰기 -->
@@ -192,15 +192,13 @@
 				<% } %>
 				</div>
 				<!-- 검색 -->
-				<form class="navbar-search pull-left">
-				  <input type="text" class="search-query" placeholder="Search">
+				<form class="navbar-search pull-left" action="<%=request.getContextPath()%>/search.all" method="get">
+				  <input type="text" class="search-query" placeholder="Search" name="keyword">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
+					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button>
 				</form>
 				<script>
-				function searchImg(){
-					location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-				}
+				
 				</script>
 		</div>
 	</nav>
