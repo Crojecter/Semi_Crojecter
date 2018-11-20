@@ -6,8 +6,9 @@
 	System.out.println("m : " + m);
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
-	//System.out.println("g : " + g);
-	//System.out.println("clist : " + clist);
+	
+	System.out.println("g : " + g);
+	System.out.println("clist : " + clist);
 %>
     
 <!DOCTYPE html>
@@ -31,13 +32,12 @@
 		background : black;
 		color: white;
 	}
-	
 	.tableArea {
 		border:1px solid black;
 		background : white;
 		color: black;
 		width:800px;
-		height:auto;
+		height:350px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -69,7 +69,6 @@
 <title>갤러리 상세보기</title>
 </head>
 <body>
-	<%@ include file="../../common/header.jsp"%>
 
 	<div class="outer">
 		<br>
@@ -114,18 +113,18 @@
 		</div>
 		
 		<div align="center" style="display:inline;">
-			<% if(m != null && m.getMid() == g.getBwriter()){ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
-			<% } %>	
 			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
 			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
 			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport(<%=g.getBid()%>, 0);">신고</button>
+			<button onclick="showReport();">신고</button>
+			
+			<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
+			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
+			<% } %>	
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 	</div>
-	
 	<div class="commentOuter" style="padding:5px;">
 		<div class="commentWriteArea" style="display:inline;">
 			<div><input type="hidden" name="crefmid" value="-1" /></div>
@@ -138,7 +137,6 @@
 		<div class="commentListArea">
 	      <% if( clist != null ) { %>
 	      	<% for(BoardComment bc : clist) { %>
-	      	<hr />
 	      	<div class="comment">
 	      		<div class="commentInfo" style="display:inline;">
 	      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
@@ -153,8 +151,7 @@
 					<button type="button" class="deleteBtn" onclick="deleteComment(this);">삭제하기</button> &nbsp;&nbsp;
 	      			<% } %>
 					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
-					<button type="button" class="insertBtn" onclick="reComment(this);">댓글달기</button>&nbsp;&nbsp;
-					<button type="button" class="reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button>				 
+					<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
@@ -164,6 +161,7 @@
 	      				<%= bc.getCcontent() %>
 	      			</p>
 	      		</div>
+	      		<hr />
 	      	</div>
 	  		<% } } %>
 		</div>
@@ -222,9 +220,9 @@
 			var ccontent = $(obj).siblings('textarea').val();
 			var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
 			
-			location.href='/crojecter/cInsert.co?bid=' + bid
-					+ '&btype=' + btype + '&cwriter=' + cwriter
-					+ '&ccontent=' + ccontent + '&crefmid=' + crefmid;
+				location.href='/crojecter/cInsert.co?bid=' + bid
+		           + '&btype=' + btype + '&cwriter=' + cwriter
+		           + '&ccontent=' + ccontent + '&crefmid=' + crefmid;
 		}
 		
 		// 댓글 수정
@@ -285,11 +283,10 @@
 		}	
 	</script>
 	<% } else { // 뷰어 입장 %>
-	<script>		
+	<script>
 		// 후원하기
 		function showSpon() {
-			// 알람창 크기
-			var windowObj = null;
+      var windowObj = null;
 			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
 		    var yPos = (screen.availHeight / 2) - 150;
@@ -298,20 +295,6 @@
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}
-		
-		// 신고하기
-		function showReport(bid, cid) {
-			var windowObj = null;
-			var xPos = (document.body.clientWidth / 2) - 250; 
-		    xPos += window.screenLeft;
-		    var yPos = (screen.availHeight / 2) - 150;
-		    var b = bid;
-		    var c = cid;
-
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
-		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
-		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
-		}	
 		
 		// 팔로우 버튼 클릭
 		$('#btnFollow').click(function(){

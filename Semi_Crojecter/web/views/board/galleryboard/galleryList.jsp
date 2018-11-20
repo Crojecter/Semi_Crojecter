@@ -106,7 +106,7 @@
 				$("#gal-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
 					var bno = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/gSelectOne.ga?bid=" + bno;
+					location.href="<%=request.getContextPath()%>/selectOne.ga?bno=" + bno;
 				})
 			});
 		</script>

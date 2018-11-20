@@ -57,7 +57,7 @@ public class NoticeInsertServlet extends HttpServlet {
 			int result = ns.insertNotice(n);
 			
 			if(result > 0) {
-				response.sendRedirect("nSelectOne.ga?bid="+result);
+				response.sendRedirect("nSelectOne.no?bid="+result);
 				
 			} else {
 

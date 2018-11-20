@@ -569,7 +569,7 @@ public class GalleryDao {
 		//for(Notice n : list) System.out.println(list);
 		return searchGalleryList;
 	}
-
+	
 	public int deleteGallery(Connection con, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;

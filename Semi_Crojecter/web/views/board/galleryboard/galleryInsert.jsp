@@ -15,7 +15,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
 
-
 <style>
 body {
 	font-family: 'Nanum Gothic', sans-serif;
@@ -39,11 +38,29 @@ body {
 	font-size: 20px;
 }
 
+#thumbnailArea {
+	position: relative;
+	width: 100%;
+	height: 150px;
+	border: 1px solid lightgray;	
+}
+
 #titleImg {
 	width: 100%;
 	height: 100%;
 	border: none;
+	vertical-align: middle;
 }
+
+#thumbnailLabel {
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
+}
+
 </style>
 </head>
 
@@ -70,9 +87,9 @@ body {
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId"
 					value="<%=m.getMid()%>" />
-				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">
-					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
-						style="border: white;">
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">					
+					<img id="titleImg">
+					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				</div>
 				<select class="sidebar" name="category" id="category">
 					<option value="" disabled selected>카테고리 선택</option>
@@ -88,11 +105,11 @@ body {
 					<option value="4">저작자-변경금지</option>
 					<option value="5">저작자-비영리-변경금지</option>
 					<option value="6">저작자-비영리-동일조건변경허락</option>
-				</select> <input type="text" name="tags" placeholder="태그 입력(,로 구분)"
-					style="width: 100%; height: 150px">
-
+				</select> 
+				<input type="text" name="tags" placeholder="태그를 입력해주세요!" 
+				data-role="tagsinput" id="tagsinput" class="tagsinput">
 				<button class="btn btn-success" id="insertBtn"
-					onclick="insertMember();">업로드</button>
+					onclick="insertGallery();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -108,8 +125,8 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
@@ -148,7 +165,7 @@ body {
 			
 			$('#thumbnailArea').click(() => {
 				$('#thumbnailInput').click();
-				$('#thumbnailLabel').hide();
+			      
 			});
 		});
 		function LoadImg(value) {
@@ -157,44 +174,42 @@ body {
 				
 				reader.onload = function(e){					
 					$('#titleImg').attr('src', e.target.result);	
+					$('#thumbnailLabel').hide();
 				}
 				
 				reader.readAsDataURL(value.files[0]);
 			}
 		}
 		
-		function insertMember() {
-			$("#insertform").submit();
-		}
-		
-		$("#insertform").submit(function(event){
-			
-			if(title.legnth < 0){
-				alert("제목을 입력해주세요.");
+		function insertGallery() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
 			}
-			else if($("#summernote").val == null){
+			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
 			}
-			else if($("#titleImg").val == null){
+ 			else if($('#category').val() == "2" && !$("#thumbnailInput").val()){
 				alert("대표 이미지를 설정해주세요.");	
-			}
+			} 
 			else if($("#category").val() == null) {
 				alert("카테고리를 선택해주세요.");				
 			}
 			else if($('#cclid').val() == null) {
 				alert("ccl을 선택해주세요.");				
 			}
-			else return;
-			event.preventDefault();
+			else $("#insertform").submit();
 			
-			//File file = new File(url);
-			//file.delete();
-			
-		});
+			event.preventDefault();			
+		}
 		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
-		
-		</script>
+	</script>
+	
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> -->
+    
+	
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>

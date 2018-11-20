@@ -61,16 +61,6 @@ public class ProjectUpdateServlet extends HttpServlet {
 			MultipartRequest mrequest =
 					new MultipartRequest(request,savePath,maxSize,"UTF-8",new DefaultFileRenamePolicy());
 			
-			// 대표 이미지 영역의 파일만 불러온다.
-			File savefile = mrequest.getFile("thumbnailInput");
-			System.out.println("thumbnailInput file : " + savefile);
-
-			String path = savefile.getPath();
-			String fileName = savefile.getName();  
-			
-			System.out.println("path : " + path);				
-			System.out.println("fileName : " + fileName);
-			
 			// selectProjectMap(bid) : projectUpdate.jsp에서 받아온 bid로 Project와 AttachedFile을 불러온다.
 			int bid = Integer.parseInt(request.getParameter("bid"));
 			System.out.println("bid : " + bid);
@@ -87,22 +77,39 @@ public class ProjectUpdateServlet extends HttpServlet {
 			p.setBcontent(mrequest.getParameter("content"));
 			p.setBwriter(Integer.parseInt(mrequest.getParameter("userId")));
 			p.setJtag(mrequest.getParameter("tags"));
-			 
-		    String endDate = mrequest.getParameter("date");
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		    Date jend;
-			try {
-				jend = new Date(sdf.parse(endDate).getTime());
-				p.setJend(jend);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}	
+			
+			if(mrequest.getParameter("date") != null){
+			    String endDate = mrequest.getParameter("date");
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			    Date jend;
+				try {
+					jend = new Date(sdf.parse(endDate).getTime());
+					System.out.println("jend : " + jend);
+					p.setJend(jend);
+				} catch (ParseException e) {
+					//e.printStackTrace();
+				}
+			}
 			
 			// Attachment 객체 생성 후 DB 전달 값 설정
 			AttachedFile af= (AttachedFile)prj.get("attachedfile");
+			File savefile = null;
 			
-			af.setFname(fileName); 
-			af.setFpath(savePath); 
+			if(mrequest.getFile("thumbnailInput") != null){
+				// 대표 이미지 영역의 파일만 불러온다.
+				savefile = mrequest.getFile("thumbnailInput");
+				System.out.println("thumbnailInput file : " + savefile);
+
+				String path = savefile.getPath();
+				String fileName = savefile.getName();  
+				
+				System.out.println("GalleryUpdateServlet path : " + path);				
+				System.out.println("GalleryUpdateServlet fileName : " + fileName);	
+			
+				af.setFname(fileName); 
+				af.setFpath(path); 
+			
+			}	
 
 			// service로 작성한 내용 전송하기
 			

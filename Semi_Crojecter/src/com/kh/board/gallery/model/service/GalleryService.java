@@ -176,4 +176,18 @@ public class GalleryService {
 		return 0;
 	}
 
+	public int deleteGallery(int bid) {
+		
+		Connection con = getConnection();
+		
+		int result = gDao.deleteGallery(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+
 }
