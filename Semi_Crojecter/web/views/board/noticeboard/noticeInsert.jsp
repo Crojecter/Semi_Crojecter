@@ -59,7 +59,7 @@ body {
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertNotice();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -75,15 +75,15 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
 		            for (var i = files.length - 1; i >= 0; i--) {
 		              sendFile(files[i], this);
 		            }
-		          }
+		          },
 		        }		      
 		      });
 		    });
@@ -110,6 +110,19 @@ body {
 					}
 				});
 			}
+		
+		function insertNotice() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
+			}
+			else if(!$("#summernote").val()){
+				alert("내용을 입력해주세요.");	
+			}
+			else $("#insertform").submit();
+			
+			event.preventDefault();			
+		}
 		</script>
 
 </body>

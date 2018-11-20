@@ -29,17 +29,27 @@ body {
 	font-size: 20px;
 }
 
-.thumbnailArea {
+#thumbnailArea {
+	position: relative;
 	width: 100%;
 	height: 150px;
 	border: 1px solid lightgray;
-	text-align: center;
 }
 
 #titleImg {
 	width: 100%;
 	height: 100%;
+	vertical-align: middle;	
 	border: none;
+}
+
+#thumbnailLabel {
+	padding: 5px 10px;
+	text-align: center;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate( -50%, -50% );
 }
 </style>
 </head>
@@ -50,7 +60,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
+	<form id="insertform" action="<%=request.getContextPath()%>/pInsert.pr" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div id="fileArea">
@@ -65,13 +75,13 @@ body {
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">
-					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
-						style="border: white;">
+					<img id="titleImg" style="border: white;">
+					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				</div>
-				<input class="sidebar" name="date" type="date" min="" max="">
-				<input type="text" name="tags" placeholder="태그 입력(,로 구분)"
-					style="width: 100%; height: 150px">
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<input class="sidebar" id="date" name="date" type="date" min="" max="">
+				<input type="text" name="tags" placeholder="태그를 입력해주세요!" 
+				data-role="tagsinput" id="tagsinput" class="tagsinput">
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -89,18 +99,18 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
 		            for (var i = files.length - 1; i >= 0; i--) {
 		              sendFile(files[i], this);
 		            }
-		          }
+		          },
 		        }		      
 		      });
-		});
+		    });
 		
 		$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
 		    var el = this, type = $(el).attr('type');
@@ -154,20 +164,21 @@ body {
 						alert(url);
 						
 						$(el).summernote('editor.insertImage', url);
-					}, error : function(){						
+					}, error : function() {						
 						console.log("실패!!");
 						
 					}
 				});
 			}
+		
 		$(function(){
 			$('#fileArea').hide();
 			
 			$('#thumbnailArea').click(() => {
 				$('#thumbnailInput').click();
-				$('#thumbnailLabel').hide();
 			});
 		});
+		
 		function LoadImg(value) {
 			if(value.files && value.files[0]) {
 				var reader = new FileReader();
@@ -177,37 +188,30 @@ body {
 				}
 				
 				reader.readAsDataURL(value.files[0]);
+				$('#thumbnailLabel').attr('style', 'display : none');
 			}
 		}
 		
-		function insertMember() {
-			$("#insertform").submit();
-		}
-		
-		$("#insertform").submit(function(event){
-			
-			if(title.legnth < 0){
-				alert("제목을 입력해주세요.");
+		function insertProject() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
 			}
-			else if($("#summernote").val == null){
+			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
 			}
-			else if($("#titleImg").val == null){
+			else if(!$("#thumbnailInput").val()){
 				alert("대표 이미지를 설정해주세요.");	
 			}
-			else if($("#category").val() == null) {
-				alert("카테고리를 선택해주세요.");				
+			else if(!$("#date").val()){
+				alert("마감날짜를 입력해주세요.");	
 			}
-			else if($('#cclid').val() == null) {
-				alert("ccl을 선택해주세요.");				
-			}
-			else return;
-			event.preventDefault();
+			else $("#insertform").submit();
 			
-			//File file = new File(url);
-			//file.delete();
-			
-		});
+			event.preventDefault();			
+		}
+		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
 		</script>
 

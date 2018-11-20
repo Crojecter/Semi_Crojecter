@@ -33,7 +33,6 @@ public class ProjectSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
 		Project p = new ProjectService().selectOne(bid);

@@ -6,6 +6,8 @@
 	Project p = (Project)request.getAttribute("project");
 	AttachedFile af = (AttachedFile)request.getAttribute("attachedfile");	
 	String root = af.getFpath() + af.getFname();
+	
+	System.out.println(p.getJend());
 %>	
 <!DOCTYPE html>
 <html lang="kr">
@@ -22,7 +24,7 @@ body {
 	font-family: 'Nanum Gothic', sans-serif;
 }
 
-.sidebar {
+.jend {
 	width: 100%;
 	height: 50px;
 }
@@ -54,7 +56,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/jUpdate.pr?bid=<%=p.getBid() %>" method="post" encType="multipart/form-data">
+	<form  id="insertform"  action="<%=request.getContextPath()%>/jUpdate.pr?bid=<%=p.getBid() %>" method="post" encType="multipart/form-data">
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div id="fileArea">
@@ -71,9 +73,9 @@ body {
 					<label id="thumbnailLabel">대표이미지 설정</label> <img id="titleImg"
 						style="border: white;">
 				</div>
-				<input class="sidebar" id="jend" name="date" type="date" min="" max="">
-				<input type="text" name="tags" value="<%=p.getJtag()%>" style="width: 100%; height: 150px">
-				<button class="btn btn-success" id="insertBtn" type="submit">업로드</button>
+				<input class="jend" id="jend" name="date" type="date" min="" max="">
+				<input type="text" name="tags" data-role="tagsinput" value="<%=g.getGtag()%>" id="tagsinput" class="tagsinput">
+				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -88,25 +90,27 @@ body {
 	%>
 
 	<script type="text/javascript">
-		$(document).ready(function() {
-		      $('#summernote').summernote({
-		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
-		        focus: true,
-		        callbacks: {
-		          onImageUpload: function(files, editor, welEditable) {
-		            for (var i = files.length - 1; i >= 0; i--) {
-		              sendFile(files[i], this);
-		            }
-		          }
-		        }		      
-		      });
+	$(document).ready(function() {
+	      $('#summernote').summernote({
+	        height: 500,
+	        minHeight: 500,
+	        maxHeight: 500,
+	        focus: true,
+	        callbacks: {
+	          onImageUpload: function(files, editor, welEditable) {
+	            for (var i = files.length - 1; i >= 0; i--) {
+	              sendFile(files[i], this);
+	            }
+	          },
+	        }		      
+	      });
+	      
+		   // 대표 이미지 레디
+		   $('#titleImg').attr('src', "resources/uploadFiles/<%=af.getFname()%>");	
+			
+	    });
 		      
-		      // 대표 이미지 레디
-		      $('#titleImg').attr('src', "resources/uploadFiles/<%=af.getFname()%>");
 		      
-		});
 		
 		$('input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="time"], input[type="week"]').each(function() {
 		    var el = this, type = $(el).attr('type');
@@ -127,7 +131,7 @@ body {
 		    } 	
 		    
 		    today = yyyy+'-'+mm+'-'+dd;
-		    //$(el).attr('max', today);	    
+		    $(el).attr('max', today);	    
 		    
 		    if ($(el).val() == ''){
 		    	$(el).attr('type', 'text');	    
@@ -198,22 +202,12 @@ body {
 			else if($("#summernote").val == null){
 				alert("내용을 입력해주세요.");	
 			}
-			else if($("#titleImg").val == null){
-				alert("대표 이미지를 설정해주세요.");	
-			}
-			else if($("#category").val() == null) {
-				alert("카테고리를 선택해주세요.");				
-			}
-			else if($('#cclid').val() == null) {
-				alert("ccl을 선택해주세요.");				
-			}
 			else return;
 			event.preventDefault();
 			
-			//File file = new File(url);
-			//file.delete();
-			
 		});
+		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
 		</script>
 

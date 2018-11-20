@@ -12,7 +12,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.attachedfile.model.vo.AttachedFile;
+import com.kh.board.common.model.vo.Board;
 import com.kh.board.notice.model.vo.Notice;
+import com.kh.board.project.model.vo.Project;
 
 public class NoticeDao {
 	
@@ -98,7 +101,7 @@ private Properties prop = new Properties();
 			if (rset.next()) {
 				n = new Notice();
                 
-				n.setBid(rset.getInt("bid"));
+				n.setBid(bid);
 				n.setBtype(rset.getInt("btype"));
 				n.setBtitle(rset.getString("btitle"));
 				n.setBcontent(rset.getString("bcontent"));
@@ -108,6 +111,7 @@ private Properties prop = new Properties();
 				n.setBrcount(rset.getInt("brcount"));
 				n.setBwriter(rset.getInt("bwriter"));
 				n.setMname(rset.getString("mname"));
+				n.setMprofile(rset.getString("mprofile"));	
 
 			}
 		} catch (SQLException e) {
@@ -143,7 +147,6 @@ private Properties prop = new Properties();
 		}
 		return result;
 	}
-
 
 	public ArrayList<Notice> selectNoticeList(Connection con) {
 		// 
@@ -200,7 +203,7 @@ private Properties prop = new Properties();
 
 		return result;
 	}
-
+	
 	public int deleteNotice(Connection con, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -222,6 +225,9 @@ private Properties prop = new Properties();
 		
 		return result;
 	}
+
+
+
 
 
 }
