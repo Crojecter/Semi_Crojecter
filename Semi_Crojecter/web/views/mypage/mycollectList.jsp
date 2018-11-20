@@ -24,18 +24,9 @@
 	<table>  
 		<% for(Likeit l : list){ %>
 		<tr>
-			<th>이름</th>
-			<th>게시물</th>
-		<tr>
-			<td><%=l.getMid() %></td>
-			<td><%=l.getBid() %></td>
+			<td><%=l.getBtitle() %></td>
+			<td><%=l.getBwriter() %></td>
 		</tr>
-		<tr>
-			<td> <div id="btnFollow" class="btn btn-follow">
-					<p id="p-follow" style="color: black">팔로우</p></div>
-			</td>
-		</tr>
-		
 		<% } %>
 	</table>
 </div>

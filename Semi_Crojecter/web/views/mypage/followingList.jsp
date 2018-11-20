@@ -5,6 +5,7 @@
 <%
 	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
 	Gallery g = (Gallery)request.getAttribute("gallery");
+	System.out.println("list : " + list);
 %>
 <!DOCTYPE html>
 <html>
@@ -25,44 +26,18 @@
 	<table>  
 		<% for(Follow f : list){ %>
 		<tr>
-			<th>이름</th>
-		<tr>
-			<td id="name"><%=f.getFollowid() %></td>
-		</tr>
-		<tr>
+			<td id="name"><%=f.getFollowname() %></td>
 			<td> <div id="btnFollow" class="btn btn-follow">
-					<p id="p-follow" style="color: black">팔로우</p></div>
+					<p id="p-follow" style="color: black">언팔로우</p></div>
 			</td>
 		</tr>
-		
 		<% } %>
 	</table>
 
 </div>
+</form>
 <script>
-$('#btnFollow').click(function(){
-	$.ajax({
-		url : '/crojecter/fSwitch.fo',
-		type : 'get',
-		data : {
-			mid : '<%= m.getMid() %>',
-			wid : '<%= g.getBwriter() %>'
-		}, 
-		success : function(data){
-			if(data == 'insert') {
-				$("#btnFollow").addClass('active');
-				$('#p-follow').html('언팔로우');
-			} else if (data == 'delete') {
-				$("#btnFollow").removeClass('active');
-				$('#p-follow').html('팔로우');
-			} else {
-				console.log('btnFollow() 에러 발생!');
-			}
-		}, error : function(data){
-			console.log('btnFollow() 에러 발생!!');
-		}
-	});
-});
+
 </script>
 </body>
 </html>

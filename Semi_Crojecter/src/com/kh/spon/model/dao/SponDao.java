@@ -97,13 +97,13 @@ public class SponDao {
 				Spon s = new Spon();
 				
 				s.setSdate(rset.getDate("sdate"));
-				s.setSreceivername(rset.getString("sreceivername"));
+				s.setSreceivername(rset.getString("MNAME"));
 				s.setShodu(rset.getInt("shodu"));
 	
 				list.add(s);
 				
 			}
-			
+			System.out.println("Spon List : " + list);
 		} catch (SQLException e) {
 		
 			e.printStackTrace();

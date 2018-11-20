@@ -9,8 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.notice.model.service.NoticeService;
+import com.kh.board.notice.model.vo.Notice;
+
 
 /**
  * Servlet implementation class MyworkViewServlet
@@ -31,15 +32,17 @@ public class MyworkViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Gallery> glist = null;
-		GalleryService gs = new GalleryService();
+		ArrayList<Notice> list = null;
+		NoticeService ns = new NoticeService();
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		
-		glist = gs.searchGallery(mid);
+		list = ns.searchMywork(mid);
 		
-		if(glist != null){
+		System.out.println("list : " + list);
+		
+		if(list != null){
 			
-			request.setAttribute("glist", glist);
+			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/mypage/myworkList.jsp").forward(request, response);
 			
 		} else {

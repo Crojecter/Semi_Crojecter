@@ -95,4 +95,15 @@ public class NoticeService {
 		return result;
 	}
 
+	public ArrayList<Notice> searchMywork(int mid) {
+		
+		Connection con = getConnection();
+		ArrayList<Notice> list = nDao.selectMywork(con, mid);
+		
+		close(con);
+		
+		return list;
+
+	}
+
 }
