@@ -159,8 +159,9 @@ public class ProjectDao {
 				p.setJid(rset.getInt("jid"));
 				p.setJend(rset.getDate("jend"));
 				p.setJtag(rset.getString("jtag"));
+				p.setDday(rset.getInt("dday"));
+				
 				p.setBid(rset.getInt("bid"));
-                
 				p.setBtype(rset.getInt("btype"));
 				p.setBtitle(rset.getString("btitle"));
 				p.setBcontent(rset.getString("bcontent"));
