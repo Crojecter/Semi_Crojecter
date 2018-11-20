@@ -160,6 +160,7 @@ public class ProjectDao {
 				p.setJend(rset.getDate("jend"));
 				p.setJtag(rset.getString("jtag"));
 				p.setBid(rset.getInt("bid"));
+				p.setDday(rset.getInt("dday"));
                 
 				p.setBtype(rset.getInt("btype"));
 				p.setBtitle(rset.getString("btitle"));

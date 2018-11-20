@@ -2,8 +2,6 @@
 <%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
-	Member m = (Member)session.getAttribute("member");
-	System.out.println("m : " + m);
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
 	
@@ -25,43 +23,107 @@
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;
-	}
-	
-	td {
-		border:1px solid black;
-		background : black;
-		color: white;
-	}
-	.tableArea {
-		border:1px solid black;
-		background : white;
-		color: black;
-		width:800px;
-		height:350px;
-		margin-left:auto;
-		margin-right:auto;
-	}
-	
-	.btn {
-		width: 150px;
-		height: 50px;
-		border: 1px solid blue;
-		background: lightyellow;
-	}
+	}	
 	
 	.active {
 		background: red;
 	}
 	
+	.titleArea {
+		width: 100%;
+		height:50px;
+		height: 50px;
+		border: 1px solid lightgray;	
+		border-radius: 3px;
+	}
+	
+	.contentArea {
+		height: 500px;
+		padding: 15px;
+		border: 1px solid lightgray;	
+	}
+	
+	.title {
+		padding-top: -5px;
+	}
+	
+	.count {
+		padding: 20px;		
+	}
+	
 	.commentOuter {
-		width:800px;
+		width:auto;
 		height:auto;
-		background:lightblue;
 		color:black;
 		margin-left:auto;
 		margin-right:auto;
-		margin-top:50px;
+		margin-top:20px;
 	}
+	
+	#profileImg {
+		margin-top: 10px;
+		margin-bottom: 5px;
+		width: 120px;
+		height: 120px;
+		border-radius: 50px;
+		border: 1px solid lightgray;		
+	}
+	
+	.sidebar {
+		width: 100%;
+		height: 50px;
+		border: 1px solid lightgray;
+		padding-top:15px;
+		padding-left:5px;
+	
+	}
+	
+	.btnArea1 {
+		width: 90%;
+		height: 40px;
+		border: 1px solid lightpink;
+		background:lightpink;
+	}
+	
+	.btnArea2 {
+		width: 70px;
+		height: 40px;
+		border: 1px solid lightpink;
+		background:lightpink;
+	}
+	
+	.btnComment {
+		width: 60px;
+		height: 25px;
+		background: lightpink;
+	    border: 1px solid  lightpink;
+    	border-radius: 5px;
+    	color: white;
+    	float: right; 
+	}
+	
+	#addComment {
+		width: 100px;
+		height: 40px;
+		margin: 10px;
+	}
+	
+	.bottomBtn {
+		width: 20%;
+		height: 25px;
+		background: lightpink;
+	    border: 1px solid  lightpink;
+    	border-radius: 5px;
+    	color: white;
+    	float: right;
+    	margin-right:2px;
+	}
+	
+	.insertBtn{
+		width: 25%;
+	}
+	
+
 	
 	
 </style>
@@ -69,103 +131,124 @@
 <title>갤러리 상세보기</title>
 </head>
 <body>
+	<%@ include file="../../common/header.jsp"%>
+	
+	<div class="row">
+		<div class="col-md-2"></div>
 
-	<div class="outer">
-		<br>
-		<h2 align="center">게시글 내용</h2>
-		
-		<div class="tableArea">
+		<div class="col-md-6">
+				
 			<%if(m != null)  {  %>
 			<span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
-			<table align="center" width="800px">
-				<tr>
-					<td>제목 </td>
-					<td colspan="5"><span><%= g.getBtitle() %></span></td>
-				</tr>
-				<tr>
-					<td>작성자 </td>
-					<td><span id="parentGetName"><%= g.getMname() %></span></td>
-					<td>작성일</td>
-					<td><span><%= g.getBdate() %></span></td>
-					<td>조회수 </td>
-					<td><span><%= g.getBcount() %></span></td>
-				</tr>
-				<tr>
-					<td>카테고리 </td>
-					<td><span><%= g.getGcategoryname() %></span></td>
-					<td>태그</td>
-					<td><span><%= g.getGtag() %></span></td>
-					<td>ccl </td>
-					<td><span><%= g.getCclname() %></span></td>
-				</tr>
-				<tr>
-					<td colspan="6">내용 </td>
-				</tr>
-				<tr>
-					<td colspan="6">
-					<p id="content"><%= g.getBcontent() %>
-					</td>
-				</tr>
-			</table>
 			
-			
-
-		</div>
-		
-		<div align="center" style="display:inline;">
-			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
-			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
-			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport();">신고</button>
-			
-			<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
-			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
-			<% } %>	
-		</div>
-		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
-	</div>
-	<div class="commentOuter" style="padding:5px;">
-		<div class="commentWriteArea" style="display:inline;">
-			<div><input type="hidden" name="crefmid" value="-1" /></div>
-			<div display="inline">
-				<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>
-				<button id="addComment" onclick="insertComment(this);">댓글 등록</button>
+			<div class="row titleArea"  style="margin: 0;">
+				<div class="col-md-10"><h3 class="title" style="margin-top: 14px;"><%= g.getBtitle() %></h3></div>
+				<div class="col-md-2 count"><p class="">조회수 :  <%= g.getBcount() %></p></div>
 			</div>
+			
+			
+			<div class="row contentArea" style="margin: 0;">
+				<div class="content"><%= g.getBcontent() %></div>
+			</div>
+			
+			<div class="commentOuter" >
+				<div class="commentWriteArea">
+					<div><input type="hidden" name="crefmid" value="-1" /></div>					
+					<div class="row contentArea1">
+						<div class="col-md-10"><textarea rows="3" id="ccontent" name="ccontent" style="width:100%;"></textArea></div>
+						<div class="col-md-2"><button class="btnComment" id="addComment" onclick="insertComment(this);"style="width:100%;" >댓글 등록</button></div>							
+					</div>				
+				</div>
+			</div>
+
+			<div class="commentListArea">
+		      	<% if( clist != null ) { %>
+		      	<% for(BoardComment bc : clist) { %>
+		      	<div class="comment">
+		      		<div class="row commentInfo" style="display:inline; height:30px;">
+		      			<div class="col-md-5" style="padding:0;">
+		      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
+		      			<span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
+		      			<span>작성날짜 : <%=bc.getCdate() %></span>
+		      			</div>
+		      			<% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
+		      			<div class="col-md-5" style="padding:0; float:right;">	      			
+			      			<% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>	
+			      			<div class="" style="padding:0;"><button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
+							<button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
+								    style="display:none;">수정완료</button></div>
+							<div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
+			      			<% } %>							
+							<div class="" style="padding:0;"><input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" /><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
+							<div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>			 
+			      			<% } %>
+		      			</div>
+		      			
+		      		</div>
+		      		<div class="comment commentContent">
+		      		
+			      		<textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
+			      		
+			      		<div class="row"></div>			      		
+			      		<p style="border:1px solid lightgray; background:white; height:70px;">
+			      			<% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
+			      			<%= bc.getCcontent() %>
+			      		</p>				      			      		
+		      			</div>
+		      			
+		      		<hr />
+		      	</div>
+		  		<% } } %>
+			</div>
+			
 		</div>
 		
-		<div class="commentListArea">
-	      <% if( clist != null ) { %>
-	      	<% for(BoardComment bc : clist) { %>
-	      	<div class="comment">
-	      		<div class="commentInfo" style="display:inline;">
-	      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
-	      			<span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
-	      			<span>작성날짜 : <%=bc.getCdate() %></span>
-	      				
-	      			<% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
-	      			<% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>	 
-					<button type="button" class="updateBtn" onclick="updateComment(this);">수정하기</button>
-					<button type="button" class="updateConfirm" onclick="updateConfirm(this);"
-						    style="display:none;" >수정완료</button> &nbsp;&nbsp;
-					<button type="button" class="deleteBtn" onclick="deleteComment(this);">삭제하기</button> &nbsp;&nbsp;
-	      			<% } %>
-					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
-					<button type="button" class="insertBtn" onclick="reComment(this);">댓글 달기</button>&nbsp;&nbsp;				 
-	      			<% } %>
-	      		</div>
-	      		<div class="comment commentContent">
-	      			<textarea class="comment-content" cols="105" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
-	      			<p style="border:1px solid gray; background:white; height:70px;">
-	      				<% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
-	      				<%= bc.getCcontent() %>
-	      			</p>
-	      		</div>
-	      		<hr />
-	      	</div>
-	  		<% } } %>
+		<div class="col-md-2">
+		
+			<div align="center">
+			<% if(g.getMprofile() == null) { %>
+			<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
+			<% } else { %>
+			<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/profileImg/<%=g.getMprofile()%>">
+			<% }  %>
+			</div>
+			
+			<h4 align="center"><%=g.getMname()%></h4>
+
+			<div class="row" align="center" id="btnArea1" style="margin-top: 10px;">
+				<div class="col-md-6" style="padding:0;"><button class="btn btn-follow btnArea1" id="btnFollow">팔로우</button></div>			
+				<div class="col-md-6" style="padding:0;"><button class="btn btn-likeit btnArea1" id="btnLikeit">좋아요</button></div>								
+			</div>			
+			
+			<div class="sidebar" style="margin-top: 10px;">카테고리 : <%=g.getGcategoryname() %></div>
+			<div class="sidebar" >CCL : <%=g.getCclname() %></div>
+			<input type="text" value=<%=g.getGtag()%> data-role="tagsinput" id="tagsinput" class="tagsinput" disabled>		
+			
+			<div class="row" align="center" id="btnArea2" style="margin-top: 10px;">				
+				<div class="col-md-6" style="padding:0;"><button class="btn btnArea1" onclick="showSpon();">후원</button></div>
+				<div class="col-md-6" style="padding:0;"><button class="btn btnArea1" onclick="showReport();">신고</button></div>	
+				<!-- <input class="btn btnArea2" type="button" onclick="location.href='/crojecter/main.html'" value="목록"/> -->
+			</div>
+			<div class="row" align="center" id="btnArea3" style="margin-top: 10px;">
+				<% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
+				<div class="col-md-6" style="padding:0;">
+				<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
+				</div>
+				<div class="col-md-6" style="padding:0;">
+				<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
+				</div>
+				<% } %>
+			</div>
+		
 		</div>
+			
+		
+		
+		<div class="col-md-2"></div>
 	</div>
+
+	
+	<!-- -----------------------여기서부터  스크립트----------------------- -->
 
 	<% if(m != null) { // 회원 %>
 	<script> 
@@ -217,8 +300,8 @@
 			var bid = '<%= g.getBid() %>';
 			var btype = '<%= g.getBtype() %>';
 			var cwriter = '<%= m.getMid() %>';
-			var ccontent = $(obj).siblings('textarea').val();
-			var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
+			var ccontent = $(obj).parent().siblings().children('textarea').val();
+			var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
 			
 				location.href='/crojecter/cInsert.co?bid=' + bid
 		           + '&btype=' + btype + '&cwriter=' + cwriter
@@ -249,9 +332,10 @@
 			$(obj).css('display', 'none');
 			
 			// 내용 입력 공간 만들기
-			var htmlForm = '<div display="inline" style="padding-left:20px;">'
-				+ '<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>'
-				+ '<button id="addComment" onclick="insertComment(this);">댓글 등록</button>'
+			var htmlForm = '<div class="row contentArea1" style="">'
+				+ '<div class="col-md-1"></div>'
+				+ '<div class="col-md-9"><textarea rows="3" cols="70" id="ccontent" name="ccontent" style=""></textArea></div>'
+				+ '<div class="col-md-2"><button class="btnComment" id="addComment" onclick="insertComment(this);">댓글 등록</button></div>	'
 				+ '</div>';
 			
 			$(obj).parents('.comment').append(htmlForm);
@@ -284,16 +368,28 @@
 	</script>
 	<% } else { // 뷰어 입장 %>
 	<script>
-		var windowObj = null;
-		
 		// 후원하기
 		function showSpon() {
-			var xPos = (document.body.clientWidth / 2) - (500 / 2); 
+      		var windowObj = null;
+			var xPos = (document.body.clientWidth / 2) - 250; 
 		    xPos += window.screenLeft;
-		    var yPos = (screen.availHeight / 2) - (300 / 2);
-
+		    var yPos = (screen.availHeight / 2) - 150;
 		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
 		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
+		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+		}
+		
+		// 신고하기
+		function showReport(bid, cid) {
+			var windowObj = null;
+			var xPos = (document.body.clientWidth / 2) - 250; 
+		    xPos += window.screenLeft;
+		    var yPos = (screen.availHeight / 2) - 150;
+		    var b = bid;
+		    var c = cid;
+	
+		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
+		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}
 		
@@ -356,6 +452,8 @@
 		});
 	</script>
 	<% } %>
+	
+	<%@ include file="../../common/footer.jsp"%>
 	
 	
 </body>
