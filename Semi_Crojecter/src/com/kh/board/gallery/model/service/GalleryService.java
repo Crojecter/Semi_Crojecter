@@ -183,4 +183,13 @@ public class GalleryService {
 		return result;
 	}
 
+	public ArrayList<Gallery> searchGallery(int mid) {
+		Connection con = getConnection();
+		ArrayList<Gallery> glist = gDao.searchGallery(con, mid);
+
+		close(con);
+		
+		return glist;
+	}
+
 }

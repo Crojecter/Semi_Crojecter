@@ -40,7 +40,7 @@
 </style>
 </head>
 <body>
-<%@ include file="../mypage/common/mypageHeader.jsp" %>
+<%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 <div class="searchArea">
 	<select id="searchMember" name="searchMember">
 		<option>---</option>
@@ -69,9 +69,12 @@
 	</tr>
 	<% } %>
     
+<<<<<<< HEAD
+=======
     
     
 
+>>>>>>> refs/remotes/origin/master
 </table>
 <script>
 	function search(){

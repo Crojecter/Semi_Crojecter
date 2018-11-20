@@ -10,6 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.kh.board.gallery.model.dao.GalleryDao;
+import com.kh.follow.model.vo.Follow;
+import com.kh.payment.model.vo.Payment;
+import com.kh.spon.model.vo.Spon;
+
 public class FollowDao {
 	
 	private Properties prop = new Properties();
@@ -103,4 +108,80 @@ public class FollowDao {
 		return result;
 	}
 
+
+	public ArrayList<Follow> selectList(Connection con, int mid) {
+		ArrayList<Follow> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("viewFollow");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Follow>();
+			
+			while(rset.next()){
+				
+				Follow f = new Follow();
+				
+				f.setFollowid(rset.getInt("followid"));
+				
+				list.add(f);
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+	public ArrayList<Follow> selectFollowerList(Connection con, int mid) {
+		ArrayList<Follow> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("viewFollower");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Follow>();
+			
+			while(rset.next()){
+				
+				Follow f = new Follow();
+				
+				f.setFollowerid(rset.getInt("followerid"));
+				
+				list.add(f);
+			} 
+			
+		} catch (SQLException e){
+				e.printStackTrace();
+		
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+			
+		return list;
+	}
 }
+	

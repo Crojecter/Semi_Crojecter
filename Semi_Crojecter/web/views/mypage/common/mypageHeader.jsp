@@ -60,24 +60,21 @@
 <div class="profileArea">
 	<img src="../resources/images/icon/likeSelect.png" class="profilePic">
 	<p id="profileName"> <%=m.getMname()%>님의 페이지</p>
-	<a class="profileMenu" href="/views/mypage/paymentList.jsp">결제내역</a>
-	<a class="profileMenu" href="/views/mypage/mypage.jsp">정보수정</a>
+	<a class="profileMenu" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid() %>">결제내역</a>
+	<a class="profileMenu" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
 	<br><br>
 </div>
 <br>
 <div class="menu">
 	<table>
 		<tr>
-			<td class="menuMenu"><a href="/view/mypage/">About</a></td>
-			<td class="menuMenu"><a href="/views/mypage/myworkList.jsp">Works</a></td>
-			<td class="menuMenu"><a href="/views/mypage/mycollectList.jsp">Collect</a></td>
-			<td class="menuMenu"><a href="/views/mypage/followingList.jsp">Followings</a></td>
-			<td class="menuMenu"><a href="/views/mypage/followerList.jsp">Followers</a></td>
+			<td class="menuMenu"><a href="/crojecter/mypageView.do?mid=<%=m.getMid() %>">About</a></td>
+			<td class="menuMenu"><a href="/crojecter/mworkView.do?mid=<%=m.getMid() %>">Works</a></td>
+			<td class="menuMenu"><a href="/crojecter/collectView.do?mid=<%=m.getMid() %>">Collect</a></td>
+			<td class="menuMenu"><a href="/crojecter/followingView.do?mid=<%=m.getMid() %>">Followings</a></td>
+			<td class="menuMenu"><a href="/crojecter/followerView.do?mid=<%=m.getMid() %>">Followers</a></td>
 		</tr>
 	</table>
 </div>
-<script>
-
-</script>
 </body>
 </html>

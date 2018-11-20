@@ -6,8 +6,10 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.likeit.model.dao.LikeitDao;
+import com.kh.likeit.model.vo.Likeit;
 
 public class LikeitService {
 	
@@ -44,4 +46,14 @@ public class LikeitService {
 		return result;
 
 	}
+
+	public ArrayList<Likeit> searchLikeit(int mid) {
+		Connection con = getConnection();
+		ArrayList<Likeit> list = lDao.searchLikeit(con, mid);
+
+		close(con);
+		
+		return list;
+	}
+
 }
