@@ -118,7 +118,7 @@ public class ProjectService {
 		close(con);		
 		return listCount;
 	}
-
+	
 	public int deleteProject(int bid) {
 		Connection con = getConnection();
 		

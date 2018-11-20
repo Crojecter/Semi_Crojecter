@@ -35,7 +35,8 @@ public class NoticeUpdateViewServlet extends HttpServlet {
 		
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Notice n = new NoticeService().selectOne(bid);	
+		Notice n = new NoticeService().selectOne(bid);
+		System.out.println("NoticeUpdateViewServlet bid : " + bid);
 		
 		String page = "";
 		if(n != null) {

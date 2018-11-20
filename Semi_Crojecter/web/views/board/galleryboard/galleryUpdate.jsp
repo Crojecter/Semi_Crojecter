@@ -5,7 +5,6 @@
 <%
 	Gallery g = (Gallery)request.getAttribute("gallery");
 	AttachedFile af = (AttachedFile)request.getAttribute("attachedfile");	
-	String root = af.getFpath() + af.getFname();
 %>
 <!DOCTYPE html>
 <html lang="kr">
@@ -15,7 +14,6 @@
 <!-- 폰트 설정 -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
-
 
 <style>
 body {
@@ -68,17 +66,14 @@ body {
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">				
-					<%--<label id="thumbnailLabel">대표이미지 설정</label> --%>
 					<img id="titleImg" style="border: white;"></div>
 				<select class="sidebar" name="category" id="category">
-					<option value="<%=g.getGcategoryid()%>" disabled selected>카테고리 : <%=g.getGcategoryname() %></option>
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
 					<option value="3">AUDIO</option>
 					<option value="4">VIDEO</option>
 				</select> 
 				<select class="sidebar" name="cclid" id="cclid">
-					<option value="g.getCclid()" disabled selected>CCL 표시 : <%=g.getCclname() %></option>
 					<option value="1">저작자 표시</option>
 					<option value="2">저작자-비영리</option>
 					<option value="3">저작자-동일조건변경허락</option>
@@ -86,9 +81,9 @@ body {
 					<option value="5">저작자-비영리-변경금지</option>
 					<option value="6">저작자-비영리-동일조건변경허락</option>
 				</select> 
-				<input type="text" name="tags" value="<%=g.getGtag()%>"style="width: 100%; height: 150px">
+				<input type="text" name="tags" data-role="tagsinput" value="<%=g.getGtag()%>" id="tagsinput" class="tagsinput">
 
-				<button class="btn btn-success" id="insertBtn" onclick="insertMember();">업로드</button>
+				<button class="btn btn-success" id="insertBtn" onclick="insertGallery();">업로드</button>
 				
 			</div>
 			<div class="col-md-2"></div>
@@ -105,8 +100,8 @@ body {
 		$(document).ready(function() {
 		      $('#summernote').summernote({
 		        height: 500,
-		        minHeight: null,
-		        maxHeight: null,
+		        minHeight: 500,
+		        maxHeight: 500,
 		        focus: true,
 		        callbacks: {
 		          onImageUpload: function(files, editor, welEditable) {
@@ -114,14 +109,14 @@ body {
 		              sendFile(files[i], this);
 		            }
 		          },
-		      		onMediaDelete : function(target) {
-	                alert(target[0].src); 
-	                deleteFile(target[0].src);
-	            }
 		        }		      
 		      });
+		    
 		      
 		      $('#titleImg').attr('src', "resources/uploadFiles/<%=af.getFname()%>");
+		      $('#category').val(<%=g.getGcategoryid()%>);
+		      $('#cclid').val(<%=g.getCclid()%>);
+		      
 		    });
     
 		function sendFile(file, el) {
@@ -145,19 +140,6 @@ body {
 				});
 			}
 		
-		// 아직 구현중
-		function deleteFile(src) {
-		    $.ajax({
-		        data: {src : src},
-		        type: "POST",
-		        url: "/crojecter/resources/uploadFiles/"+src, // replace with your url
-		        cache: false,
-		        success: function(resp) {
-		            console.log(resp);
-		        }
-		    });
-		}
-		
 		$(function(){
 			$('#fileArea').hide();
 			
@@ -178,20 +160,13 @@ body {
 			}
 		}
 		
-		function insertMember() {
-			$("#insertform").submit();
-		}
-		
-		$("#insertform").submit(function(event){
-			
-			if(title.legnth < 0){
-				alert("제목을 입력해주세요.");
+		function insertGallery() {							
+			if($("#title").val() == "") {
+				alert("제목을 입력하세요.");
+				$("#title").focus();
 			}
-			else if($("#summernote").val == null){
+			else if(!$("#summernote").val()){
 				alert("내용을 입력해주세요.");	
-			}
-			else if($("#titleImg").val == null){
-				alert("대표 이미지를 설정해주세요.");	
 			}
 			else if($("#category").val() == null) {
 				alert("카테고리를 선택해주세요.");				
@@ -199,13 +174,15 @@ body {
 			else if($('#cclid').val() == null) {
 				alert("ccl을 선택해주세요.");				
 			}
-			else return;
-			event.preventDefault();
-		});
+			else $("#insertform").submit();
+			
+			event.preventDefault();			
+		}
 		
-		
+		$('#tagsinput').tagsinput({maxTags: 10});
 		
 		</script>
+
 <%@ include file="../../common/footer.jsp" %>
 </body>
 </html>
