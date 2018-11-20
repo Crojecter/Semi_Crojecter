@@ -1,26 +1,28 @@
-package com.kh.alarm.controller;
+package com.kh.mypage;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.alarm.model.service.AlarmService;
+import com.kh.follow.model.service.FollowService;
+import com.kh.follow.model.vo.Follow;
 
 /**
- * Servlet implementation class alarmRead
+ * Servlet implementation class FollowerViewServlet
  */
-@WebServlet("/aRead.al")
-public class AlarmReadServlet extends HttpServlet {
+@WebServlet("/followerView.do")
+public class FollowerViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlarmReadServlet() {
+    public FollowerViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +31,20 @@ public class AlarmReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 읽지않은 알람메세지 확인용 서블릿
-		AlarmService as = new AlarmService();
+		ArrayList<Follow> list = null;
+		FollowService fs = new FollowService();
+		int mid = Integer.parseInt(request.getParameter("mid"));
+
+		list = fs.searchFollower(mid);
 		
-		int unReadAlarm = 0;
-		System.out.println("countUnreadAlarm : "+ unReadAlarm);
-		
-		int mid = Integer.parseInt(request.getParameter("Mid"));
-		
-		unReadAlarm = as.countUnReadAlarm(mid);
-		
-		if(unReadAlarm < 0){
-			System.out.println("조회할 알람메세지가 없습니다.");
-		}
-		else{
-			PrintWriter out = response.getWriter();
-			out.print(unReadAlarm);
+		if(list != null){
+			
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/mypage/followerList.jsp").forward(request, response);
+		} else {
+			
+			request.setAttribute("msg", "조회 실패!");
+			
 		}
 	}
 

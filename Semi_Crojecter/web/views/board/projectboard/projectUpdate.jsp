@@ -79,6 +79,7 @@ body {
 					<img id="titleImg">
 					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				</div>
+
 				<input class="jend" id="jend" name="date" type="date" min="" max="" value="<%=p.getJend() %>">
 				<input type="text" name="tags" data-role="tagsinput" value="<%=p.getJtag()%>" id="tagsinput" class="tagsinput">
 				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>

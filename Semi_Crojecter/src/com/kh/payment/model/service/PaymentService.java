@@ -38,4 +38,13 @@ private PaymentDao pDao = new PaymentDao();
 		return plist;
 	}
 
+	public ArrayList<Payment> searchPayment(int mid) {
+		Connection con = getConnection();
+		ArrayList<Payment> list = pDao.searchPayment(con, mid);
+		
+		close(con);
+		
+		return list;
+	}
+
 }

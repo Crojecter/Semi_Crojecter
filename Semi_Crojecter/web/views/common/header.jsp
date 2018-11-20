@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
-<% Member m = (Member)session.getAttribute("member"); 
+<% 
+	Member m = (Member)session.getAttribute("member"); 
     // 읽지않은 알람갯수 조회용
 	ArrayList<Alarm> aList = (ArrayList<Alarm>)request.getAttribute("aList"); 
 	System.out.println("Header alist : "+ aList);	
@@ -108,13 +109,37 @@
 						
 						<!-- 알람 -->
 						<li>
-						<button title="읽지않은 알림메세지가  <%= 0%>개 있습니다." type="button" data-target="#myModal" 
-						onclick="location.href='<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>'"
-						class="btn btn-primary" data-toggle="modal">
+						<!-- data-toggle="tooltip" title="읽지않은 알림메세지가  개 있습니다."  -->
+						<button type="button" data-target="#myModal" onclick="openAlarmList();" class="btn btn-primary" >
 						<img src="<%= request.getContextPath()%>/resources/images/icon/alarm.png" style="height:30px">
-						<span class="badge badge-light"> <%= 3%></span>
+						<span class="badge badge-light" id="countUnreadAlarm"></span>
 						</button>
-  						<a href="#" data-toggle="tooltip" title="Hooray!"></a>
+						<script>
+						$(document).ready(function(){
+							$.ajax({
+								data : { Mid : <%= m.getMid() %>},
+								url : "/crojecter/aRead.al",
+								type : "post",
+								success : function(data){
+									$("#countUnreadAlarm").text(data);
+								}
+							});
+						});
+					    
+						function openAlarmList() {
+							
+							// 알람창 크기
+							var xPos = ((document.body.clientWidth / 2) - (500 / 2)); 
+						    xPos += window.screenLeft;
+						    var yPos = ((screen.availHeight / 2) - (300 / 2));
+
+						    window.open('<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>', 
+						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
+						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
+						}
+						
+						</script>
+						
 						<!-- Modal -->
 						<div id="myModal" class="modal fade" role="dialog">
 						  <div class="modal-dialog">
@@ -149,7 +174,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypage.jsp">마이페이지</a>
+							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypageView.jsp">마이페이지</a>
 							<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 							<script>
 							function logout(){

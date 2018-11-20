@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.member.model.vo.Member;
 
 public class GalleryDao {
 
@@ -65,6 +66,7 @@ public class GalleryDao {
 				g.setBwriter(rset.getInt("bwriter"));
 				g.setMname(rset.getString("mname"));
 				g.setMprofile(rset.getString("mprofile"));
+				
 
 				// System.out.println("gdao g : " + g);
 			}
@@ -420,7 +422,7 @@ public class GalleryDao {
 				g.setBstatus(rset.getString("BSTATUS"));
 				g.setBwriter(rset.getInt("BWRITER"));
 				// 
-				
+				g.setFname(rset.getString("FNAME"));
 				
 				list.add(g);
 				System.out.println("selectGalleryList Dao : "+ list);
@@ -486,6 +488,8 @@ public class GalleryDao {
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBcount(rset.getInt("BCOUNT"));
 				
+				g.setFname(rset.getString("FNAME"));
+				
 				list.add(g);
 				System.out.println("Top5 Dao : " + list);
 			}
@@ -500,6 +504,69 @@ public class GalleryDao {
 		
 		return list;
 	}
+
+
+	public ArrayList<Gallery> searchGallery(Connection con, int mid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Gallery> glist = null;
+		
+		String sql = prop.getProperty("selectMyworkList");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+			
+			glist = new ArrayList<Gallery>();
+			
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setBwriter(rset.getInt("BWRITER"));
+				g.setMname(rset.getString("MNAME"));
+				g.setBtitle(rset.getString("BTITLE"));
+				
+				
+				glist.add(g);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return glist;
+	}
+	
+	public int deleteGallery(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteGallery");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 
 
 	public ArrayList<Gallery> searchGallery(Connection con, String condition, String keyword) {
@@ -566,33 +633,4 @@ public class GalleryDao {
 		//for(Notice n : list) System.out.println(list);
 		return searchGalleryList;
 	}
-	
-	public int deleteGallery(Connection con, int bid) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		
-		String sql = prop.getProperty("deleteGallery");
-
-		try {
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setInt(1, bid);
-			
-			result = pstmt.executeUpdate();
-		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
-
-
-
-
-
-
 }

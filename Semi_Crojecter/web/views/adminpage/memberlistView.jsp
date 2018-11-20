@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.member.model.vo.*, java.util.*"%>
+<%  
+	ArrayList<Member> mlist = (ArrayList<Member>)request.getAttribute("mlist");
+	System.out.println("mlist : " + mlist);
+%>
 <!DOCTYPE html>
 <html>
 
 <head>
-<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
@@ -49,17 +52,17 @@
 <table>
 	<tr>
 		<th>회원번호</th>
-		<th>이름</th>
-		<th>이메일주소</th>
+		<th>닉네임</th>
+		<th>이메일</th>
 		<th>호두</th>
 		<th>상태</th>	
     </tr>
-    <%-- <% for(Member m : mlist){ %> --%>
+    <% for(Member m2 : mlist){ %>
 	<tr>
-		<td id="mid"><%-- <%= m.getMid()%> --%>회원 번호</td>
-		<td><%-- <%= m.getMname()%> --%>회원 이름</td>
-		<td><%-- <%= m.getMemail()%> --%>이메일 주소</td>
-		<td><%-- <%= m.getMhodu()%> --%>호두</td>
+		<td><%= m2.getMid()%></td>
+		<td><%= m2.getMname()%></td>
+		<td><%= m2.getMemail()%></td>
+		<td><%= m2.getMhodu()%></td>
 		<td>
 			<select name="status" onchange="changeStatusSelect()">
 				<option id="status1" value="1" selected>활성</option>
@@ -68,7 +71,8 @@
 			</select>
 		</td>			
 	</tr>
-	<%-- <% } %> --%>
+	<% } %>
+	
 </table>
 <script>
 	console.log(<%= m.getMsid() %>);

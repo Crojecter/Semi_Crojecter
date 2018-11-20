@@ -27,7 +27,7 @@ public class AlarmDao{
 		}
 	}
 	
-	public int countUnReadAlarm(Connection con) {
+	public int countUnReadAlarm(Connection con, int mid) {
 		// 
 		int unReadAlarm = 0;
 		ResultSet rset = null;
@@ -36,11 +36,13 @@ public class AlarmDao{
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setInt(1, mid);
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()){
-				unReadAlarm = rset.getInt(1);
+				unReadAlarm = Integer.parseInt(rset.getString(1));
+				
+				
 			}
 		} catch (SQLException e) {	
 			e.printStackTrace();
@@ -53,22 +55,21 @@ public class AlarmDao{
 	}
 
 
-	public ArrayList<Alarm> selectAlarmList(Connection con, int id) {
+	public ArrayList<Alarm> selectAlarmList(Connection con, int mid) {
 		// 
 		ArrayList<Alarm> alarmList = null;
 		ResultSet rset = null;
-		Alarm Mid = new Alarm();
 		String sql = prop.getProperty("alarmList");
 		
 		try {
 			pstmt = con.prepareStatement(sql);
-			pstmt.setInt(1, id);
-			
+			pstmt.setInt(1, mid);
 			
 			rset = pstmt.executeQuery();
 			
 			alarmList = new ArrayList<Alarm>();
 			//
+			System.out.println(rset.next());
 			while(rset.next()){
 				Alarm al = new Alarm();
 				
@@ -77,8 +78,10 @@ public class AlarmDao{
 				al.setADate(rset.getDate("ADATE"));
 				al.setAFlag(rset.getString("AFLAG"));
 				
+				
+				
 				alarmList.add(al);
-				//System.out.println("selectAlarmList dao : "+ alarmList);
+				System.out.println("selectAlarmList dao : "+ alarmList);
 			}
 			
 		} catch (SQLException e) {

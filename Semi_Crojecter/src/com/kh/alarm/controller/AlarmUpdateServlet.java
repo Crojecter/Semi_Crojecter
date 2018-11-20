@@ -1,26 +1,25 @@
 package com.kh.alarm.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.alarm.model.service.AlarmService;
+import com.kh.board.gallery.model.service.GalleryService;
 
 /**
- * Servlet implementation class alarmRead
+ * Servlet implementation class AlarmUpdateServlet
  */
-@WebServlet("/aRead.al")
-public class AlarmReadServlet extends HttpServlet {
+@WebServlet("/aUpdate.al")
+public class AlarmUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlarmReadServlet() {
+    public AlarmUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +28,16 @@ public class AlarmReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 읽지않은 알람메세지 확인용 서블릿
-		AlarmService as = new AlarmService();
+		// 
+		int Aid = Integer.parseInt(request.getParameter("Aid"));
 		
-		int unReadAlarm = 0;
-		System.out.println("countUnreadAlarm : "+ unReadAlarm);
+		int result = new GalleryService().updateAlarm(Aid);
 		
-		int mid = Integer.parseInt(request.getParameter("Mid"));
-		
-		unReadAlarm = as.countUnReadAlarm(mid);
-		
-		if(unReadAlarm < 0){
-			System.out.println("조회할 알람메세지가 없습니다.");
-		}
-		else{
-			PrintWriter out = response.getWriter();
-			out.print(unReadAlarm);
+		if(result > 0) {
+			response.sendRedirect("gSelectOne.ga?bid="+Aid);
+		} else {
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 	}
 

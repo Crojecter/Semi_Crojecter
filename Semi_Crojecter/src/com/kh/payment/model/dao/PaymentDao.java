@@ -24,7 +24,7 @@ private Properties prop = null;
 		prop = new Properties();
 		
 		String filePath = PaymentDao.class
-				.getResource("/config/mypage-query.properties").getPath();
+				.getResource("/config/admin-query.properties").getPath();
 		
 		try {
 			
@@ -131,6 +131,47 @@ private Properties prop = null;
 		for(Payment p : plist) System.out.println(p);
 		
 		return plist;
+	}
+
+
+	public ArrayList<Payment> searchPayment(Connection con, int mid) {
+		ArrayList<Payment> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectMypayment");
+
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);		
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Payment>();
+			
+			while(rset.next()){
+				
+				Payment p = new Payment();
+				
+				p.setPdate(rset.getDate("pdate"));
+				p.setPmoney(rset.getInt("pmoney"));
+		
+				list.add(p);
+				
+			}
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

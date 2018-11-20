@@ -6,8 +6,12 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.follow.model.dao.FollowDao;
+import com.kh.follow.model.vo.Follow;
+import com.kh.member.model.vo.Member;
+import com.kh.spon.model.vo.Spon;
 
 public class FollowService {
 
@@ -43,6 +47,31 @@ public class FollowService {
 		close(con);
 		
 		return result;
+
+	}
+
+	public ArrayList<Follow> searchFollowing(int mid) {
+		
+		Connection con = getConnection();
+		ArrayList<Follow> list = fDao.selectList(con, mid);
+		
+		close(con);
+		
+		return list;
+		
+	}
+
+	public ArrayList<Follow> searchFollower(int mid) {
+		
+		ArrayList<Follow> list = null;
+		Connection con = getConnection();
+		
+		list = fDao.selectFollowerList(con, mid);
+		
+		close(con);
+		
+		return list;
+
 
 	}
 

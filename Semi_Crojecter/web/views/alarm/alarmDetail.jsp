@@ -4,21 +4,28 @@
 	// 읽지않은 알람목록 조회용
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("alarmList");
 	System.out.println("alarmDetail alist : "+ alarmList);
-
+	int mid = Integer.parseInt(request.getParameter("Mid"));
+	int result = 0;
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>알람메세지 페이지입니다.</title>
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<style>
 		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
 	</style>
-
 </head>
-
+<body>
 	<div class="outer">
 		<br>
+		<script>
+		$(function(){
+			console.log(sessionStorage.getItem("myAlarmList"));
+		});
+		</script>
 		<div class="tableArea">
 		<% if(alarmList != null){ %>
 			<table align="center" id="alarmList">
@@ -35,11 +42,16 @@
 				</td>
 				<td><%= al.getADate() %></td>
 				<% if( al.getAFlag().equals("Y")) { %>
-				<td> 확인 </td>
+				<td><button onclick="updateAlarm();">확인</button></td>
 				<% } %>
 			</tr>
 			<% } %>
 			</table>
+			<script>
+			function updateAlarm(){
+				location.href="/crojecter/aUpdate.al?Aid="+ Aid;
+			}
+			</script>
 		<% } else { %>
 			현재 전송된 알람이 없습니다.
 		<% } %>
@@ -51,9 +63,19 @@
 					location.href="<%=request.getContextPath()%>/aList.al?Aid=" + Aid;
 				});
 			});
+			
+			var result = 0;
+			<%-- 
+			$(document).ready(function(){
+				$.ajax({
+					data : { Mid : <%= mid %>},
+					url : "/crojecter/aList.al",
+					type : "post",
+					success : function(data){}
+				});
+			}); --%>
 		</script>
 
 
-	</table>
 </body>
 </html>

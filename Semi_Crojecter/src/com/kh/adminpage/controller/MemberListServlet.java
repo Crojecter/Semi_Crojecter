@@ -1,26 +1,30 @@
-package com.kh.alarm.controller;
+package com.kh.adminpage.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.alarm.model.service.AlarmService;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
+import com.kh.report.model.service.ReportService;
+import com.kh.report.model.vo.Report;
 
 /**
- * Servlet implementation class alarmRead
+ * Servlet implementation class MemberListServlet
  */
-@WebServlet("/aRead.al")
-public class AlarmReadServlet extends HttpServlet {
+@WebServlet("/mListView.do")
+public class MemberListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AlarmReadServlet() {
+    public MemberListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,22 +33,20 @@ public class AlarmReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 읽지않은 알람메세지 확인용 서블릿
-		AlarmService as = new AlarmService();
+		ArrayList<Member> mlist = null;
+		MemberService ms = new MemberService();
 		
-		int unReadAlarm = 0;
-		System.out.println("countUnreadAlarm : "+ unReadAlarm);
+		mlist = ms.selectlist();
 		
-		int mid = Integer.parseInt(request.getParameter("Mid"));
-		
-		unReadAlarm = as.countUnReadAlarm(mid);
-		
-		if(unReadAlarm < 0){
-			System.out.println("조회할 알람메세지가 없습니다.");
-		}
-		else{
-			PrintWriter out = response.getWriter();
-			out.print(unReadAlarm);
+		if(mlist != null){
+			
+			request.setAttribute("mlist", mlist);
+			request.getRequestDispatcher("views/adminpage/memberlistView.jsp").forward(request, response);
+			
+		} else {
+			
+			request.setAttribute("msg", "조회 실패!");
+			
 		}
 	}
 
