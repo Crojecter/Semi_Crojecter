@@ -42,6 +42,7 @@ public class SearchAllServlet extends HttpServlet {
 		if(bList != null) {
 			System.out.println("성공 bList : " + bList);
 			request.setAttribute("bList", bList);
+			request.getRequestDispatcher("views/board/searchAll.jsp").forward(request, response);
 		} else {
 			System.out.println("실패");
 		}
