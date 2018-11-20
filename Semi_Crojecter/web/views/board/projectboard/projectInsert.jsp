@@ -117,21 +117,11 @@ body {
 		    
 		    var today = new Date();
 		    var dd = today.getDate();
-		    var mm = today.getMonth()+2; //January is 0!
-		    var yyyy = today.getFullYear();	    
-		    
-		    if(dd<10){
-		        dd='0'+dd;
-		    } 	    
-		    if(mm>12){
-		    	mm=mm-11;
-		    }	    
-		    if(mm<10){
-		        mm='0'+mm;
-		    } 	
+		    var mm = today.getMonth()+1; //January is 0!
+		    var yyyy = today.getFullYear();	    	
 		    
 		    today = yyyy+'-'+mm+'-'+dd;
-		    $(el).attr('max', today);	    
+		    $(el).attr('min', today);	    
 		    
 		    if ($(el).val() == ''){
 		    	$(el).attr('type', 'text');	    
@@ -185,6 +175,7 @@ body {
 				
 				reader.onload = function(e){					
 					$('#titleImg').attr('src', e.target.result);	
+					$('#thumbnailLabel').hide();
 				}
 				
 				reader.readAsDataURL(value.files[0]);

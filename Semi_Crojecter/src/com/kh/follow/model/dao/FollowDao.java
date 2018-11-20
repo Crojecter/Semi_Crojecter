@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
@@ -109,7 +110,7 @@ public class FollowDao {
 	}
 
 
-	public ArrayList<Follow> selectList(Connection con, int mid) {
+	public ArrayList<Follow> selectFollowingList(Connection con, int mid) {
 		ArrayList<Follow> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -129,7 +130,8 @@ public class FollowDao {
 				Follow f = new Follow();
 				
 				f.setFollowid(rset.getInt("followid"));
-				
+				f.setFollowname(rset.getString("mname"));
+
 				list.add(f);
 			}
 			
@@ -167,6 +169,7 @@ public class FollowDao {
 				Follow f = new Follow();
 				
 				f.setFollowerid(rset.getInt("followerid"));
+				f.setFollowername(rset.getString("mname"));
 				
 				list.add(f);
 			} 

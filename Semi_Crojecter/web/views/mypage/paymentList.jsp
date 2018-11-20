@@ -20,8 +20,8 @@
 <table class="sponTable">
 	<tr> 
 		<th>날짜</th>
-		<th>내용</th>
-		<th>사용내역</th>
+		<th>받는이</th>
+		<th>후원호두</th>
 	</tr>
 		<% for(Spon s : slist){ %>
 	<tr>
@@ -40,14 +40,16 @@
 <table class="paymentTable">
 	<tr> 
 		<th>날짜</th>
-		<th>충전내역</th>
-		<th>비고</th>
+		<th>충전 호두</th>
+		<th>충전 금액</th>
 	</tr>
+	<% for(Payment p : plist){ %>
 	<tr>
-		<td>2</td>
-		<td>3</td>
-		<td>4</td>
-
+		<td><%=p.getPdate()%></td>
+		<td><%=p.getPhodu() %></td>
+		<td><%=p.getPmoney_1() %></td>
+	</tr>
+	<% } %>
 </table>
 </div>
 </body>

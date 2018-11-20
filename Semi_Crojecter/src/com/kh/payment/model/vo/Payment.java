@@ -13,9 +13,24 @@ public class Payment implements Serializable{
 	private String memail;
 	private int pmoney;
 	private int phodu;
+	private int pmoney_1;
 	
 	public Payment() {
 		super();
+	}
+
+	public Payment(int pid, int pmoneyid, Date pdate, int mid, String mname, String memail, int pmoney, int phodu,
+			int pmoney_1) {
+		super();
+		this.pid = pid;
+		this.pmoneyid = pmoneyid;
+		this.pdate = pdate;
+		this.mid = mid;
+		this.mname = mname;
+		this.memail = memail;
+		this.pmoney = pmoney;
+		this.phodu = phodu;
+		this.pmoney_1 = pmoney_1;
 	}
 
 	public int getPid() {
@@ -82,10 +97,18 @@ public class Payment implements Serializable{
 		this.phodu = phodu;
 	}
 
+	public int getPmoney_1() {
+		return pmoney_1;
+	}
+
+	public void setPmoney_1(int pmoney_1) {
+		this.pmoney_1 = pmoney_1;
+	}
+
 	@Override
 	public String toString() {
 		return "Payment [pid=" + pid + ", pmoneyid=" + pmoneyid + ", pdate=" + pdate + ", mid=" + mid + ", mname="
-				+ mname + ", memail=" + memail + ", pmoney=" + pmoney + ", phodu=" + phodu + "]";
+				+ mname + ", memail=" + memail + ", pmoney=" + pmoney + ", phodu=" + phodu + ", pmoney_1=" + pmoney_1
+				+ "]";
 	}
-
 }

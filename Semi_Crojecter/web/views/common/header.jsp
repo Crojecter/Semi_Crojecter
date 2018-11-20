@@ -198,9 +198,6 @@
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button>
 				</form>
-				<script>
-				
-				</script>
 		</div>
 	</nav>
 	</div>
