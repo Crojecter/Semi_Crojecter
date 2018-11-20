@@ -15,7 +15,6 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.member.model.vo.Member;
 
 public class GalleryDao {
 
@@ -66,7 +65,6 @@ public class GalleryDao {
 				g.setBwriter(rset.getInt("bwriter"));
 				g.setMname(rset.getString("mname"));
 				g.setMprofile(rset.getString("mprofile"));
-				
 
 				// System.out.println("gdao g : " + g);
 			}
@@ -79,7 +77,7 @@ public class GalleryDao {
 
 		return g;
 	}
-	
+
 	public AttachedFile selectOneAf(Connection con, int bid) {
 
 		PreparedStatement pstmt = null;
@@ -95,7 +93,7 @@ public class GalleryDao {
 
 			if (rset.next()) {
 				af = new AttachedFile();
-				
+
 				af.setBid(bid);
 				af.setFid(rset.getInt("fid"));
 				af.setFlevel(rset.getInt("flevel"));
@@ -204,15 +202,14 @@ public class GalleryDao {
 
 		try {
 
-				pstmt = con.prepareStatement(sql);
+			pstmt = con.prepareStatement(sql);
 
-				pstmt.setString(1, af.getFname());
-				pstmt.setString(2, af.getFpath());
-				pstmt.setInt(3, 1);
-				pstmt.setInt(4, bid);
+			pstmt.setString(1, af.getFname());
+			pstmt.setString(2, af.getFpath());
+			pstmt.setInt(3, 1);
+			pstmt.setInt(4, bid);
 
-				result += pstmt.executeUpdate();
-
+			result += pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -280,12 +277,12 @@ public class GalleryDao {
 		String sql = prop.getProperty("updateAttachedfile");
 
 		try {
-				pstmt = con.prepareStatement(sql);
-			
-				pstmt.setString(1, af.getFname());
-				pstmt.setInt(2, bid);
+			pstmt = con.prepareStatement(sql);
 
-				result = pstmt.executeUpdate();
+			pstmt.setString(1, af.getFname());
+			pstmt.setInt(2, bid);
+
+			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -300,25 +297,25 @@ public class GalleryDao {
 	public int updateCount(Connection con, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String sql = prop.getProperty("updateCount");
-		
-		try{
-			
+
+		try {
+
 			pstmt = con.prepareStatement(sql);
-				
+
 			pstmt.setInt(1, bid);
-			
+
 			result = pstmt.executeUpdate();
-			
-			System.out.println("updateCount result : "  + result);
-			
+
+			System.out.println("updateCount result : " + result);
+
 		} catch (SQLException e) {
-			
+
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
@@ -328,26 +325,26 @@ public class GalleryDao {
 		HashMap<String, Object> hmap = null;
 		Gallery g = null;
 		AttachedFile af = null;
-		
+
 		System.out.println("selectGalleryMap 진입");
 		String sql = prop.getProperty("selectGalleryOne");
-				
+
 		try {
 			pstmt = con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 			pstmt.setInt(1, bid);
 			rset = pstmt.executeQuery();
-			
+
 			af = new AttachedFile();
-			
-			while(rset.next()){
-				
+
+			while (rset.next()) {
+
 				g = new Gallery();
 				g.setGid(rset.getInt("gid"));
 				g.setGcategoryid(rset.getInt("gcategoryid"));
 				g.setGtag(rset.getString("gtag"));
 				g.setGlike(rset.getInt("glike"));
 				g.setCclid(rset.getInt("cclid"));
-				
+
 				g.setBid(rset.getInt("bid"));
 				g.setBtype(rset.getInt("btype"));
 				g.setBtitle(rset.getString("btitle"));
@@ -358,55 +355,54 @@ public class GalleryDao {
 				g.setBrcount(rset.getInt("brcount"));
 				g.setBwriter(rset.getInt("bwriter"));
 				g.setMname(rset.getString("mname"));
-				
+
 				af = new AttachedFile();
 				af.setBid(bid);
 				af.setFid(rset.getInt("fid"));
 				af.setFlevel(rset.getInt("flevel"));
 				af.setFname(rset.getString("fname"));
 				af.setFpath(rset.getString("fpath"));
-				
+
 				System.out.println("selectGalleryMap의 g : " + g);
 				System.out.println("selectGalleryMap의 af : " + af);
-				
+
 			}
-			
+
 			hmap = new HashMap<String, Object>();
-			
+
 			hmap.put("gallery", g);
 			hmap.put("attachedfile", af);
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return hmap;
 	}
-	
+
 	public ArrayList<Gallery> selectGalleryList(Connection con, int currentPage, int limit) {
-		
+
 		ArrayList<Gallery> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
-				
-		String sql = prop.getProperty("selectGalleryList");		
-		
+		String sql = prop.getProperty("selectGalleryList");
+
 		try {
-			
-			pstmt = con.prepareStatement(sql);			
-			
-			int startRow = (currentPage -1) * limit +1;	
-			int endRow = startRow + limit -1;
-			
-			rset = pstmt.executeQuery();			
+
+			pstmt = con.prepareStatement(sql);
+
+			int startRow = (currentPage - 1) * limit + 1;
+			int endRow = startRow + limit - 1;
+
+			rset = pstmt.executeQuery();
 			list = new ArrayList<Gallery>();
-			
-			while(rset.next()){
-				
+
+			while (rset.next()) {
+
 				Gallery g = new Gallery();
 				// 갤러리분
 				g.setGid(rset.getInt("GID"));
@@ -421,13 +417,13 @@ public class GalleryDao {
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBstatus(rset.getString("BSTATUS"));
 				g.setBwriter(rset.getInt("BWRITER"));
-				// 
+				//
 				g.setFname(rset.getString("FNAME"));
-				
+
 				list.add(g);
-				System.out.println("selectGalleryList Dao : "+ list);
+				System.out.println("selectGalleryList Dao : " + list);
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -436,179 +432,165 @@ public class GalleryDao {
 		}
 		return list;
 	}
-				
 
-
-		public int getCountGalleryList(Connection con) {
-		// 
+	public int getCountGalleryList(Connection con) {
+		//
 		Statement stmt = null;
 		int listCount = 0;
 		ResultSet rset = null;
-		
+
 		String sql = prop.getProperty("countGalleryList");
-		
+
 		try {
 			stmt = con.createStatement();
 			rset = stmt.executeQuery(sql);
-			if(rset.next()){
+			if (rset.next()) {
 				listCount = rset.getInt(1);
 			}
-		} catch (SQLException e) {	
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(stmt);
 		}
-		
+
 		return listCount;
 	}
 
 	public ArrayList<Gallery> galleryTop5(Connection con) {
-		// 
+		//
 		Statement stmt = null;
 		ResultSet rset = null;
 		ArrayList<Gallery> list = null;
-		
+
 		String sql = prop.getProperty("selectGalleryTop5");
-		
+
 		try {
-			
+
 			stmt = con.createStatement();
-			
+
 			rset = stmt.executeQuery(sql);
-			
+
 			list = new ArrayList<Gallery>();
-			
-			while(rset.next()){
+
+			while (rset.next()) {
 				Gallery g = new Gallery();
-				
+
 				g.setBid(rset.getInt("BID"));
 				g.setBtitle(rset.getString("BTITLE"));
 				g.setBwriter(rset.getInt("BWRITER"));
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBcount(rset.getInt("BCOUNT"));
-				
+
 				g.setFname(rset.getString("FNAME"));
-				
+
 				list.add(g);
 				System.out.println("Top5 Dao : " + list);
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			close(rset);
 			close(stmt);
 		}
-		
+
 		return list;
 	}
-
 
 	public ArrayList<Gallery> searchGallery(Connection con, int mid) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Gallery> glist = null;
-		
+
 		String sql = prop.getProperty("selectMyworkList");
-		
+
 		try {
-			
+
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mid);
-			
+
 			rset = pstmt.executeQuery();
-			
+
 			glist = new ArrayList<Gallery>();
-			
-			while(rset.next()){
+
+			while (rset.next()) {
 				Gallery g = new Gallery();
-				
+
 				g.setBwriter(rset.getInt("BWRITER"));
 				g.setMname(rset.getString("MNAME"));
 				g.setBtitle(rset.getString("BTITLE"));
-				
-				
+
 				glist.add(g);
 			}
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-			
+
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
+
 		return glist;
 	}
-}
-	
+
 	public int deleteGallery(Connection con, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		
+
 		String sql = prop.getProperty("deleteGallery");
 
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setInt(1, bid);
-			
+
 			result = pstmt.executeUpdate();
-		
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(pstmt);
 		}
-		
+
 		return result;
 	}
 
-
-
-
-
-
-
-}
-
 	public ArrayList<Gallery> searchGallery(Connection con, String condition, String keyword) {
-		
+
 		ArrayList<Gallery> searchGalleryList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-				
+
 		String sql = null;
-		
-		switch(condition){
-		case "image" : 
+
+		switch (condition) {
+		case "image":
 			sql = prop.getProperty("searchImage");
 			break;
-		case "audio" :
+		case "audio":
 			sql = prop.getProperty("searchAudio");
 			break;
-		case "text" : 
+		case "text":
 			sql = prop.getProperty("searchText");
 			break;
-		case "vidio" : 
+		case "vidio":
 			sql = prop.getProperty("searchVidio");
 			break;
 		}
-		
-		
+
 		try {
 			pstmt = con.prepareStatement(sql);
-			
+
 			pstmt.setString(1, keyword);
 			rset = pstmt.executeQuery();
-			
+
 			searchGalleryList = new ArrayList<Gallery>();
-			
-			while(rset.next()){
-				
+
+			while (rset.next()) {
+
 				Gallery g = new Gallery();
 				// 갤러리분
 				g.setGid(rset.getInt("GID"));
@@ -624,10 +606,10 @@ public class GalleryDao {
 				g.setBdate(rset.getDate("BDATE"));
 				g.setBstatus(rset.getString("BSTATUS"));
 				g.setBwriter(rset.getInt("BWRITER"));
-				
-				searchGalleryList.add(g); 
+
+				searchGalleryList.add(g);
 			}
-			
+
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -636,6 +618,7 @@ public class GalleryDao {
 			close(pstmt);
 		}
 		// 확인용 출력문
-		//for(Notice n : list) System.out.println(list);
+		// for(Notice n : list) System.out.println(list);
 		return searchGalleryList;
 	}
+}

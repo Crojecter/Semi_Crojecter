@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
+	pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,84 +7,129 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-
-	.form{
-		width:300px;
-		margin:0 auto;
-		margin-top:160px;
-		margin-bottom:160px;
-		padding:10px 10px 10px 10px;
-		}
-
-	.inputContent{
-		width:250px;
-		height:25px;
-		margin:1px 10px 1px 10px;
-		}
-		
-	.label{
-		color:red;
-		text-align:center;
-		font-size:10px;
-		width:auto;
-		margin:1px 10px 1px 10px;
-		}
-		
-	#submit{
-		color:white;
-		text-align:center;
-		border-radius:5px;
-		height:40px;
-		width:120px;
-		font-size:15px;
-		margin:1px 10px 1px 10px;
-		}
-
+	.form {
+		width: 300px;
+		margin: 0 auto;
+		margin-top: 160px;
+		margin-bottom: 160px;
+		padding: 10px 10px 10px 10px;
+	}
+	
+	.inputContent {
+		width: 250px;
+		height: 25px;
+		margin: 1px 10px 1px 10px;
+	}
+	
+	.label {
+		color: red;
+		text-align: center;
+		font-size: 10px;
+		width: auto;
+		margin: 1px 10px 1px 10px;
+	}
+	
+	.submit {
+		color: white;
+		text-align: center;
+		border-radius: 5px;
+		height: 40px;
+		width: 120px;
+		font-size: 15px;
+		margin: 1px 10px 1px 10px;
+	}
+	
+	.pro {
+		width: 80px;
+		height: 80px;
+		margin: 1px 10px 1px 10px;
+	}
 </style>
 </head>
 <body>
-<%@ include file="../mypage/common/mypageHeader.jsp" %>
-<div class="form">
-<form id="updateForm" action="<%=request.getContextPath()%>/mUpdate.do" method="post">
-	        <table>
-            <tr>
-                <td><label class="inputContent">닉네임</label></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="text" class="inputContent" name="nickName" id="nickName" oninput="checkNickName();" 
-                value="<%= m.getMname()%>"><br>
-                <label id="labelNickname" class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label></td>
-            </tr>
-            <tr>
-                <td><label class="inputContent">이메일</label></td>
-            </tr>
-            <tr>
-                <td colspan="2"><input type="email" class="inputContent" name="email" id="email" value="<%= m.getMemail()%>" readonly></td>
-            </tr>
-            <tr>
-                <td><label class="inputContent">비밀번호</label></td>
-            </tr>
-            <tr>
-				<td><input type="password" name="password" id="password"
-							class="inputContent" placeholder="비밀번호를 입력해주세요"
-							oninput="checkedPassword();" /></td>
-			</tr>
-			<tr>
-				<td><input type="password" name="passwordCheck" id="passwordCheck" class="inputContent" 
-							placeholder="비밀번호를 확인합니다" oninput="checkedPassword();" /><br> 
-							<label id="labelPwd" class="label">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
-								특수문자 숫자 최소 1개 이상 포함
-						</label></td>
-			</tr>
-            <tr colspan="2">
-                <td><input type="submit" id="submit" onclick="updateMember();" style="border: 1px solid gray; background-color: gray;" value="수정하기">
-                <input type="button" id="submit" onclick="deleteMember();" style="border: 1px solid gray; background-color: gray;" value="탈퇴하기"></td>
-            </tr> 
-        </table>
-</div>
-</form>
-
-<script>
+	<%@ include file="../mypage/common/mypageHeader.jsp"%>
+	<div class="form">
+		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdate.do" method="post" encType="multipart/form-data">
+			<table>
+				<tr>
+					<td><label class="inputContent">프로필 사진</label></td>
+				</tr>
+				<tr>
+					<td><img class="inputContent pro" name="mprofile" id="proImg" src="<%= m.getMprofile() %>" /></td>
+				</tr>
+				<tr>
+					<td>
+					<input type="file" name="file" id="btnProfile" style="display:none;" onchange="LoadImg(this)"/>
+					<input type="button" class="inputContent" id="inputProfile" value="프로필 사진 선택"/>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="inputContent">닉네임</label></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<input type="text" class="inputContent" name="nickName" id="nickName"
+						   oninput="checkNickName();" value="<%= m.getMname()%>"><br> 
+					<label id="labelNickname" class="label">2~10 글자의 닉네임을 입력하세요. 특수문자 불가</label>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="inputContent">이메일</label></td>
+				</tr>
+				<tr>
+					<td colspan="2">
+					<input type="email" class="inputContent" name="email" id="email" 
+						   value="<%= m.getMemail()%>" readonly>
+					</td>
+				</tr>
+				<tr>
+					<td><label class="inputContent">비밀번호</label></td>
+				</tr>
+				<tr>
+					<td>
+					<input type="password" name="password" id="password" class="inputContent"
+						   placeholder="비밀번호를 입력해주세요" oninput="checkedPassword();" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<input type="password" name="passwordCheck" id="passwordCheck" class="inputContent" 
+						   placeholder="비밀번호를 확인합니다" oninput="checkedPassword();" /><br> 
+					<label id="labelPwd" class="label">6~12 글자의 비밀번호를 입력하세요.<br>
+						&nbsp;&nbsp;영대문자 특수문자 숫자 최소 1개 이상 포함 </label>
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<input type="submit" class="submit" onclick="updateMember();"
+						style="border: 1px solid gray; background-color: gray;" value="수정하기"> 
+					<input type="button" class="submit" onclick="deleteMember();"
+						style="border: 1px solid gray; background-color: gray;" value="탈퇴하기">
+					</td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	
+	<script>	
+	
+	$('#inputProfile').click(() => {
+		$('#btnProfile').click();
+	      
+	});
+	
+	function LoadImg(value) {
+		if(value.files && value.files[0]) {
+			var reader = new FileReader();
+			
+			reader.onload = function(e){					
+				$('#proImg').attr('src', e.target.result);	
+			}
+			
+			reader.readAsDataURL(value.files[0]);
+		}
+	}
+	
 	function updateMember() {
 		$("#updateForm").submit();
 	}
@@ -178,6 +223,6 @@
 	}
 
 </script>
-<%@ include file="../common/footer.jsp" %>
+	<%@ include file="../common/footer.jsp"%>
 </body>
 </html>

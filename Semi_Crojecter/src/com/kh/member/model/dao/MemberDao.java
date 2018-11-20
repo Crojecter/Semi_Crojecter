@@ -180,9 +180,9 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, m.getMname());
-			pstmt.setString(2, m.getMpwd());
-			pstmt.setString(3, m.getMemail());
+			pstmt.setString(1, m.getMpwd());
+			pstmt.setString(2, m.getMprofile());
+			pstmt.setInt(3, m.getMid());
 			
 			result = pstmt.executeUpdate();
 		
