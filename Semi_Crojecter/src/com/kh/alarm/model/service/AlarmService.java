@@ -11,22 +11,22 @@ public class AlarmService {
 	
 	private AlarmDao aDao = new AlarmDao();
 	
-	public int countUnReadAlarm() {
+	public int countUnReadAlarm(int mid) {
 		// 
 		Connection con = getConnection();
-		int unReadAlarm = aDao.countUnReadAlarm(con);
+		int unReadAlarm = aDao.countUnReadAlarm(con, mid);
 		
 		close(con);
 		
 		return unReadAlarm;
 	}
 
-	public ArrayList<Alarm> selectAlarmList(String Mid) {
+	public ArrayList<Alarm> selectAlarmList(int mid) {
 		// 
 		Connection con = getConnection();
-		ArrayList<Alarm> alarmList = aDao.selectAlarmList(con, Integer.parseInt(Mid));
+		ArrayList<Alarm> alarmList = aDao.selectAlarmList(con, mid);
 		
-		//System.out.println("selectAlarmList s : "+ alarmList);
+		System.out.println("selectAlarmList s : "+ alarmList);
 		
 		close(con);
 		return alarmList;

@@ -157,6 +157,7 @@ public class GalleryService {
 		return list;
 	}
 	
+
 	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
 		ArrayList<Gallery> searchGalleryList = null;
 		Connection con = getConnection();
@@ -167,7 +168,7 @@ public class GalleryService {
 		
 		return searchGalleryList;
 	}
-	
+
 	public int deleteGallery(int bid) {
 		
 		Connection con = getConnection();
@@ -181,11 +182,5 @@ public class GalleryService {
 		
 		return result;
 	}
-	
-	
-
-
-
-
 
 }

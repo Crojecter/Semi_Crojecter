@@ -32,25 +32,26 @@ public class AlarmListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 게시판 요소
-			ArrayList<Alarm> alarmList = null;
-			AlarmService as = new AlarmService();
+		ArrayList<Alarm> alarmList = null;
+		AlarmService as = new AlarmService();
+		int mid = Integer.parseInt(request.getParameter("Mid"));
+		//System.out.println("Mid ser : "+ request.getParameter("Mid"));
+		
+		alarmList = as.selectAlarmList(mid);
+		System.out.println("AlarmListServlet alist : "+ alarmList);
+		
+		String page = "";
+		
+		
+		if (alarmList != null){
+			page = "views/alarm/alarmDetail.jsp";
+			request.setAttribute("alarmList", alarmList);
 			
-			//System.out.println("Mid ser : "+ request.getParameter("Mid"));
-			
-			alarmList = as.selectAlarmList(request.getParameter("Mid"));
-			//System.out.println("AlarmListServlet alist : "+ alarmList);
-			
-			String page = "";
-			
-			if (alarmList != null){
-				page = "views/alarm/alarmDetail.jsp";
-				request.setAttribute("alarmList", alarmList);
-				
-			} else {
-				page = "views/common/errorPage.jsp";
-				request.setAttribute("msg", "알람목록 조회실패");
-			}
-			request.getRequestDispatcher(page).forward(request, response);
+		} else {
+			page = "views/common/errorPage.jsp";
+			request.setAttribute("msg", "알람목록 조회실패");
+		}
+		request.getRequestDispatcher(page).forward(request, response);
 				
 	}
 
