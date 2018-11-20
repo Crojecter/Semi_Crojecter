@@ -53,7 +53,7 @@ public class FollowService {
 	public ArrayList<Follow> searchFollowing(int mid) {
 		
 		Connection con = getConnection();
-		ArrayList<Follow> list = fDao.selectList(con, mid);
+		ArrayList<Follow> list = fDao.selectFollowingList(con, mid);
 		
 		close(con);
 		

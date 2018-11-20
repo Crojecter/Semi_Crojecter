@@ -4,7 +4,7 @@
     		com.kh.board.gallery.model.vo.*, java.util.*"%>
     
 <%
-	ArrayList<Follow> flist = (ArrayList<Follow>)session.getAttribute("flist");
+	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
 	Gallery g = (Gallery)request.getAttribute("gallery");
 %>
 <!DOCTYPE html>
@@ -24,12 +24,9 @@
 <form action="<%=request.getContextPath()%>/followerView.do" method="post">
 <div class="followList">
 	<table>  
-		<% for(Follow f : flist){ %>
-		
+		<% for(Follow f : list){ %>
 		<tr>
-			<td><%=f.getFollowerid() %></td>
-		</tr>
-		<tr>
+			<td><%=f.getFollowername()%></td>
 			<td> <div id="btnFollow" class="btn btn-follow">
 					<p id="p-follow" style="color: black">팔로우</p></div>
 			</td>
@@ -37,32 +34,7 @@
 		
 		<% } %>
 	</table>
-
+</form>
 </div>
-<script>
-$('#btnFollow').click(function(){
-	$.ajax({
-		url : '/crojecter/fSwitch.fo',
-		type : 'get',
-		data : {
-			mid : '<%= m.getMid() %>',
-			wid : '<%= g.getBwriter() %>'
-		}, 
-		success : function(data){
-			if(data == 'insert') {
-				$("#btnFollow").addClass('active');
-				$('#p-follow').html('언팔로우');
-			} else if (data == 'delete') {
-				$("#btnFollow").removeClass('active');
-				$('#p-follow').html('팔로우');
-			} else {
-				console.log('btnFollow() 에러 발생!');
-			}
-		}, error : function(data){
-			console.log('btnFollow() 에러 발생!!');
-		}
-	});
-});
-</script>
 </body>
 </html>

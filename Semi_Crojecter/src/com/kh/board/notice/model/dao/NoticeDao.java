@@ -16,6 +16,7 @@ import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.common.model.vo.Board;
 import com.kh.board.notice.model.vo.Notice;
 import com.kh.board.project.model.vo.Project;
+import com.kh.follow.model.vo.Follow;
 
 public class NoticeDao {
 	
@@ -224,6 +225,46 @@ private Properties prop = new Properties();
 		}
 		
 		return result;
+	}
+
+	public ArrayList<Notice> selectMywork(Connection con, int mid) {
+		ArrayList<Notice> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+	
+		String sql = prop.getProperty("viewMywork");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Notice>();
+			
+			while(rset.next()){
+				
+				Notice n = new Notice();
+				
+				n.setBtitle(rset.getString("btitle"));
+				n.setBdate(rset.getDate("bdate"));
+				n.setBid(rset.getInt("bid"));
+				n.set
+			
+				list.add(n);
+			} 
+			
+		} catch (SQLException e){
+				e.printStackTrace();
+		
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+			
+		return list;
 	}
 
 

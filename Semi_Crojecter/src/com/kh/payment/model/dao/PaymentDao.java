@@ -154,14 +154,14 @@ private Properties prop = null;
 			while(rset.next()){
 				
 				Payment p = new Payment();
-				
+				p.setPmoney_1(rset.getInt("PAYMONEY"));
 				p.setPdate(rset.getDate("pdate"));
 				p.setPmoney(rset.getInt("pmoney"));
 		
 				list.add(p);
-				
+
 			}
-			
+			System.out.println("list : " + list);
 		} catch (SQLException e) {
 		
 			e.printStackTrace();
