@@ -74,7 +74,7 @@ body {
 						style="border: white;">
 				</div>
 				<input class="jend" id="jend" name="date" type="date" min="" max="">
-				<input type="text" name="tags" data-role="tagsinput" value="<%=g.getGtag()%>" id="tagsinput" class="tagsinput">
+				<input type="text" name="tags" data-role="tagsinput" value="<%=p.getJtag()%>" id="tagsinput" class="tagsinput">
 				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertProject();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
