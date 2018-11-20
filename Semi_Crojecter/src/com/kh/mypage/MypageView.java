@@ -1,4 +1,4 @@
-package com.kh.spon.controller;
+package com.kh.mypage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class SelectPaymentList
+ * Servlet implementation class MypageView
  */
-@WebServlet("/sponSelect.do")
-public class SponListServlet extends HttpServlet {
+@WebServlet("/mypageView.do")
+public class MypageView extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SponListServlet() {
+    public MypageView() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +31,21 @@ public class SponListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Spon> list = null;
-		SponService ss = new SponService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		ArrayList<Member> list = null;
+		MemberService ms = new MemberService();
 		
-		list = ss.selectlist(mid);
+		list = ms.searchMypage();
 		
 		if(list != null){
 			
-			request.setAttribute("slist", list);
-			request.getRequestDispatcher("views/mypage/paymentList.jsp").forward(request, response);
+			request.setAttribute("list", list);
 			
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");
+			request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);
 			
 		}
-		
 	}
 
 	/**

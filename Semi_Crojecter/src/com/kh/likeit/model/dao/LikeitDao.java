@@ -8,9 +8,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.gallery.model.dao.GalleryDao;
+import com.kh.follow.model.vo.Follow;
+import com.kh.likeit.model.vo.Likeit;
 
 public class LikeitDao {
 
@@ -104,4 +107,45 @@ public class LikeitDao {
 		
 		return result;
 	}
+
+
+	public ArrayList<Likeit> searchLikeit(Connection con, int mid) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Likeit> list = null;
+		
+		String sql = prop.getProperty("selectLikeit");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);	
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Likeit>();
+			
+			while(rset.next()){
+				
+				Likeit l = new Likeit();
+				
+				l.setMid(rset.getInt("mid"));
+				l.setBid(rset.getInt("bid"));
+				
+				list.add(l);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return list;
+	}
+
+
+
 }

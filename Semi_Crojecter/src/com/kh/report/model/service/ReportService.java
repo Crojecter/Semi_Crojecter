@@ -1,11 +1,9 @@
 package com.kh.report.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.commit;
-import static com.kh.common.JDBCTemplate.getConnection;
-import static com.kh.common.JDBCTemplate.rollback;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.kh.report.model.dao.ReportDao;
 import com.kh.report.model.vo.Report;
@@ -38,6 +36,16 @@ public class ReportService {
 		close(con);
 
 		return result;
+	}
+	public ArrayList<Report> selectlist() {
+		ArrayList<Report> list = null;
+		Connection con = getConnection();
+		
+		list = rDao.selectList(con);
+		
+		close(con);
+		
+		return list;
 	}
 
 }

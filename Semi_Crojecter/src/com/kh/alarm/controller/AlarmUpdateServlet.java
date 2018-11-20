@@ -1,28 +1,25 @@
-package com.kh.spon.controller;
+package com.kh.alarm.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
+import com.kh.board.gallery.model.service.GalleryService;
 
 /**
- * Servlet implementation class SelectPaymentList
+ * Servlet implementation class AlarmUpdateServlet
  */
-@WebServlet("/sponSelect.do")
-public class SponListServlet extends HttpServlet {
+@WebServlet("/aUpdate.al")
+public class AlarmUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SponListServlet() {
+    public AlarmUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +28,17 @@ public class SponListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Spon> list = null;
-		SponService ss = new SponService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		// 
+		int Aid = Integer.parseInt(request.getParameter("Aid"));
 		
-		list = ss.selectlist(mid);
+		int result = new GalleryService().updateAlarm(Aid);
 		
-		if(list != null){
-			
-			request.setAttribute("slist", list);
-			request.getRequestDispatcher("views/mypage/paymentList.jsp").forward(request, response);
-			
+		if(result > 0) {
+			response.sendRedirect("gSelectOne.ga?bid="+Aid);
 		} else {
-			
-			request.setAttribute("msg", "조회 실패!");
-			
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
-		
 	}
 
 	/**

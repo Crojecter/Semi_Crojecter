@@ -13,12 +13,12 @@ public class SponService {
 	
 	private SponDao sDao = new SponDao();
 	
-	public ArrayList<Spon> selectlist() {
+	public ArrayList<Spon> selectlist(int mid) {
 		
 		ArrayList<Spon> list = null;
 		Connection con = getConnection();
 		
-		list = sDao.selectList(con);
+		list = sDao.selectList(con, mid);
 		
 		close(con);
 		

@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
+    pageEncoding="UTF-8" 
+    import="com.kh.member.model.vo.*, com.kh.board.gallery.model.vo.*, java.util.*"%>
+<% 
+	ArrayList<Gallery> glist = (ArrayList<Gallery>)session.getAttribute("glist");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +41,7 @@
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
 <div class="card">
+<form action="<%=request.getContextPath()%>/mworkView.do" method="post"></form>
 		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/galSample/gall1.png" alt="Card image cap" class="gallery"></a>
 			<div class="card-body">
 				<h5 class="card-title"><a href="">Card title  <span id="cid" class="badge" style="background:black; color:white;">5</span></a></h5>

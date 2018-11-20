@@ -1,4 +1,4 @@
-package com.kh.spon.controller;
+package com.kh.mypage;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
+import com.kh.follow.model.service.FollowService;
+import com.kh.follow.model.vo.Follow;
 
 /**
- * Servlet implementation class SelectPaymentList
+ * Servlet implementation class FollowerViewServlet
  */
-@WebServlet("/sponSelect.do")
-public class SponListServlet extends HttpServlet {
+@WebServlet("/followerView.do")
+public class FollowerViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SponListServlet() {
+    public FollowerViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +31,21 @@ public class SponListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Spon> list = null;
-		SponService ss = new SponService();
+		ArrayList<Follow> list = null;
+		FollowService fs = new FollowService();
 		int mid = Integer.parseInt(request.getParameter("mid"));
-		
-		list = ss.selectlist(mid);
+
+		list = fs.searchFollower(mid);
 		
 		if(list != null){
 			
-			request.setAttribute("slist", list);
-			request.getRequestDispatcher("views/mypage/paymentList.jsp").forward(request, response);
-			
+			request.setAttribute("list", list);
+			request.getRequestDispatcher("views/mypage/followerList.jsp").forward(request, response);
 		} else {
 			
 			request.setAttribute("msg", "조회 실패!");
 			
 		}
-		
 	}
 
 	/**

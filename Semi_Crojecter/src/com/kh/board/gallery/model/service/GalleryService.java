@@ -169,6 +169,13 @@ public class GalleryService {
 		return searchGalleryList;
 	}
 
+
+	public int updateAlarm(int aid) {
+		// 
+		
+		return 0;
+	}
+
 	public int deleteGallery(int bid) {
 		
 		Connection con = getConnection();
@@ -181,6 +188,15 @@ public class GalleryService {
 		close(con);
 		
 		return result;
+	}
+
+	public ArrayList<Gallery> searchGallery(int mid) {
+		Connection con = getConnection();
+		ArrayList<Gallery> glist = gDao.searchGallery(con, mid);
+
+		close(con);
+		
+		return glist;
 	}
 
 }
