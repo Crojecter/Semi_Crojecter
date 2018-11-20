@@ -1,12 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.gallery.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
+<%@ page import="com.kh.board.project.model.vo.*, com.kh.member.model.vo.Member, java.util.*, com.kh.boardcomment.model.vo.*" %>
 
 <%
-	Member m = (Member)session.getAttribute("member");
-	System.out.println("m : " + m);
-	Gallery g = (Gallery)request.getAttribute("gallery");
-	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 
-	//System.out.println("g : " + g);
+	Project j = (Project)request.getAttribute("project");
+	ArrayList<BoardComment> clist = (ArrayList<BoardComment>) request.getAttribute("clist"); 	
+	//System.out.println("j : " + j);
 	//System.out.println("clist : " + clist);
 %>
     
@@ -31,13 +29,12 @@
 		background : black;
 		color: white;
 	}
-	
 	.tableArea {
 		border:1px solid black;
 		background : white;
 		color: black;
 		width:800px;
-		height:auto;
+		height:350px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -70,7 +67,6 @@
 </head>
 <body>
 	<%@ include file="../../common/header.jsp"%>
-
 	<div class="outer">
 		<br>
 		<h2 align="center">게시글 내용</h2>
@@ -81,55 +77,49 @@
 			<table align="center" width="800px">
 				<tr>
 					<td>제목 </td>
-					<td colspan="5"><span><%= g.getBtitle() %></span></td>
+					<td colspan="5"><span><%= j.getBtitle() %></span></td>
 				</tr>
 				<tr>
 					<td>작성자 </td>
-					<td><span id="parentGetName"><%= g.getMname() %></span></td>
+					<td><span id="parentGetName"><%= j.getMname() %></span></td>
 					<td>작성일</td>
-					<td><span><%= g.getBdate() %></span></td>
+					<td><span><%= j.getBdate() %></span></td>
 					<td>조회수 </td>
-					<td><span><%= g.getBcount() %></span></td>
+					<td><span><%= j.getBcount() %></span></td>
 				</tr>
 				<tr>
-					<td>카테고리 </td>
-					<td><span><%= g.getGcategoryname() %></span></td>
 					<td>태그</td>
-					<td><span><%= g.getGtag() %></span></td>
-					<td>ccl </td>
-					<td><span><%= g.getCclname() %></span></td>
+					<td><span><%= j.getJtag() %></span></td>
+					<td>마감일 </td>
+					<td><span><%= j.getJend() %></span></td>
+					<td>마감일 </td>
+					<td><span><%= j.getDday() %></span></td>
 				</tr>
 				<tr>
 					<td colspan="6">내용 </td>
 				</tr>
 				<tr>
 					<td colspan="6">
-					<p id="content"><%= g.getBcontent() %>
+					<p id="content"><%= j.getBcontent() %>
 					</td>
 				</tr>
 			</table>
-			
-			
-
 		</div>
 		
 		<div align="center" style="display:inline;">
-			<% if(m != null && m.getMid() == g.getBwriter()){ %>
-			<button onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
+			<button onclick="showReport(<%=j.getBid()%>, 0);">신고</button>
+			<% if(m != null && m.getMid() == j.getBwriter()){ // 글쓴이 본인인 경우 %>
+			<button onclick="location.href='<%= request.getContextPath() %>/jUpView.pr?bid='+<%=j.getBid()%>">수정하기</button>
+			<button onclick="location.href='<%= request.getContextPath() %>/jDelete.pr?bid='+<%=j.getBid()%>">삭제하기</button>
 			<% } %>	
-			<div id="btnFollow" class="btn btn-follow"><p id="p-follow" style="color: black">팔로우</p></div>			
-			<div id="btnLikeit" class="btn btn-likeit"><p id="p-likeit" style="color: black">좋아요</p></div>
-			<button onclick="showSpon();">후원하기</button>
-			<button onclick="showReport(<%=g.getBid()%>, 0);">신고</button>
 		</div>
 		<input type="button" onclick="location.href='/crojecter/main.html'" value="목록"/>
 	</div>
 	
 	<div class="commentOuter" style="padding:5px;">
-		<div class="commentWriteArea" style="display:inline;">
+		<div class="commentWriteArea">
 			<div><input type="hidden" name="crefmid" value="-1" /></div>
-			<div display="inline">
+			<div style="display:inline;">
 				<textarea rows="3" cols="80" id="ccontent" name="ccontent"></textArea>
 				<button id="addComment" onclick="insertComment(this);">댓글 등록</button>
 			</div>
@@ -138,7 +128,6 @@
 		<div class="commentListArea">
 	      <% if( clist != null ) { %>
 	      	<% for(BoardComment bc : clist) { %>
-	      	<hr />
 	      	<div class="comment">
 	      		<div class="commentInfo" style="display:inline;">
 	      			<input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
@@ -154,7 +143,7 @@
 	      			<% } %>
 					<input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
 					<button type="button" class="insertBtn" onclick="reComment(this);">댓글달기</button>&nbsp;&nbsp;
-					<button type="button" class="reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button>				 
+					<button type="button" class="reportBtn" onclick="showReport(<%=j.getBid()%>, <%=bc.getCid()%>);">신고</button>				 
 	      			<% } %>
 	      		</div>
 	      		<div class="comment commentContent">
@@ -164,6 +153,7 @@
 	      				<%= bc.getCcontent() %>
 	      			</p>
 	      		</div>
+	      		<hr />
 	      	</div>
 	  		<% } } %>
 		</div>
@@ -171,53 +161,11 @@
 
 	<% if(m != null) { // 회원 %>
 	<script> 
-		// 초기화 함수
-		$(function(){		
-			// 팔로우 버튼 초기화
-			$.ajax({
-				url : '/crojecter/fCheck.fo',
-				type : 'get',
-				data : {
-					mid : '<%= m.getMid() %>',
-					wid : '<%= g.getBwriter() %>'
-				}, 
-				success : function(data){
-					if(data == 'ok') {
-						$("#btnFollow").addClass('active');
-						$('#p-follow').html('언팔로우');
-					} else if (data == 'no') {
-						$("#btnFollow").removeClass('active');
-					} 
-				}, error : function(data){
-					console.log('팔로우버튼 초기화 에러 발생!');
-				}
-			});
-			
-			// 좋아요 버튼 초기화
-			$.ajax({
-				url : '/crojecter/lCheck.li',
-				type : 'get',
-				data : {
-					mid : '<%= m.getMid() %>',
-					bid : '<%= g.getBid() %>'
-				}, 
-				success : function(data){
-					if(data == 'ok') {
-						$("#btnLikeit").addClass('active');
-					} else if (data == 'no') {
-						$("#btnLikeit").removeClass('active');
-					} 
-				}, error : function(data){
-					console.log('좋아요버튼 초기화 에러 발생!');
-				}
-			});
-		});
-		
 		// 댓글 삽입 
 		function insertComment(obj) {
 	
-			var bid = '<%= g.getBid() %>';
-			var btype = '<%= g.getBtype() %>';
+			var bid = '<%= j.getBid() %>';
+			var btype = '<%= j.getBtype() %>';
 			var cwriter = '<%= m.getMid() %>';
 			var ccontent = $(obj).siblings('textarea').val();
 			var crefmid = $(obj).parent().siblings().children('input[name="crefmid"]').val();
@@ -238,8 +186,8 @@
 		// 댓글 수정 완료 
 		function updateConfirm(obj) {
 			var cid = $(obj).siblings('input[name="cid"]').val();
-			var bid = '<%=g.getBid()%>';
-			var btype = '<%= g.getBtype() %>';
+			var bid = '<%=j.getBid()%>';
+			var btype = '<%= j.getBtype() %>';
 			var content = $(obj).parent().parent().find('textarea').val();
 			
 			location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
@@ -262,43 +210,21 @@
 		// 댓글 삭제 
 		function deleteComment(obj) {
 			var cid = $(obj).siblings('input[name="cid"]').val();
-			var bid = '<%= g.getBid() %>';
-			var btype = '<%= g.getBtype() %>';
+			var bid = '<%= j.getBid() %>';
+			var btype = '<%= j.getBtype() %>';
 			
 			location.href="/crojecter/cDelete.co?cid="+cid+"&bid="+bid+"&btype="+btype;
 		}	
 	</script>
 	
-	<% if(m.getMid() == g.getBwriter()) { // 글쓴이 본인 %>	 
+	<% if(m.getMid() == j.getBwriter()) { // 글쓴이 본인 %>	 
 	<script>
-		$('#btnFollow').click(function(){
-			alert("본인은 팔로우할 수 없습니다.");
-		});
-		$('#btnLikeit').click(function(){
-			alert("본인 작품은 좋아요 할 수 없습니다.");
-		});
-		function showSpon() {
-			alert("본인에게는 후원할 수 없습니다.");
-		}
 		function showReport() {
 			alert("본인은 신고할 수 없습니다.");
 		}	
 	</script>
 	<% } else { // 뷰어 입장 %>
-	<script>		
-		// 후원하기
-		function showSpon() {
-			// 알람창 크기
-			var windowObj = null;
-			var xPos = (document.body.clientWidth / 2) - 250; 
-		    xPos += window.screenLeft;
-		    var yPos = (screen.availHeight / 2) - 150;
-
-		    windowObj = window.open('<%= request.getContextPath() %>/views/board/galleryboard/popupSpon.jsp', 
-		    		'후원', 'width=500,height=300,top='+yPos+',left='+xPos
-		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
-		}
-		
+	<script>				
 		// 신고하기
 		function showReport(bid, cid) {
 			var windowObj = null;
@@ -307,60 +233,11 @@
 		    var yPos = (screen.availHeight / 2) - 150;
 		    var b = bid;
 		    var c = cid;
-
+	
 		    windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
 		    		'신고', 'width=500,height=550,top='+yPos+',left='+xPos
 		    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 		}	
-		
-		// 팔로우 버튼 클릭
-		$('#btnFollow').click(function(){
-			$.ajax({
-				url : '/crojecter/fSwitch.fo',
-				type : 'get',
-				data : {
-					mid : '<%= m.getMid() %>',
-					wid : '<%= g.getBwriter() %>'
-				}, 
-				success : function(data){
-					if(data == 'insert') {
-						$("#btnFollow").addClass('active');
-						$('#p-follow').html('언팔로우');
-					} else if (data == 'delete') {
-						$("#btnFollow").removeClass('active');
-						$('#p-follow').html('팔로우');
-					} else {
-						console.log('btnFollow() 에러 발생!');
-					}
-				}, error : function(data){
-					console.log('btnFollow() 에러 발생!!');
-				}
-			});
-		});
-		
-		// 좋아요 버튼 클릭
-		$('#btnLikeit').click(function(){
-			$.ajax({
-				url : '/crojecter/lSwitch.li',
-				type : 'get',
-				data : {
-					mid : '<%= m.getMid() %>',
-					bid : '<%= g.getBid() %>'
-				}, 
-				success : function(data){
-					if(data == 'insert') {
-						$("#btnLikeit").addClass('active');
-					} else if (data == 'delete') {
-						$("#btnLikeit").removeClass('active');
-					} else {
-						console.log('btnLikeit() 에러 발생!');
-					}
-				}, error : function(data){
-					console.log('btnLikeit() 에러 발생!!');
-				}
-			});
-		});
-	
 	</script>
 	<% } %> <% } else { // 비회원 %>
 	<script>
@@ -372,7 +249,6 @@
 		});
 	</script>
 	<% } %>
-	
 	
 </body>
 </html>

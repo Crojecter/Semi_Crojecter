@@ -570,6 +570,28 @@ public class GalleryDao {
 		return searchGalleryList;
 	}
 
+	public int deleteGallery(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteGallery");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 
 

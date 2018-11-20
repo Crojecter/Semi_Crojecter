@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.project.model.dao.ProjectDao;
 import com.kh.board.project.model.vo.Project;
 
@@ -118,6 +117,19 @@ public class ProjectService {
 		
 		close(con);		
 		return listCount;
+	}
+
+	public int deleteProject(int bid) {
+		Connection con = getConnection();
+		
+		int result = pDao.deleteProject(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 

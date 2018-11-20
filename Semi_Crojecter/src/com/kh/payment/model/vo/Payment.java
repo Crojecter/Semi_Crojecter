@@ -6,20 +6,16 @@ import java.sql.Date;
 public class Payment implements Serializable{
 
 	private int pid;
-	private int pmoney;
+	private int pmoneyid;
 	private Date pdate;
 	private int mid;
+	private String mname;
+	private String memail;
+	private int pmoney;
+	private int phodu;
 	
 	public Payment() {
 		super();
-	}
-
-	public Payment(int pid, int pmoney, Date pdate, int mid) {
-		super();
-		this.pid = pid;
-		this.pmoney = pmoney;
-		this.pdate = pdate;
-		this.mid = mid;
 	}
 
 	public int getPid() {
@@ -30,12 +26,12 @@ public class Payment implements Serializable{
 		this.pid = pid;
 	}
 
-	public int getPmoney() {
-		return pmoney;
+	public int getPmoneyid() {
+		return pmoneyid;
 	}
 
-	public void setPmoney(int pmoney) {
-		this.pmoney = pmoney;
+	public void setPmoneyid(int pmoneyid) {
+		this.pmoneyid = pmoneyid;
 	}
 
 	public Date getPdate() {
@@ -54,10 +50,42 @@ public class Payment implements Serializable{
 		this.mid = mid;
 	}
 
+	public String getMname() {
+		return mname;
+	}
+
+	public void setMname(String mname) {
+		this.mname = mname;
+	}
+
+	public String getMemail() {
+		return memail;
+	}
+
+	public void setMemail(String memail) {
+		this.memail = memail;
+	}
+
+	public int getPmoney() {
+		return pmoney;
+	}
+
+	public void setPmoney(int pmoney) {
+		this.pmoney = pmoney;
+	}
+
+	public int getPhodu() {
+		return phodu;
+	}
+
+	public void setPhodu(int phodu) {
+		this.phodu = phodu;
+	}
+
 	@Override
 	public String toString() {
-		return "Payment [pid=" + pid + ", pmoney=" + pmoney + ", pdate=" + pdate + ", mid=" + mid + "]";
+		return "Payment [pid=" + pid + ", pmoneyid=" + pmoneyid + ", pdate=" + pdate + ", mid=" + mid + ", mname="
+				+ mname + ", memail=" + memail + ", pmoney=" + pmoney + ", phodu=" + phodu + "]";
 	}
-	
-	
+
 }

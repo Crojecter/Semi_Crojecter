@@ -1,7 +1,6 @@
-package com.kh.board.notice.controller;
+package com.kh.report.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.notice.model.service.NoticeService;
-import com.kh.board.notice.model.vo.Notice;
-import com.kh.boardcomment.model.service.BoardCommentService;
-import com.kh.boardcomment.model.vo.BoardComment;
+import com.kh.report.model.service.ReportService;
+import com.kh.report.model.vo.Report;
 
 /**
- * Servlet implementation class NoticeSelectOneServlet
+ * Servlet implementation class ReportInsertServlet
  */
-@WebServlet("/nSelectOne.no")
-public class NoticeSelectOneServlet extends HttpServlet {
+@WebServlet("/rInsert.re")
+public class ReportInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeSelectOneServlet() {
+    public ReportInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +30,24 @@ public class NoticeSelectOneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int rreason = Integer.parseInt(request.getParameter("rreason"));
+		String retc = request.getParameter("retc");
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		int cid = Integer.parseInt(request.getParameter("cid"));
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Notice n = new NoticeService().selectOne(bid);
+		Report r = new Report();
+		r.setRreason(rreason);
+		r.setRetc(retc);
+		r.setMid(mid);
+		r.setCid(cid);
+		r.setBid(bid);
 		
-		String page = "";
-		if(n != null) {
-			page = "views/board/noticeboard/noticeDetail.jsp";
-			request.setAttribute("notice", n);
-			
-		} else {
-			page = "views/common/errorPage.jsp";
-			request.setAttribute("msg", "공지사항 상세보기 실패!");
-		}
+		int result = new ReportService().insertReport(r);
 		
-		request.getRequestDispatcher(page).forward(request, response);
-
+		response.getWriter().print((result > 0) ? "ok" : "no");
+		
 	}
 
 	/**

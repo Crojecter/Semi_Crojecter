@@ -43,6 +43,7 @@ private Properties prop = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectPayment");
+		System.out.println("sql : " + sql);
 		
 		try {
 			
@@ -54,10 +55,14 @@ private Properties prop = null;
 			while(rset.next()){
 				Payment p = new Payment();
 				
-				//p.setPid(rset.getInt("pid"));
-				p.setPmoney(rset.getInt("pmoney"));
+				p.setPid(rset.getInt("pid"));
+				p.setPmoneyid(rset.getInt("pmoney"));
 				p.setPdate(rset.getDate("pdate"));
 				p.setMid(rset.getInt("mid"));
+				p.setPmoney(rset.getInt("money"));
+				p.setPhodu(rset.getInt("phodu"));
+				p.setMname(rset.getString("mname"));
+				p.setMemail(rset.getString("memail"));
 				
 				list.add(p);
 			}

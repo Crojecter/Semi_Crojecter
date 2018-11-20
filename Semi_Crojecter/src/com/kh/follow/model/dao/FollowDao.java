@@ -10,15 +10,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import com.kh.board.gallery.model.dao.GalleryDao;
-
 public class FollowDao {
 	
 	private Properties prop = new Properties();
 	
 	public FollowDao() {
 		
-		String filePath = GalleryDao.class.getResource("/config/follow-query.properties").getPath();
+		String filePath = FollowDao.class.getResource("/config/follow-query.properties").getPath();
 		try {
 			prop.load(new FileReader(filePath));		
 		} catch (IOException e) {			

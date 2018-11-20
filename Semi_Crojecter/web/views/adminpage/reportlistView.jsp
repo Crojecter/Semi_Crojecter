@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import="com.kh.report.model.vo.*, java.util.*"%>
 <%
 	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
+	System.out.println("rlist : " + rlist);
 %>
 <!DOCTYPE html>
 <html>
