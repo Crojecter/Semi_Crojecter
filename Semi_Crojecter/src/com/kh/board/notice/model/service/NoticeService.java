@@ -80,5 +80,19 @@ public class NoticeService {
 		
 		return noticeList;
 	}
+	
+	public int deleteNotice(int bid) {
+		
+		Connection con = getConnection();
+		
+		int result = nDao.deleteNotice(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 }

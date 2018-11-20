@@ -118,6 +118,19 @@ public class ProjectService {
 		close(con);		
 		return listCount;
 	}
+	
+	public int deleteProject(int bid) {
+		Connection con = getConnection();
+		
+		int result = pDao.deleteProject(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
 
 
 }

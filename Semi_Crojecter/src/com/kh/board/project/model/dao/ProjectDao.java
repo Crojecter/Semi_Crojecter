@@ -415,6 +415,28 @@ public class ProjectDao {
 		System.out.println("현재 프로잭트 갯수 : "+ listCount);
 		return listCount;
 	}
+	
+	public int deleteProject(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("deleteProject");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 
 

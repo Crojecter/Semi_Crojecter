@@ -157,6 +157,31 @@ public class GalleryService {
 		return list;
 	}
 	
+	public ArrayList<Gallery> searchGallery(String condition, String keyword) {
+		ArrayList<Gallery> searchGalleryList = null;
+		Connection con = getConnection();
+		
+	
+		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
+				:  gDao.selectGalleryList(con);
+		
+		return searchGalleryList;
+	}
+	
+	public int deleteGallery(int bid) {
+		
+		Connection con = getConnection();
+		
+		int result = gDao.deleteGallery(con, bid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
+	}
+	
 	
 
 
