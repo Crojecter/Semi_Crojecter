@@ -25,6 +25,11 @@
 	.sponP{
 		margin:10px 10px 10px 10px;
 	}
+	
+	body {
+	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
+	}
 </style>
 </head>
 <body style="width:400px; margin:auto; margin-top:40px;">

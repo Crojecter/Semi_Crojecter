@@ -71,6 +71,7 @@ public class ProjectDao {
 					
 			pstmt.setInt(1, bid);
 			pstmt.setInt(2, p.getBtype());
+			System.out.println(p.getBtype());
 			pstmt.setString(3, p.getBtitle());
 			pstmt.setString(4, p.getBcontent());
 			pstmt.setInt(5, p.getBwriter());			
