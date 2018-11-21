@@ -1,8 +1,9 @@
 package com.kh.board.common.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board {
+public class Board implements Serializable{
 	private int bid; 
 	private int btype;
 	private String btitle;
@@ -17,6 +18,25 @@ public class Board {
 	
 	private String fname;
 	private String tag;
+	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+
+	public int getCommCnt() {
+		return commCnt;
+	}
+
+	public void setCommCnt(int commCnt) {
+		this.commCnt = commCnt;
+	}
+
+	private int likeCnt;
+	private int commCnt;
 	
 	public String getTag() {
 		return tag;

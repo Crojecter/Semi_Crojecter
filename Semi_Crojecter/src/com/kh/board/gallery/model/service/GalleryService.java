@@ -150,11 +150,11 @@ public class GalleryService {
 		// 게시글 순위
 		
 		Connection con = getConnection();
-		ArrayList<Gallery> gTop5List = gDao.galleryTop5(con);
+		ArrayList<Gallery> list = gDao.galleryTop5(con);
 
-		System.out.println("Top5 Ser : " + gTop5List);
+		System.out.println("Top5 Ser : " + list);
 		close(con);
-		return gTop5List;
+		return list;
 	}
 	
 
