@@ -532,10 +532,20 @@ public class GalleryDao {
 			while(rset.next()){
 				Gallery g = new Gallery();
 				
-				g.setBwriter(rset.getInt("BWRITER"));
-				g.setMname(rset.getString("MNAME"));
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				// 상속분
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
 				g.setBtitle(rset.getString("BTITLE"));
-				
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				// 
+				g.setFname(rset.getString("FNAME"));
 				
 				glist.add(g);
 			}

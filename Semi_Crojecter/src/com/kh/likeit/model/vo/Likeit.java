@@ -9,18 +9,20 @@ public class Likeit implements Serializable {
 	private String bwriter;
 	private String btitle;
 	private String fname;
+	private String mname;
 		
 	public Likeit() {
 		super();
 	}
 
-	public Likeit(int mid, int bid, String bwriter, String btitle, String fname) {
+	public Likeit(int mid, int bid, String bwriter, String btitle, String fname, String mname) {
 		super();
 		this.mid = mid;
 		this.bid = bid;
 		this.bwriter = bwriter;
 		this.btitle = btitle;
 		this.fname = fname;
+		this.mname= mname;
 	}
 
 	public int getMid() {
@@ -62,10 +64,20 @@ public class Likeit implements Serializable {
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+	
+	public String getMname() {
+		return mname;
+	}
+	
+	public void setMname(String mname){
+		this.mname = mname;
+	}
 
 	@Override
 	public String toString() {
 		return "Likeit [mid=" + mid + ", bid=" + bid + ", bwriter=" + bwriter + ", btitle=" + btitle + ", fname="
-				+ fname + "]";
+				+ fname + ", mname=" + mname + "]";
 	}
+
+	
 }
