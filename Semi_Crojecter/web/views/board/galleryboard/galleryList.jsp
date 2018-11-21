@@ -17,17 +17,28 @@
 <head>
 <meta charset="UTF-8">
 
+<style>
+.card-img-to {
+	display: inline-block;
+  	vertical-align: middle;
+    max-height: 100%;
+    max-width: 100%;
+}
+
+</style>
+
 </head>
-<body style="height:100%">
+<body style="height:100%;">
 		<div class="galleryList">
 
 		<% for (Gallery gal : gList) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
-			
+			<div style="width: 300px; height: 300px; display: inline-block; ">
+			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->		
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
 			alt="Card image cap" class="gallery"></a>
+			</div>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
 					<p class="card-text"><a href=""><%= gal.getGtag() %></a></p>

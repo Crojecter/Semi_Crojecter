@@ -12,11 +12,21 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
+
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}
+	
 	.outer {
 		margin-top: 50px;
 		margin-bottom: 100px;
 		padding: 20px;
-		border: 1px solid lightgray;
+		border: 1px solid lightgray;	
+		background: white; 
+		padding-top: 10px; 
+		background-color: rgba( 255, 255, 255, 0.5 ); 
+
 	}
 	
 	.bottomBtn {
@@ -51,7 +61,6 @@
 			<hr />
 	
 			<div class="">
-				<button class="bottomBtn" onclick="location.href='/crojecter/main.html'">목록</button>
 				<% if(m != null && m.getMid() == n.getBwriter()) { // 글쓴이 본인인 경우 %>
 				<button class="bottomBtn" onclick="location.href='<%= request.getContextPath() %>/nUpView.no?bid='+<%=n.getBid()%>">수정하기</button>
 				<button class="bottomBtn" onclick="location.href='<%= request.getContextPath() %>/nDelete.no?bid='+<%=n.getBid()%>">삭제하기</button>
