@@ -68,14 +68,14 @@
 	
 </head>
 <body style="position:absolute; width:100%;">
-	<div class="row">
+	<div class="row" style="background:white">
 	<div class="col-md-2">
 		<!-- 로고 -->
 		<a href="<%= request.getContextPath()%>/gList.ga">
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
 	</div>
 	<div class="col-md-10">
-	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background:white">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -133,7 +133,6 @@
 							var xPos = ((document.body.clientWidth / 2) - (500 / 2)); 
 						    xPos += window.screenLeft;
 						    var yPos = ((screen.availHeight / 2) - (300 / 2));
-
 						    window.open('<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>', 
 						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
 						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
