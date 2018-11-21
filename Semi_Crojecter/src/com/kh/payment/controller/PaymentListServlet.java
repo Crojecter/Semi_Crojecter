@@ -37,7 +37,7 @@ public class PaymentListServlet extends HttpServlet {
 		
 		if(list != null){
 			
-			request.setAttribute("list", list);
+			request.setAttribute("plist", list);
 			request.getRequestDispatcher("views/adminpage/paymentlistView.jsp").forward(request, response);
 			
 		} else {

@@ -224,20 +224,15 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, m.getMpwd());
-			pstmt.setString(2, m.getMprofile());
-			pstmt.setInt(3, m.getMid());
+			pstmt.setInt(1, m.getMsid());
+			pstmt.setInt(2, m.getMid());
 			
 			result = pstmt.executeUpdate();
 		
-		} catch (SQLException e) {
-		
+		} catch (SQLException e) {		
 			e.printStackTrace();
-
-		} finally {
-			
+		} finally {			
 			close(pstmt);
-			
 		}
 		
 		return result;
@@ -288,13 +283,9 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 		
 		} catch (SQLException e) {
-		
 			e.printStackTrace();
-
-		} finally {
-			
-			close(pstmt);
-			
+		} finally {			
+			close(pstmt);			
 		}
 		
 		return result;

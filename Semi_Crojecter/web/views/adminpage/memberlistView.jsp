@@ -65,12 +65,13 @@
 		<td><%= m2.getMemail()%></td>
 		<td><%= m2.getMhodu()%></td>
 		<td>
-			<select id="status" name="status">
+			<select name="status">
 				<option value="1">활성</option>
 				<option value="2">비활성</option>
 				<option value="3">탈퇴</option>
 			</select>
-			<button onclick="changeStatusSelect(this);">설정</button>
+			<input type="hidden" name="mid" value="<%= m2.getMid()%>" />
+			<button onclick="chageStatusSelect(this);">설정</button>
 		</td>		
 	</tr>
 	<% } } else { %>
@@ -81,20 +82,21 @@
 <script>
 
 	function chageStatusSelect(obj){
-    	var sel = document.getElementById("status").value;
-    	var mid = document.getElementById("mid").value;
     	$.ajax({
     		type:'get',
     		url : '/crojecter/mStatusChange.do',
-    		data : {changeSel:sel, chageMid:mid},		
+    		data : {
+    			changeSel : $(obj).siblings('select').val(),
+    			chageMid : $(obj).siblings('input[name="mid"]').val()
+    		},		
     		success : function(data){
-    			location.href='/crojecter/views/adminpage/memberlistView.jsp';
-    			console.log("성공");
-    		},
-    		error : function (request,status,error){
-    			console.log("실패");
+    			if(data == 'ok') {
+    				alert("회원 상태가 변경되었습니다.");
+                 } else if (data == 'no') {
+                	alert("회원 상태 변경에 실패하였습니다.");
+                 }
     		}
-    	});
+    	});	
 	}
 	
 	function search(){

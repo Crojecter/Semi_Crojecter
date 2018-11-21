@@ -1,14 +1,12 @@
 package com.kh.adminpage.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
@@ -38,19 +36,13 @@ public class ChangeStatusServlet extends HttpServlet {
 	
 		MemberService  ms = new MemberService();
 		
-		HttpSession session = request.getSession(false);
 		Member m = new Member();
-		
 		m.setMsid(mStatus);
 		m.setMid(mId);
 		
 		int result = ms.updateMemberStatus(m);
 		
-		if(result > 0) System.out.println("상태 수정 성공");
-		else System.out.println("상태 수정 실패");
-	
-		System.out.println(m);
-	
+		response.getWriter().print((result > 0) ? "ok" : "no");
 	}
 
 	/**
