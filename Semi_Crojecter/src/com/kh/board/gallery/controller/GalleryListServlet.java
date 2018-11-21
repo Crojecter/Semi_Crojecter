@@ -73,6 +73,8 @@ public class GalleryListServlet extends HttpServlet {
 			page = "galleryMain.jsp";
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);
+			System.out.println("start, end, max, current, limit : "+ startPage +", "+ endPage +", "+ maxPage +", "+ currentPage +", "+ limit);
+			
 		} else {
 			
 			page = "views/common/errorPage.jsp";
