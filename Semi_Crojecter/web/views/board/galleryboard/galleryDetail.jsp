@@ -215,7 +215,7 @@
          
          <div class="row" align="center" id="btnArea2" style="margin-top: 10px;">            
             <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showSpon();">후원</button></div>
-            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport();">신고</button></div>   
+            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport(<%=g.getBid()%>, 0);">신고</button></div>   
             <!-- <input class="btn btnArea2" type="button" onclick="location.href='/crojecter/main.html'" value="목록"/> -->
          </div>
          <div class="row" align="center" id="btnArea3" style="margin-top: 10px;">

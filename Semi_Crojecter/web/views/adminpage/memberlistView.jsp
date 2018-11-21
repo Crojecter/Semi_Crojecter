@@ -43,12 +43,12 @@
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 	<div class="searchArea">
 		<select id="searchCondition" name="searchCondition">
-			<option value="mname">이름</option>
-			<option value="memail">이메일</option>
+			<option value="name">이름</option>
+			<option value="email">이메일</option>
 		</select>
 		<input type="search" id="keyword" placeholder="검색어를 입력하세요!">
 		<button type="button" onclick="search();">검색하기</button>
-</div>
+	</div>
 <table>
 	<tr>
 		<th>회원번호</th>
@@ -57,6 +57,7 @@
 		<th>호두</th>
 		<th>상태</th>	
     </tr>
+    <% if(mlist.size() > 0) { %>
     <% for(Member m2 : mlist){ %>
 	<tr>
 		<td><%= m2.getMid()%></td>
@@ -64,7 +65,7 @@
 		<td><%= m2.getMemail()%></td>
 		<td><%= m2.getMhodu()%></td>
 		<td>
-			<select name="status">
+			<select id="status" name="status">
 				<option value="1">활성</option>
 				<option value="2">비활성</option>
 				<option value="3">탈퇴</option>
@@ -72,9 +73,11 @@
 			<button onclick="changeStatusSelect(this);">설정</button>
 		</td>		
 	</tr>
+	<% } } else { %>
+	<tr><td colspan="5"><p>검색 결과가 존재하지 않습니다.</p></td></tr>
 	<% } %>
-	
 </table>
+
 <script>
 
 	function chageStatusSelect(obj){
