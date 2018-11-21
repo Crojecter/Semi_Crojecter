@@ -21,15 +21,19 @@
 <%@ include file="../mypage/common/mypageHeader.jsp"%>
 <form action="<%=request.getContextPath()%>/collectView.do" method="post">
 <div class="collectList">
-	<table>  
 		<% for(Likeit l : list){ %>
-		<tr>
-			<td><%=l.getBtitle() %></td>
-			<td><%=l.getBwriter() %></td>
-		</tr>
+		<%-- <% System.out.println("gList jsp : "+gList); %> --%>
+			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<a href="">
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
+			alt="Card image cap" class="gallery"></a>
+				<div class="card-body">
+					<h5 class="card-title"><a href=""><%= l.getBtitle() %></a></h5>
+					<h5 class=><a href=""><%= l.getMname() %></a></h5>
+				</div>
+			</div>
 		<% } %>
-	</table>
-</div>
+		</div>
 </form>
 </body>
 </html>

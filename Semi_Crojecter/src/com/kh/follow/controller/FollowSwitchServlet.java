@@ -32,6 +32,8 @@ public class FollowSwitchServlet extends HttpServlet {
 		String wid = request.getParameter("wid"); //글쓴이
 		String mid = request.getParameter("mid"); //로그인한회원
 		
+		System.out.println("mid : " + mid + " / wid : " + wid);
+		
 		int result = new FollowService().switchFollow(wid, mid);
 		System.out.println("fSwitch.fo result : " + result);
 		
