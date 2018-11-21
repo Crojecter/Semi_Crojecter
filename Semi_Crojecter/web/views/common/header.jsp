@@ -105,7 +105,7 @@
 					</form>
 					<% } else { %>
 					<ul class="navbar-nav mr-auto">
-						<li class="alert alert-primary" style="height:45px"><%= m.getMemail() %>
+						<li class="alert alert-primary" style="height:45px"><%= m.getMname() %>
 						(회원번호 : <%= m.getMid() %>)님 환영합니다.</li> &nbsp;&nbsp;&nbsp;
 						
 						<!-- 알람 -->

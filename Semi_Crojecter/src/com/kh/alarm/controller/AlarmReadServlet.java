@@ -33,7 +33,6 @@ public class AlarmReadServlet extends HttpServlet {
 		AlarmService as = new AlarmService();
 		
 		int unReadAlarm = 0;
-		System.out.println("countUnreadAlarm : "+ unReadAlarm);
 		
 		int mid = Integer.parseInt(request.getParameter("Mid"));
 		

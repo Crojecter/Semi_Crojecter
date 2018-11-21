@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
+import com.kh.board.gallery.model.vo.PageInfo;
 
 /**
  * Servlet implementation class GalleryTop5Servlet
@@ -35,11 +36,17 @@ public class GalleryTop5Servlet extends HttpServlet {
 		// 
 		GalleryService gs = new GalleryService();
 		
-		ArrayList<Gallery> list = gs.galleryTop5();
-		System.out.println("Top5list ser: "+ list);
-		response.setContentType("application/json; charset=UTF-8");
+		ArrayList<Gallery> gTop5List = gs.galleryTop5();
+		System.out.println("Top5list ser: "+ gTop5List);
+		/*
+		if(gTop5List != null){
+			
+			request.setAttribute("gTop5List", gTop5List);
+			
+		} */
+		Gson gson = new Gson();
+		gson.toJson(gTop5List, response.getWriter());
 		
-		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**

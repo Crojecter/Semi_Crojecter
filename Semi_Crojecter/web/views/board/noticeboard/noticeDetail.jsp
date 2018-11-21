@@ -13,9 +13,6 @@
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 .outer {
-	width: 1000px;
-	height: auto;
-	color: black;
 	margin-top: 50px;
 	margin-bottom: 100px;
 	padding: 20px;

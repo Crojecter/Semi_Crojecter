@@ -26,10 +26,24 @@ public class AlarmService {
 		Connection con = getConnection();
 		ArrayList<Alarm> alarmList = aDao.selectAlarmList(con, mid);
 		
-		System.out.println("selectAlarmList s : "+ alarmList);
+		//System.out.println("selectAlarmList s : "+ alarmList);
 		
 		close(con);
 		return alarmList;
+	}
+
+	public int updateAlarm(int aid) {
+		
+		Connection con = getConnection();
+		
+		int result = aDao.updateAlarm(con, aid);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		close(con);
+		
+		return result;
 	}
 
 }

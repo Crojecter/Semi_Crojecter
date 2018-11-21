@@ -4,13 +4,16 @@
 	// 읽지않은 알람목록 조회용
 	ArrayList<Alarm> alarmList = (ArrayList<Alarm>)request.getAttribute("alarmList");
 	System.out.println("alarmDetail alist : "+ alarmList);
-	int mid = Integer.parseInt(request.getParameter("Mid"));
+	System.out.println("alarmDetail sz : "+ alarmList.size());
+	int Mid = Integer.parseInt(request.getParameter("Mid"));
 	int result = 0;
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <title>알람메세지 페이지입니다.</title>
 <script
 	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
@@ -38,23 +41,42 @@
 			<tr>
 				
 				<td><%= al.getAMsg() %>
-					<input type="hidden" value="<%= al.getMid() %>">
 				</td>
 				<td><%= al.getADate() %></td>
 				<% if( al.getAFlag().equals("Y")) { %>
-				<td><button onclick="updateAlarm();">확인</button></td>
+				<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');">미확인</button></td>
+				<% } else { %>
+				<td>확인</td>
 				<% } %>
 			</tr>
 			<% } %>
+			
 			</table>
 			<script>
-			function updateAlarm(){
-				location.href="/crojecter/aUpdate.al?Aid="+ Aid;
+
+			function updateAlarm(obj, alarmNo){
+					$.ajax({
+						data : { Aid : alarmNo},
+						url : "/crojecter/aUpdate.al",
+						type : "post",
+						async: false,
+						success : 
+							function(data){ 
+							if (data > 0){
+								obj.append("확인");
+								obj.remove();
+								window.location.reload();
+							}
+							
+						}
+					});
 			}
-			</script>
+			
+				</script>
 		<% } else { %>
 			현재 전송된 알람이 없습니다.
 		<% } %>
+		
 		</div>
 		<script>
 			$(function(){
