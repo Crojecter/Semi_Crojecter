@@ -10,6 +10,13 @@
 <head>
 <meta charset="UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
+<style>
+	.selectNotice:hover{
+		/* background-color:#E4FCD6; */
+		background-color:#E9ECE7;
+		cursor:pointer
+	}
+</style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
@@ -24,6 +31,7 @@
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
+		<hr style="height:3px; background:gray;"/>
 		<h3 style="text-align:center;">갤러리</h3>
 		<br />		<% for (Board b : bList) { %>
 			<% if(b.getBtype() == 2) { %>
@@ -36,11 +44,11 @@
 			<% } %>
 			</a>
 				<div class="card-body">
-					<h5 class="card-title"><a href=""><%= b.getBtitle() %></a></h5>
-					<% if(b.getTag() != null) {
-						String tags[] = b.getTag().split(",");
+					<h5 class="card-title"><a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= b.getBid() %>"><%= b.getBtitle() %></a></h5>
+					<% if(b.getgTag() != null) {
+						String tags[] = b.getgTag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
-						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
+						<a style="text-decoration:none;" href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
 						<% }
 					} else {
 						
@@ -67,20 +75,20 @@
 		<br />
 		<% for (Board b : bList) { %>
 			<% if(b.getBtype() == 3) { %>
-
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= b.getBid() %>">
 			<% if(b.getFname() != null) { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>">
 			<% } else { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
-			<% } %></a>
+			<% } %>
+			</a>
 				<div class="card-body">
-					<h5 class="card-title"><a href=""><%= b.getBtitle() %></a></h5>
-					<% if(b.getTag() != null) {
-						String tags[] = b.getTag().split(",");
+					<h5 class="card-title"><a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= b.getBid() %>"><%= b.getBtitle() %></a></h5>
+					<% if(b.getjTag() != null) {
+						String tags[] = b.getjTag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
-						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
+						<a style="text-decoration:none;" href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
 						<% }
 					} else {
 						
@@ -105,15 +113,24 @@
 		<hr style="height:3px; background:gray;"/>
 		<h3 style="text-align:center;">공지사항</h3>
 		<br />
+		<table style="width:600px; height:30px; margin:auto;">
+			<tr>
+				<th style="width:50px; text-align:center;">글번호</th>
+				<th style="width:260px; text-align:center;">제목</th>
+				<th style="width:80px; text-align:center;">작성자</th>
+				<th style="width:140px; text-align:center;">작성일</th>
+				<th style="width:50px; text-align:center;">조회수</th>
+			</tr>
+		</table>
 		<% for (Board b : bList) { %>
 			<% if(b.getBtype() == 1) { %>
 			<table style="width:600px; height:30px; text-align:center; margin:auto;">
-				<tr onclick="location.href='<%= request.getContextPath()%>/nSelectOne.no?bid=<%= b.getBid() %>'">
-					<td style="width:20px;"><%= b.getBid() %></td>
+				<tr class="selectNotice" onclick="location.href='<%= request.getContextPath()%>/nSelectOne.no?bid=<%= b.getBid() %>'">
+					<td style="width:50px;"><%= b.getBid() %></td>
 					<td style="width:260px;"><%= b.getBtitle() %></td>
 					<td style="width:80px;"><%= b.getMname() %></td>
 					<td style="width:140px;"><%= b.getBdate() %></td>
-					<td style="width:20px;"><%= b.getBcount() %></td>
+					<td style="width:50px;"><%= b.getBcount() %></td>
 				</tr>
 			</table>
 			<% count ++; } %>
@@ -126,6 +143,7 @@
 	</div>
 	<div class="col-md-2"></div>
 	</div>
+	<br />
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

@@ -38,6 +38,10 @@
 		margin-bottom:160px;
 		padding:10px 10px 10px 10px;
 	}
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}
 </style>
 </head>
 <body>
@@ -92,10 +96,13 @@
 					<tr>
 						<td><input type="password" name="passwordCheck"
 							id="passwordCheck" class="inputContent" placeholder="비밀번호를 확인합니다"
-							oninput="checkedPassword();" /><br><label id="labelPwd"
-							class="label" style="color:red;">6~12 글자의 비밀번호를 입력하세요.<br>&nbsp;&nbsp;영대문자
-								특수문자 숫자 최소 1개 이상 포함
-						</label></td>
+							oninput="checkedPassword();" /><br>
+							<label class="label" style="color:gray;">영대문자특수문자 숫자 최소 1개 이상 포함</label><br>
+							<label id="labelPwd" class="label" style="color:red;">6~12 글자의 비밀번호를 입력하세요.</label>
+							</td>
+					</tr>
+					<tr>
+						<td><br /></td>
 					</tr>
 					<tr>
 						<td><button name="submit" id="submit"
@@ -103,7 +110,7 @@
 								onclick="singUpCheck();" disabled>회원가입</button></td>
 					</tr>
 					<tr>
-						<td><hr /></td>
+						<td><br /></td>
 					</tr>
 					<tr>
 						<td><p align="center">

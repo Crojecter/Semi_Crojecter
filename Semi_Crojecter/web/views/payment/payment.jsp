@@ -15,17 +15,11 @@
 <!-- 폰트 설정 -->
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
-<style>
-	
-	body {
-	font-family: 'Nanum Gothic', sans-serif;
-	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
-	}
-	
+<style>	
 	.payBtn{
 		width:240px;
 		height:150px;
-		color: black;
+		color: white;
 		text-align:center;
 		border-radius:10px;
 		background-color:#30B2A0;
@@ -49,6 +43,11 @@
     	border:1px solid orange;
     	color: white;
 	}
+	
+	body {
+	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
+	}
 </style>
 </head>
 <body>
@@ -68,7 +67,6 @@
 		</table>
 	</div>
 	<%@ include file="../common/footer.jsp" %>
-	<input type="text" id="url" />
 
 	<script>
 		var referrer = document.referrer;
