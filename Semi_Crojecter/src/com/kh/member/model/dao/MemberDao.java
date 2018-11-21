@@ -262,20 +262,15 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = null;
-		
-		switch(condition) {
-		case "name" :
-			sql = prop.getProperty("mSearchByName"); break;
-		case "email" :
-			sql = prop.getProperty("mSearchByEmail"); break;
-		}
+		String sql = prop.getProperty("searchMember");
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, keyword);
+			pstmt.setString(1, condition);
+			pstmt.setString(2, keyword);
+			System.out.println(condition + " / " + keyword); 
 			
 			rset = pstmt.executeQuery();
 			
@@ -293,22 +288,17 @@ public class MemberDao {
 				m.setMdate(rset.getDate("mdate"));
 				m.setMhodu(rset.getInt("mhodu"));
 				m.setMsid(rset.getInt("msid"));
+				m.setMstatus(rset.getString("mstatus"));
 				
+				System.out.println("rrr : " + m);
 				mlist.add(m);
-				
 			}
-			
 		} catch (SQLException e) {
-		
 			e.printStackTrace();
-			
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		// 확인용 출력문
-		for(Member m : mlist) System.out.println(m);
 		
 		return mlist;
 	}
@@ -339,6 +329,7 @@ public class MemberDao {
 				m.setMdate(rset.getDate("mdate"));
 				m.setMhodu(rset.getInt("mhodu"));
 				m.setMsid(rset.getInt("msid"));
+				m.setMstatus(rset.getString("mstatus"));
 				
 				mlist.add(m);
 			}

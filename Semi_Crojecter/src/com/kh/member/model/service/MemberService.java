@@ -1,14 +1,15 @@
 package com.kh.member.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.follow.model.vo.Follow;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
-import com.kh.report.model.vo.Report;
 
 public class MemberService {
 	
