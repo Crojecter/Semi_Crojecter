@@ -11,15 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.payment.model.service.PaymentService;
 import com.kh.payment.model.vo.Payment;
-<<<<<<< HEAD
-=======
-import com.kh.spon.model.service.SponService;
-import com.kh.spon.model.vo.Spon;
->>>>>>> refs/remotes/origin/master
 
-/**
- * Servlet implementation class PaymentListServlet
- */
+
 @WebServlet("/paymentSelect.do")
 public class PaymentListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

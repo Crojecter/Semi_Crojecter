@@ -68,13 +68,7 @@
 		<td><%= p.getPhodu() %></td>		
 	</tr>
 	<% } %>
-    
-<<<<<<< HEAD
-=======
-    
-    
 
->>>>>>> refs/remotes/origin/master
 </table>
 <script>
 	function search(){

@@ -54,8 +54,8 @@
 </style>
 <body>
 	<div class="profileArea">
-		<img src="../resources/images/icon/likeSelect.png" class="profilePic">
-		<p id="profileName"> <%=m.getMname()%>님의 페이지</p>
+		<img src="../../resources/profileFiles/user.png" class="profilePic">
+		<p id="profileName"> 관리자 페이지</p>
 	</div>
 	<br>
 	<div class="menu">

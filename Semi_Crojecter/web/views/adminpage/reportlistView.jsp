@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.report.model.vo.*, java.util.*"%>
 <%
-<<<<<<< HEAD
-	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list"); 
-=======
 	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
 	System.out.println("rlist : " + rlist);
->>>>>>> refs/remotes/origin/master
 %>
 <!DOCTYPE html>
 <html>
@@ -61,7 +57,7 @@
 		<th>게시물 번호</th>
 		<th>댓글 번호</th>
     </tr>
-    <% for(Report r : list){ %>
+    <% for(Report r : rlist){ %>
 	<tr>
 		<td><%= r.getRdate() %></td>
 		<td><%= r.getRetc() %>

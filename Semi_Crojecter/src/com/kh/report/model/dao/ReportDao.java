@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -101,6 +102,17 @@ public class ReportDao {
 			while(rset.next()){
 				Report r = new Report();
 				
+				private int rid;
+				private int rreason;
+				private String retc;
+				private Date rdate;
+				private int mid;
+				private int cid;
+				private int bid;
+				private String mname;
+				private String cwriter;
+				
+				
 				r.setRdate(rset.getDate("rdate"));
 				
 				if(rset.getInt("rreason")==5) {
@@ -110,7 +122,6 @@ public class ReportDao {
 				}
 				
 				r.setMname(rset.getString("mname"));
-				r.setCwriter(rset.getString("cwriter"));
 				r.setBid(rset.getInt("bid"));
 				r.setCid(rset.getInt("cid"));
 				

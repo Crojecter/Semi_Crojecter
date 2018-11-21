@@ -319,7 +319,6 @@ public class MemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
-		System.out.println("sql : " + sql);
 		
 		try {
 			
