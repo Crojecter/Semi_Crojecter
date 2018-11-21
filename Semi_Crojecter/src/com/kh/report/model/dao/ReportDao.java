@@ -102,28 +102,26 @@ public class ReportDao {
 			while(rset.next()){
 				Report r = new Report();
 				
-				private int rid;
-				private int rreason;
-				private String retc;
-				private Date rdate;
-				private int mid;
-				private int cid;
-				private int bid;
-				private String mname;
-				private String cwriter;
+				r.setRid(rset.getInt("rid"));
+				r.setRreason(rset.getInt("rreason"));
 				
-				
-				r.setRdate(rset.getDate("rdate"));
-				
-				if(rset.getInt("rreason")==5) {
+				if(r.getRreason() == 5) {
 					r.setRetc(rset.getString("retc"));
 				} else {
 					r.setRetc(rset.getString("rcontent"));
 				}
 				
-				r.setMname(rset.getString("mname"));
+				r.setRdate(rset.getDate("rdate"));
+				r.setMid(rset.getInt("mid"));
 				r.setBid(rset.getInt("bid"));
 				r.setCid(rset.getInt("cid"));
+				r.setMname(rset.getString("mname"));
+				
+				if(r.getCid() > 0) {
+					r.setCwriter(rset.getString("cname"));
+				} else {
+					r.setCwriter(rset.getString("bname"));
+				}
 				
 				list.add(r);
 			}

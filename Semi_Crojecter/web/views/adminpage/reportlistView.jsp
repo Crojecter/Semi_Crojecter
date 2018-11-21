@@ -42,10 +42,10 @@
 <body>
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 <div class="searchArea">
-	<select id="searchList" name="searchList" type="submit">
+	<select id="searchList" name="searchList">
 		<option>---</option>
-		<option value="date" href="">날짜순</option>
-		<option value="comment" href="">사유순</option>
+		<option value="date">날짜순</option>
+		<option value="comment">사유순</option>
 	</select>
 </div>
 <table>
@@ -60,7 +60,7 @@
     <% for(Report r : rlist){ %>
 	<tr>
 		<td><%= r.getRdate() %></td>
-		<td><%= r.getRetc() %>
+		<td><%= r.getRetc() %></td>
 		<td><%= r.getMname() %></td>
 		<td><%= r.getCwriter() %></td>		
 		<td><%= r.getBid() %></td>

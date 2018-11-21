@@ -14,25 +14,16 @@
 <head>
 <meta charset="UTF-8">
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
-<style>
-   .outer{
-      width:800px;
-      height:auto;
-      background:lightblue;
-      color:black;
-      margin-left:auto;
-      margin-right:auto;
-      margin-top:50px;
-   }   
-   
-   .active {
-      background: red;
+<style>  
+
+   body {
+      font-family: 'Nanum Gothic', sans-serif;
+      background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
    }
    
    .titleArea {
       width: 100%;
-      height:50px;
-      height: 50px;
+      height: 34px;
       border: 1px solid lightgray;   
       border-radius: 3px;
    }
@@ -45,10 +36,12 @@
    
    .title {
       padding-top: -5px;
+      margin-top: 5px;
+      font-size: 18px;
    }
    
    .count {
-      padding: 20px;      
+      margin-top: 7px;    
    }
    
    .commentOuter {
@@ -74,49 +67,39 @@
       height: 50px;
       border: 1px solid lightgray;
       padding-top:15px;
-      padding-left:5px;
-   
+      padding-left:5px; 
    }
    
    .btnArea1 {
       width: 90%;
       height: 40px;
-      border: 1px solid lightpink;
-      background:lightpink;
+      border: 1.5px solid lightblue;
+      background: lightblue;
+      color: black;
+      border-radius: 5px;
    }
    
-   .btnArea2 {
-      width: 70px;
-      height: 40px;
-      border: 1px solid lightpink;
-      background:lightpink;
-   }
-   
-   .btnComment {
-      width: 60px;
-      height: 25px;
-      background: lightpink;
-       border: 1px solid  lightpink;
-       border-radius: 5px;
-       color: white;
-       float: right; 
-   }
-   
-   #addComment {
+    .btnComment {
       width: 100px;
       height: 40px;
       margin: 10px;
-   }
+      background: lightblue;
+      color: black;
+      border: 1.5px solid lightblue;
+      border-radius: 5px;
+      float: right; 
+   } 
    
    .bottomBtn {
       width: 20%;
       height: 25px;
-      background: lightpink;
-       border: 1px solid  lightpink;
-       border-radius: 5px;
-       color: white;
-       float: right;
-       margin-right:2px;
+      background: lightblue;
+      border: 1.5px solid lightblue;
+      border-radius: 5px;
+      color: black;
+      float: right;
+      margin-right:2px;
+      font-size: 12px;
    }
    
    .insertBtn{
@@ -125,7 +108,7 @@
    
    .content img {
       display: inline-block;
-  	  vertical-align: middle;
+       vertical-align: middle;
       max-height: 100%;
       max-width: 100%;
    }
@@ -140,18 +123,20 @@
    <div class="row">
       <div class="col-md-2"></div>
 
-      <div class="col-md-6">
+      <div class="col-md-6" 
+            style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
+            margin-bottom: 20px;">
             
          <%if(m != null)  {  %>
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
          
-         <div class="row titleArea"  style="margin: 0;">
-            <div class="col-md-10"><h3 class="title" style="margin-top: 14px;"><%= g.getBtitle() %></h3></div>
-            <div class="col-md-2 count"><p class="">조회수 :  <%= g.getBcount() %></p></div>
+         <div class="row titleArea" style="margin: 0; background: white;">
+            <div class="col-md-10"><p class="title"><%= g.getBtitle() %></p></div>
+            <div class="col-md-2 count">(조회수 :  <%= g.getBcount() %>)</div>
          </div>
          
          
-         <div class="row contentArea" style="margin: 0;">
+         <div class="row contentArea" style="margin: 0; background: white;">
             <div class="content"><%= g.getBcontent() %></div>
          </div>
          
@@ -208,8 +193,7 @@
          
       </div>
       
-      <div class="col-md-2">
-      
+      <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">      
          <div align="center">
          <% if(g.getMprofile() == null) { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
@@ -220,27 +204,27 @@
          
          <h4 align="center"><%=g.getMname()%></h4>
 
-         <div class="row" align="center" id="btnArea1" style="margin-top: 10px;">
-            <div class="col-md-6" style="padding:0;"><button class="btn btn-follow btnArea1" id="btnFollow">팔로우</button></div>         
-            <div class="col-md-6" style="padding:0;"><button class="btn btn-likeit btnArea1" id="btnLikeit">좋아요</button></div>                        
+         <div class="row" align="center" id="" style="margin-top: 10px;">
+            <div class="col-md-6" style="padding:0;"><button class="btn-follow btnArea1" id="btnFollow">팔로우</button></div>         
+            <div class="col-md-6" style="padding:0;"><button class="btn-likeit btnArea1" id="btnLikeit">좋아요</button></div>                        
          </div>         
-         
-         <div class="sidebar" style="margin-top: 10px;">카테고리 : <%=g.getGcategoryname() %></div>
-         <div class="sidebar" >CCL : <%=g.getCclname() %></div>
+         <hr />
+         <div class="sidebar" style="margin-top: 10px; background: white">카테고리 : <%=g.getGcategoryname() %></div>
+         <div class="sidebar" style="background: white">CCL : <%=g.getCclname() %></div>
          <input type="text" value=<%=g.getGtag()%> data-role="tagsinput" id="tagsinput" class="tagsinput" disabled>      
          
          <div class="row" align="center" id="btnArea2" style="margin-top: 10px;">            
-            <div class="col-md-6" style="padding:0;"><button class="btn btnArea1" onclick="showSpon();">후원</button></div>
-            <div class="col-md-6" style="padding:0;"><button class="btn btnArea1" onclick="showReport();">신고</button></div>   
+            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showSpon();">후원</button></div>
+            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport();">신고</button></div>   
             <!-- <input class="btn btnArea2" type="button" onclick="location.href='/crojecter/main.html'" value="목록"/> -->
          </div>
          <div class="row" align="center" id="btnArea3" style="margin-top: 10px;">
             <% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
             <div class="col-md-6" style="padding:0;">
-            <button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
+            <button class="btnArea1" onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=g.getBid()%>">수정하기</button>
             </div>
             <div class="col-md-6" style="padding:0;">
-            <button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
+            <button class="btnArea1" onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=g.getBid()%>">삭제하기</button>
             </div>
             <% } %>
          </div>
@@ -308,9 +292,13 @@
          var ccontent = $(obj).parent().siblings().children('textarea').val();
          var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
          
-         location.href='/crojecter/cInsert.co?bid=' + bid
-               + '&btype=' + btype + '&cwriter=' + cwriter
-               + '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
+         if(ccontent.length == 0){
+	         alert("댓글 내용을 입력해 주세요.");
+         } else {
+        	 location.href='/crojecter/cInsert.co?bid=' + bid
+             	+ '&btype=' + btype + '&cwriter=' + cwriter
+             	+ '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
+         }
       }
       
       // 댓글 수정
@@ -448,15 +436,15 @@
    
    </script>
    <% } %> <% } else { // 비회원 %>
-	<script>
-		$('button').click(function(){
-			alert("로그인이 필요한 기능입니다.");
-		});
-		$('.btn').click(function(){
-			alert("로그인이 필요한 기능입니다.");
-		});
-	</script>
-	<% } %>
+   <script>
+      $('button').click(function(){
+         alert("로그인이 필요한 기능입니다.");
+      });
+      $('.btn').click(function(){
+         alert("로그인이 필요한 기능입니다.");
+      });
+   </script>
+   <% } %>
    
    <%@ include file="../../common/footer.jsp"%>
    
