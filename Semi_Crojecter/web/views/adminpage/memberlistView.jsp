@@ -42,13 +42,13 @@
 <body>
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 	<div class="searchArea">
-		<select id="searchMember" name="searchMember">
+		<select id="searchCondition" name="searchCondition">
 			<option value="name">이름</option>
 			<option value="email">이메일</option>
 		</select>
-		<input type="search">
+		<input type="search" id="keyword" placeholder="검색어를 입력하세요!">
 		<button type="button" onclick="search();">검색하기</button>
-</div>
+	</div>
 <table>
 	<tr>
 		<th>회원번호</th>
@@ -57,6 +57,7 @@
 		<th>호두</th>
 		<th>상태</th>	
     </tr>
+    <% if(mlist.size() > 0) { %>
     <% for(Member m2 : mlist){ %>
 	<tr>
 		<td><%= m2.getMid()%></td>
@@ -64,68 +65,43 @@
 		<td><%= m2.getMemail()%></td>
 		<td><%= m2.getMhodu()%></td>
 		<td>
-			<select name="status" onchange="changeStatusSelect()">
-				<option id="status1" value="1" selected>활성</option>
-				<option id="status2" value="2">비활성</option>
-				<option id="status3"value="3">탈퇴</option>
+			<select name="status">
+				<option value="1">활성</option>
+				<option value="2">비활성</option>
+				<option value="3">탈퇴</option>
 			</select>
-		</td>			
+			<input type="hidden" name="mid" value="<%= m2.getMid()%>" />
+			<button onclick="chageStatusSelect(this);">설정</button>
+		</td>		
 	</tr>
+	<% } } else { %>
+	<tr><td colspan="5"><p>검색 결과가 존재하지 않습니다.</p></td></tr>
 	<% } %>
-	
 </table>
-<script>
-	console.log(<%= m.getMsid() %>);
-	var status_name = null;
-	switch(<%= m.getMsid() %>) {
-	case 1 : status_name = "활성"; break;
-	case 2 : status_name = "비활성"; break;
-	case 3 : status_name = "탈퇴"; break;
-	}
-	console.log("회원 상태 : " + status_name);
-	console.log($("#status").text());
-	if($("#status1").text() == status_name) {
-		//console.log("값 일치");
-		$("#status1").attr("selected", true);
-		$("#status2").removeAttr("selected");
-		$("#status3").removeAttr("selected");
-		
-	}else if($("#status2").text() == status_name){
-		//console.log("값2 일치");
-		$("#status2").attr("selected", true);
-		$("#status1").removeAttr("selected");
-		$("#status3").removeAttr("selected");
-		
-	}else if($("#status3").text() == status_name){
-		//console.log("값3 일치");
-		$("#status3").attr("selected", true);
-		$("#status1").removeAttr("selected");
-		$("#status2").removeAttr("selected");
-		
-	}else {
-		console.log("값 불일치");
-	}
 
-	function chageStatusSelect(){
-    	var sel = document.getElementById("status").value;
-    	var mid = document.getElementById("mid").value;
+<script>
+
+	function chageStatusSelect(obj){
     	$.ajax({
     		type:'get',
     		url : '/crojecter/mStatusChange.do',
-    		data : {changeSel:sel, chageMid:mid},
-    		
+    		data : {
+    			changeSel : $(obj).siblings('select').val(),
+    			chageMid : $(obj).siblings('input[name="mid"]').val()
+    		},		
     		success : function(data){
-    			location.href='/crojecter/views/adminpage/memberlistView.jsp';
-    			console.log("성공");
-    		},
-    		error : function (request,status,error){
-    			console.log("실패");
+    			if(data == 'ok') {
+    				alert("회원 상태가 변경되었습니다.");
+                 } else if (data == 'no') {
+                	alert("회원 상태 변경에 실패하였습니다.");
+                 }
     		}
-    	});
+    	});	
 	}
 	
 	function search(){
-		location.href="<%=request.getContextPath()%>/searchMember.do?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		location.href="<%=request.getContextPath()%>/searchMember.do?con="
+				+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 	}
 
 </script>

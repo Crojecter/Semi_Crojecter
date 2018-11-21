@@ -11,10 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.follow.model.vo.Follow;
-import com.kh.payment.model.vo.Payment;
-import com.kh.spon.model.vo.Spon;
 
 public class FollowDao {
 	

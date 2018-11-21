@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.kh.member.model.vo.*"
-	import="com.kh.alarm.model.vo.*, java.util.*"%>
-<%
-	Member m = (Member) session.getAttribute("member");
-	// 읽지않은 알람갯수 조회용
-	ArrayList<Alarm> aList = (ArrayList<Alarm>) request.getAttribute("aList");
-	System.out.println("Header alist : " + aList);
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.*" import="com.kh.alarm.model.vo.*, java.util.*"%>
+<% 
+	Member m = (Member)session.getAttribute("member"); 
+    // 읽지않은 알람갯수 조회용
+	ArrayList<Alarm> aList = (ArrayList<Alarm>)request.getAttribute("aList"); 
+	System.out.println("Header alist : "+ aList);	
 	Alarm al = (Alarm) request.getAttribute("Alarm");
+	
 %>
 
 <!DOCTYPE html>
@@ -14,64 +14,27 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<!-- bootstrap css include -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-<!-- bootstrap js include -->
-<script
-	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- bootstrap css include -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<!-- bootstrap js include -->
+	<script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>		
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 
-
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- 부가적인 테마 -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- 폰트 설정 -->
-<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
-	rel="stylesheet">
-
-
-<!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
-
-<!-- include summernote css/js-->
-<link
-	href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
-
-<!-- tagsinput -->
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/bootstrap-tagsinput.css">
-<link rel="stylesheet"
-	href="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/assets/app.css">
-
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script
-	src="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
+	
+	<!-- 합쳐지고 최소화된 최신 CSS -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+	
+	<!-- 부가적인 테마 -->
+	<link rel="stylesheet"
+		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+	
+	<!-- 폰트 설정 -->
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
+		rel="stylesheet">
 
 <style>
 	.sign{
@@ -83,6 +46,35 @@
 	}
 </style>
 
+	<!-- include libraries(jQuery, bootstrap) -->
+	<link
+		href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
+		rel="stylesheet">
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+	<script
+		src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+	
+	<!-- include summernote css/js-->
+	<link
+		href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css"
+		rel="stylesheet">
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+		
+	 <!-- tagsinput -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/bootstrap-tagsinput.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/assets/app.css">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>	
+	
+	<style>
+		
+	</style>
+	
 </head>
 <body style="position: absolute; width: 100%;">
 	<div class="row" style="background: white">
@@ -194,7 +186,7 @@
 										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
 										<a class="dropdown-item"
-											href="<%=request.getContextPath()%>/views/mypage/mypageView.jsp">마이페이지</a>
+											href="<%=request.getContextPath()%>/selectPage.my?mid=<%=m.getMid()%>">마이페이지</a>
 										<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 										<script>
 							function logout(){

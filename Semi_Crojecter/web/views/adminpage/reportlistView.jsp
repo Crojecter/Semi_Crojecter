@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.report.model.vo.*, java.util.*"%>
 <%
-<<<<<<< HEAD
-	ArrayList<Report> list = (ArrayList<Report>)request.getAttribute("list"); 
-=======
 	ArrayList<Report> rlist = (ArrayList<Report>)request.getAttribute("rlist"); 
 	System.out.println("rlist : " + rlist);
->>>>>>> refs/remotes/origin/master
 %>
 <!DOCTYPE html>
 <html>
@@ -46,10 +42,10 @@
 <body>
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 <div class="searchArea">
-	<select id="searchList" name="searchList" type="submit">
+	<select id="searchList" name="searchList">
 		<option>---</option>
-		<option value="date" href="">날짜순</option>
-		<option value="comment" href="">사유순</option>
+		<option value="date">날짜순</option>
+		<option value="comment">사유순</option>
 	</select>
 </div>
 <table>
@@ -61,10 +57,10 @@
 		<th>게시물 번호</th>
 		<th>댓글 번호</th>
     </tr>
-    <% for(Report r : list){ %>
+    <% for(Report r : rlist){ %>
 	<tr>
 		<td><%= r.getRdate() %></td>
-		<td><%= r.getRetc() %>
+		<td><%= r.getRetc() %></td>
 		<td><%= r.getMname() %></td>
 		<td><%= r.getCwriter() %></td>		
 		<td><%= r.getBid() %></td>
