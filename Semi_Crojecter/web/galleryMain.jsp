@@ -270,16 +270,7 @@
 			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		}
 		</script>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>
 
