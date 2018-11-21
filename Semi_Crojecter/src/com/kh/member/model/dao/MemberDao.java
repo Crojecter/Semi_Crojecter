@@ -110,6 +110,50 @@ public class MemberDao {
 		return result;
 		
 	}
+	
+	public Member selectMember(Connection con, int mid) {
+		
+		Member result = null;
+		
+		String sql = prop.getProperty("selectMemberbyMid");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				
+				result = new Member();
+				
+				result.setMid(rset.getInt(1));
+				result.setMprofile(rset.getString(2));
+				result.setMemail(rset.getString(3));
+				result.setMpwd(rset.getString(4));
+				result.setMname(rset.getString(5));
+				result.setMdate(rset.getDate(6));
+				result.setMhodu(rset.getInt(7));
+				result.setMsid(rset.getInt(8));
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
 
 	public int selectEmail(Connection con, Member m) {
 

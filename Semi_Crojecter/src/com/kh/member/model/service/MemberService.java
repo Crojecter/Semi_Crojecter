@@ -47,6 +47,18 @@ public class MemberService {
 		return result;
 
 	}
+	
+	public Member selectMember(int mid) {
+
+		con = getConnection();
+		
+		Member result = mDao.selectMember(con, mid);
+		
+		close(con);
+		
+		return result;
+
+	}
 
 	public int selectEmail(Member m) {
 		

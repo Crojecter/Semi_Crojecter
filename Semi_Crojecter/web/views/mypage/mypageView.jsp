@@ -44,7 +44,6 @@
 }
 
 
-}
 #submit {
 	color: white;
 	text-align: center;
@@ -68,32 +67,29 @@
 <body>
 	<%@ include file="../mypage/common/mypageHeader.jsp"%>
 	<div class="form">
-		<form id="updateForm"
-			action="<%=request.getContextPath()%>/mUpdate.do" method="post">
 			<table class="table">
 				<tr>
 					<td class="tdStyle"><label class="subject">닉네임</label></td>
 					<td colspan="2" class="tdStyle"><input type="text"
 						class="inputContent" name="nickName" id="nickName"
-						oninput="checkNickName();" value="<%=m.getMname()%>" readonly></td>
+						oninput="checkNickName();" value="<%=m2.getMname()%>" readonly></td>
 				</tr>
 				<tr>
 					<td class="tdStyle"><label class="subject">이메일</label></td>
 					<td colspan="2" class="tdStyle"><input type="email"
-						class="inputContent" value="<%=m.getMemail()%>" readonly></td>
+						class="inputContent" value="<%=m2.getMemail()%>" readonly></td>
 				</tr>
 				<tr>
 					<td class="tdStyle"><label class="subject">호두</label></td>
 					<td colspan="2" class="tdStyle"><input type="text"
-						class="inputContent" value="<%=m.getMhodu()%>" readonly></td>
+						class="inputContent" value="<%=m2.getMhodu()%>" readonly></td>
 				</tr>
 				<tr>
 					<td class="tdStyle"><label class="subject">가입일</label></td>
 					<td class="tdStyle"><input type="text" class="inputContent"
-						value="<%=m.getMdate()%>" readonly></td>
+						value="<%=m2.getMdate()%>" readonly></td>
 				</tr>
-			</table>
-		</form>
+			</table>>
 	</div>
 
 </body>

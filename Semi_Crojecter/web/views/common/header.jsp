@@ -174,7 +174,7 @@
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/mypage/mypageView.jsp">마이페이지</a>
+							<a class="dropdown-item" href="<%= request.getContextPath()%>/selectPage.my?mid=<%=m.getMid()%>">마이페이지</a>
 							<div class="dropdown-item" onclick='logout();'>로그아웃</div>
 							<script>
 							function logout(){

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.likeit.model.service.LikeitService;
 import com.kh.likeit.model.vo.Likeit;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class CollectViewServlet
@@ -31,23 +33,20 @@ public class CollectViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Likeit> list = null;
-		LikeitService ls = new LikeitService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
 		
-		list = ls.searchLikeit(mid);
-		System.out.println("collect list : " + list);
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		Member m = new MemberService().selectMember(mid);
+		
+		ArrayList<Likeit> list = null;
+		list = new LikeitService().searchLikeit(mid);
 		
 		if(list != null){
-			
+			request.setAttribute("myMember", m);
 			request.setAttribute("list", list);
-			System.out.println("list : " + list);
 			request.getRequestDispatcher("views/mypage/mycollectList.jsp").forward(request, response);
-			
 		} else {
-			
 			request.setAttribute("msg", "조회 실패!");
-			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

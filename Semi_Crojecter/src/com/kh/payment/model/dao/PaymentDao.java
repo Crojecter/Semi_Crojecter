@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,8 +13,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.member.model.vo.Member;
-import com.kh.payment.model.dao.PaymentDao;
 import com.kh.payment.model.vo.Payment;
 
 public class PaymentDao {
@@ -110,25 +109,23 @@ private Properties prop = null;
 				Payment p = new Payment();
 				
 				p.setPid(rset.getInt("pid"));
-				p.setPmoney(rset.getInt("pmoney"));
+				p.setPmoneyid(rset.getInt("pmoney"));
 				p.setPdate(rset.getDate("pdate"));
 				p.setMid(rset.getInt("mid"));
+				p.setMname(rset.getString("mname"));
+				p.setMemail(rset.getString("memail"));
+				p.setPmoney(rset.getInt("money"));
+				p.setPhodu(rset.getInt("phodu"));
 				
 				plist.add(p);
-				
-			}
+			}			
 			
 		} catch (SQLException e) {
-		
-			e.printStackTrace();
-			
+			e.printStackTrace();			
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		// 확인용 출력문
-		for(Payment p : plist) System.out.println(p);
 		
 		return plist;
 	}
