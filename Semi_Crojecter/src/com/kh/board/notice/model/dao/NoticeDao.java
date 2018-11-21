@@ -246,10 +246,10 @@ private Properties prop = new Properties();
 				
 				Notice n = new Notice();
 				
+				n.setFname(rset.getString("fname"));
 				n.setBtitle(rset.getString("btitle"));
 				n.setBdate(rset.getDate("bdate"));
 				n.setBid(rset.getInt("bid"));
-				//n.set
 			
 				list.add(n);
 			} 

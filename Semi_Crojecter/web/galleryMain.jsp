@@ -2,10 +2,11 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.* " %>
 <!DOCTYPE html>
 <%
-/* 
+ 
 	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List"); 
 	System.out.println("GalleryList ArrayList : "+ gTop5List);
- */	
+	
+ 	
 %>
 <html>
 	<head>
@@ -21,32 +22,24 @@
 		<!-- 순위조회용 테스트 코드 -->
 		<script>
 			// Top 5 계산 (TOP-N 분석)
-			$(function(){
-				
+			$(document).ready(function(){
+
 				$.ajax({
 					url : '/crojecter/gTop5.ga',
 					type : 'get',
 					success : function(data){
 						
-						$table = $('#galleryTop5 tbody');
-						
+						$('#galleryTop5');
+						console.log(data)
 						for(var i in data){
 							
-							// console.log(data[i]);
-							var $trGallery = $('<tr>');
-							var $tdGalleryGid = $('<td>').text(data[i].bid);
-							var $tdGalleryBTitle = $('<td>').text(data[i].btitle);
-							var $tdGalleryBWriter = $('<td>').text(data[i].bwriter);
-							var $tdGalleryDate = $('<td>').text(data[i].bdate);
-							var $tdGalleryCount = $('<td>').text(data[i].bcount);
+							$("#top5Bid").text(data[i].bid);
+							$("#top5Btitle").text(data[i].btitle);
+							$("#top5Bwriter").text(data[i].bwriter);
+							$("#top5Bdate").text(data[i].bdate);
+							$("#top5Bcount").text(data[i].bcount);
+							$("#top5Fname").text(data[i].fname);
 							
-							$trBoard.append($tdGalleryGid)
-							.append($tdGalleryBTitle)
-							.append($tdGalleryBWriter)
-							.append($tdGalleryDate)
-							.append($tdGalleryCount);
-							
-							$table.append($trGallery);
 						}
 					}, error : function(data){
 						console.log("top5 조회 실패!!");
@@ -56,7 +49,6 @@
 			});
 		</script>
 		<!-- 슬라이드 -->
-
 
 		<div id="demo1" class="carousel slide" data-ride="carousel" style="display: inline-block;">
 		  <ul class="carousel-indicators" style="z-index:1">

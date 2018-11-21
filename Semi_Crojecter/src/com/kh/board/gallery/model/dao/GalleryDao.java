@@ -284,8 +284,11 @@ public class GalleryDao {
 			
 				pstmt.setString(1, af.getFname());
 				pstmt.setInt(2, bid);
+				
+				System.out.println("af.getFname() : " + af.getFname());
+				System.out.println("bid : " + bid);
 
-				result = pstmt.executeUpdate();
+				result += pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -401,7 +404,10 @@ public class GalleryDao {
 			
 			int startRow = (currentPage -1) * limit +1;	
 			int endRow = startRow + limit -1;
-			
+/*			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);					
+*/			
 			rset = pstmt.executeQuery();			
 			list = new ArrayList<Gallery>();
 			
@@ -425,7 +431,7 @@ public class GalleryDao {
 				g.setFname(rset.getString("FNAME"));
 				
 				list.add(g);
-				System.out.println("selectGalleryList Dao : "+ list);
+				//System.out.println("selectGalleryList Dao : "+ list);
 			}
 			
 		} catch (SQLException e) {
@@ -467,7 +473,7 @@ public class GalleryDao {
 		// 
 		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<Gallery> list = null;
+		ArrayList<Gallery> gTop5List = null;
 		
 		String sql = prop.getProperty("selectGalleryTop5");
 		
@@ -477,7 +483,7 @@ public class GalleryDao {
 			
 			rset = stmt.executeQuery(sql);
 			
-			list = new ArrayList<Gallery>();
+			gTop5List = new ArrayList<Gallery>();
 			
 			while(rset.next()){
 				Gallery g = new Gallery();
@@ -490,9 +496,10 @@ public class GalleryDao {
 				
 				g.setFname(rset.getString("FNAME"));
 				
-				list.add(g);
-				System.out.println("Top5 Dao : " + list);
+				gTop5List.add(g);
+				
 			}
+			System.out.println("Top5 Dao : " + gTop5List);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -502,7 +509,7 @@ public class GalleryDao {
 			close(stmt);
 		}
 		
-		return list;
+		return gTop5List;
 	}
 
 
@@ -525,10 +532,20 @@ public class GalleryDao {
 			while(rset.next()){
 				Gallery g = new Gallery();
 				
-				g.setBwriter(rset.getInt("BWRITER"));
-				g.setMname(rset.getString("MNAME"));
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				// 상속분
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
 				g.setBtitle(rset.getString("BTITLE"));
-				
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				// 
+				g.setFname(rset.getString("FNAME"));
 				
 				glist.add(g);
 			}

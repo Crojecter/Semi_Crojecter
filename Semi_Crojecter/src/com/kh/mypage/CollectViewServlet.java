@@ -36,12 +36,12 @@ public class CollectViewServlet extends HttpServlet {
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		
 		list = ls.searchLikeit(mid);
-		
 		System.out.println("collect list : " + list);
 		
 		if(list != null){
 			
 			request.setAttribute("list", list);
+			System.out.println("list : " + list);
 			request.getRequestDispatcher("views/mypage/mycollectList.jsp").forward(request, response);
 			
 		} else {

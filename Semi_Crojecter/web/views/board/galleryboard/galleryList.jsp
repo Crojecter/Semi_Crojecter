@@ -16,14 +16,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 </head>
-<body>
+<body style="height:100%">
 		<div class="galleryList">
 
 		<% for (Gallery gal : gList) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
+			
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
 			alt="Card image cap" class="gallery"></a>
 				<div class="card-body">

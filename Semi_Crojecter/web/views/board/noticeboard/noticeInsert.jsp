@@ -49,7 +49,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/nInsert.no" method="post" >
+	<form id="insertform" action="<%=request.getContextPath()%>/nInsert.no" method="post" >
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-6">

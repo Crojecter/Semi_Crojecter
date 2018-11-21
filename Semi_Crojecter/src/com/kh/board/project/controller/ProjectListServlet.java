@@ -70,7 +70,7 @@ public class ProjectListServlet extends HttpServlet {
 			
 			PageInfo pi = new PageInfo(currentPage, countProjectList, limit, maxPage, startPage, endPage);
 			
-			page = "projectPage.jsp";
+			page = "views/projectBoard/projectPage.jsp";
 			request.setAttribute("pi", pi);
 			request.setAttribute("list", list);
 		} else {

@@ -36,6 +36,7 @@ public class FollowingViewServlet extends HttpServlet {
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		
 		list = fs.searchFollowing(mid);
+		
 		if(list != null){
 						
 			request.setAttribute("list", list);

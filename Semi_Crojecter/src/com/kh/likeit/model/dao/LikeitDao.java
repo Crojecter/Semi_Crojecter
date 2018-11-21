@@ -133,6 +133,7 @@ public class LikeitDao {
 				l.setBwriter(rset.getString("bwriter"));
 				l.setBtitle(rset.getString("btitle"));
 				l.setFname(rset.getString("fname"));
+				l.setMname(rset.getString("mname"));
 				
 				list.add(l);
 			}
