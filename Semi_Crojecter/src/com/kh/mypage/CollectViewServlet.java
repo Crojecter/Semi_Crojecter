@@ -39,6 +39,7 @@ public class CollectViewServlet extends HttpServlet {
 		
 		ArrayList<Likeit> list = null;
 		list = new LikeitService().searchLikeit(mid);
+		System.out.println("llllist : " + list);
 		
 		if(list != null){
 			request.setAttribute("myMember", m);

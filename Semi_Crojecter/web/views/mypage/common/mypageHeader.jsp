@@ -67,6 +67,7 @@
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
+	<% if(m2 == null) m2 = m; %>
 	<div class="profileArea">
 		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
@@ -76,7 +77,7 @@
 		
 		<% if(m.getMid() == m2.getMid()) { %>
 		<p class=proMenu>
-		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
+		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
 		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
 		<br>
 		</p>
