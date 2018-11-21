@@ -30,7 +30,7 @@
 		margin:1px 10px 1px 10px;
 		}
 		
-	#submit{
+	.submit{
 		color:white;
 		text-align:center;
 		border-radius:5px;
@@ -77,13 +77,12 @@
 						</label></td>
 			</tr>
             <tr>
-                <td><input type="submit" id="submit" onclick="updateMember();" style="border: 1px solid gray; background-color: gray;" value="수정하기">
-                <input type="button" id="submit" onclick="deleteMember();" style="border: 1px solid gray; background-color: gray;" value="탈퇴하기"></td>
+                <td><input type="submit" class="submit" onclick="updateMember();" style="border: 1px solid gray; background-color: gray;" value="수정하기">
+                <input type="button" class="submit" onclick="deleteMember();" style="border: 1px solid gray; background-color: gray;" value="탈퇴하기"></td>
             </tr> 
         </table>
 	</form>
 </div>
-
 
 <script>
 	function updateMember() {

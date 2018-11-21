@@ -13,19 +13,6 @@
 		background: lavender;
 	}
 	
-	.profileMenu {
-		border: solid 1px gray;
-		text-decoration: none;
-		color: white;
-		background-color: gray;
-		text-align: center;
-		border-radius: 5px;
-		height: 40px;
-		width: 120px;
-		font-size: 15px;
-		margin: 1px 10px 1px 10px;
-	}
-	
 	.menu {
 		border: 1px solid black;
 	}
@@ -42,7 +29,21 @@
 		border: 1px solid black;
 	}
 	
-	.profilePic {
+	.profileMenu {
+		border: solid 1px gray;
+		text-decoration: none;
+		color: white;
+		background-color: gray;
+		text-align: center;
+		border-radius: 5px;
+		height: 40px;
+		width: 120px;
+		font-size: 15px;
+		margin: 1px 10px 1px 10px;
+		float: right;
+	}
+	
+	#profileImg {
 		width: 100px;
 		height: 100px;
 		border-radius: 50px;
@@ -54,8 +55,11 @@
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
-	<div class="profileArea" style="align:center;">
-		<img src="../resources/images/icon/likeSelect.png" class="profilePic">
+	<div class="profileArea">
+		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
+			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
+			<input type="file" name="file" id="btnProfile" style="display:none;" onchange="updateProfile();"/>
+		</form>
 		<p id="profileName"><%=m.getMname()%>님의 페이지</p>
 		<a class="profileMenu" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
 		<a class="profileMenu" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
@@ -78,5 +82,49 @@
 			</tr>
 		</table>
 	</div>
+	
+	<script>
+
+	$(function() {
+		$('#profileImg').attr('src', "../../resources/profileFiles/<%= m.getMprofile() %>");
+	});
+		
+	function updateProfile() {
+		$("#updateForm").submit();
+	}
+	
+	$('#profileImg').click(() => {
+		$('#btnProfile').click();   
+	});
+	
+	function LoadImg(value) {
+		if(value.files && value.files[0]) {
+			var reader = new FileReader();			
+			reader.onload = function(e){					
+				$('#profileImg').attr('src', e.target.result);	
+			}			
+			reader.readAsDataURL(value.files[0]);
+		}
+		
+		$.ajax({
+			url : '/crojecter/mUpdateProfile.me',
+			type : 'get',
+			data : {
+				mid : '<%= m.getMid() %>',
+				mprofile : $('#profileImg').attr('src')
+			}, 
+			success : function(data){
+				if(data == 'success') {
+					console.log('프로필 변경 성공');
+				} else {
+					console.log('프로필 변경 실패');
+				}
+			}, error : function(data){
+				console.log('프로필 변경 에러 발생!!');
+			}
+		});
+	}
+	
+	</script>
 </body>
 </html>

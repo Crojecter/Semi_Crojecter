@@ -63,9 +63,5 @@
 		</form>
 	</div>
 	
-	<div class="button">
-		<input type="button" value="메인으로">
-	</div>
-	
 </body>
 </html>

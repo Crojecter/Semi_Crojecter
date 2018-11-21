@@ -361,6 +361,30 @@ public class MemberDao {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public int updateProfile(Connection con, Member m) {
+		
+		int result = 0;
+		
+		String sql = prop.getProperty("updateProfile");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMprofile());
+			pstmt.setInt(2, m.getMid());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();			
+		} finally {			
+			close(pstmt);			
+		}
+		
+		return result;
+	}
 	
 }
 
