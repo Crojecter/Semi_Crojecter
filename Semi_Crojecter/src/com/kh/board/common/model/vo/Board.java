@@ -15,6 +15,25 @@ public class Board {
 	private String mprofile;
 	private String mname;
 	
+	private String fname;
+	private String tag;
+	
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
 	public Board() {}
 	
 	public Board(int bid, int btype, String btitle, String bcontent, int bcount, Date bdate, String bstatus,

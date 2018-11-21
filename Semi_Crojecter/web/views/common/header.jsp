@@ -125,13 +125,15 @@
 								}
 							});
 						});
+					    
 						function openAlarmList() {
+							
 							// 알람창 크기
-							var xPos = (document.body.clientWidth / 2) - 250; 
+							var xPos = ((document.body.clientWidth / 2) - (500 / 2)); 
 						    xPos += window.screenLeft;
-						    var yPos = (screen.availHeight / 2) - 150;
+						    var yPos = ((screen.availHeight / 2) - (300 / 2));
 
-						    window.open('<%= request.getContextPath() %>/views/alarm/alarmDetail.jsp?Mid=<%= m.getMid() %>', 
+						    window.open('<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>', 
 						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
 						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 						}
@@ -191,16 +193,11 @@
 				<% } %>
 				</div>
 				<!-- 검색 -->
-				<form class="navbar-search pull-left">
-				  <input type="text" class="search-query" placeholder="Search">
+				<form class="navbar-search pull-left" action="<%=request.getContextPath()%>/search.all" method="get">
+				  <input type="text" class="search-query" placeholder="Search" name="keyword">
 				  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button> &nbsp;				  
+					<img src="<%= request.getContextPath()%>/resources/images/icon/search.png" alt="" style="height:20px;"></button>
 				</form>
-				<script>
-				function searchImg(){
-					location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-				}
-				</script>
 		</div>
 	</nav>
 	</div>

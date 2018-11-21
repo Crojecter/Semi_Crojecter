@@ -130,6 +130,9 @@ public class LikeitDao {
 				
 				l.setMid(rset.getInt("mid"));
 				l.setBid(rset.getInt("bid"));
+				l.setBwriter(rset.getString("bwriter"));
+				l.setBtitle(rset.getString("btitle"));
+				l.setFname(rset.getString("fname"));
 				
 				list.add(l);
 			}

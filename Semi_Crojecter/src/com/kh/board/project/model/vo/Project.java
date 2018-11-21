@@ -11,8 +11,7 @@ public class Project extends Board implements Serializable {
 	private Date jend;
 	private String jtag;
 	private int dday;
-	
-	
+
 	public Project() {
 		super();
 	}
@@ -22,7 +21,7 @@ public class Project extends Board implements Serializable {
 		this.jid = jid;
 		this.jend = jend;
 		this.jtag = jtag;	
-		this.dday = dday;
+		this.dday = dday;			
 	}
 
 	public int getJid() {
@@ -56,6 +55,7 @@ public class Project extends Board implements Serializable {
 	public void setDday(int dday) {
 		this.dday = dday;
 	}
+
 
 	@Override
 	public String toString() {

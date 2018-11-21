@@ -169,6 +169,13 @@ public class GalleryService {
 		return searchGalleryList;
 	}
 
+
+	public int updateAlarm(int aid) {
+		// 
+		
+		return 0;
+	}
+
 	public int deleteGallery(int bid) {
 		
 		Connection con = getConnection();

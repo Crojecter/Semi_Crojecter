@@ -1,28 +1,25 @@
-package com.kh.mypage;
+package com.kh.alarm.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.follow.model.service.FollowService;
-import com.kh.follow.model.vo.Follow;
+import com.kh.board.gallery.model.service.GalleryService;
 
 /**
- * Servlet implementation class FollowingViewServlet
+ * Servlet implementation class AlarmUpdateServlet
  */
-@WebServlet("/followingView.do")
-public class FollowingViewServlet extends HttpServlet {
+@WebServlet("/aUpdate.al")
+public class AlarmUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowingViewServlet() {
+    public AlarmUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +28,16 @@ public class FollowingViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Follow> list = null;
-		FollowService fs = new FollowService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		// 
+		int Aid = Integer.parseInt(request.getParameter("Aid"));
 		
-		list = fs.searchFollowing(mid);
-		if(list != null){
-						
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/mypage/followingList.jsp").forward(request, response);
-			
+		int result = new GalleryService().updateAlarm(Aid);
+		
+		if(result > 0) {
+			response.sendRedirect("gSelectOne.ga?bid="+Aid);
 		} else {
-			
-			request.setAttribute("msg", "조회 실패!");
-	
+			request.setAttribute("msg", "삭제 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 	}
 
