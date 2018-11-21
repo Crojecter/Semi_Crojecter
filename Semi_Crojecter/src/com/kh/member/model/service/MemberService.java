@@ -153,5 +153,19 @@ public class MemberService {
 		return list;
 	}
 
+	public int updateProfile(Member m) {
+		
+		int result = 0;
+		
+		con = getConnection();
+		
+		result = mDao.updateProfile(con, m);
+		
+		if(result > 0) commit(con);
+		else rollback(con);
+		
+		return result;
+	}
+
 
 }
