@@ -13,6 +13,9 @@
 	margin-top: 160px;
 	margin-bottom: 160px;
 	padding: 10px 10px 10px 10px;
+	background:lightgray;
+	border-radius: 5px;
+
 }
 
 .label {
@@ -23,6 +26,25 @@
 	margin: 1px 10px 1px 10px;
 }
 
+.inputContent {
+
+	width: auto;
+	text-align:center;
+	background:lightgray;
+	border:lightgray;
+
+}
+
+.table{
+
+	font-size:15px;
+	height: 300px;
+	color:white;
+
+}
+
+
+}
 #submit {
 	color: white;
 	text-align: center;
@@ -32,36 +54,47 @@
 	font-size: 15px;
 	margin: 1px 10px 1px 10px;
 }
+
+.subject {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.tdStyle{
+	height:20px;
+}
 </style>
 </head>
 <body>
 	<%@ include file="../mypage/common/mypageHeader.jsp"%>
 	<div class="form">
-		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdate.do" method="post">
-			<table>
+		<form id="updateForm"
+			action="<%=request.getContextPath()%>/mUpdate.do" method="post">
+			<table class="table">
 				<tr>
-					<td><label class="inputContent">닉네임</label></td>
-					<td colspan="2"><input type="text" class="inputContent"
-						name="nickName" id="nickName" oninput="checkNickName();"
-						value="<%= m.getMname()%>" readonly></td>
+					<td class="tdStyle"><label class="subject">닉네임</label></td>
+					<td colspan="2" class="tdStyle"><input type="text"
+						class="inputContent" name="nickName" id="nickName"
+						oninput="checkNickName();" value="<%=m.getMname()%>" readonly></td>
 				</tr>
 				<tr>
-					<td><label class="inputContent">이메일</label></td>
-					<td colspan="2"><input type="email" class="inputContent"
-						value="<%= m.getMemail()%>" readonly></td>
+					<td class="tdStyle"><label class="subject">이메일</label></td>
+					<td colspan="2" class="tdStyle"><input type="email"
+						class="inputContent" value="<%=m.getMemail()%>" readonly></td>
 				</tr>
 				<tr>
-					<td><label class="inputContent">호두</label></td>
-					<td colspan="2"><input type="text" class="inputContent"
-						value="<%= m.getMhodu()%>" readonly></td>
+					<td class="tdStyle"><label class="subject">호두</label></td>
+					<td colspan="2" class="tdStyle"><input type="text"
+						class="inputContent" value="<%=m.getMhodu()%>" readonly></td>
 				</tr>
 				<tr>
-					<td><label>가입일</label></td>
-					<td><input type="text" value="<%=m.getMdate() %>" readonly></td>
+					<td class="tdStyle"><label class="subject">가입일</label></td>
+					<td class="tdStyle"><input type="text" class="inputContent"
+						value="<%=m.getMdate()%>" readonly></td>
 				</tr>
 			</table>
 		</form>
 	</div>
-	
+
 </body>
 </html>

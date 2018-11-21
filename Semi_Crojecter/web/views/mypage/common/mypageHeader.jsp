@@ -10,45 +10,54 @@
 	.profileArea {
 		border: 1px solid black;
 		color: black;
-		background: lavender;
+		background: lightgray;
+		text-align:center;
+		font-weight:bold;
+		font-size:23px;
+		
 	}
 	
 	.menu {
-		border: 1px solid black;
+		border: 1px solid gray;
+		padding-top:20px;
+		padding-bottom:20px;
+
 	}
 	
 	.menuMenu a {
+		margin-left:15px;
+		margin-right:15px;
 		text-decoration: none;
 		color: darkgray;
-		width: 100px;
-		margin-right: 30px;
-		margin-left: 30px;
+		font-size:23px;
+		font-weight:bold;
+
+
 	}
 	
 	.form {
 		border: 1px solid black;
 	}
-	
-	.profileMenu {
+
+	.profileMenus {
 		border: solid 1px gray;
-		text-decoration: none;
 		color: white;
 		background-color: gray;
-		text-align: center;
 		border-radius: 5px;
-		height: 40px;
-		width: 120px;
 		font-size: 15px;
-		margin: 1px 10px 1px 10px;
-		float: right;
+		margin-right:20px;
+
 	}
 	
+
+
 	#profileImg {
 		width: 100px;
 		height: 100px;
 		border-radius: 50px;
-		margin-top: 10px;
-		margin-left: 10px;
+		margin-top: 20px;
+		margin-left: 20px;
+		border: solid 1px gray;
 	}			
 </style>
 </head>
@@ -61,12 +70,15 @@
 			<input type="file" name="file" id="btnProfile" style="display:none;" onchange="updateProfile();"/>
 		</form>
 		<p id="profileName"><%=m.getMname()%>님의 페이지</p>
-		<a class="profileMenu" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
-		<a class="profileMenu" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
-		<br><br>
+		
+		<p class=proMenu>
+		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
+		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
+		<br>
+		</p>
 	</div>
 	<br>
-	<div class="menu">
+	<div class="menu" align="center">
 		<table>
 			<tr>
 				<td class="menuMenu"><a
