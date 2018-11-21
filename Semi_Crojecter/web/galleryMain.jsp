@@ -2,10 +2,11 @@
     pageEncoding="UTF-8" import="java.util.*, com.kh.board.gallery.model.vo.* " %>
 <!DOCTYPE html>
 <%
-/* 
+ 
 	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List"); 
 	System.out.println("GalleryList ArrayList : "+ gTop5List);
- */	
+	
+ 	
 %>
 <html>
 	<head>
@@ -17,6 +18,8 @@
 		</style> 
 	</head>
 	<body>
+		<a type="button" href="<%=request.getContextPath()%>/gTop5.ga">조회수 순위</a>
+		
 		<%@ include file="views/common/header.jsp" %>
 		<table align="center" id="galleryTop5">
 			<thead>	
@@ -28,55 +31,54 @@
 					<th width="70px">작성일 </th>
 					<th width="70px">조회수</th>
 					<th width="70px">파일명</th>		
-					<a type="button" href="<%=request.getContextPath()%>/gTop5.ga">조회수 순위</a>
+					
 				</tr>
 			</thead>
 			<tbody>
-<%-- 			
-			<% for(Gallery ga : gTop5List){ %>
-				<tr id="noticeTR">				
-					<td id="noticeTD"><%= ga.getBid() %></td>
-					<td id="noticeTD"><%= ga.getBtitle() %></td>
-					<td id="noticeTD"><%= ga.getBwriter() %></td>
-					<td id="noticeTD"><%= ga.getBdate() %></td>
-					<td id="noticeTD"><%= ga.getBcount() %></td>
-					<td id="noticeTD"><%= ga.getFname() %></td>
-				</tr>
-			<% } %>
- --%>
+<%-- 
+<tr>
+				
+	<td id="top5Bid"></td>
+	<td id="top5Btitle"></td>
+	<td id="top5Bwriter"></td>
+	<td id="top5Bdate"></td>
+	<td id="top5Bcount"></td>
+	
+</tr>
+--%>
+			<tr>
+			<%-- <% for (Gallery gal : gTop5List) { %> --%>
+					<td id="top5Bid"></td>
+					<td id="top5Btitle"></td>
+					<td id="top5Bwriter"></td>
+					<td id="top5Bdate"></td>
+					<td id="top5Bcount"></td>
+			<%-- <% } %> --%>
+			</tr>			 
 			</tbody>
 		</table>	
-
 
 		<!-- 순위조회용 테스트 코드 -->
 		<script>
 			// Top 5 계산 (TOP-N 분석)
-			$(function(){
-				
+			$(document).ready(function(){
+
 				$.ajax({
 					url : '/crojecter/gTop5.ga',
 					type : 'get',
 					success : function(data){
 						
-						$table = $('#galleryTop5 tbody');
-						
+						$('#galleryTop5');
+						console.log(data)
 						for(var i in data){
 							
-							// console.log(data[i]);
-							var $trGallery = $('<tr>');
-							var $tdGalleryGid = $('<td>').text(data[i].bid);
-							var $tdGalleryBTitle = $('<td>').text(data[i].btitle);
-							var $tdGalleryBWriter = $('<td>').text(data[i].bwriter);
-							var $tdGalleryDate = $('<td>').text(data[i].bdate);
-							var $tdGalleryCount = $('<td>').text(data[i].bcount);
+							$("#top5Bid").text(data[i].bid);
+							$("#top5Btitle").text(data[i].btitle);
+							$("#top5Bwriter").text(data[i].bwriter);
+							$("#top5Bdate").text(data[i].bdate);
+							$("#top5Bcount").text(data[i].bcount);
+							$("#top5Fname").text(data[i].fname);
 							
-							$trBoard.append($tdGalleryGid)
-							.append($tdGalleryBTitle)
-							.append($tdGalleryBWriter)
-							.append($tdGalleryDate)
-							.append($tdGalleryCount);
-							
-							$table.append($trGallery);
 						}
 					}, error : function(data){
 						console.log("top5 조회 실패!!");
@@ -86,7 +88,40 @@
 			});
 		</script>
 		<!-- 슬라이드 -->
-
+<!-- 			// Top 5 계산 (TOP-N 분석)
+		$(function(){
+			$/ajax({
+				// top5 페이지가 로딩되기 전에 페이지를 볼수있게 하기위해서
+				// 서블릿을 통하는게 아닌 ajax로 표현한다.
+				url : '/crojecter/top5.bo',
+				type : 'get',
+				success : function(data){
+					$table = $('#galleryTop5 tbody');
+					for(var i in data){
+						console.log(data[i]);
+						var $trGallery = $('<tr>');
+						var $tdGalleryNo = $('<td>').text(data[i].bno);
+						var $tdGalleryTitle = $('<td>').text(data[i].btitle);
+						var $tdGalleryWriter = $('<td>').text(data[i].bwriter);
+						var $tdGalleryDate = $('<td>').text(data[i].bdate);
+						var $tdGalleryCount = $('<td>').text(data[i].bcount);
+						var $tdGalleryFname = $('<td>').text(data[i]).bcount;
+						sons
+						$trBoard.append($tdGalleryNo)
+								.append($tdGalleryTitle)
+								.append($tdGalleryWriter)
+								.append($tdGalleryDate)
+								.append($tdGalleryCount)
+								.append($tdGalleryFname);
+						
+						$table.append($trGallery);
+					}
+				},
+				error : function(data){
+					에러발생
+				}
+			});
+		}); -->
 
 		<div id="demo1" class="carousel slide" data-ride="carousel" style="display: inline-block;">
 		  <ul class="carousel-indicators" style="z-index:1">

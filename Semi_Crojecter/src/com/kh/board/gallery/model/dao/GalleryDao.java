@@ -401,7 +401,10 @@ public class GalleryDao {
 			
 			int startRow = (currentPage -1) * limit +1;	
 			int endRow = startRow + limit -1;
-			
+/*			
+			pstmt.setInt(1, endRow);
+			pstmt.setInt(2, startRow);					
+*/			
 			rset = pstmt.executeQuery();			
 			list = new ArrayList<Gallery>();
 			
@@ -425,7 +428,7 @@ public class GalleryDao {
 				g.setFname(rset.getString("FNAME"));
 				
 				list.add(g);
-				System.out.println("selectGalleryList Dao : "+ list);
+				//System.out.println("selectGalleryList Dao : "+ list);
 			}
 			
 		} catch (SQLException e) {
@@ -467,7 +470,7 @@ public class GalleryDao {
 		// 
 		Statement stmt = null;
 		ResultSet rset = null;
-		ArrayList<Gallery> list = null;
+		ArrayList<Gallery> gTop5List = null;
 		
 		String sql = prop.getProperty("selectGalleryTop5");
 		
@@ -477,7 +480,7 @@ public class GalleryDao {
 			
 			rset = stmt.executeQuery(sql);
 			
-			list = new ArrayList<Gallery>();
+			gTop5List = new ArrayList<Gallery>();
 			
 			while(rset.next()){
 				Gallery g = new Gallery();
@@ -490,9 +493,10 @@ public class GalleryDao {
 				
 				g.setFname(rset.getString("FNAME"));
 				
-				list.add(g);
-				System.out.println("Top5 Dao : " + list);
+				gTop5List.add(g);
+				
 			}
+			System.out.println("Top5 Dao : " + gTop5List);
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -502,7 +506,7 @@ public class GalleryDao {
 			close(stmt);
 		}
 		
-		return list;
+		return gTop5List;
 	}
 
 

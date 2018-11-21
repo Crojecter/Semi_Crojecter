@@ -39,7 +39,7 @@ public class AlarmListServlet extends HttpServlet {
 		//System.out.println("Mid ser : "+ request.getParameter("Mid"));
 		
 		alarmList = as.selectAlarmList(mid);
-		System.out.println("AlarmListServlet alist : "+ alarmList);
+		//System.out.println("AlarmListServlet alist : "+ alarmList);
 		
 		String page = "";
 		

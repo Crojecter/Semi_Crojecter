@@ -1,12 +1,15 @@
 package com.kh.alarm.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.alarm.model.service.AlarmService;
 import com.kh.board.gallery.model.service.GalleryService;
 
 /**
@@ -31,12 +34,15 @@ public class AlarmUpdateServlet extends HttpServlet {
 		// 
 		int Aid = Integer.parseInt(request.getParameter("Aid"));
 		
-		int result = new GalleryService().updateAlarm(Aid);
+		int result = new AlarmService().updateAlarm(Aid);
+		/*System.out.println("Aid : "+ Aid);
+		System.out.println("Result : "+ result);*/
 		
 		if(result > 0) {
-			response.sendRedirect("gSelectOne.ga?bid="+Aid);
+			response.sendRedirect("aUpdate.al?Aid="+Aid);
+			System.out.println(Aid+ "알람 확인 완료");
 		} else {
-			request.setAttribute("msg", "삭제 실패!");
+			request.setAttribute("msg", "변경 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp");
 		}
 	}
