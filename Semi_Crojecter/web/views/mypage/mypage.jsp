@@ -35,9 +35,9 @@
 		text-align:center;
 		border-radius:5px;
 		height:40px;
-		width:120px;
+		width:100px;
 		font-size:15px;
-		margin:1px 10px 1px 10px;
+		margin:1px 20px 1px 10px;
 		}
 
 </style>
