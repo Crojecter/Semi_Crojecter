@@ -16,8 +16,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 </head>
-<body>
+<body style="height:100%">
 	<!-- 검색 프로토타입 -->
 	<div class="searchArea" align="center">
 		<select id="searchCondition" name="searchCondition">

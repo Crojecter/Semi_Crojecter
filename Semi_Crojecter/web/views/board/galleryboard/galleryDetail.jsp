@@ -134,7 +134,7 @@
 
 <title>갤러리 상세보기</title>
 </head>
-<body>
+<body style="height: 100%;">
    <%@ include file="../../common/header.jsp"%>
    
    <div class="row">

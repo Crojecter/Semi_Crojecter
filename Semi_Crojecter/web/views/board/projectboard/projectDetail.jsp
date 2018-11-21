@@ -228,10 +228,10 @@
          	<div class="row" align="center" id="btnArea3" style="margin-top: 10px;">
             	<% if(m != null && m.getMid() == j.getBwriter()){ // 글쓴이 본인인 경우 %>
             	<div class="col-md-6" style="padding:0;">
-            	<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gUpView.ga?bid='+<%=j.getBid()%>">수정하기</button>
+            	<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/jUpView.pr?bid='+<%=j.getBid()%>">수정하기</button>
             	</div>
             	<div class="col-md-6" style="padding:0;">
-            	<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/gDelete.ga?bid='+<%=j.getBid()%>">삭제하기</button>
+            	<button class="btn btnArea1" onclick="location.href='<%= request.getContextPath() %>/jDelete.pr?bid='+<%=j.getBid()%>">삭제하기</button>
             	</div>
             	<% } %>
             </div>
