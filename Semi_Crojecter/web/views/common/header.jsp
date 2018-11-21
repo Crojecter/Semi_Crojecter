@@ -216,11 +216,5 @@
 	</nav>
 	</div>
 	</div>
-	<!-- 리모컨 -->
-	<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
-	<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>
-	<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
-	</div>
-	<a name="bottom"></a>
 </body>
 </html>

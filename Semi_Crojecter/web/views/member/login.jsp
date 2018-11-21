@@ -43,8 +43,7 @@
 	.wrapper{
 		width:290px;
 		margin:0 auto;
-		margin-top:210px;
-		margin-bottom:220px;
+		
 		border:1px solid black;
 		border-radius:20px;
 		padding:10px 10px 10px 10px;
@@ -60,7 +59,10 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<div class="wrapper">
+	<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="wrapper">
 		<form action="<%=request.getContextPath()%>/login.do" method="post" id="login" name="login">
 			<table>
 				<tr>
@@ -128,6 +130,77 @@
 			<input type="hidden" name="url" value="<%= request.getHeader("referer") %>"/>
 		</form>
 	</div>
+	</div>
+	<div class="col-md-2"></div>
+	</div>
+	<%-- <div class="wrapper">
+		<form action="<%=request.getContextPath()%>/login.do" method="post" id="login" name="login">
+			<table>
+				<tr>
+					<td colspan="2" align="center"><label id="loginLabel">COPYRIGHT</label></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><img
+						src="<%=request.getContextPath()%>/resources/images/user.png"
+						class="loginImg" /> <input type="email" name="email" id="email"
+						class="loginInput" placeholder="User-email" style="width: 180px"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2"><label id="labelEmail" class="label" style="display:none;"></label></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><img
+						src="<%=request.getContextPath()%>/resources/images/pw.png"
+						class="loginImg" /> <input type="password" name="password" id="password"
+						class="loginInput" placeholder="****" style="width: 180px" /></td>
+				</tr>
+				<tr>
+					<td colspan="2"><label id="labelPwd" class="label" style="display:none;"></label></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center"><input type="button" onclick="goSubmit();"
+						class="loginInput submit" value="로그인" /></td>
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<div style="margin: 10px 10px 10px 10px;" class="fb-login-button"
+							data-max-rows="1" data-size="large" data-button-type="login_with"
+							data-show-faces="false" data-auto-logout-link="false"
+							data-use-continue-as="false"></div>
+					</td>
+				</tr>
+				<tr style="font-size: 12px;">
+					<td align="left"><a href="./searchPassword.jsp"
+						style="padding-left:20px; text-decoration: none;">내정보 찾기</a></td>
+					<td align=right><a href="./signUp.jsp"
+						style="padding-right:20px; text-decoration: none;">회원가입</a></td>
+				</tr>
+				<tr>
+					<td colspan="2"><hr /></td>
+				</tr>
+				<tr>
+					<td align="center" colspan="2" style="font-size:12px;">소셜 계정으로 회원가입 하기</td>
+				</tr>
+				<tr>
+					<td colspan="2"><br></td>
+				</tr>
+				<tr>
+					<td align="center" style="width:50%;">
+						<a id="kakaoLogin" onclick="loginWithKakao();" style="cursor:pointer">
+						<img class="sns_login" id="kakaoLoginBtn" src="../../resources/images/kakao_btn.png" width="68" height="69"/>
+						</a>
+					</td>
+					<td align="center" style="width:50%;">
+						<a id="googleLogin" onclick="onLoadGoogleCallback();" style="cursor:pointer">
+						<img class="sns_login" id="googleLoginBtn" src="../../resources/images/google-plus.png" width="68" height="69"/>
+						</a>
+					</td>
+				</tr>
+			</table>
+			<input type="hidden" name="url" value="<%= request.getHeader("referer") %>"/>
+		</form>
+	</div> --%>
 
 	<div id="fb-root"></div>
 	<%@ include file="../common/footer.jsp" %>
