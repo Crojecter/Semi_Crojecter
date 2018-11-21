@@ -18,9 +18,9 @@
 		</style> 
 	</head>
 	<body>
-		<a type="button" href="<%=request.getContextPath()%>/gTop5.ga">조회수 순위</a>
 		
 		<%@ include file="views/common/header.jsp" %>
+<!-- 		
 		<table align="center" id="galleryTop5">
 			<thead>	
 				<tr>
@@ -34,31 +34,11 @@
 					
 				</tr>
 			</thead>
-			<tbody>
-<%-- 
-<tr>
-				
-	<td id="top5Bid"></td>
-	<td id="top5Btitle"></td>
-	<td id="top5Bwriter"></td>
-	<td id="top5Bdate"></td>
-	<td id="top5Bcount"></td>
-	
-</tr>
---%>
-			<tr>
-			<%-- <% for (Gallery gal : gTop5List) { %> --%>
-					<td id="top5Bid"></td>
-					<td id="top5Btitle"></td>
-					<td id="top5Bwriter"></td>
-					<td id="top5Bdate"></td>
-					<td id="top5Bcount"></td>
-			<%-- <% } %> --%>
-			</tr>			 
+			<tbody id="galBody">	 
 			</tbody>
 		</table>	
 
-		<!-- 순위조회용 테스트 코드 -->
+		순위조회용 테스트 코드
 		<script>
 			// Top 5 계산 (TOP-N 분석)
 			$(document).ready(function(){
@@ -68,17 +48,19 @@
 					type : 'get',
 					success : function(data){
 						
-						$('#galleryTop5');
-						console.log(data)
+						var body = $('#galBody');
+						console.log(data);
 						for(var i in data){
+							var trContent = $('<tr>');
 							
-							$("#top5Bid").text(data[i].bid);
-							$("#top5Btitle").text(data[i].btitle);
-							$("#top5Bwriter").text(data[i].bwriter);
-							$("#top5Bdate").text(data[i].bdate);
-							$("#top5Bcount").text(data[i].bcount);
-							$("#top5Fname").text(data[i].fname);
+							trContent.append($("<td id='' class=''>").text(data[i].bid));
+							trContent.append($("<td id='' class=''>").text(data[i].btitle));
+							trContent.append($("<td id='' class=''>").text(data[i].bwriter));
+							trContent.append($("<td id='' class=''>").text(data[i].bdate));
+							trContent.append($("<td id='' class=''>").text(data[i].bcount));
+							trContent.append($("<td >").text(data[i].fname));
 							
+							body.append(trContent);
 						}
 					}, error : function(data){
 						console.log("top5 조회 실패!!");
@@ -87,114 +69,66 @@
 				
 			});
 		</script>
-		<!-- 슬라이드 -->
-<!-- 			// Top 5 계산 (TOP-N 분석)
-		$(function(){
-			$/ajax({
-				// top5 페이지가 로딩되기 전에 페이지를 볼수있게 하기위해서
-				// 서블릿을 통하는게 아닌 ajax로 표현한다.
-				url : '/crojecter/top5.bo',
-				type : 'get',
-				success : function(data){
-					$table = $('#galleryTop5 tbody');
-					for(var i in data){
-						console.log(data[i]);
-						var $trGallery = $('<tr>');
-						var $tdGalleryNo = $('<td>').text(data[i].bno);
-						var $tdGalleryTitle = $('<td>').text(data[i].btitle);
-						var $tdGalleryWriter = $('<td>').text(data[i].bwriter);
-						var $tdGalleryDate = $('<td>').text(data[i].bdate);
-						var $tdGalleryCount = $('<td>').text(data[i].bcount);
-						var $tdGalleryFname = $('<td>').text(data[i]).bcount;
-						sons
-						$trBoard.append($tdGalleryNo)
-								.append($tdGalleryTitle)
-								.append($tdGalleryWriter)
-								.append($tdGalleryDate)
-								.append($tdGalleryCount)
-								.append($tdGalleryFname);
+ -->
+
+		<!-- 테스트용 슬라이드 -->
+
+		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block;">
+		<!-- 테스트용 슬라이드 버튼 -->
+		<ul class="carousel-indicators">
+			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
+			<li data-target="#slideBody" data-slide-to="1" class=""></li>
+			<li data-target="#slideBody" data-slide-to="2" class=""></li>
+			<li data-target="#slideBody" data-slide-to="3" class=""></li>
+			<li data-target="#slideBody" data-slide-to="4" class=""></li>
+		</ul>
+		<!-- 테스트용 슬라이드 본문 -->
+			<div class="carousel-inner" id="top5test">
 						
-						$table.append($trGallery);
+			</div>
+		
+			<!-- 슬라이드 넘기기 -->	
+			<a class="carousel-control-prev" href="#slideBody" data-slide="prev">
+			<span class="carousel-control-prev-icon"></span></a>
+			<a class="carousel-control-next" href="#slideBody" data-slide="next">
+			<span class="carousel-control-next-icon"></span></a>
+		</div>
+	
+		
+		<script>
+			// Top 5 계산 (TOP-N 분석)
+			$(document).ready(function(){
+				$.ajax({
+					url : '/crojecter/gTop5.ga',
+					type : 'get',
+					success : function(data){
+
+						var body = $('#top5test');
+						console.log(data);
+						
+						for(var i in data){
+
+							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active' style='width: 1600px;'>") : $("<div class='carousel-item'  style='width:1600px'>");
+							var img = $('<img height="400px" width="50px">');
+							$(img).addClass('d-block w-100');
+							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname +'.jpg');
+							
+							top5Slide.append($(img));
+							top5Slide.append($("<div class='carousel-caption'><h5 class='top5Title'>").text(data[i].btitle));
+							//top5Slide.append($("<p class='top5Writer'>").text(data[i].bwriter));
+							
+							body.append(top5Slide);
+						}
+						
+					}, error : function(data){
+						console.log("top5 조회 실패!!");
 					}
-				},
-				error : function(data){
-					에러발생
-				}
+				});
+				
 			});
-		}); -->
+		</script>
 
-		<div id="demo1" class="carousel slide" data-ride="carousel" style="display: inline-block;">
-		  <ul class="carousel-indicators" style="z-index:1">
-		    <li data-target="#demo1" data-slide-to="0" class="active"></li>
-		    <li data-target="#demo1" data-slide-to="1" class=""></li>
-		    <li data-target="#demo1" data-slide-to="2" class=""></li>
-		    <li data-target="#demo1" data-slide-to="3" class="active"></li>
-		    <li data-target="#demo1" data-slide-to="4" class=""></li>
-		    <li data-target="#demo1" data-slide-to="5" class=""></li>
-		  </ul>
-		  <div class="carousel-inner">
-		    <div class="carousel-item active">
-		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg1.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>One</h3>
-		        <p>수달은 즐겁다</p>
-		      </div>   
-		    </div>
-		    <div class="carousel-item">
-		      <img id= "slide"  class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg2.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>Two</h3>
-		        <p>나는 안즐겁다</p>
-		      </div>   
-		    </div>
-		    <div class="carousel-item">
-		      <img id= "slide"  class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg3.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>Three</h3>
-		        <p>We love the Big Apple!</p>
-		      </div>   
-		    </div>
-		    <div class="carousel-item">
-		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg4.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>Four</h3>
-		        <p>Thank you, Chicago!</p>
-		      </div>   
-		    </div>  
-		    <div class="carousel-item">
-		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg5.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>Five</h3>
-		        <p>Thank you, Chicago!</p>
-		      </div>   
-		    </div>  
-		    <div class="carousel-item">
-		      <img id= "slide" class="d-block w-100" src="<%= request.getContextPath()%>/resources/images/slideSample/slideImg6.jpg" alt="" data-holder-rendered="true">
-		      <div class="carousel-caption">
-		        <h3>Six</h3>
-		        <p>Thank you, Chicago!</p>
-		      </div>   
-		    </div>
-			</div>
 		
-		
-		  <a class="carousel-control-prev" href="#demo1" data-slide="prev">
-		    <span class="carousel-control-prev-icon"></span>
-		  </a>
-		  <a class="carousel-control-next" href="#demo1" data-slide="next">
-		    <span class="carousel-control-next-icon"></span>
-		  </a>
-		</div>
-			<div style="background:violet; width: 300px; height: 300px;">
-				<h4> = 자주 사용한 태그 = </h4>
-			</div>
-		
-		</div>
-
-
-
-		<!-- 인기태그 -->
-
 
 		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -226,35 +160,7 @@
 			</div>		
 		</nav>
 		
-		
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
-				
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
-				<ul class="navbar-nav mr-auto"></ul>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="nav-item dropdown" type="submit">
-						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							최신순		
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
-						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
-						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
-						</div>
-					</button>
-				</form>
-			</div>		
-		</nav>
+
 		
 		<script>
 		function searchImg(){

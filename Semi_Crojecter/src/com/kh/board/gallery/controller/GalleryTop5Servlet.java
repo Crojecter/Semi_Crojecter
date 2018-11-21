@@ -44,6 +44,8 @@ public class GalleryTop5Servlet extends HttpServlet {
 			request.setAttribute("gTop5List", gTop5List);
 			
 		} */
+		response.setContentType("application/json; charset=UTF-8");
+		
 		Gson gson = new Gson();
 		gson.toJson(gTop5List, response.getWriter());
 		
