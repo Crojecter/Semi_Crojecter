@@ -17,7 +17,8 @@ public class Board implements Serializable{
 	private String mname;
 	
 	private String fname;
-	private String tag;
+	private String jTag;
+	private String gTag;
 	
 	public int getLikeCnt() {
 		return likeCnt;
@@ -38,12 +39,20 @@ public class Board implements Serializable{
 	private int likeCnt;
 	private int commCnt;
 	
-	public String getTag() {
-		return tag;
+	public String getjTag() {
+		return jTag;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setjTag(String jTag) {
+		this.jTag = jTag;
+	}
+
+	public String getgTag() {
+		return gTag;
+	}
+
+	public void setgTag(String gTag) {
+		this.gTag = gTag;
 	}
 
 	public String getFname() {

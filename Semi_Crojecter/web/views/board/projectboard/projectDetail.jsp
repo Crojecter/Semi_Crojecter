@@ -203,7 +203,7 @@
          	<% if(j.getMprofile() == null) { %>
          	<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
          	<% } else { %>
-         	<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/profileImg/<%=j.getMprofile()%>">
+         	<img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=j.getMprofile()%>">
          	<% }  %>
          	</div>
          
