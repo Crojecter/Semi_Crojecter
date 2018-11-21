@@ -12,41 +12,56 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
-.outer {
-	width: 1000px;
-	height: auto;
-	color: black;
-	margin: 100px;
-	padding: 20px;
-	border: 1px solid gray;
-}
+	.outer {
+		margin-top: 50px;
+		margin-bottom: 100px;
+		padding: 20px;
+		border: 1px solid lightgray;
+	}
+	
+	.bottomBtn {
+	      width: 10%;
+	      height: 25px;
+	      background: lightpink;
+	      border: 1px solid  lightpink;
+	      border-radius: 5px;
+	      color: white;
+	      float: right;
+	      margin-right:2px;
+	   }
 </style>
 
 <title>공지사항 상세보기</title>
 </head>
 <body>
 	<%@ include file="../../common/header.jsp"%>
-	<div class="outer">
-		<h1>공지사항</h1>
-		<hr />
-		<div>
-			<span style="font-size:18px;"><%= n.getBtitle() %></span>
-			<span style="float:right;"><%= n.getBdate() %></span>
-		</div>
-		<hr />
-		<p id="content"><%= n.getBcontent() %></p>
-		<br /><br /><hr />
-
-		<div align="center" style="display: inline;">
-			<% if(m != null && m.getMid() == n.getBwriter()) { // 글쓴이 본인인 경우 %>
-			<button onclick="location.href='<%= request.getContextPath() %>/nUpView.no?bid='+<%=n.getBid()%>">수정하기</button>
-			<button onclick="location.href='<%= request.getContextPath() %>/nDelete.no?bid='+<%=n.getBid()%>">삭제하기</button>
-			<br /> 
-			<% } %>
-			<input type="button" onclick="location.href='/crojecter/main.html'" value="목록" />
+	<div class="row">
+		<div class="col-md-3"></div>
+		<div class="col-md-6 outer">		
+			<h4>[공지사항]</h4>
+			<hr />
+			<div>
+				<span style="font-size:18px;"><%= n.getBtitle() %></span>
+				<span style="float:right;"><%= n.getBdate() %></span>
+			</div>
+			<hr />
+			<div  style="min-height: 400px">
+			<p id="content"><%= n.getBcontent() %></p>
+			</div>
+			<hr />
+	
+			<div class="">
+				<button class="bottomBtn" onclick="location.href='/crojecter/main.html'">목록</button>
+				<% if(m != null && m.getMid() == n.getBwriter()) { // 글쓴이 본인인 경우 %>
+				<button class="bottomBtn" onclick="location.href='<%= request.getContextPath() %>/nUpView.no?bid='+<%=n.getBid()%>">수정하기</button>
+				<button class="bottomBtn" onclick="location.href='<%= request.getContextPath() %>/nDelete.no?bid='+<%=n.getBid()%>">삭제하기</button>
+				<br /> 
+				<% } %>
+				
+			</div>
+		<div class="col-md-3"></div>
 		</div>
 	</div>
-
 	<%@ include file="../../common/footer.jsp"%>
 </body>
 </html>
