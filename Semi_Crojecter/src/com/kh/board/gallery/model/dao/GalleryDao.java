@@ -570,9 +570,6 @@ public class GalleryDao {
 		return result;
 	}
 
-
-
-
 	public ArrayList<Gallery> searchGallery(Connection con, String condition, String keyword) {
 		
 		ArrayList<Gallery> searchGalleryList = null;

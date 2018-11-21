@@ -65,8 +65,9 @@ body {
 			</div>
 			<div class="col-md-2">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
-				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">				
-					<img id="titleImg" style="border: white;"></div>
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">					
+					<img id="titleImg">
+					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				<select class="sidebar" name="category" id="category">
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
@@ -95,6 +96,8 @@ body {
 			request.getRequestDispatcher("../member/login.jsp").forward(request, response);
 		}
 	%>
+	
+	
 
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -145,7 +148,6 @@ body {
 			
 			$('#thumbnailArea').click(() => {
 				$('#thumbnailInput').click();
-				//$('#thumbnailLabel').hide();
 			});
 		});
 		function LoadImg(value) {
@@ -153,7 +155,8 @@ body {
 				var reader = new FileReader();
 				
 				reader.onload = function(e){					
-					$('#titleImg').attr('src', e.target.result);	
+					$('#titleImg').attr('src', e.target.result);
+					$('#thumbnailLabel').hide();
 				}
 				
 				reader.readAsDataURL(value.files[0]);
@@ -183,6 +186,7 @@ body {
 		
 		</script>
 
-<%@ include file="../../common/footer.jsp" %>
+		<%@ include file="../../common/footer.jsp" %>
+
 </body>
 </html>

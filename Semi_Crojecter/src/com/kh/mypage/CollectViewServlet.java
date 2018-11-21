@@ -37,6 +37,8 @@ public class CollectViewServlet extends HttpServlet {
 		
 		list = ls.searchLikeit(mid);
 		
+		System.out.println("collect list : " + list);
+		
 		if(list != null){
 			
 			request.setAttribute("list", list);

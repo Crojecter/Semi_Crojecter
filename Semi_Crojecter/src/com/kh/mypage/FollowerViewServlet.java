@@ -36,6 +36,7 @@ public class FollowerViewServlet extends HttpServlet {
 		int mid = Integer.parseInt(request.getParameter("mid"));
 
 		list = fs.searchFollower(mid);
+		System.out.println("list : " + list);
 		
 		if(list != null){
 			

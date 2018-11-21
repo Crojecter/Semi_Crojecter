@@ -1,4 +1,4 @@
-package com.kh.mypage;
+package com.kh.board.common.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.follow.model.service.FollowService;
-import com.kh.follow.model.vo.Follow;
+import com.kh.board.common.model.service.BoardService;
+import com.kh.board.common.model.vo.Board;
 
 /**
- * Servlet implementation class FollowingViewServlet
+ * Servlet implementation class SearchAllServlet
  */
-@WebServlet("/followingView.do")
-public class FollowingViewServlet extends HttpServlet {
+@WebServlet("/search.all")
+public class SearchAllServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowingViewServlet() {
+    public SearchAllServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +31,22 @@ public class FollowingViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Follow> list = null;
-		FollowService fs = new FollowService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
+
+		ArrayList<Board> bList = null;
+		BoardService bs = new BoardService();
+		String keyword = request.getParameter("keyword");
+		System.out.println(keyword);
 		
-		list = fs.searchFollowing(mid);
-		if(list != null){
-						
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/mypage/followingList.jsp").forward(request, response);
-			
+		bList = bs.searchAll(keyword);
+		
+		if(bList != null) {
+			System.out.println("성공 bList : " + bList);
+			request.setAttribute("bList", bList);
+			request.getRequestDispatcher("views/board/searchAll.jsp").forward(request, response);
 		} else {
-			
-			request.setAttribute("msg", "조회 실패!");
-	
+			System.out.println("실패");
 		}
+		
 	}
 
 	/**
