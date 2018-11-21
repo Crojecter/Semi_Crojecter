@@ -30,8 +30,8 @@
 			<td id="name"><%=f1.getFollowname() %></td>
 			<td>
 				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> 
-				<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
-				<p id="p-follow" style="color: black">언팔로우</p></div>
+				<div class="btn btn-follow active" onclick="switchfollow(this);">
+				<p class="p-follow" style="color: black">언팔로우</p></div>
 			</td>
 		</tr>
 		<% } %>
@@ -50,11 +50,11 @@
 			}, 
 			success : function(data){
 				if(data == 'insert') {
-					$("#btnFollow").addClass('active');
-					$('#p-follow').html('언팔로우');
+					$(obj).addClass('active');
+					$(obj).children('p[class="p-follow"]').html('언팔로우');
 				} else if (data == 'delete') {
-					$("#btnFollow").removeClass('active');
-					$('#p-follow').html('팔로우');
+					$(obj).removeClass('active');
+					$(obj).children('p[class="p-follow"]').html('팔로우');
 				} else {
 					console.log('btnFollow() 에러 발생!');
 				}

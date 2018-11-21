@@ -9,6 +9,7 @@ public class Follow implements Serializable {
 	private int followid;
 	private String followername;
 	private String followname;
+	private String chk;
 	
 	public Follow() {
 		super();
@@ -63,12 +64,18 @@ public class Follow implements Serializable {
 		this.followname = followname;
 	}
 
+	public String getChk() {
+		return chk;
+	}
+
+	public void setChk(String chk) {
+		this.chk = chk;
+	}
+
 	@Override
 	public String toString() {
 		return "Follow [fid=" + fid + ", followerid=" + followerid + ", followid=" + followid + ", followername="
-				+ followername + ", followname=" + followname + "]";
+				+ followername + ", followname=" + followname + ", chk=" + chk + "]";
 	}
-	
 
-	
 }
