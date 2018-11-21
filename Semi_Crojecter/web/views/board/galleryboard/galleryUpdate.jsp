@@ -43,6 +43,10 @@ body {
 	height: 100%;
 	border: none;
 }
+
+img {
+	max-width: 
+}
 </style>
 </head>
 
@@ -68,6 +72,7 @@ body {
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">					
 					<img id="titleImg">
 					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
+				</div>
 				<select class="sidebar" name="category" id="category">
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>

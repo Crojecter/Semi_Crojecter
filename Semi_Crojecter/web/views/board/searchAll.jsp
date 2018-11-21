@@ -25,25 +25,36 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 		<h3 style="text-align:center;">갤러리</h3>
-		<br />
-		<% for (Board b : bList) { %>
+		<br />		<% for (Board b : bList) { %>
 			<% if(b.getBtype() == 2) { %>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= b.getBid() %>">
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>"
-			alt="Card image cap" class="gallery"></a>
+			<% if(b.getFname() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>">
+			<% } else { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+			<% } %>
+			</a>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= b.getBtitle() %></a></h5>
-					<p class="card-text"><a href=""><%= b.getTag() %></a></p>
-					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= b.getBcount() %>
-					</button>
-					<button onclick="addLike();" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1">좋아요<%-- <%= b.getGlike() %> --%></button>
-					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</button>
+					<% if(b.getTag() != null) {
+						String tags[] = b.getTag().split(",");
+						for(int i = 0; i < tags.length; i++) { %>
+						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
+						<% }
+					} else {
+						
+					} %>
+					<br>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= b.getBcount() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= b.getLikeCnt() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= b.getCommCnt() %>
+					</label>
 				</div>
 			</div>
 			<% count ++; } %>
@@ -59,20 +70,31 @@
 
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= b.getBid() %>">
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>"
-			alt="Card image cap" class="gallery"></a>
+			<% if(b.getFname() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>">
+			<% } else { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+			<% } %></a>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= b.getBtitle() %></a></h5>
-					<p class="card-text"><a href=""><%= b.getTag() %></a></p>
-					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= b.getBcount() %>
-					</button>
-					<button onclick="addLike();" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1">좋아요<%-- <%= b.getGlike() %> --%></button>
-					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</button>
+					<% if(b.getTag() != null) {
+						String tags[] = b.getTag().split(",");
+						for(int i = 0; i < tags.length; i++) { %>
+						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
+						<% }
+					} else {
+						
+					} %>
+					<br>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= b.getBcount() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= b.getLikeCnt() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= b.getCommCnt() %>
+					</label>
 				</div>
 			</div>
 			<% count ++; } %>
@@ -99,6 +121,7 @@
 		<% if(count == 0) { %>
 		<h4 style="margin-left:30px;">공지사항 검색결과가 없습니다.</h4>
 		<% } else { count = 0; } %>
+		<hr style="height:3px; background:gray;"/>
 	<% } %>
 	</div>
 	<div class="col-md-2"></div>

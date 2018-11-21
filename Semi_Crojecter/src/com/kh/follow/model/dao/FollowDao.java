@@ -160,6 +160,7 @@ public class FollowDao {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mid);
+			pstmt.setInt(2, mid);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Follow>();
@@ -170,6 +171,7 @@ public class FollowDao {
 				
 				f.setFollowerid(rset.getInt("followerid"));
 				f.setFollowername(rset.getString("mname"));
+				f.setChk(rset.getString("chk"));
 				
 				list.add(f);
 			} 

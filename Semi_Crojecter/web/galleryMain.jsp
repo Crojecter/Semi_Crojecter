@@ -18,46 +18,7 @@
 		</style> 
 	</head>
 	<body>
-		<a type="button" href="<%=request.getContextPath()%>/gTop5.ga">조회수 순위</a>
-		
 		<%@ include file="views/common/header.jsp" %>
-		<table align="center" id="galleryTop5">
-			<thead>	
-				<tr>
-
-					<th width="70px">글번호</th>
-					<th width="150px">글제목</th>
-					<th width="70px">작성자</th>
-					<th width="70px">작성일 </th>
-					<th width="70px">조회수</th>
-					<th width="70px">파일명</th>		
-					
-				</tr>
-			</thead>
-			<tbody>
-<%-- 
-<tr>
-				
-	<td id="top5Bid"></td>
-	<td id="top5Btitle"></td>
-	<td id="top5Bwriter"></td>
-	<td id="top5Bdate"></td>
-	<td id="top5Bcount"></td>
-	
-</tr>
---%>
-			<tr>
-			<%-- <% for (Gallery gal : gTop5List) { %> --%>
-					<td id="top5Bid"></td>
-					<td id="top5Btitle"></td>
-					<td id="top5Bwriter"></td>
-					<td id="top5Bdate"></td>
-					<td id="top5Bcount"></td>
-			<%-- <% } %> --%>
-			</tr>			 
-			</tbody>
-		</table>	
-
 		<!-- 순위조회용 테스트 코드 -->
 		<script>
 			// Top 5 계산 (TOP-N 분석)
@@ -88,40 +49,6 @@
 			});
 		</script>
 		<!-- 슬라이드 -->
-<!-- 			// Top 5 계산 (TOP-N 분석)
-		$(function(){
-			$/ajax({
-				// top5 페이지가 로딩되기 전에 페이지를 볼수있게 하기위해서
-				// 서블릿을 통하는게 아닌 ajax로 표현한다.
-				url : '/crojecter/top5.bo',
-				type : 'get',
-				success : function(data){
-					$table = $('#galleryTop5 tbody');
-					for(var i in data){
-						console.log(data[i]);
-						var $trGallery = $('<tr>');
-						var $tdGalleryNo = $('<td>').text(data[i].bno);
-						var $tdGalleryTitle = $('<td>').text(data[i].btitle);
-						var $tdGalleryWriter = $('<td>').text(data[i].bwriter);
-						var $tdGalleryDate = $('<td>').text(data[i].bdate);
-						var $tdGalleryCount = $('<td>').text(data[i].bcount);
-						var $tdGalleryFname = $('<td>').text(data[i]).bcount;
-						sons
-						$trBoard.append($tdGalleryNo)
-								.append($tdGalleryTitle)
-								.append($tdGalleryWriter)
-								.append($tdGalleryDate)
-								.append($tdGalleryCount)
-								.append($tdGalleryFname);
-						
-						$table.append($trGallery);
-					}
-				},
-				error : function(data){
-					에러발생
-				}
-			});
-		}); -->
 
 		<div id="demo1" class="carousel slide" data-ride="carousel" style="display: inline-block;">
 		  <ul class="carousel-indicators" style="z-index:1">
@@ -200,36 +127,6 @@
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewImg">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewSound">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewText">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewVidio">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
-				
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
-				<ul class="navbar-nav mr-auto"></ul>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="nav-item dropdown" type="submit">
-						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							최신순		
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
-						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
-						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
-						</div>
-					</button>
-				</form>
-			</div>		
-		</nav>
-		
-		
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
 			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
 			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
@@ -282,14 +179,7 @@
 		
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>
-
-		<!-- 리모컨 -->
-		<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
-		<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>
-		<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
-		</div>
-		<a name="bottom"></a>
-	<%@ include file="views/common/footer.jsp" %>
+		<%@ include file="views/common/footer.jsp" %>
 </body>
 
 </html>
