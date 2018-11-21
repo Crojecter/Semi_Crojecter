@@ -1,8 +1,9 @@
 package com.kh.board.common.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Board {
+public class Board implements Serializable{
 	private int bid; 
 	private int btype;
 	private String btitle;

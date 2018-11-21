@@ -80,5 +80,31 @@ public class BoardDao {
 		
 		return bList;
 	}
+
+	public String searchLikeIt(Connection con, int bid, int btype) {
+
+		String result = null;
+		
+		String sql = prop.getProperty("searchLikeIt");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			pstmt.setInt(2, btype);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				result = rset.getString(1);
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		}
+		
+		return result;
+	}
 	
 }

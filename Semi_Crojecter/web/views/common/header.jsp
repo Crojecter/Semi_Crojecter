@@ -171,7 +171,7 @@
 						<!-- 프로필 -->
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="<%= request.getContextPath()%>#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="<%= request.getContextPath()%>/resources/images/defaultImg.jpg" style="height: 30px;" class="rounded-circle" alt="Cinque Terre">
+							<img src="<%= request.getContextPath()%>/resources/images/user.png" style="height: 30px;" class="rounded-circle" alt="Cinque Terre">
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
@@ -184,7 +184,7 @@
 							
 							</script>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
+							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">:<%= m.getMhodu() %>개</a>
 						</div>
 						<li>
 						<!-- 글쓰기 -->
