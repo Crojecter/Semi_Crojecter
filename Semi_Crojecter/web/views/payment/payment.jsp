@@ -12,40 +12,58 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
+<!-- 폰트 설정 -->
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
+	rel="stylesheet">
 <style>
+	
+	body {
+	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
+	}
+	
 	.payBtn{
-		width:300px;
-		height:180px;
-		color:white;
+		width:240px;
+		height:150px;
+		color: black;
 		text-align:center;
-		border-radius:5px;
+		border-radius:10px;
 		background-color:#30B2A0;
 		border:1px solid #30B2A0;
+		margin: 5px;
 	}
 	p{
 		margin:10px 10px 10px 10px;
 	}
 	.wrapper{
-		width:600px;
+		width:800px;
 		margin:0 auto;
-		margin-top:120px;
-		margin-bottom:120px;
+		margin-top:50px;
+		margin-bottom:150px;
+		background-color: rgba( 255, 255, 255, 0.5 );
+		padding: 50px;
+	}
+	
+	button:hover { 
+    	background-color: orange;
+    	border:1px solid orange;
+    	color: white;
 	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
 	<div class="wrapper">
-		<p style="font-size:50px; color:orange; text-align:center;">호두 충전하기</p>
-		<p style="font-size:25px;">크리에이터들의 창작활동에 후원을 할 수 있는 호두를 충전하세요.</p>
-		<table>
+		<p style="font-size:30px; color: #ff9900; text-align:center;">호두 충전하기</p>
+		<p style="font-size:20px; text-align:center">&nbsp;&nbsp;크리에이터들의 창작활동에 후원을 할 수 있는 호두를 충전하세요.</p>
+		<table align="center">
 			<tr>
-				<td><button class="payBtn" id="pay5500" onclick="pay(100, 50);" style="font-size:30px;">50알(5,550원)</button></td>
-				<td><button class="payBtn" id="pay11000" onclick="pay(200, 100);" style="font-size:30px;">100알(11,000원)</button></td>
+				<td><button class="payBtn" id="pay5500" onclick="pay(100, 50);" style="font-size:24px;">50알(5,550원)</button></td>
+				<td><button class="payBtn" id="pay11000" onclick="pay(200, 100);" style="font-size:24px;">100알(11,000원)</button></td>
 			</tr>
 			<tr>
-				<td><button class="payBtn" id="pay33000" onclick="pay(300, 300);" style="font-size:30px;">300알(33,000원)</button></td>
-				<td><button class="payBtn" id="pay55000" onclick="pay(400, 500);" style="font-size:30px;">500알(55,000원)</button></td>
+				<td><button class="payBtn" id="pay33000" onclick="pay(300, 300);" style="font-size:24px;">300알(33,000원)</button></td>
+				<td><button class="payBtn" id="pay55000" onclick="pay(400, 500);" style="font-size:24px;">500알(55,000원)</button></td>
 			</tr>
 		</table>
 	</div>

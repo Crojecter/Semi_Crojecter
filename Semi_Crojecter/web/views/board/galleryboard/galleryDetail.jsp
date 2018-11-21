@@ -17,6 +17,7 @@
 <style>  
 
 	body {
+		font-family: 'Nanum Gothic', sans-serif;
 		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
 	}
 	
@@ -35,6 +36,8 @@
    
    .title {
       padding-top: -5px;
+      margin-top: 5px;
+      font-size: 18px;
    }
    
    .count {
@@ -64,8 +67,7 @@
       height: 50px;
       border: 1px solid lightgray;
       padding-top:15px;
-      padding-left:5px;
-   
+      padding-left:5px; 
    }
    
    .btnArea1 {
@@ -129,7 +131,7 @@
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
          
          <div class="row titleArea" style="margin: 0; background: white;">
-            <div class="col-md-10"><h3 class="title" style="margin-top: 2px;"><%= g.getBtitle() %></h3></div>
+            <div class="col-md-10"><p class="title"><%= g.getBtitle() %></p></div>
             <div class="col-md-2 count">(조회수 :  <%= g.getBcount() %>)</div>
          </div>
          
@@ -191,8 +193,7 @@
          
       </div>
       
-      <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
-      
+      <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">      
          <div align="center">
          <% if(g.getMprofile() == null) { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
@@ -291,9 +292,13 @@
          var ccontent = $(obj).parent().siblings().children('textarea').val();
          var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
          
-         location.href='/crojecter/cInsert.co?bid=' + bid
-               + '&btype=' + btype + '&cwriter=' + cwriter
-               + '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
+         if(ccontent.length == 0){
+            alert("댓글 내용을 입력해 주세요.");
+         } else {
+            location.href='/crojecter/cInsert.co?bid=' + bid
+                + '&btype=' + btype + '&cwriter=' + cwriter
+                + '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
+         }
       }
       
       // 댓글 수정

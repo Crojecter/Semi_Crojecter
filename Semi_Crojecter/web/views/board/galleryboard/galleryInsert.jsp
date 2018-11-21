@@ -18,6 +18,7 @@
 <style>
 body {
 	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
 }
 
 .sidebar {
@@ -32,10 +33,15 @@ body {
 	text-align: center;
 }
 
-#insertBtn {
+.uploadBtn {
 	width: 100%;
-	height: 50px;
-	font-size: 20px;
+    height: 50px;
+    border: 1.5px solid lightblue;
+    background: lightblue;
+    color: black;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
 }
 
 #thumbnailArea {
@@ -79,15 +85,17 @@ body {
 					onchange="LoadImg(this)">
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-6" style="background: white; padding-top: 10px; 
+				 background-color: rgba( 255, 255, 255, 0.5 ); margin-bottom: 100px;">
 				<input type="text" class="form-control" id="title" name="title"
 					placeholder="제목을 입력하세요.">
 				<textarea id="summernote" name="content"></textarea>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2"
+				 style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
 				<input type="hidden" id="userId" name="userId"
 					value="<%=m.getMid()%>" />
-				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">					
+				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea" style="background: white;">					
 					<img id="titleImg">
 					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
 				</div>
@@ -108,7 +116,7 @@ body {
 				</select> 
 				<input type="text" name="tags" placeholder="태그를 입력해주세요!" 
 				data-role="tagsinput" id="tagsinput" class="tagsinput">
-				<button class="btn btn-success" id="insertBtn"
+				<button class="uploadBtn" id="insertBtn"
 					onclick="insertGallery();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
