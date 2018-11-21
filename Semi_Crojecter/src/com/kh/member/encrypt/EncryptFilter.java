@@ -1,6 +1,7 @@
 package com.kh.member.encrypt;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -35,8 +36,7 @@ public class EncryptFilter implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
-		HttpServletRequest h_request =
-				(HttpServletRequest)request;
+		HttpServletRequest h_request = (HttpServletRequest)request;
 		
 		EncryptWrapper ew = new EncryptWrapper(h_request);
 

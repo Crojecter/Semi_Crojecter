@@ -43,9 +43,9 @@ public class UpdateMemberServlet extends HttpServlet {
 		m.setMemail(memail);
 		m.setMpwd(mpwd);
 		
-		ms.updateMember(m);
+		int result = ms.updateMember(m);
 		
-		if(m != null){
+		if(result > 0){
 			System.out.println("회원정보 수정 성공!");
 		} else {
 			System.out.println("회원정보 수정 실패");

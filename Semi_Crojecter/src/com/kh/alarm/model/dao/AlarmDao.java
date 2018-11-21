@@ -69,10 +69,11 @@ public class AlarmDao{
 			
 			alarmList = new ArrayList<Alarm>();
 			//
-			System.out.println(rset.next());
+			//System.out.println(rset.next());
 			while(rset.next()){
 				Alarm al = new Alarm();
 				
+				al.setAid(rset.getInt("AID"));
 				al.setMid(rset.getInt("MID"));
 				al.setAMsg(rset.getString("AMSG"));
 				al.setADate(rset.getDate("ADATE"));
@@ -81,7 +82,7 @@ public class AlarmDao{
 				
 				
 				alarmList.add(al);
-				System.out.println("selectAlarmList dao : "+ alarmList);
+				//System.out.println("selectAlarmList dao : "+ alarmList);
 			}
 			
 		} catch (SQLException e) {
@@ -95,6 +96,29 @@ public class AlarmDao{
 		}
 		
 		return alarmList;
+	}
+
+	public int updateAlarm(Connection con, int aid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updateAlarm");
+		//System.out.println(sql);
+		try {
+			pstmt = con.prepareStatement(sql);
+			//System.out.println(sql);
+			pstmt.setInt(1, aid);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	
 	}
 
 }
