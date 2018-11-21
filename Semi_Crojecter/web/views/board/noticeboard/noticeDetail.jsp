@@ -12,23 +12,23 @@
 <script
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
-.outer {
-	margin-top: 50px;
-	margin-bottom: 100px;
-	padding: 20px;
-	border: 1px solid lightgray;
-}
-
-.bottomBtn {
-      width: 10%;
-      height: 25px;
-      background: lightpink;
-      border: 1px solid  lightpink;
-      border-radius: 5px;
-      color: white;
-      float: right;
-      margin-right:2px;
-   }
+	.outer {
+		margin-top: 50px;
+		margin-bottom: 100px;
+		padding: 20px;
+		border: 1px solid lightgray;
+	}
+	
+	.bottomBtn {
+	      width: 10%;
+	      height: 25px;
+	      background: lightpink;
+	      border: 1px solid  lightpink;
+	      border-radius: 5px;
+	      color: white;
+	      float: right;
+	      margin-right:2px;
+	   }
 </style>
 
 <title>공지사항 상세보기</title>
