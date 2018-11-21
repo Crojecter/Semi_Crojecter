@@ -15,23 +15,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
+
+	#btnFollow {
+	
+	background:lightblue;
+	font-weight:bold;
+	width: 130px;
+	height: 35px;
+	margin-bottom:20px;
+	}
+	
 	#name {
-		color:black
+	
+	color:darkgray;
+	padding-right:50px;
+	padding-left:100px;
+	font-size:20px;
+	padding-top:30px;
+	
+	}
+	
+	.form {
+	
+
+	margin-bottom:20px;
+
+	}
+	
+	.table {
+	
+	width:50%;
+	
+	}
+	
+	.set {
+	
+	border:solid 1px red;
+	
 	}
 </style>
 </head>
 <body>
-<%@ include file="../mypage/common/mypageHeader.jsp"%>
+<%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/followingView.do" method="post">
 <div class="followList">
-	<table>  
+	<table class="table">  
 		<% for(Follow f1 : list){ %>
-		<tr>
-			<td id="name"><%=f1.getFollowname() %></td>
+		<tr class="set">
+			<td id="name" name="name"><%=f1.getFollowname() %></td>
 			<td>
-				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> 
-				<div class="btn btn-follow active" onclick="switchfollow(this);">
-				<p class="p-follow" style="color: black">언팔로우</p></div>
+        
+				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> <br>
+				<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
+				<p id="p-follow" style="color: black">언팔로우</p></div>
+
 			</td>
 		</tr>
 		<% } %>

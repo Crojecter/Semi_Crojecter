@@ -16,11 +16,10 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>  
 
-   body {
-      font-family: 'Nanum Gothic', sans-serif;
-      background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
-   }
-   
+	body {
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}
+	
    .titleArea {
       width: 100%;
       height: 34px;
@@ -36,8 +35,6 @@
    
    .title {
       padding-top: -5px;
-      margin-top: 5px;
-      font-size: 18px;
    }
    
    .count {
@@ -67,7 +64,8 @@
       height: 50px;
       border: 1px solid lightgray;
       padding-top:15px;
-      padding-left:5px; 
+      padding-left:5px;
+   
    }
    
    .btnArea1 {
@@ -108,7 +106,7 @@
    
    .content img {
       display: inline-block;
-       vertical-align: middle;
+  	  vertical-align: middle;
       max-height: 100%;
       max-width: 100%;
    }
@@ -124,14 +122,14 @@
       <div class="col-md-2"></div>
 
       <div class="col-md-6" 
-            style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
-            margin-bottom: 20px;">
+      	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
+      	   margin-bottom: 20px;">
             
          <%if(m != null)  {  %>
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
          
          <div class="row titleArea" style="margin: 0; background: white;">
-            <div class="col-md-10"><p class="title"><%= g.getBtitle() %></p></div>
+            <div class="col-md-10"><h3 class="title" style="margin-top: 2px;"><%= g.getBtitle() %></h3></div>
             <div class="col-md-2 count">(조회수 :  <%= g.getBcount() %>)</div>
          </div>
          
@@ -193,7 +191,8 @@
          
       </div>
       
-      <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">      
+      <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
+      
          <div align="center">
          <% if(g.getMprofile() == null) { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
@@ -292,13 +291,9 @@
          var ccontent = $(obj).parent().siblings().children('textarea').val();
          var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
          
-         if(ccontent.length == 0){
-	         alert("댓글 내용을 입력해 주세요.");
-         } else {
-        	 location.href='/crojecter/cInsert.co?bid=' + bid
-             	+ '&btype=' + btype + '&cwriter=' + cwriter
-             	+ '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
-         }
+         location.href='/crojecter/cInsert.co?bid=' + bid
+               + '&btype=' + btype + '&cwriter=' + cwriter
+               + '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
       }
       
       // 댓글 수정
@@ -436,15 +431,15 @@
    
    </script>
    <% } %> <% } else { // 비회원 %>
-   <script>
-      $('button').click(function(){
-         alert("로그인이 필요한 기능입니다.");
-      });
-      $('.btn').click(function(){
-         alert("로그인이 필요한 기능입니다.");
-      });
-   </script>
-   <% } %>
+	<script>
+		$('button').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
+		$('.btn').click(function(){
+			alert("로그인이 필요한 기능입니다.");
+		});
+	</script>
+	<% } %>
    
    <%@ include file="../../common/footer.jsp"%>
    

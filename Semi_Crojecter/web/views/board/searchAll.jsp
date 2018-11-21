@@ -40,7 +40,7 @@
 					<% if(b.getTag() != null) {
 						String tags[] = b.getTag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
-						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>"><%= tags[i] %></a>
+						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
 						<% }
 					} else {
 						
@@ -50,25 +50,13 @@
 					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= b.getBcount() %>
 					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><span class="likeit"></span>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= b.getLikeCnt() %>
 					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;">수
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= b.getCommCnt() %>
 					</label>
 				</div>
 			</div>
-			<script>
-				$(document).ready(function(){
-					$.ajax({
-						data : { bid : <%= b.getBid() %>, btype : <%= b.getBtype() %> },
-						url : "/crojecter/search.like",
-						success : function(data){
-							console.log("성공 : " + data);
-							$(".likeit").text(data);
-						}
-					})
-				})
-			</script>
 			<% count ++; } %>
 		<% } %>
 		<% if(count == 0) { %>
@@ -92,7 +80,7 @@
 					<% if(b.getTag() != null) {
 						String tags[] = b.getTag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
-						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>"><%= tags[i] %></a>
+						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
 						<% }
 					} else {
 						
@@ -102,25 +90,13 @@
 					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= b.getBcount() %>
 					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><span class="likeit"></span>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= b.getLikeCnt() %>
 					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;">수
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= b.getCommCnt() %>
 					</label>
 				</div>
 			</div>
-			<%-- <script>
-				$(document).ready(function(){
-					$.ajax({
-						data : { bid : <%= b.getBid() %>, btype : <%= b.getBtype() %> },
-						url : "/crojecter/search.like",
-						success : function(data){
-							//console.log("성공 : " + data);
-							$(".likeit").text(data);
-						}
-					})
-				})
-			</script> --%>
 			<% count ++; } %>
 		<% } %>
 		<% if(count == 0) { %>
@@ -145,6 +121,7 @@
 		<% if(count == 0) { %>
 		<h4 style="margin-left:30px;">공지사항 검색결과가 없습니다.</h4>
 		<% } else { count = 0; } %>
+		<hr style="height:3px; background:gray;"/>
 	<% } %>
 	</div>
 	<div class="col-md-2"></div>
