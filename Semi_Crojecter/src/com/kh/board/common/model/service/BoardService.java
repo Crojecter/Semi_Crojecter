@@ -23,4 +23,13 @@ public class BoardService {
 		return bList;
 	}
 
+	public String searchLikeIt(int bid, int btype) {
+
+		Connection con = getConnection();
+		
+		String result = bDao.searchLikeIt(con, bid, btype);
+		
+		return result;
+	}
+
 }

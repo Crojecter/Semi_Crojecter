@@ -18,36 +18,6 @@
 	</head>
 	<body>
 		<%@ include file="views/common/header.jsp" %>
-		<table align="center" id="galleryTop5">
-			<thead>	
-				<tr>
-
-					<th width="70px">글번호</th>
-					<th width="150px">글제목</th>
-					<th width="70px">작성자</th>
-					<th width="70px">작성일 </th>
-					<th width="70px">조회수</th>
-					<th width="70px">파일명</th>		
-					<a type="button" href="<%=request.getContextPath()%>/gTop5.ga">조회수 순위</a>
-				</tr>
-			</thead>
-			<tbody>
-<%-- 			
-			<% for(Gallery ga : gTop5List){ %>
-				<tr id="noticeTR">				
-					<td id="noticeTD"><%= ga.getBid() %></td>
-					<td id="noticeTD"><%= ga.getBtitle() %></td>
-					<td id="noticeTD"><%= ga.getBwriter() %></td>
-					<td id="noticeTD"><%= ga.getBdate() %></td>
-					<td id="noticeTD"><%= ga.getBcount() %></td>
-					<td id="noticeTD"><%= ga.getFname() %></td>
-				</tr>
-			<% } %>
- --%>
-			</tbody>
-		</table>	
-
-
 		<!-- 순위조회용 테스트 코드 -->
 		<script>
 			// Top 5 계산 (TOP-N 분석)
