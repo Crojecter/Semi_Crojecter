@@ -267,6 +267,31 @@ private Properties prop = new Properties();
 		return list;
 	}
 
+	public int updateCount(Connection con, int bid) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String sql = prop.getProperty("updateCount");
+		
+		try{
+			
+			pstmt = con.prepareStatement(sql);
+				
+			pstmt.setInt(1, bid);
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println("updateCount result : "  + result);
+			
+		} catch (SQLException e) {
+			
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
 
 
 

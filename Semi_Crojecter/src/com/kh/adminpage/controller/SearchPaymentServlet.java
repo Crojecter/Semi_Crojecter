@@ -31,10 +31,8 @@ public class SearchPaymentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 검색 카테고리
+
 		String condition = request.getParameter("con");
-						
-		// 검색 키워드
 		String keyword = request.getParameter("keyword");
 						
 		ArrayList<Payment> plist = new ArrayList<Payment>();
@@ -48,7 +46,7 @@ public class SearchPaymentServlet extends HttpServlet {
 		if (plist != null) {
 							
 			page = "views/adminpage/paymentlistView.jsp";
-			request.setAttribute("mlist", plist);
+			request.setAttribute("plist", plist);
 							
 		} else {
 							

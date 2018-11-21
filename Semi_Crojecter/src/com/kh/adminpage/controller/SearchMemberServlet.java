@@ -31,10 +31,8 @@ public class SearchMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// 검색 카테고리
+
 		String condition = request.getParameter("con");
-				
-		// 검색 키워드
 		String keyword = request.getParameter("keyword");
 				
 		ArrayList<Member> mlist = new ArrayList<Member>();

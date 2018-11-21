@@ -110,6 +110,50 @@ public class MemberDao {
 		return result;
 		
 	}
+	
+	public Member selectMember(Connection con, int mid) {
+		
+		Member result = null;
+		
+		String sql = prop.getProperty("selectMemberbyMid");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, mid);
+			
+			rset = pstmt.executeQuery();
+
+			if(rset.next()) {
+				
+				result = new Member();
+				
+				result.setMid(rset.getInt(1));
+				result.setMprofile(rset.getString(2));
+				result.setMemail(rset.getString(3));
+				result.setMpwd(rset.getString(4));
+				result.setMname(rset.getString(5));
+				result.setMdate(rset.getDate(6));
+				result.setMhodu(rset.getInt(7));
+				result.setMsid(rset.getInt(8));
+				
+			}
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return result;
+		
+	}
 
 	public int selectEmail(Connection con, Member m) {
 
@@ -180,20 +224,15 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setString(1, m.getMpwd());
-			pstmt.setString(2, m.getMprofile());
-			pstmt.setInt(3, m.getMid());
+			pstmt.setInt(1, m.getMsid());
+			pstmt.setInt(2, m.getMid());
 			
 			result = pstmt.executeUpdate();
 		
-		} catch (SQLException e) {
-		
+		} catch (SQLException e) {		
 			e.printStackTrace();
-
-		} finally {
-			
+		} finally {			
 			close(pstmt);
-			
 		}
 		
 		return result;
@@ -244,13 +283,9 @@ public class MemberDao {
 			result = pstmt.executeUpdate();
 		
 		} catch (SQLException e) {
-		
 			e.printStackTrace();
-
-		} finally {
-			
-			close(pstmt);
-			
+		} finally {			
+			close(pstmt);			
 		}
 		
 		return result;
@@ -293,22 +328,16 @@ public class MemberDao {
 				m.setMdate(rset.getDate("mdate"));
 				m.setMhodu(rset.getInt("mhodu"));
 				m.setMsid(rset.getInt("msid"));
-				
-				mlist.add(m);
-				
-			}
-			
-		} catch (SQLException e) {
+				m.setMstatus(rset.getString("mstatus"));
 		
+				mlist.add(m);
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
-			
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
-		// 확인용 출력문
-		for(Member m : mlist) System.out.println(m);
 		
 		return mlist;
 	}
@@ -319,7 +348,6 @@ public class MemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectList");
-		System.out.println("sql : " + sql);
 		
 		try {
 			
@@ -340,6 +368,7 @@ public class MemberDao {
 				m.setMdate(rset.getDate("mdate"));
 				m.setMhodu(rset.getInt("mhodu"));
 				m.setMsid(rset.getInt("msid"));
+				m.setMstatus(rset.getString("mstatus"));
 				
 				mlist.add(m);
 			}

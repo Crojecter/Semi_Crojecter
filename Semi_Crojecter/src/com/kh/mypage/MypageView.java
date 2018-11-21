@@ -31,20 +31,15 @@ public class MypageView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Member> list = null;
-		MemberService ms = new MemberService();
 		
-		list = ms.searchMypage();
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		Member m = new MemberService().selectMember(mid);
 		
-		if(list != null){
-			
-			request.setAttribute("list", list);
-			
-		} else {
-			
-			request.setAttribute("msg", "조회 실패!");
+		if(m != null){
+			request.setAttribute("myMember", m);
 			request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);
-			
+		} else {
+			request.setAttribute("msg", "조회 실패!");
 		}
 	}
 
