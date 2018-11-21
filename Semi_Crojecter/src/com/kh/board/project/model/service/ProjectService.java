@@ -49,10 +49,16 @@ public class ProjectService {
 
 	public Project selectOne(int bid) {
 		Connection con = getConnection();
+		int result = 0;
 		
 		Project p = pDao.selectOne(con, bid);
 		
-		close(con);
+		if( p != null ){
+			result = pDao.updateCount(con, bid);
+			
+			if(result > 0) commit(con);
+			else rollback(con);
+		}
 		
 		return p;
 	}

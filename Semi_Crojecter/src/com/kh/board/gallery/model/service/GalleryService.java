@@ -21,10 +21,16 @@ public class GalleryService {
 	public Gallery selectOne(int bid) {
 		
 		Connection con = getConnection();
+		int result = 0;
 		
 		Gallery g = gDao.selectOne(con, bid);
 		
-		close(con);
+		if( g != null ){
+			result = gDao.updateCount(con, bid);
+			
+			if(result > 0) commit(con);
+			else rollback(con);
+		}
 		
 		return g;
 	}
