@@ -12,19 +12,11 @@
 <meta charset="UTF-8">
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
-	.outer{
-      width:800px;
-      height:auto;
-      background:lightblue;
-      color:black;
-      margin-left:auto;
-      margin-right:auto;
-      margin-top:50px;
-   }   
-   
-   .active {
-      background: red;
-   }
+
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}   
    
    .titleArea {
       width: 100%;
@@ -41,7 +33,9 @@
    }
    
    .title {
-      padding-top: -5px;
+      padding-top: 5px;
+      margin-top: 5px;
+      font-size: 18px;
    }
    
    .count {
@@ -70,32 +64,32 @@
       width: 100%;
       height: 50px;
       border: 1px solid lightgray;
-      padding-top:15px;
-      padding-left:5px;
+      padding-top: 15px;
+      padding-left: 10px;
    
    }
    
    .btnArea1 {
       width: 90%;
       height: 40px;
-      border: 1px solid lightpink;
-      background:lightpink;
+      border: 1px solid lightblue;
+      background: lightblue;
    }
    
    .btnArea2 {
       width: 70px;
       height: 40px;
-      border: 1px solid lightpink;
-      background:lightpink;
+      border: 1px solid lightblue;
+      background: lightblue;
    }
    
    .btnComment {
       width: 60px;
       height: 25px;
-      background: lightpink;
-      border: 1px solid  lightpink;
+      background: lightblue;
+      border: 1px solid  lightblue;
       border-radius: 5px;
-      color: white;
+      color: black;
       float: right; 
    }
    
@@ -108,10 +102,10 @@
    .bottomBtn {
       width: 20%;
       height: 25px;
-      background: lightpink;
-      border: 1px solid  lightpink;
+      background: lightblue;
+      border: 1px solid  lightblue;
       border-radius: 5px;
-      color: white;
+      color: black;
       float: right;
       margin-right:2px;
    }
@@ -136,22 +130,23 @@
 	
 	<div class="row">
       	<div class="col-md-2"></div>
-      	<div class="col-md-6">
-      	
-      	<%if(m != null)  {  %>
-         <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
-         
-         <div class="row titleArea"  style="margin: 0;">
-            <div class="col-md-10"><h3 class="title" style="margin-top: 14px;"><%= j.getBtitle() %></h3></div>
-            <div class="col-md-2 count"><p class="">조회수 :  <%= j.getBcount() %></p></div>
-         </div>
-         
-         
-         <div class="row contentArea" style="margin: 0;">
-            <div class="content"><%= j.getBcontent() %></div>
-         </div>
-         
-         <div class="commentOuter" >
+      	<div class="col-md-6" 
+      	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
+      	   margin-bottom: 20px;">      	
+	      	<%if(m != null)  {  %>
+	         <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
+	         
+	         <div class="row titleArea"  style="margin: 0;">
+	            <div class="col-md-10"><h3 class="title" style="margin-top: 14px;"><%= j.getBtitle() %></h3></div>
+	            <div class="col-md-2 count"><p class="">(조회수 :  <%= j.getBcount() %>)</p></div>
+	         </div>
+	         
+	         
+	         <div class="row contentArea" style="margin: 0; background: white;">
+	            <div class="content"><%= j.getBcontent() %></div>
+	         </div>
+	         
+	         <div class="commentOuter" >
             <div class="commentWriteArea">
                <div><input type="hidden" name="crefmid" value="-1" /></div>               
                <div class="row contentArea1">
@@ -162,46 +157,48 @@
          </div>
 
          <div class="commentListArea">
-         	<% if( clist != null ) { %>
-            <% for(BoardComment bc : clist) { %>
-			<div class="comment">
-            	<div class="row commentInfo" style="display:inline; height:30px;">
-                	<div class="col-md-5" style="padding:0;">
-                    <input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
-                    <span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
-                    <span>작성날짜 : <%=bc.getCdate() %></span>
-                    </div>
-                     
-                    <% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
-                    <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
-                    <div class="col-md-5" style="padding:0; float:right;">                  
-                    	<% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
+               <% if( clist != null ) { %>
+               <% for(BoardComment bc : clist) { %>
+               <div class="comment">
+                  <div class="row commentInfo" style="display:inline; height:30px;">
+                     <div class="col-md-5" style="padding:0;">
+                     <input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
+                     <span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
+                     <span>작성날짜 : <%=bc.getCdate() %></span>
+                     </div>
+                     <% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
+                     <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
+                     <div class="col-md-5" style="padding:0; float:right;">                  
+                        <% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
                         <div class="" style="padding:0;"><button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
-                     	<button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
+                     <button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
                             style="display:none;">수정완료</button></div>
-                     	<div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
+                     <div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
                         <% } %>                     
-                     	<div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
-                     	<div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=j.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
+                     <div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
+                     <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=j.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
                         <% } %>
                      </div>
                      
                   </div>
-                  <div class="comment commentContent">                
-                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>                     
-                     <div class="row">                     
+                  <div class="comment commentContent">
+                  
+                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
+                     
+                     <div class="row"></div>                     
                      <p style="border:1px solid lightgray; background:white; height:70px;">
                         <% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
                         <%= bc.getCcontent() %>
                      </p>                                       
-                     </div>                    
+                     </div>
+                     
                   <hr />
                </div>
               <% } } %>
-         	</div>
+         </div>
       	</div>
       	
-      	<div class="col-md-2">
+      	<div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
       		<div align="center">
          	<% if(j.getMprofile() == null) { %>
          	<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
@@ -211,13 +208,14 @@
          	</div>
          
          	<h4 align="center"><%=j.getMname()%></h4>
-
+			
          	<div class="row" align="center" id="btnArea1" style="margin-top: 10px;">
 	            <div class="col-md-6" style="padding:0;"><button class="btn btn-follow btnArea1" id="btnFollow">팔로우</button></div>         
 	            <div class="col-md-6" style="padding:0;"><button class="btn btn-likeit btnArea1" id="btnLikeit">좋아요</button></div>                        
          	</div>         
-         
-         	<div class="sidebar" style="margin-top: 10px;">마감일 : <%=j.getJend() %></div>
+         	
+         	<hr />
+         	<div class="sidebar" style="margin-top: 10px; background: white">마감일 : <%=j.getJend() %></div>
          	<input type="text" value=<%=j.getJtag()%> data-role="tagsinput" id="tagsinput" class="tagsinput" disabled>      
          
          	<div class="row" align="center" id="btnArea2" style="margin-top: 10px;">            
@@ -235,6 +233,7 @@
             	</div>
             	<% } %>
             </div>
+          </div>
 
 		<div class="col-md-2"></div>
 	</div>
@@ -245,17 +244,21 @@
 	<script> 
 		// 댓글 삽입 
 		function insertComment(obj) {
-	
-			var bid = '<%= j.getBid() %>';
-			var btype = '<%= j.getBtype() %>';
-			var cwriter = '<%= m.getMid() %>';
-			var ccontent = $(obj).parent().siblings().children('textarea').val();
-	        var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
-			
-			location.href='/crojecter/cInsert.co?bid=' + bid
-					+ '&btype=' + btype + '&cwriter=' + cwriter
-					+ '&ccontent=' + ccontent + '&crefmid=' + crefmid;
-		}
+   
+         var bid = '<%= j.getBid() %>';
+         var btype = '<%= j.getBtype() %>';
+         var cwriter = '<%= m.getMid() %>';
+         var ccontent = $(obj).parent().siblings().children('textarea').val();
+         var crefmid = $(obj).parent().parent().siblings().children('input[name="crefmid"]').val();
+         
+         if(ccontent.length == 0){
+            alert("댓글 내용을 입력해 주세요.");
+         } else {
+            location.href='/crojecter/cInsert.co?bid=' + bid
+                + '&btype=' + btype + '&cwriter=' + cwriter
+                + '&ccontent=' + ccontent + '&crefmid=' + crefmid; 
+         }
+      }
 		
 		// 댓글 수정
 		function updateComment(obj) {	
