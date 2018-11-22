@@ -67,7 +67,6 @@
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
-	<% if(m2 == null) m2 = m; %>
 	<div class="profileArea">
 		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
@@ -88,15 +87,15 @@
 		<table>
 			<tr>
 				<td class="menuMenu"><a
-					href="/crojecter/mypageView.do?mid=<%=m2.getMid()%>">About</a></td>
+					href="/crojecter/mypageView.do?mpid=<%=m2.getMid()%>">About</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/mworkView.do?mid=<%=m2.getMid()%>">Works</a></td>
+					href="/crojecter/mworkView.do?mpid=<%=m2.getMid()%>">Works</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/collectView.do?mid=<%=m2.getMid()%>">Collect</a></td>
+					href="/crojecter/collectView.do?mpid=<%=m2.getMid()%>">Collect</a></td>
+				<td class="menuMenu"><a 
+					href="/crojecter/followingView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followings</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/followingView.do?mid=<%=m2.getMid()%>">Followings</a></td>
-				<td class="menuMenu"><a
-					href="/crojecter/followerView.do?mid=<%=m2.getMid()%>">Followers</a></td>
+					href="/crojecter/followerView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followers</a></td>
 			</tr>
 		</table>
 	</div>

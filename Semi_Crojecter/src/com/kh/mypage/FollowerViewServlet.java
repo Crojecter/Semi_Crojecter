@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.follow.model.service.FollowService;
 import com.kh.follow.model.vo.Follow;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class FollowerViewServlet
@@ -31,21 +33,22 @@ public class FollowerViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// 팔로워 목록 = 나를 좋아하는 사람들
 		ArrayList<Follow> list = null;
 		FollowService fs = new FollowService();
-		int mid = Integer.parseInt(request.getParameter("mid"));
-
-		list = fs.searchFollower(mid);
-		System.out.println("list : " + list);
+		
+		int mid = Integer.parseInt(request.getParameter("mid")); //로그인한 사람
+		int mpid = Integer.parseInt(request.getParameter("mpid")); //마이페이지 주인
+		Member m = new MemberService().selectMember(mpid);
+		
+		list = fs.searchFollower(mid, mpid);
 		
 		if(list != null){
-			
+			request.setAttribute("myMember", m);
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("views/mypage/followerList.jsp").forward(request, response);
-		} else {
-			
+		} else {			
 			request.setAttribute("msg", "조회 실패!");
-			
 		}
 	}
 
