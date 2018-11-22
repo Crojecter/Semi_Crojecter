@@ -16,7 +16,7 @@
 <style>
 
 	
-	#btnFollow {
+	.btnFollow {
 	
 	background:lightblue;
 	font-weight:bold;
@@ -26,7 +26,7 @@
 	
 	}
 	
-	#name {
+	.name {
 	
 	color:darkgray;
 	padding-right:50px;
@@ -61,7 +61,7 @@
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
 		<tr class="form">
-			<td id="name" name="name"><%=f1.getFollowername() %></td>
+			<td class="name"><%=f1.getFollowername() %></td>
 			<td>
 				<input type="hidden" name="fid" value="<%= f1.getFollowerid() %>"/> 
 				<% if(f1.getChk().equals("Y")){ %>

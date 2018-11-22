@@ -50,10 +50,10 @@ public class FollowService {
 
 	}
 
-	public ArrayList<Follow> searchFollowing(int mid) {
+	public ArrayList<Follow> searchFollowing(int mid, int mpid) {
 		
 		Connection con = getConnection();
-		ArrayList<Follow> list = fDao.selectFollowingList(con, mid);
+		ArrayList<Follow> list = fDao.selectFollowingList(con, mid, mpid);
 		
 		close(con);
 		
@@ -61,12 +61,12 @@ public class FollowService {
 		
 	}
 
-	public ArrayList<Follow> searchFollower(int mid) {
+	public ArrayList<Follow> searchFollower(int mid, int mpid) {
 		
 		ArrayList<Follow> list = null;
 		Connection con = getConnection();
 		
-		list = fDao.selectFollowerList(con, mid);
+		list = fDao.selectFollowerList(con, mid, mpid);
 		
 		close(con);
 		

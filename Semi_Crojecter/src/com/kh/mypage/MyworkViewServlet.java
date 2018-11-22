@@ -38,7 +38,7 @@ public class MyworkViewServlet extends HttpServlet {
 		ArrayList<Gallery> glist = null;
 		GalleryService gs = new GalleryService();
 		
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		int mid = Integer.parseInt(request.getParameter("mpid"));
 		Member m = new MemberService().selectMember(mid);
 
 		glist = gs.searchGallery(mid);
