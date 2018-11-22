@@ -95,7 +95,7 @@ public class SponDao {
 				
 				s.setSdate(rset.getDate("sdate"));
 				s.setMname(rset.getString("mname"));
-				s.setShodu(rset.getInt("shodu"));
+				s.setShodu(rset.getInt("shoduu"));
 	
 				list.add(s);
 				
@@ -139,7 +139,7 @@ public class SponDao {
 				
 				s.setSdate(rset.getDate("sdate"));
 				s.setMname(rset.getString("mname"));
-				s.setShodu(rset.getInt("shodu"));
+				s.setShodu(rset.getInt("shoduu"));
 	
 				list.add(s);
 				
