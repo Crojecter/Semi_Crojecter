@@ -3,13 +3,13 @@
  
 <% ArrayList<Gallery> gList = (ArrayList<Gallery>)request.getAttribute("list"); 
 	/* System.out.println("GalleryList ArrayList : "+ gList); */
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
+ 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	//System.out.println("PageInfo gl : "+ pi);
 	int currentPage = pi.getCurrentPage();
 	int listCount = pi.getListCount();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
+	int endPage = pi.getEndPage(); 
 %> 
  
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
 					<button disabled class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= gal.getBcount() %>
 					</button>
-					<button onclick="addLike();" class="btn btn-primary">
+					<button onclick="" class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
 					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= gal.getGlike() %></button>
 					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">

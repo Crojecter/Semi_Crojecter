@@ -15,7 +15,6 @@ import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.member.model.vo.Member;
 
 public class GalleryDao {
 

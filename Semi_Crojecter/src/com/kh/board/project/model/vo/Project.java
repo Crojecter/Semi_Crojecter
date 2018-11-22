@@ -12,6 +12,18 @@ public class Project extends Board implements Serializable {
 	private String jtag;
 	private int dday;
 
+	// 파일경로 조회용 코드
+	private String fname;
+	
+	public String getFname() {
+		return fname;
+	}
+	
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	//
+	
 	public Project() {
 		super();
 	}

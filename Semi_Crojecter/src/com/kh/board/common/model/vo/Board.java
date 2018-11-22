@@ -19,7 +19,7 @@ public class Board implements Serializable{
 	private String mprofile;
 	private String mname;
 
-	private String fname;
+	private String FName;
 	private String jTag;
 	private String gTag;
 	
@@ -58,12 +58,12 @@ public class Board implements Serializable{
 		this.gTag = gTag;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getFName() {
+		return FName;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setFName(String fname) {
+		this.FName = fname;
 	}
 
 	public Board() {}
