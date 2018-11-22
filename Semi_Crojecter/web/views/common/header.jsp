@@ -192,9 +192,9 @@
 									style="height: 30px;" class="rounded-circle" alt="Cinque Terre"> <% }  %>
 								</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+										<% if(m.getMid() != -1) { %>
 										<a class="dropdown-item"
 											href="<%=request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
-										<% if(m.getMid() != -1) { %>
 										<a class="dropdown-item" 
 											href="<%= request.getContextPath()%>/selectPage.my?mid=<%=m.getMid()%>">마이페이지</a>
 										<% } else { %>
@@ -208,10 +208,12 @@
 							}
 							
 							</script>
+							<% if(m.getMid() != -1) { %>
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">
 							<img src="<%=request.getContextPath()%>/resources/images/icon/walnut.jpg"
-								 alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
+								 alt="" style="height: 30px;"><span id="callHodu"></span>개</a>
+							<% } %>
 							</div>
 							</li>
 							<script>

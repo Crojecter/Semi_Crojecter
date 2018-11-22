@@ -17,7 +17,7 @@
 		display: inline-block;
 		padding-top:30px;
 		margin-left:30px;
-		margin-top:100px;
+		margin-top:30px;
 		border:1px solid darkgary;
 	}
 	
@@ -47,20 +47,26 @@
 	width:250px;
 	height:250px;
 	}
-
 	
-
 </style>
 </head>
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/collectView.do" method="post">
-<div class="collectList">
+<div class="row collectList">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" style="margin-bottom: 100px">
 	<% if(list.size() > 0) { %>
 	<% for(Likeit l : list){ %>
 	<div id="gal-list" class="card">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
-						alt="Card image cap" class="gallery"></a>
+	<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= l.getBid() %>">
+	<% if(l.getFname() != null) { %>
+	<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
+	alt="Card image cap" class="gallery">
+	<% } else { %>
+	<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+	<% } %>
+	</a>
 		<div class="card-body">
 			<h5 class="card-title"><a class="classA" href=""><%= l.getBtitle() %></a></h5>
 			<h5 class="card-title"><a href=""><%= l.getMname() %></a></h5>
@@ -69,6 +75,11 @@
 	<% } } else { %>
 		<div class="alarm" align="center">아직 좋아요한 작품이 없습니다.</div>
 	<% } %>
+	</div>
+	<div class="col-md-2"></div>
+	
+	
+	
 </div>
 </form>
 <%@ include file="../common/footer.jsp" %>

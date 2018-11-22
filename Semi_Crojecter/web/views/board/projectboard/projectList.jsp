@@ -40,6 +40,21 @@
 				</div>
 				<div class="card-body">
 					<h5 class="card-title"><a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
+		<div class="col-md-8" style="padding: 0;">
+		<% if(projectList == null) { %>
+			해당 게시글이 존재하지 않습니다.
+		<% } else { %>
+		<% for (Project pro : projectList) { %>
+			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>">
+			<% if(pro.getFname() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>">
+			<% } else { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+			<% } %>
+			</a>
+				<div class="card-body">
+					<h5 class="card-title"><%= pro.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
 					<% if(pro.getJtag() != null) {
 						String tags[] = pro.getJtag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
@@ -62,13 +77,49 @@
 						<span id=Dday>.</span>
 
 					</div>
+					<br />
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= pro.getBcount() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= pro.getLikeCnt() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= pro.getCommCnt() %>
+					</label>
+					<br />
+					<% if(pro.getDday() == 0) { %>
+					<label>D-day 입니다.</label>
+					<% } else if(pro.getDday() < 0) { %>
+					<label>만료된 프로젝트입니다.</label>
+					<% } else { %>
+					<label>D-day <%= pro.getDday() %></label>
+					<% } %>
+
+					<br />
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= pro.getBcount() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= pro.getLikeCnt() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= pro.getCommCnt() %>
+					</label>
+					<br />
+					<% if(pro.getDday() == 0) { %>
+					<label>D-day 입니다.</label>
+					<% } else if(pro.getDday() < 0) { %>
+					<label>만료된 프로젝트입니다.</label>
+					<% } else { %>
+					<label>D-day <%= pro.getDday() %></label>
+					<% } %>
 				</div>
-				
-				</div>
-				<% } %>
-				<div class="col-md-2"></div>
 			</div>
-				
+				<% } %>
+			<% } %>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
 		<script>
 			$(function(){

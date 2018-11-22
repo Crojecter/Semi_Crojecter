@@ -13,7 +13,6 @@ public class Project extends Board implements Serializable {
 	private int jid;
 	private Date jend;
 	private String jtag;
-	
 	private int dday;
 
 	// 파일경로 조회용 코드
