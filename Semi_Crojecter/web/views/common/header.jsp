@@ -211,7 +211,7 @@
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">
 							<img src="<%=request.getContextPath()%>/resources/images/icon/walnut.jpg"
-								 alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
+								 alt="" style="height: 30px;">:<span id="callHodu"></span>개</a>
 							</div>
 							</li>
 							<script>
