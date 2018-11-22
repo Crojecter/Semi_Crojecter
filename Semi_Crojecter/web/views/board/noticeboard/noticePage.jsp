@@ -111,18 +111,6 @@ p {
 		<% } %>
 		<a name="bottom"></a>
 		<script>
-<<<<<<< HEAD
-		$(function(){
-			$("#noticeList td").mouseenter(function(){				
-				$(this).parent().css({"background":"gray", "cursor":"pointer"});
-			}).mouseout(function(){
-				$(this).parent().css({"background":"lightgray"});
-			}).click(function(){
-				var bid = $(this).parent().children().eq(0).children().val();
-				location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;				
-			});
-		});
-=======
 		 $(function(){
 	         $("#noticeList td").mouseenter(function(){            
 	            $(this).parent().css({"background":"gray", "cursor":"pointer"});
@@ -133,7 +121,6 @@ p {
 	            location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;            
 	         });
      	});
->>>>>>> refs/remotes/origin/master
 		//
 		</script>
 				<!-- 리모컨 -->

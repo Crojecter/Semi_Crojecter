@@ -107,10 +107,12 @@ public class ProjectService {
 		return result;
 	}
 
-	public ArrayList<Project> selectProjectList(int currentPage, int limit) {
+	public ArrayList<Project> selectProjectList() {
 		// 게시판 목록
 		Connection con = getConnection();
-		ArrayList<Project> projectList = pDao.selectProjectList(con, currentPage, limit);
+		ArrayList<Project> projectList = pDao.selectProjectList(con);
+
+		System.out.println("projectList SER"+ projectList);
 		
 		close(con);
 		return projectList;
@@ -138,6 +140,17 @@ public class ProjectService {
 		
 		return result;
 	}
+
+	public int countDday(int bid) {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		int countDday = pDao.countDday(con, bid);
+		System.out.println("countDday ser : "+ countDday);
+		close(con);
+		
+		return countDday;
+	}
+
 
 
 }

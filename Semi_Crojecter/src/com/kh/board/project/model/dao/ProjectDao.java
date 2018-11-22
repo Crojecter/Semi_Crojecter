@@ -344,21 +344,17 @@ public class ProjectDao {
 		return result;
 	}
 
-	public ArrayList<Project> selectProjectList(Connection con, int currentPage, int limit) {
+	public ArrayList<Project> selectProjectList(Connection con) {
 		
 		ArrayList<Project> projectList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
 				
 		String sql = prop.getProperty("selectProjectList");		
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);			
-			
-			int startRow = (currentPage -1) * limit +1;	
-			int endRow = startRow + limit -1;
 			
 			rset = pstmt.executeQuery();
 			projectList = new ArrayList<Project>();
@@ -367,9 +363,12 @@ public class ProjectDao {
 				
 				Project pro = new Project();
 				// 갤러리분
-				pro.setJid(rset.getInt("JID"));
-				pro.setJend((rset.getDate("JEND")));
+				pro.setJid(rset.getInt("JID"));//
+				pro.setJend((rset.getDate("JEND")));//
 				pro.setJtag(rset.getString("JTAG"));
+				
+				
+
 				// 상속분
 				pro.setBid(rset.getInt("BID"));
 				pro.setBtype(rset.getInt("BTYPE"));
@@ -381,11 +380,13 @@ public class ProjectDao {
 				pro.setBwriter(rset.getInt("BWRITER"));
 				//
 				pro.setFname(rset.getString("FNAME"));
+				pro.setMname(rset.getString("MNAME"));
+				pro.setLikeCnt(rset.getInt("LIKECNT"));
+				pro.setCommCnt(rset.getInt("COMMCNT"));
 				
 				projectList.add(pro);
-				System.out.println("selectProjectList Dao : "+ projectList);
+				//System.out.println("selectProjectList Dao : "+ projectList);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -500,7 +501,30 @@ public class ProjectDao {
 		
 	}
 
+	public int countDday(Connection con, int bid) {
+		int countDday = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countDday");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
 
+			countDday = Integer.parseInt(rset.getString(1));
+			System.out.println("countComment dao : "+ countDday);
+			
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return countDday;
+	}
 
 
 }
