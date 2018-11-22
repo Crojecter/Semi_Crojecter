@@ -54,15 +54,15 @@
 						
 					} %>
 					<div>
-					<button disabled class="btn btn-primary">
+					<label>
 					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= pro.getBcount() %>
-					</button>
-					<button onclick="" class="btn btn-primary">
+					</label>
+					<label>
 					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></button>
-					<button src="<%= request.getContextPath()%>/views/board/projectDetail.jsp" class="btn btn-primary">
+					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></label>
+					<label>
 					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</button>
+					alt="" style="height:22px;">수</label>
 					</div>
 				</div>
 				
