@@ -7,6 +7,7 @@
 	System.out.println("alarmDetail sz : "+ alarmList.size());
 	int Mid = Integer.parseInt(request.getParameter("Mid"));
 	int result = 0;
+	int count = 0;
 %>    
 <!DOCTYPE html>
 <html>
@@ -70,19 +71,26 @@
 				<th id="alarmTH">확인</th>
 			</tr>
 			<% for(Alarm al : alarmList){ %>
-			<tr>
-				
-				<td><%= al.getAMsg() %>
-				</td>
-				<td><%= al.getADate() %></td>
-				<% if( al.getAFlag().equals("Y")) { %>
-				<td><button onclick="updateAlarm(this, '<%=al.getAid()%>' style="font-size: 8px;">미확인</button></td>
-				<% } else { %>
-				<td align="center" style="font-size: 12px;">확인</td>
-				<% } %>
-			</tr>
+				<% if(al.getAFlag().equals("Y")) { %>
+				<tr>
+					<td><%= al.getAMsg() %></td>
+					<td><%= al.getADate() %></td>
+					<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');" style="font-size:15px;">미확인</button></td>
+				</tr>
+				<% count++; } %>
+				<%-- <% } else { %>
+				<tr>
+					<td><%= al.getAMsg() %></td>
+					<td><%= al.getADate() %></td>
+					<td align="center" style="font-size: 12px;">확인</td>
+				</tr>
+				<% } %> --%>
 			<% } %>
-			
+			<% if(count == 0) { %>
+			<tr>
+				<td colspan="3">확인하지 않은 알람이 없습니다.</td>
+			</tr>
+			<% } else { count = 0; } %>			
 			</table>
 			<script>
 
@@ -95,13 +103,11 @@
 						success : 
 							function(data){ 
 							if (data > 0){
-								obj.append("확인");
-								obj.remove();
-								window.location.reload();
+								obj.parent().parent().remove();
 							}
-							
 						}
 					});
+					location.reload();
 			}
 			
 				</script>
@@ -131,7 +137,7 @@
 				});
 			}); --%>
 		</script>
-
+		</div>
 
 </body>
 </html>
