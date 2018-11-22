@@ -5,11 +5,10 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -90,7 +89,6 @@ public class ReportDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectReport");
-		System.out.println("sql : " + sql);
 		
 		try {
 			
@@ -137,6 +135,36 @@ public class ReportDao {
 		}
 		
 		return list;
+	}
+
+	public int updateCount(Connection con, Report r) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = null;
+		int id = 0;
+		
+		if(r.getCid() > 0) {
+			sql = "UPDATE BOARDCOMMENT SET CRCOUNT = CRCOUNT+1 WHERE CID = ?";
+			id = r.getCid();
+		} else {
+			sql = "UPDATE BOARD SET BRCOUNT = BRCOUNT+1 WHERE BID = ?";
+			id = r.getBid();
+		}
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, id);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
 	}
 	
 }
