@@ -132,21 +132,22 @@
       	<div class="col-md-2"></div>
       	<div class="col-md-6" 
       	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
-      	   margin-bottom: 20px;">      	
-	      	<%if(m != null)  {  %>
-	         <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
-	         
-	         <div class="row titleArea"  style="margin: 0;">
-	            <div class="col-md-10"><h3 class="title" style="margin-top: 14px;"><%= j.getBtitle() %></h3></div>
-	            <div class="col-md-2 count"><p class="">(조회수 :  <%= j.getBcount() %>)</p></div>
-	         </div>
-	         
-	         
-	         <div class="row contentArea" style="margin: 0; background: white;">
-	            <div class="content"><%= j.getBcontent() %></div>
-	         </div>
-	         
-	         <div class="commentOuter" >
+      	   margin-bottom: 20px;">
+            
+         <%if(m != null)  {  %>
+         <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
+         
+         <div class="row titleArea" style="margin: 0; background: white;">
+            <div class="col-md-10"><p class="title"><%= j.getBtitle() %></p></div>
+            <div class="col-md-2 count">(조회수 :  <%= j.getBcount() %>)</div>
+         </div>
+         
+         
+         <div class="row contentArea" style="margin: 0; background: white;">
+            <div class="content"><%= j.getBcontent() %></div>
+         </div>
+         
+         <div class="commentOuter" >
             <div class="commentWriteArea">
                <div><input type="hidden" name="crefmid" value="-1" /></div>               
                <div class="row contentArea1">
@@ -170,33 +171,32 @@
                      <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
                      <div class="col-md-5" style="padding:0; float:right;">                  
                         <% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
-                        <div class="" style="padding:0;"><button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
-                     <button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
-                            style="display:none;">수정완료</button></div>
+                        <div class="" style="padding:0;">
+                        	<button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
+                     		<button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
+                            		style="display:none;">수정완료</button></div>
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
                         <% } %>                     
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=j.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
                         <% } %>
-                     </div>
-                     
+                     </div>                     
                   </div>
-                  <div class="comment commentContent">
                   
-                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
-                     
-                     <div class="row"></div>                     
+                  <div class="comment commentContent">                 
+                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>                                     
                      <p style="border:1px solid lightgray; background:white; height:70px;">
                         <% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
                         <%= bc.getCcontent() %>
-                     </p>                                       
-                     </div>
+                     </p>                                     
+                  </div>
                      
                   <hr />
                </div>
               <% } } %>
          </div>
-      	</div>
+         
+      </div>
       	
       	<div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
       		<div align="center">
