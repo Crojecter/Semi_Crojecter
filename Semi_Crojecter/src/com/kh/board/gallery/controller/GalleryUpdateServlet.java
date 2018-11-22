@@ -82,6 +82,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 			
 			/// 기존 bid의 AttachedFile 객체 불러와서 업데이트 하기 
 			AttachedFile af= (AttachedFile)gal.get("attachedfile");
+			System.out.println("(AttachedFile)gal.get(attachedfile) : " + (AttachedFile)gal.get("attachedfile"));
 			
 			File savefile = null;
 			String path = null;
@@ -97,6 +98,9 @@ public class GalleryUpdateServlet extends HttpServlet {
 				
 				System.out.println("GalleryUpdateServlet path : " + path);				
 				System.out.println("GalleryUpdateServlet fileName : " + fileName);
+				
+				af.setFname(fileName);
+				af.setFpath(path);
 			}
 				
 			switch(g.getGcategoryid()){
@@ -104,9 +108,7 @@ public class GalleryUpdateServlet extends HttpServlet {
 					af.setFname("textCategoryImage.png"); 
 					af.setFpath(savePath); 
 					break;
-				case 2: 
-					af.setFname(fileName);
-					af.setFpath(path);											
+				case 2: 											
 					break;
 				case 3: 
 					af.setFname("audioCategoryImage.png"); 
@@ -128,7 +130,6 @@ public class GalleryUpdateServlet extends HttpServlet {
 			
 		} else {
 			
-			savefile.delete();
 			page= "views/common/errorPage.jsp";
 			request.setAttribute("msg", "게시글 수정 실패!!");
 			request.getRequestDispatcher(page).forward(request, response);

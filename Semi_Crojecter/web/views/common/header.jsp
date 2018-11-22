@@ -6,6 +6,7 @@
 	ArrayList<Alarm> aList = (ArrayList<Alarm>)request.getAttribute("aList"); 
 	System.out.println("Header alist : "+ aList);	
 	Alarm al = (Alarm) request.getAttribute("Alarm");
+	
 %>
 
 <!DOCTYPE html>
@@ -67,14 +68,14 @@
 	
 </head>
 <body style="position:absolute; width:100%;">
-	<div class="row">
+	<div class="row" style="background:white">
 	<div class="col-md-2">
 		<!-- 로고 -->
 		<a href="<%= request.getContextPath()%>/gList.ga">
 		<img src="<%= request.getContextPath()%>/resources/images/icon/LogoImage.png" alt="" style="height:50px"/></a> 
 	</div>
 	<div class="col-md-10">
-	<nav class="navbar navbar-expand-lg navbar-light" style="background:lightyellow">
+	<nav class="navbar navbar-expand-lg navbar-light" style="background:white">
 
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
@@ -132,7 +133,6 @@
 							var xPos = ((document.body.clientWidth / 2) - (500 / 2)); 
 						    xPos += window.screenLeft;
 						    var yPos = ((screen.availHeight / 2) - (300 / 2));
-
 						    window.open('<%= request.getContextPath() %>/aList.al?Mid=<%= m.getMid() %>', 
 						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
 						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
@@ -170,7 +170,7 @@
 						<!-- 프로필 -->
 						<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="<%= request.getContextPath()%>#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							<img src="<%= request.getContextPath()%>/resources/images/defaultImg.jpg" style="height: 30px;" class="rounded-circle" alt="Cinque Terre">
+							<img src="<%= request.getContextPath()%>/resources/images/user.png" style="height: 30px;" class="rounded-circle" alt="Cinque Terre">
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 							<a class="dropdown-item" href="<%= request.getContextPath()%>/views/payment/payment.jsp">호두충전</a>
@@ -180,18 +180,31 @@
 							function logout(){
 								location.href="/crojecter/logout.me";
 							}
+							
 							</script>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">: <span>??</span>개</a>
+							<a class="dropdown-item" href="#"><img src="<%= request.getContextPath()%>/resources/images/icon/walnut.jpg" alt="" style="height:30px;">:<%= m.getMhodu() %>개</a>
 						</div>
 						<li>
 						<!-- 글쓰기 -->
-						<a href="<%= request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp">
+						<a id="moveInsert" href="<%= request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp">
+						<script>
+							var x = location.href;
+							$(function(){
+							if(x == "http://localhost:8088/crojecter/pList.pr"){
+								$("#moveInsert").attr('href','<%= request.getContextPath()%>/views/board/projectboard/projectInsert.jsp');
+							}
+							
+							});			
+						</script>
+											
 						<img src="<%= request.getContextPath()%>/resources/images/icon/upload.png" alt="" style="height:40px;"></a>
 						&nbsp;&nbsp;</li>
 					</ul>
 				<% } %>
 				</div>
+				
+				
 				<!-- 검색 -->
 				<form class="navbar-search pull-left" action="<%=request.getContextPath()%>/search.all" method="get">
 				  <input type="text" class="search-query" placeholder="Search" name="keyword">
@@ -202,11 +215,5 @@
 	</nav>
 	</div>
 	</div>
-	<!-- 리모컨 -->
-	<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
-	<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>
-	<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
-	</div>
-	<a name="bottom"></a>
 </body>
 </html>

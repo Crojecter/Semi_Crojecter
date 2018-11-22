@@ -1,7 +1,7 @@
-package com.kh.mypage;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,22 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
-import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.notice.model.service.NoticeService;
-import com.kh.board.notice.model.vo.Notice;
-
 
 /**
- * Servlet implementation class MyworkViewServlet
+ * Servlet implementation class GalleryCountCommentServlet
  */
-@WebServlet("/mworkView.do")
-public class MyworkViewServlet extends HttpServlet {
+@WebServlet("/gCountCo.ga")
+public class GalleryCountCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyworkViewServlet() {
+    public GalleryCountCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,26 +30,23 @@ public class MyworkViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		ArrayList<Gallery> glist = null;
-		GalleryService gs = new GalleryService();
-		
-		int mid = Integer.parseInt(request.getParameter("mid"));
-
-		glist = gs.searchGallery(mid);
-		
-		System.out.println("work list : " + glist);
-		
-		if(glist != null){
+		// 댓글수 확인용 서블릿
+			GalleryService gs = new GalleryService();
+				
+			int countComment = 0;
 			
-			request.setAttribute("glist", glist);
-			request.getRequestDispatcher("views/mypage/myworkList.jsp").forward(request, response);
+			int bid = Integer.parseInt(request.getParameter("bid"));
 			
-		} else {
+			countComment = gs.countComment(bid);
 			
-			request.setAttribute("msg", "조회 실패!");
-			
-		}
+			PrintWriter out = response.getWriter();
+			if(countComment < 0){
+				out.print(countComment);
+			}
+			else{
+				
+				out.print(countComment);
+			}
 	}
 
 	/**

@@ -5,6 +5,7 @@
 <%
 	ArrayList<Follow> list = (ArrayList<Follow>)request.getAttribute("list");
 	Gallery g = (Gallery)request.getAttribute("gallery");
+	Follow f = (Follow)request.getAttribute("follow");
 	System.out.println("list : " + list);
 %>
 <!DOCTYPE html>
@@ -14,29 +15,91 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
+
+	#btnFollow {
+	
+	background:lightblue;
+	font-weight:bold;
+	width: 130px;
+	height: 35px;
+	margin-bottom:20px;
+	}
+	
 	#name {
-		color:black
+	
+	color:darkgray;
+	padding-right:50px;
+	padding-left:100px;
+	font-size:20px;
+	padding-top:30px;
+	
+	}
+	
+	.form {
+	
+
+	margin-bottom:20px;
+
+	}
+	
+	.table {
+	
+	width:50%;
+	
+	}
+	
+	.set {
+	
+	border:solid 1px red;
+	
 	}
 </style>
 </head>
 <body>
-<%@ include file="../mypage/common/mypageHeader.jsp"%>
+<%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/followingView.do" method="post">
 <div class="followList">
-	<table>  
-		<% for(Follow f : list){ %>
-		<tr>
-			<td id="name"><%=f.getFollowname() %></td>
-			<td> <div id="btnFollow" class="btn btn-follow">
-					<p id="p-follow" style="color: black">언팔로우</p></div>
+	<table class="table">  
+		<% for(Follow f1 : list){ %>
+		<tr class="set">
+			<td id="name" name="name"><%=f1.getFollowname() %></td>
+			<td>
+        
+				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> <br>
+				<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
+				<p id="p-follow" style="color: black">언팔로우</p></div>
+
 			</td>
 		</tr>
 		<% } %>
 	</table>
-
 </div>
 </form>
 <script>
+
+	function switchfollow(obj){
+		$.ajax({
+			url : '/crojecter/fSwitch.fo',
+			type : 'get',
+			data : {
+				mid : '<%= m.getMid() %>',
+				wid : $(obj).siblings('input[name="fid"]').val()
+			}, 
+			success : function(data){
+				if(data == 'insert') {
+					$(obj).addClass('active');
+					$(obj).children('p[class="p-follow"]').html('언팔로우');
+				} else if (data == 'delete') {
+					$(obj).removeClass('active');
+					$(obj).children('p[class="p-follow"]').html('팔로우');
+				} else {
+					console.log('btnFollow() 에러 발생!');
+				}
+			}, error : function(data){
+				console.log('btnFollow() 에러 발생!!');
+			}
+		});
+	}
 
 </script>
 </body>

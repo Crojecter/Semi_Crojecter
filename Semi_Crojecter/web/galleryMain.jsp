@@ -18,8 +18,8 @@
 		</style> 
 	</head>
 	<body>
-		
 		<%@ include file="views/common/header.jsp" %>
+
 <!-- 		
 		<table align="center" id="galleryTop5">
 			<thead>	
@@ -39,7 +39,8 @@
 		</table>	
 
 		순위조회용 테스트 코드
-		<script>
+		<!-- 순위조회용 테스트 코드 -->
+<!--		<script>
 			// Top 5 계산 (TOP-N 분석)
 			$(document).ready(function(){
 
@@ -69,12 +70,13 @@
 				
 			});
 		</script>
+
  -->
 
-		<!-- 테스트용 슬라이드 -->
+		<!-- 슬라이드 -->
 
 		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block;">
-		<!-- 테스트용 슬라이드 버튼 -->
+		<!-- 슬라이드 버튼 -->
 		<ul class="carousel-indicators">
 			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
 			<li data-target="#slideBody" data-slide-to="1" class=""></li>
@@ -82,7 +84,7 @@
 			<li data-target="#slideBody" data-slide-to="3" class=""></li>
 			<li data-target="#slideBody" data-slide-to="4" class=""></li>
 		</ul>
-		<!-- 테스트용 슬라이드 본문 -->
+		<!--  슬라이드 본문 -->
 			<div class="carousel-inner" id="top5test">
 						
 			</div>
@@ -127,20 +129,20 @@
 				
 			});
 		</script>
-
 		
 
 		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewImg">
+
+			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewSound">
+			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewText">
+			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewVidio">
+			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
 				
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
@@ -160,8 +162,6 @@
 			</div>		
 		</nav>
 		
-
-		
 		<script>
 		function searchImg(){
 			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
@@ -176,26 +176,10 @@
 			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 		}
 		</script>
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>
-
-		<!-- 리모컨 -->
-		<div style="position: fixed; right: 50%; top: 80%; margin-right: -720px; text-align:center; width: 10%;">
-		<button><a href="#top"><img src="<%= request.getContextPath()%>/resources/images/icon/up.png" alt="" style="height:30px;"></a></button><br>
-		<button><a href="#bottom"> <img src="<%= request.getContextPath()%>/resources/images/icon/down.png" alt="" style="height:30px;"></a></button>
-		</div>
-		<a name="bottom"></a>
-	<%@ include file="views/common/footer.jsp" %>
+		<%@ include file="views/common/footer.jsp" %>
 </body>
 
 </html>

@@ -284,8 +284,11 @@ public class GalleryDao {
 			
 				pstmt.setString(1, af.getFname());
 				pstmt.setInt(2, bid);
+				
+				System.out.println("af.getFname() : " + af.getFname());
+				System.out.println("bid : " + bid);
 
-				result = pstmt.executeUpdate();
+				result += pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 
@@ -529,10 +532,20 @@ public class GalleryDao {
 			while(rset.next()){
 				Gallery g = new Gallery();
 				
-				g.setBwriter(rset.getInt("BWRITER"));
-				g.setMname(rset.getString("MNAME"));
+				g.setGid(rset.getInt("GID"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGtag(rset.getString("GTAG"));
+				g.setGlike(rset.getInt("GLIKE"));
+				// 상속분
+				g.setBid(rset.getInt("BID"));
+				g.setBtype(rset.getInt("BTYPE"));
 				g.setBtitle(rset.getString("BTITLE"));
-				
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				// 
+				g.setFname(rset.getString("FNAME"));
 				
 				glist.add(g);
 			}
@@ -633,5 +646,31 @@ public class GalleryDao {
 		// 확인용 출력문
 		//for(Notice n : list) System.out.println(list);
 		return searchGalleryList;
+	}
+
+	public int countComment(Connection con, int bid) {
+		int countComment = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countComment");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()){
+				countComment = Integer.parseInt(rset.getString(1));
+				System.out.println("countComment dao : "+ countComment);
+			}
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return countComment;
 	}
 }

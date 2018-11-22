@@ -30,14 +30,14 @@
 		margin:1px 10px 1px 10px;
 		}
 		
-	#submit{
+	.submit{
 		color:white;
 		text-align:center;
 		border-radius:5px;
 		height:40px;
-		width:120px;
+		width:100px;
 		font-size:15px;
-		margin:1px 10px 1px 10px;
+		margin:1px 20px 1px 10px;
 		}
 
 </style>
@@ -76,13 +76,13 @@
 								특수문자 숫자 최소 1개 이상 포함
 						</label></td>
 			</tr>
-            <tr colspan="2">
-                <td><input type="submit" id="submit" onclick="updateMember();" style="border: 1px solid gray; background-color: gray;" value="수정하기">
-                <input type="button" id="submit" onclick="deleteMember();" style="border: 1px solid gray; background-color: gray;" value="탈퇴하기"></td>
+            <tr>
+                <td><input type="submit" class="submit" onclick="updateMember();" style="border: 1px solid gray; background-color: gray;" value="수정하기">
+                <input type="button" class="submit" onclick="deleteMember();" style="border: 1px solid gray; background-color: gray;" value="탈퇴하기"></td>
             </tr> 
         </table>
+	</form>
 </div>
-</form>
 
 <script>
 	function updateMember() {
