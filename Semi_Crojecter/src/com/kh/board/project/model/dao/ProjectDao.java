@@ -367,8 +367,6 @@ public class ProjectDao {
 				pro.setJend((rset.getDate("JEND")));//
 				pro.setJtag(rset.getString("JTAG"));
 				
-				
-
 				// 상속분
 				pro.setBid(rset.getInt("BID"));
 				pro.setBtype(rset.getInt("BTYPE"));
@@ -383,6 +381,7 @@ public class ProjectDao {
 				pro.setMname(rset.getString("MNAME"));
 				pro.setLikeCnt(rset.getInt("LIKECNT"));
 				pro.setCommCnt(rset.getInt("COMMCNT"));
+				pro.setDday(rset.getInt("DDAY"));
 				
 				projectList.add(pro);
 				//System.out.println("selectProjectList Dao : "+ projectList);
