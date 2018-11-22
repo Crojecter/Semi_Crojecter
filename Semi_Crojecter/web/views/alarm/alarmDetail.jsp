@@ -95,7 +95,7 @@
 				});
 			}); --%>
 		</script>
-
+		</div>
 
 </body>
 </html>
