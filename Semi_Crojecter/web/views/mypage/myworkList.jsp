@@ -19,13 +19,6 @@
 		border: solid 1px black;
 	}
 	
-	.card-title{
-
-		background:black; 
-		color:white;
-		text-decoration: none;
-	}
-	
 	.card-text{
 
 		
@@ -58,30 +51,38 @@
 	<div class="col-md-2"></div>
 	<div class="col-md-8" style="margin-bottom: 50px; margin-top: 50px;">
 		<% if(glist.size() > 0) { %>
-		<% for (Gallery gal : glist) { %>
-			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
+		<% for (Gallery g : glist) { %>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-				<input type="hidden" value="<%= gal.getBid() %>" />
-				<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
-				<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
-				 	alt="Card image cap" class="gallery">
-				</a>
+			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>">
+			<% if(g.getFName() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= g.getFName() %>">
+			<% } else { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+			<% } %>
+			</a>
 				<div class="card-body">
-					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
-					<p class="card-text"><a href=""><%= gal.getGtag() %></a></p>
-					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= gal.getBcount() %>
-					</button>
-					<button onclick="addLike();" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-						 alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= gal.getGlike() %>
-					</button>
-					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;" />
-					</button>
+					<h5 class="card-title"><%= g.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>"><%= g.getBtitle() %></a></h5>
+					<% if(g.getgTag() != null) {
+						String tags[] = g.getgTag().split(",");
+						for(int i = 0; i < tags.length; i++) { %>
+						<a style="text-decoration:none;" href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
+						<% }
+					} else {
+						
+					} %>
+					<br>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= g.getBcount() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= g.getLikeCnt() %>
+					</label>
+					<label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= g.getCommCnt() %>
+					</label>
 				</div>
 			</div>
-			<%} }   else { %>
+		<% } }   else { %>
 			<div class="alarm" align="center">아직 업로드한 작품이 없습니다.</div>
 		<% } %>
 		</div>
