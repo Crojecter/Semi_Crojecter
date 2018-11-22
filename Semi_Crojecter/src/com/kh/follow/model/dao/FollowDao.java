@@ -201,7 +201,10 @@ public class FollowDao {
 
 				pstmt.setInt(1, Integer.parseInt(wid));
 				String msg = mname +" 님이 팔로우했습니다.";
-				pstmt.setString(2, msg);	
+				pstmt.setString(2, msg);
+				
+				int result = pstmt.executeUpdate();
+				System.out.println("result: " + result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
