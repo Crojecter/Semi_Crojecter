@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="com.kh.member.model.vo.*"%>
+<% 
+	Member m2 = (Member) request.getAttribute("myMember");	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -69,28 +72,30 @@
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
 			<input type="file" name="file" id="btnProfile" style="display:none;" onchange="updateProfile();"/>
 		</form>
-		<p id="profileName"><%=m.getMname()%>님의 페이지</p>
+		<p id="profileName"><%=m2.getMname()%>님의 페이지</p>
 		
+		<% if(m.getMid() == m2.getMid()) { %>
 		<p class=proMenu>
-		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
+		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
 		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
 		<br>
 		</p>
+		<% } %>
 	</div>
 	<br>
 	<div class="menu" align="center">
 		<table>
 			<tr>
 				<td class="menuMenu"><a
-					href="/crojecter/mypageView.do?mid=<%=m.getMid()%>">About</a></td>
+					href="/crojecter/mypageView.do?mid=<%=m2.getMid()%>">About</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/mworkView.do?mid=<%=m.getMid()%>">Works</a></td>
+					href="/crojecter/mworkView.do?mid=<%=m2.getMid()%>">Works</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/collectView.do?mid=<%=m.getMid()%>">Collect</a></td>
+					href="/crojecter/collectView.do?mid=<%=m2.getMid()%>">Collect</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/followingView.do?mid=<%=m.getMid()%>">Followings</a></td>
+					href="/crojecter/followingView.do?mid=<%=m2.getMid()%>">Followings</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/followerView.do?mid=<%=m.getMid()%>">Followers</a></td>
+					href="/crojecter/followerView.do?mid=<%=m2.getMid()%>">Followers</a></td>
 			</tr>
 		</table>
 	</div>
@@ -98,7 +103,7 @@
 	<script>
 
 	$(function() {
-		$('#profileImg').attr('src', "../../resources/profileFiles/<%= m.getMprofile() %>");
+		$('#profileImg').attr('src', "../../resources/profileFiles/<%= m2.getMprofile() %>");
 	});
 		
 	function updateProfile() {

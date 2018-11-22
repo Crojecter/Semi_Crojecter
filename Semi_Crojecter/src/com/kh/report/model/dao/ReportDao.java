@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.close;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -101,18 +102,26 @@ public class ReportDao {
 			while(rset.next()){
 				Report r = new Report();
 				
-				r.setRdate(rset.getDate("rdate"));
+				r.setRid(rset.getInt("rid"));
+				r.setRreason(rset.getInt("rreason"));
 				
-				if(rset.getInt("rreason")==5) {
+				if(r.getRreason() == 5) {
 					r.setRetc(rset.getString("retc"));
 				} else {
 					r.setRetc(rset.getString("rcontent"));
 				}
 				
-				r.setMname(rset.getString("mname"));
-				r.setCwriter(rset.getString("cwriter"));
+				r.setRdate(rset.getDate("rdate"));
+				r.setMid(rset.getInt("mid"));
 				r.setBid(rset.getInt("bid"));
 				r.setCid(rset.getInt("cid"));
+				r.setMname(rset.getString("mname"));
+				
+				if(r.getCid() > 0) {
+					r.setCwriter(rset.getString("cname"));
+				} else {
+					r.setCwriter(rset.getString("bname"));
+				}
 				
 				list.add(r);
 			}

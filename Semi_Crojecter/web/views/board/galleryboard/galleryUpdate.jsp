@@ -16,13 +16,16 @@
 	rel="stylesheet">
 
 <style>
+
 body {
 	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
 }
 
 .sidebar {
 	width: 100%;
 	height: 50px;
+	border: 1px solid lightgray; 
 }
 
 .thumbnailArea {
@@ -30,18 +33,24 @@ body {
 	height: 150px;
 	border: 1px solid lightgray; 
 	text-align: center;
-}
-
-#insertBtn {
-	width: 100%;
-	height: 50px;
-	font-size: 20px;
+	margin-bottom: 5px;
 }
 
 #titleImg {
 	width: 100%;
 	height: 100%;
 	border: none;
+}
+
+.uploadBtn {
+	width: 100%;
+    height: 50px;
+    border: 1.5px solid lightblue;
+    background: lightblue;
+    color: black;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
 }
 </style>
 </head>
@@ -59,15 +68,19 @@ body {
 				<input type="file" name="thumbnailInput" id="thumbnailInput" onchange="LoadImg(this)">
 			</div>
 			
-			<div class="col-md-6">
+			<div class="col-md-6"
+				 style="background: white; padding-top: 10px; 
+				 background-color: rgba( 255, 255, 255, 0.5 ); margin-bottom: 50px;">
 				<input type="text" class="form-control" id="title" name="title" value="<%=g.getBtitle()%>">
 				<textarea id="summernote" name="content"><%=g.getBcontent()%></textarea>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2"
+				 style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" /> 
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea">					
 					<img id="titleImg">
-					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
+					<div id="thumbnailLabel" class="tagText"></div>
+				</div>
 				<select class="sidebar" name="category" id="category">
 					<option value="1">TEXT</option>
 					<option value="2">IMAGE</option>
@@ -84,7 +97,7 @@ body {
 				</select> 
 				<input type="text" name="tags" data-role="tagsinput" value="<%=g.getGtag()%>" id="tagsinput" class="tagsinput">
 
-				<button class="btn btn-success" id="insertBtn" onclick="insertGallery();">업로드</button>
+				<button class="uploadBtn" id="insertBtn" onclick="insertGallery();">업로드</button>
 				
 			</div>
 			<div class="col-md-2"></div>

@@ -34,7 +34,7 @@ span {
 	<div class="outer">
 		<h1>서비스 에러 발생!</h1>
 	<% if(e != null) { %>
-		<h3 style="color:hotpink;">에러명:: <%= e.getMessage() %></h3>
+		<h3 style="color:orange;">에러명:: <%= e.getMessage() %></h3>
 	<% } %>
 		<h4><span><%= msg.charAt(0) %></span><%= msg.substring(1) %><br><br>
 		전송 값을 확인해 보시고, 이상이 없을 시 <br>

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.payment.model.vo.*, java.util.*"%>
 <%
-	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("list"); 
+	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("plist"); 
 	System.out.println("plist : " + plist);
 %>
 <!DOCTYPE html>
@@ -42,13 +42,12 @@
 <body>
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
 <div class="searchArea">
-	<select id="searchMember" name="searchMember">
-		<option>---</option>
+	<select id="searchCondition" name="searchCondition">
 		<option value="name">이름</option>
 		<option value="email">이메일</option>
 	</select>
-		<input type="search">
-		<button type="button" onclick="search();">검색하기</button>
+	<input type="search" id="keyword" placeholder="검색어를 입력하세요!">
+	<button type="button" onclick="search();">검색하기</button>
 </div>
 <table>
 	<tr>
@@ -68,17 +67,12 @@
 		<td><%= p.getPhodu() %></td>		
 	</tr>
 	<% } %>
-    
-<<<<<<< HEAD
-=======
-    
-    
 
->>>>>>> refs/remotes/origin/master
 </table>
 <script>
 	function search(){
-		location.href="<%=request.getContextPath()%>/searchPayment.do?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
+		location.href="<%=request.getContextPath()%>/searchPayment.do?con="
+				+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
 	}
 </script>
 </body>

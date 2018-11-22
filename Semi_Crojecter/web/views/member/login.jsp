@@ -13,10 +13,13 @@
 <meta name="google-signin-client_id" content="47962283340-c9v8pn66vso3ktgruqjj7vi40ne4kle3.apps.googleusercontent.com">
 <script src="https://apis.google.com/js/platform.js?onload=onLoadGoogleCallback" async defer></script>
 <style>
+
 	.loginInput{
-		width:250px;
+		width:180px;
 		height:25px;
-		margin:5px 10px 1px 10px;
+		margin-left:5px;
+		margin-top:10px;
+		margin-bottom:10px;
 		border:1px solid gray;
 	}
 	#loginLabel{
@@ -31,24 +34,27 @@
 		border:1px solid tomato;
 		text-align:center;
 		border-radius:5px;
+		width:220px;
 		height:40px;
 		font-size:15px;
 		margin:1px 10px 1px 10px;
 	}
+	
 	.loginImg{
 		border:0px;
 		width:25px;
 		height:25px;
 	}
+	
 	.wrapper{
 		width:290px;
 		margin:0 auto;
-		margin-top:210px;
-		margin-bottom:220px;
+		margin-top: 200px;
 		border:1px solid black;
 		border-radius:20px;
 		padding:10px 10px 10px 10px;
 	}
+	
 	.label{
 		color:red;
 		text-align:center;
@@ -56,11 +62,19 @@
 		width:auto;
 		margin:1px 10px 1px 10px;
 	}
+	
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}
 </style>
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
-	<div class="wrapper">
+	<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="wrapper">
 		<form action="<%=request.getContextPath()%>/login.do" method="post" id="login" name="login">
 			<table>
 				<tr>
@@ -70,7 +84,7 @@
 					<td colspan="2" align="center"><img
 						src="<%=request.getContextPath()%>/resources/images/user.png"
 						class="loginImg" /> <input type="email" name="email" id="email"
-						class="loginInput" placeholder="User-email" style="width: 180px"/>
+						class="loginInput" placeholder="User-email"/>
 					</td>
 				</tr>
 				<tr>
@@ -80,7 +94,7 @@
 					<td colspan="2" align="center"><img
 						src="<%=request.getContextPath()%>/resources/images/pw.png"
 						class="loginImg" /> <input type="password" name="password" id="password"
-						class="loginInput" placeholder="****" style="width: 180px" /></td>
+						class="loginInput" placeholder="****"/></td>
 				</tr>
 				<tr>
 					<td colspan="2"><label id="labelPwd" class="label" style="display:none;"></label></td>
@@ -104,7 +118,7 @@
 						style="padding-right:20px; text-decoration: none;">회원가입</a></td>
 				</tr>
 				<tr>
-					<td colspan="2"><hr /></td>
+					<td colspan="2"><br></td>
 				</tr>
 				<tr>
 					<td align="center" colspan="2" style="font-size:12px;">소셜 계정으로 회원가입 하기</td>
@@ -127,6 +141,9 @@
 			</table>
 			<input type="hidden" name="url" value="<%= request.getHeader("referer") %>"/>
 		</form>
+	</div>
+	</div>
+	<div class="col-md-2"></div>
 	</div>
 
 	<div id="fb-root"></div>

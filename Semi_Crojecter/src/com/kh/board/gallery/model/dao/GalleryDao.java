@@ -284,8 +284,11 @@ public class GalleryDao {
 			
 				pstmt.setString(1, af.getFname());
 				pstmt.setInt(2, bid);
+				
+				System.out.println("af.getFname() : " + af.getFname());
+				System.out.println("bid : " + bid);
 
-				result = pstmt.executeUpdate();
+				result += pstmt.executeUpdate();
 
 		} catch (SQLException e) {
 

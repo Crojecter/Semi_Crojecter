@@ -11,10 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.board.gallery.model.dao.GalleryDao;
 import com.kh.follow.model.vo.Follow;
-import com.kh.payment.model.vo.Payment;
-import com.kh.spon.model.vo.Spon;
 
 public class FollowDao {
 	
@@ -160,6 +157,7 @@ public class FollowDao {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mid);
+			pstmt.setInt(2, mid);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Follow>();
@@ -170,6 +168,7 @@ public class FollowDao {
 				
 				f.setFollowerid(rset.getInt("followerid"));
 				f.setFollowername(rset.getString("mname"));
+				f.setChk(rset.getString("chk"));
 				
 				list.add(f);
 			} 

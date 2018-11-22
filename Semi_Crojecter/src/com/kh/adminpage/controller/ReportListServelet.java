@@ -38,7 +38,7 @@ public class ReportListServelet extends HttpServlet {
 		
 		if(list != null){
 			
-			request.setAttribute("list", list);
+			request.setAttribute("rlist", list);
 			request.getRequestDispatcher("views/adminpage/reportlistView.jsp").forward(request, response);
 			
 		} else {

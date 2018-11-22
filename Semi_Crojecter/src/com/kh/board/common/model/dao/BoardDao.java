@@ -43,6 +43,7 @@ public class BoardDao {
 			pstmt.setString(2, keyword);
 			pstmt.setString(3, keyword);
 			pstmt.setString(4, keyword);
+			pstmt.setString(5, keyword);
 			rset = pstmt.executeQuery();
 			
 			bList = new ArrayList<Board>();
@@ -59,7 +60,11 @@ public class BoardDao {
 				b.setBtype(rset.getInt("BTYPE"));
 				b.setBwriter(rset.getInt("BWRITER"));
 				
-				b.setTag(rset.getString("GTAG"));
+				b.setjTag(rset.getString("JTAG"));
+				b.setgTag(rset.getString("GTAG"));
+		
+				b.setLikeCnt(rset.getInt("LIKECNT"));
+				b.setCommCnt(rset.getInt("COMMCNT"));
 				b.setFname(rset.getString("FNAME"));
 				b.setMname(rset.getString("MNAME"));
 				b.setMprofile(rset.getString("MPROFILE"));

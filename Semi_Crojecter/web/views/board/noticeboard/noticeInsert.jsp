@@ -15,17 +15,18 @@
 <style>
 body {
 	font-family: 'Nanum Gothic', sans-serif;
+	background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
 }
 
-.sidebar {
+.uploadBtn {
 	width: 100%;
-	height: 50px;
-}
-
-#insertBtn {
-	width: 100%;
-	height: 50px;
-	font-size: 20px;
+    height: 50px;
+    border: 1.5px solid lightblue;
+    background: lightblue;
+    color: black;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-size: 16px;
 }
 
 .thumbnailArea {
@@ -49,17 +50,18 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/nInsert.no" method="post" >
+	<form id="insertform" action="<%=request.getContextPath()%>/nInsert.no" method="post" >
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
-			<div class="col-md-6">
+			<div class="col-md-6" style="background: white; padding-top: 10px; 
+				 background-color: rgba( 255, 255, 255, 0.5 ); margin-bottom: 100px;">
 				<input type="text" class="form-control" id="title" name="title"
 					placeholder="제목을 입력하세요.">
 				<textarea id="summernote" name="content"></textarea>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
 				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
-				<button class="btn btn-success" id="insertBtn" type="submit" onclick="insertNotice();">업로드</button>
+				<button class="uploadBtn" id="insertBtn" type="submit" onclick="insertNotice();">업로드</button>
 			</div>
 			<div class="col-md-2"></div>
 		</div>
@@ -124,6 +126,8 @@ body {
 			event.preventDefault();			
 		}
 		</script>
+		
+		<%@ include file="../../common/footer.jsp"%>
 
 </body>
 </html>

@@ -13,6 +13,7 @@ public class Member implements Serializable {
 	private Date Mdate;
 	private int Mhodu;
 	private int Msid;
+	private String Mstatus;
 	
 	public Member() {
 		super();
@@ -92,6 +93,14 @@ public class Member implements Serializable {
 		Msid = msid;
 	}
 	
+	public String getMstatus() {
+		return Mstatus;
+	}
+
+	public void setMstatus(String mstatus) {
+		Mstatus = mstatus;
+	}
+
 	@Override
 	public String toString() {
 		return "Member [Mid=" + Mid + ", Mprofile=" + Mprofile + ", Memail=" + Memail + ", Mpwd=" + Mpwd + ", Mname="

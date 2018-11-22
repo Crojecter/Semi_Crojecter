@@ -3,7 +3,6 @@
     
 <%
 	ArrayList<Likeit> list = (ArrayList<Likeit>)request.getAttribute("list");
-
 %>
 <!DOCTYPE html>
 <html>
@@ -38,19 +37,20 @@
 <%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/collectView.do" method="post">
 <div class="collectList">
-		<% for(Likeit l : list){ %>
-		<%-- <% System.out.println("gList jsp : "+gList); %> --%>
-			<div id="gal-list" class="card">
-			<a href="">
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
-			alt="Card image cap" class="gallery"></a>
-				<div class="card-body">
-					<h5 class="card-title"><a class="classA" name="title" href=""><%= l.getBtitle() %></a></h5>
-					<h5 class="card-title"><a href=""><%= l.getMname() %></a></h5>
-				</div>
-			</div>
-		<% } %>
+	<% if(list.size() > 0) { %>
+	<% for(Likeit l : list){ %>
+	<div id="gal-list" class="card">
+		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
+						alt="Card image cap" class="gallery"></a>
+		<div class="card-body">
+			<h5 class="card-title"><a class="classA" href=""><%= l.getBtitle() %></a></h5>
+			<h5 class="card-title"><a href=""><%= l.getMname() %></a></h5>
 		</div>
+	</div>
+	<% } } else { %>
+		<p>아직 좋아요한 작품이 없습니다.</p>
+	<% } %>
+</div>
 </form>
 </body>
 </html>
