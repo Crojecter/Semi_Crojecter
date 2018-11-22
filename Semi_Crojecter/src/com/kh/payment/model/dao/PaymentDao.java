@@ -154,11 +154,12 @@ private Properties prop = null;
 				p.setPmoney_1(rset.getInt("PAYMONEY"));
 				p.setPdate(rset.getDate("pdate"));
 				p.setPmoney(rset.getInt("pmoney"));
+				p.setPhodu(rset.getInt("phodu"));
 		
 				list.add(p);
 
 			}
-			System.out.println("list : " + list);
+			System.out.println("PAYMENT list : " + list);
 		} catch (SQLException e) {
 		
 			e.printStackTrace();

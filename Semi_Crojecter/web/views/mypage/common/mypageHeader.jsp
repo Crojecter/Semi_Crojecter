@@ -17,7 +17,6 @@
 		font-weight:bold;
 		font-size:23px;
 		background-image: url("<%=request.getContextPath()%>/resources/images/mypage.jpg");
-		
 	}
 	
 	.menu {
@@ -34,11 +33,10 @@
 		color: darkgray;
 		font-size:23px;
 		font-weight:bold;
-
-
 	}
 	
 	.form {
+	
 		border: 1px solid black;
 	}
 
@@ -66,11 +64,8 @@
 		border: solid 1px gray;
 	}		
 
-
 </style>
-
 </head>
-
 <body>
 	<%@ include file="../../common/header.jsp"%>
 	<div class="profileArea">
@@ -82,8 +77,8 @@
 		
 		<% if(m.getMid() == m2.getMid()) { %>
 		<p class=proMenu>
-		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
-		<a class="profileMenus" id="button" href="/crojecter/mUpdateProfile.me?mid=<%=m2.getMid()%>">정보수정</a>
+		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do">결제내역</a> 
+		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
 		<br>
 		</p>
 		<% } %>
@@ -147,7 +142,6 @@
 			}
 		});
 	}
-	
 	</script>
 </body>
 </html>

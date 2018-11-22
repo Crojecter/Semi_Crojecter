@@ -647,4 +647,30 @@ public class GalleryDao {
 		//for(Notice n : list) System.out.println(list);
 		return searchGalleryList;
 	}
+
+	public int countComment(Connection con, int bid) {
+		int countComment = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("countComment");
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, bid);
+			rset = pstmt.executeQuery();
+
+			if(rset.next()){
+				countComment = Integer.parseInt(rset.getString(1));
+				System.out.println("countComment dao : "+ countComment);
+			}
+		} catch (SQLException e) {	
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return countComment;
+	}
 }
