@@ -190,6 +190,9 @@ body {
 			else if($('#cclid').val() == null) {
 				alert("ccl을 선택해주세요.");				
 			}
+			else if(!$('#tagsinput').val()) {
+				alert("태그를 한 개 이상 입력해주세요.");				
+			}
 			else $("#insertform").submit();
 			
 			event.preventDefault();			

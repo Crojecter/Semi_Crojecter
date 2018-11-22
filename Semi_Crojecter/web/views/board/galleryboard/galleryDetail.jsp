@@ -159,7 +159,7 @@
                <% if( clist != null ) { %>
                <% for(BoardComment bc : clist) { %>
                <div class="comment">
-                  <div class="row commentInfo" style="display:inline; height:30px;">
+                  <div class="row commentInfo" style="display:inline;">
                      <div class="col-md-5" style="padding:0;">
                      <input type="hidden" name="cid" value="<%=bc.getCid()%>"/>
                      <span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
