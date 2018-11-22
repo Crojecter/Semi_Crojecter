@@ -105,6 +105,6 @@ text-align:center;
 				</tr>
 			</table>
 	</div>
-
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
