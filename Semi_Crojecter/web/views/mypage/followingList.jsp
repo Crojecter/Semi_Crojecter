@@ -15,18 +15,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-
 	#btnFollow {
 	
 	width: 130px;
 	height: 35px;
 	margin-bottom:20px;
 	}
-
-
-
     #btnFollow.btn.btn-follow active{
-
         background:lightblue;
         color:black;
         height:30px;
@@ -37,7 +32,6 @@
     }
     
      #btnFollow.btn.btn-follow{
-
       background:lightblue;
         color:black;
         height:40px;
@@ -61,9 +55,7 @@
 	
 	.form {
 	
-
 	margin-bottom:20px;
-
 	}
 	
 	.table {
@@ -72,19 +64,23 @@
 	
 	}
 	
-
     .followList {
-
         border:1px black solid;
-
     }
     
     .p-follow {
     
     padding-bottom:30px;
     }
-    
 
+	.alarm {
+	
+	color:black;
+	padding-top:100px;
+	font-weight:bold;
+	
+	}
+    
 </style>
 
 </head>
@@ -92,6 +88,7 @@
 <%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/followingView.do" method="post">
 <div class="followlist">
+	<% if(list.size() > 0) { %>
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
 		<tr class="set">
@@ -109,10 +106,12 @@
 		</tr>
 		<% } %>
 	</table>
+	<% } else { %>
+		<div class="alarm" align="center">아직 팔로잉 한 회원이 없습니다.</div>
+	<% } %>
 </div>
 </form>
 <script>
-
 	function switchfollow(obj){
 		$.ajax({
 			url : '/crojecter/fSwitch.fo',
@@ -136,7 +135,7 @@
 			}
 		});
 	}
-
 </script>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

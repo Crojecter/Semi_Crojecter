@@ -47,9 +47,7 @@
 	width:250px;
 	height:250px;
 	}
-
 	
-
 </style>
 </head>
 <body>
@@ -59,8 +57,14 @@
 	<% if(list.size() > 0) { %>
 	<% for(Likeit l : list){ %>
 	<div id="gal-list" class="card">
-		<a href=""><img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
-						alt="Card image cap" class="gallery"></a>
+	<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= l.getBid() %>">
+	<% if(l.getFname() != null) { %>
+	<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= l.getFname() %>"
+	alt="Card image cap" class="gallery">
+	<% } else { %>
+	<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+	<% } %>
+	</a>
 		<div class="card-body">
 			<h5 class="card-title"><a class="classA" href=""><%= l.getBtitle() %></a></h5>
 			<h5 class="card-title"><a href=""><%= l.getMname() %></a></h5>
@@ -71,5 +75,6 @@
 	<% } %>
 </div>
 </form>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

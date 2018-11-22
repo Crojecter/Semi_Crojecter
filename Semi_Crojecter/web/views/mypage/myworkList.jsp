@@ -20,19 +20,16 @@
 	}
 	
 	.card-title{
-
 		background:black; 
 		color:white;
 		text-decoration: none;
 	}
 	
 	.card-text{
-
 		
 	}
 	
 	.card-body{
-
 	}
 	
 	.alarm {
@@ -54,9 +51,15 @@
 		<% for (Gallery gal : glist) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-			<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
-			alt="Card image cap" class="gallery"></a>
+			<input type="hidden" value="<%= gal.getBid() %>" />
+			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= gal.getBid() %>"> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
+            <% if(gal.getFName() != null) { %>
+            <img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
+            alt="Card image cap" class="gallery">
+            <% } else { %>
+            <img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+            <% } %>
+            </a>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
 					<p class="card-text"><a href=""><%= gal.getGtag() %></a></p>
@@ -79,11 +82,12 @@
 			$(function(){
 				$("#gal-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
-					var bno = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.ga?bno=" + bno;
+					var bno = $(this).children().eq(0).val();
+					location.href="<%=request.getContextPath()%>/gSelectOne.ga?bid=" + bno;
 				})
 			});
 		</script>
 </form>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
