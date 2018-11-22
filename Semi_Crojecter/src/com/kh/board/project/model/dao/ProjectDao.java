@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Properties;
 
 import com.kh.board.attachedfile.model.vo.AttachedFile;
-import com.kh.board.gallery.model.vo.Gallery;
 import com.kh.board.project.model.vo.Project;
 
 public class ProjectDao {
@@ -346,7 +345,7 @@ public class ProjectDao {
 
 	public ArrayList<Project> selectProjectList(Connection con, int currentPage, int limit) {
 		
-		ArrayList<Project> list = null;
+		ArrayList<Project> projectList = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -360,29 +359,30 @@ public class ProjectDao {
 			int startRow = (currentPage -1) * limit +1;	
 			int endRow = startRow + limit -1;
 			
-			rset = pstmt.executeQuery();			
-			list = new ArrayList<Project>();
+			rset = pstmt.executeQuery();
+			projectList = new ArrayList<Project>();
 			
 			while(rset.next()){
 				
-				Project p = new Project();
+				Project pro = new Project();
 				// 갤러리분
-				p.setJid(rset.getInt("JID"));
-				p.setJend(rset.getDate("GEND"));
+				pro.setJid(rset.getInt("JID"));
+				pro.setJend(rset.getDate("JEND"));
+				pro.setJtag(rset.getString("JTAG"));
 				// 상속분
-				p.setBid(rset.getInt("BID"));
-				p.setBtype(rset.getInt("BTYPE"));
-				p.setBtitle(rset.getString("BTITLE"));
-				p.setBcontent(rset.getString("BCONTENT"));
-				p.setBcount(rset.getInt("BCOUNT"));
-				p.setBdate(rset.getDate("BDATE"));
-				p.setBstatus(rset.getString("BSTATUS"));
-				p.setBwriter(rset.getInt("BWRITER"));
-				// 
+				pro.setBid(rset.getInt("BID"));
+				pro.setBtype(rset.getInt("BTYPE"));
+				pro.setBtitle(rset.getString("BTITLE"));
+				pro.setBcontent(rset.getString("BCONTENT"));
+				pro.setBcount(rset.getInt("BCOUNT"));
+				pro.setBdate(rset.getDate("BDATE"));
+				pro.setBstatus(rset.getString("BSTATUS"));
+				pro.setBwriter(rset.getInt("BWRITER"));
+				//
+				pro.setFname(rset.getString("FNAME"));
 				
-				
-				list.add(p);
-				//System.out.println("selectGalleryList Dao : "+ list);
+				projectList.add(pro);
+				System.out.println("selectProjectList Dao : "+ projectList);
 			}
 			
 		} catch (SQLException e) {
@@ -391,7 +391,7 @@ public class ProjectDao {
 			close(rset);
 			close(pstmt);
 		}
-		return list;
+		return projectList;
 	}
 
 	public int getCountProjectList(Connection con) {

@@ -16,42 +16,33 @@
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
 
-	#btnFollow {
-	
-	background:lightblue;
-	font-weight:bold;
-	width: 130px;
-	height: 35px;
-	margin-bottom:20px;
+	.btn-follow {
+		background:lightblue;
+		font-weight:bold;
+		width: 130px;
+		height: 35px;
+		margin-bottom:20px;
 	}
 	
-	#name {
-	
-	color:darkgray;
-	padding-right:50px;
-	padding-left:100px;
-	font-size:20px;
-	padding-top:30px;
-	
-	}
-	
-	.form {
-	
-
-	margin-bottom:20px;
-
-	}
-	
-	.table {
-	
-	width:50%;
+	.name {
+		color:darkgray;
+		padding-right:50px;
+		padding-left:100px;
+		font-size:20px;
+		padding-top:30px;
 	
 	}
 	
-	.set {
+	.form {	
+		margin-bottom:20px;
+	}
 	
-	border:solid 1px red;
+	.table {	
+		width:50%;	
+	}
 	
+	.set {	
+		border:solid 1px red;	
 	}
 </style>
 </head>
@@ -62,13 +53,16 @@
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
 		<tr class="set">
-			<td id="name" name="name"><%=f1.getFollowname() %></td>
-			<td>
-        
+			<td class="name" name="name"><%=f1.getFollowname() %></td>
+			<td>    
 				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> <br>
-				<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
-				<p id="p-follow" style="color: black">언팔로우</p></div>
-
+				<% if(f1.getChk().equals("Y")){ %>
+					<div class="btn btn-follow active" onclick="switchfollow(this);">
+					<p class="p-follow" style="color: black">언팔로우</p></div>
+				<% } else {%>
+					<div class="btn btn-follow" onclick="switchfollow(this);">
+					<p class="p-follow" style="color: black">팔로우</p></div>
+				<% } %>
 			</td>
 		</tr>
 		<% } %>

@@ -79,7 +79,7 @@ p {
 		</div>
 		<% if(m != null && m.getMname().equals("관리자")){ %>
 		<!-- 인라인 호출방식 -->
-		<button onclick="location.href='<%= request.getContextPath() %>/board/noticeInsert.jsp'">작성하기</button>
+		<button onclick="location.href='<%= request.getContextPath() %>/views/board/noticeboard/noticeInsert.jsp'">작성하기</button>
 		<% } %>
 
 		<a name="bottom"></a>
@@ -92,7 +92,8 @@ p {
 				$(this).parent().css({"background":"lightgray"});
 			}).click(function(){
 				var bid = $(this).parent().children().eq(0).val();
-				location.href="<%=request.getContextPath()%>/nSelectOne.no?bid=";				
+				console.log(bid);
+				location.href='<%=request.getContextPath()%>/nSelectOne.no?bid='+bid;
 			});
 		});
 		//
