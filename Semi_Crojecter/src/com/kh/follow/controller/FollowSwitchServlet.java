@@ -31,10 +31,11 @@ public class FollowSwitchServlet extends HttpServlet {
 		
 		String wid = request.getParameter("wid"); //글쓴이
 		String mid = request.getParameter("mid"); //로그인한회원
+		String mname = request.getParameter("mname"); //로그인한회원이름	
 		
-		System.out.println("mid : " + mid + " / wid : " + wid);
+		System.out.println("mid : " + mid + " / wid : " + wid + " / mname : " + mname);
 		
-		int result = new FollowService().switchFollow(wid, mid);
+		int result = new FollowService().switchFollow(wid, mid, mname);
 		System.out.println("fSwitch.fo result : " + result);
 		
 		response.getWriter().print((result == 0) ? "error" : (result == 1)? "delete" : "insert");

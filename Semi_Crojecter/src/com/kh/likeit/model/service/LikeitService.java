@@ -26,7 +26,7 @@ public class LikeitService {
 		return result;
 	}
 
-	public int switchLikeit(int mid, int bid) {
+	public int switchLikeit(int mid, int bid, int wid, String mname, String btitle) {
 		
 		Connection con = getConnection();
 		
@@ -36,6 +36,7 @@ public class LikeitService {
 			result = lDao.deleteLikeit(con, mid, bid) * 1;
 		} else {
 			result = lDao.insertLikeit(con, mid, bid) * 2;
+			lDao.insertAlarm(con, mid, wid, mname, btitle);
 		}
 		
 		if(result > 0) commit(con);

@@ -400,7 +400,8 @@
             type : 'get',
             data : {
                mid : '<%= m.getMid() %>',
-               wid : '<%= g.getBwriter() %>'
+               wid : '<%= g.getBwriter() %>',
+               mname : '<%= m.getMname() %>'
             }, 
             success : function(data){
                if(data == 'insert') {
@@ -425,7 +426,10 @@
             type : 'get',
             data : {
                mid : '<%= m.getMid() %>',
-               bid : '<%= g.getBid() %>'
+               wid : '<%= g.getBwriter() %>',
+               bid : '<%= g.getBid() %>', 
+               mname : '<%= m.getMname() %>',
+               btitle : '<%= g.getBtitle() %>'
             }, 
             success : function(data){
                if(data == 'insert') {

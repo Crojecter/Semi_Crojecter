@@ -32,9 +32,10 @@
 </head>
 <body style="height:100%;">
 		<%@ include file="../../common/header.jsp"%>
-		<div class="projectList">
+		<div class="row projectList" style="margin-bottom: 100px;">
+		<div class="col-md-2"></div>
 		
-
+		<div class="col-md-8" style="padding: 0;">
 		<% for (Project pro : projectList) { %>
 			<div id="pro-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<div style="width: 300px; height: 300px; display: inline-block; ">
@@ -64,8 +65,12 @@
 					alt="" style="height:22px;">수</button>
 					</div>
 				</div>
+				
+				</div>
+				<% } %>
+				<div class="col-md-2"></div>
 			</div>
-		<% } %>
+		
 		</div>
 		<script>
 			$(function(){

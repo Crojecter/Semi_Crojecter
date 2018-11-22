@@ -24,11 +24,14 @@
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
+	body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");		
+	}
 	.any{ margin-left:10px; margin-right:10px; }
 	.button{
-		background:tomato;
-		color:white;
-		border:1px solid tomato;
+		background: lightblue;
+		border:1px solid lightblue;
 		text-align:center;
 		border-radius:5px;
 		height:50px;
@@ -39,7 +42,7 @@
 	.wrapper{
 		width:780px;
 		margin:0 auto;
-		margin-top:110px;
+		margin-top: 50px;
 		margin-bottom:105px;
 	}
 </style>
@@ -48,7 +51,7 @@
 	<%@ include file="../common/header.jsp"%>
 	<div class="wrapper">
 		<div style="display: inline-block;">
-			<div style="float: left; margin-right:50px; border: 1px solid black; height: auto; width: 370px; margin: 10px 10px 10px 10px">
+			<div style="float: left; background: white; margin-right:50px; border: 1px solid lightgray; height: auto; width: 370px; margin: 10px 10px 10px 10px">
 				<div>
 					<h3 class="any">닉네임 찾기</h3>
 					<hr />
@@ -81,7 +84,7 @@
 			</div>
 
 			<div
-				style="border: 1px solid black; height: auto; width: 280px; margin: 120px 10px 120px 10px; float: right; margin-left:50px;">
+				style="border: 1px solid lightgray; background: white; height: auto; width: 280px; margin: 120px 10px 120px 10px; float: right; margin-left:50px;">
 				<h3 class="any">비밀번호 찾기</h3>
 				<hr />
 				<p class="any">
