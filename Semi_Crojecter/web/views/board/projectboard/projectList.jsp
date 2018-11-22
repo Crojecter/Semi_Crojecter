@@ -3,13 +3,7 @@
  
 <% 
 	ArrayList<Project> projectList = (ArrayList<Project>)request.getAttribute("projectList"); 
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
-	//System.out.println("PageInfo gl : "+ pi);
-	int currentPage = pi.getCurrentPage();
-	int listCount = pi.getListCount();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage(); 
+
 %> 
  
 <!DOCTYPE html>
@@ -36,41 +30,35 @@
 		<div class="col-md-2"></div>
 		
 		<div class="col-md-8" style="padding: 0;">
+		<% if(projectList == null) { %>
+			해당 게시글이 존재하지 않습니다.
+		<% } else { %>
 		<% for (Project pro : projectList) { %>
-			<div id="pro-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-			<div style="width: 300px; height: 300px; display: inline-block; ">
-			<a href="">		
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>"
-			alt="Card image cap" class="project"></a>
-			</div>
+			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>">
+			<% if(pro.getFName() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFName() %>">
+			<% } else { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
+			<% } %>
+			</a>
 				<div class="card-body">
-					<h5 class="card-title"><a href=""><%= pro.getBtitle() %></a></h5>
-					<% if(pro.getJtag() != null) {
-						String tags[] = pro.getJtag().split(",");
-						for(int i = 0; i < tags.length; i++) { %>
-						<a href="<%= request.getContextPath()%>/search.all?keyword=<%= tags[i] %>">#<%= tags[i] %></a>
-						<% }
-					} else {
-						
-					} %>
-					<div>
+					<h5 class="card-title"><%= pro.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= pro.getBcount() %>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" style="height:22px;"><%= pro.getBcount() %>
 					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></label>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" style="height:22px;"><%= pro.getLikeCnt() %>
+					</label>
 					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</label>
-					</div>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" style="height:22px;"><%= pro.getCommCnt() %>
+					</label>
 				</div>
-				
-				</div>
-				<% } %>
-				<div class="col-md-2"></div>
 			</div>
-		
+				<% } %>
+			<% } %>
+			</div>
+			<div class="col-md-2"></div>
 		</div>
 		<script>
 			$(function(){
