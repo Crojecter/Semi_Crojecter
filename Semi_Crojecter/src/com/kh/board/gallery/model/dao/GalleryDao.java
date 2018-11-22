@@ -530,23 +530,28 @@ public class GalleryDao {
 			while(rset.next()){
 				Gallery g = new Gallery();
 				
-				g.setGid(rset.getInt("GID"));
-				g.setGcategoryid(rset.getInt("GCATEGORYID"));
-				g.setGtag(rset.getString("GTAG"));
-				g.setGlike(rset.getInt("GLIKE"));
-				// 상속분
 				g.setBid(rset.getInt("BID"));
-				g.setBtype(rset.getInt("BTYPE"));
+				
+				g.setFName(rset.getString("FNAME"));
+				g.setMname(rset.getString("MNAME"));
 				g.setBtitle(rset.getString("BTITLE"));
+				g.setgTag(rset.getString("GTAG"));
 				g.setBcount(rset.getInt("BCOUNT"));
+				g.setLikeCnt(rset.getInt("LIKECNT"));
+				g.setCommCnt(rset.getInt("COMMCNT"));
+				
+				g.setBcontent(rset.getString("BCONTENT"));
 				g.setBdate(rset.getDate("BDATE"));
+				g.setBrcount(rset.getInt("BRCOUNT"));
 				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBtype(rset.getInt("BTYPE"));
 				g.setBwriter(rset.getInt("BWRITER"));
-				// 
-				g.setFname(rset.getString("FNAME"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGid(rset.getInt("GID"));
 				
 				glist.add(g);
 			}
+			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
