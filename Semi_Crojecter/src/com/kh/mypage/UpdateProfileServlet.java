@@ -60,7 +60,8 @@ public class UpdateProfileServlet extends HttpServlet {
 			int result = new MemberService().updateProfile(m);
 	
 			if (result > 0) {	
-				response.sendRedirect("views/mypage/mypageView.jsp");	
+				request.setAttribute("myMember", m);
+				request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);	
 			} else {	
 				request.setAttribute("msg", "게시글 작성 실패!");	
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);	

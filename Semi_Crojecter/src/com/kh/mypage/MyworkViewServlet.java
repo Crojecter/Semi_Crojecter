@@ -46,15 +46,12 @@ public class MyworkViewServlet extends HttpServlet {
 		System.out.println("work list : " + glist);
 		
 		if(glist != null){
-			
 			request.setAttribute("myMember", m);
 			request.setAttribute("glist", glist);
 			request.getRequestDispatcher("views/mypage/myworkList.jsp").forward(request, response);
-			
 		} else {
-			
 			request.setAttribute("msg", "조회 실패!");
-			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 	}
 

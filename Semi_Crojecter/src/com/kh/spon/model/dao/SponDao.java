@@ -8,14 +8,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.spon.model.vo.Spon;
-import com.kh.member.model.vo.Member;
-import com.kh.payment.model.vo.Payment;
-import com.kh.spon.model.dao.SponDao;
 
 public class SponDao {
 	
@@ -99,7 +95,7 @@ public class SponDao {
 				
 				s.setSdate(rset.getDate("sdate"));
 				s.setMname(rset.getString("mname"));
-				s.setShodu(rset.getInt("shodu"));
+				s.setShodu(rset.getInt("shoduu"));
 	
 				list.add(s);
 				
@@ -107,6 +103,50 @@ public class SponDao {
 			}
 			
 			System.out.println("SPON list : " + list);
+			
+		} catch (SQLException e) {
+		
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+	public ArrayList<Spon> receivedList(Connection con, int mid) {
+		ArrayList<Spon> list = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("receivedSpon");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);		
+			pstmt.setInt(1, mid);
+			rset = pstmt.executeQuery();
+			
+			list = new ArrayList<Spon>();
+			
+			while(rset.next()){
+				
+				Spon s = new Spon();
+				
+				s.setSdate(rset.getDate("sdate"));
+				s.setMname(rset.getString("mname"));
+				s.setShodu(rset.getInt("shoduu"));
+	
+				list.add(s);
+				
+				
+			}
+			
+			System.out.println("RECEIVED SPON list : " + list);
 			
 		} catch (SQLException e) {
 		
