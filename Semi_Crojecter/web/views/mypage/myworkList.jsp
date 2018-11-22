@@ -61,6 +61,7 @@
 		<% for (Gallery gal : glist) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+				<input type="hidden" value="<%= gal.getBid() %>" />
 				<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
 				<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
 				 	alt="Card image cap" class="gallery">
@@ -85,16 +86,14 @@
 		<% } %>
 		</div>
 	<div class="col-md-2"></div>
-
-		
 </div>
 
 		<script>
 			$(function(){
 				$("#gal-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
-					var bno = $(this).children().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.ga?bno=" + bno;
+					var bno = $(this).children().eq(0).val();
+					location.href="<%=request.getContextPath()%>/gSelectOne.ga?bid=" + bno;
 				})
 			});
 		</script>
