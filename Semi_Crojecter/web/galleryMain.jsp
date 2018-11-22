@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <%
  
-	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List"); 
-	System.out.println("GalleryList ArrayList : "+ gTop5List);
-	
+	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List");
  	
 %>
 <html>
@@ -80,35 +78,23 @@
 
 		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
-
-			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
-				
+			<button type="button" value="0" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gList.ga'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px">
+			</button>
 			
+			<button type="button" value="2" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=2'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px">
+			</button><!-- 2 -->		
+			<button type="button" value="3" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=3'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px">
+				</button><!-- 3 -->
+			<button type="button" value="1" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=1'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px">
+			</button><!-- 1 -->
+			<button type="button" value="4" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=4'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px">
+			</button><!-- 4 -->
 		</nav>
-		
-		<script>
-		function searchImg(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchAud(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchTxt(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchVid(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		</script>
 	
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>

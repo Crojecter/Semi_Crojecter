@@ -208,7 +208,7 @@
          <% }  %>
          </div>
          
-         <h4 align="center"><%=g.getMname()%></h4>
+         <h4 align="center" id="parentGetName"><%=g.getMname()%></h4>
 
          <div class="row" align="center" id="" style="margin-top: 10px;">
             <div class="col-md-6" style="padding:0;"><button class="btn-follow btnArea1" id="btnFollow">팔로우</button></div>         
@@ -400,7 +400,8 @@
             type : 'get',
             data : {
                mid : '<%= m.getMid() %>',
-               wid : '<%= g.getBwriter() %>'
+               wid : '<%= g.getBwriter() %>',
+               mname : '<%= m.getMname() %>'
             }, 
             success : function(data){
                if(data == 'insert') {
@@ -425,7 +426,10 @@
             type : 'get',
             data : {
                mid : '<%= m.getMid() %>',
-               bid : '<%= g.getBid() %>'
+               wid : '<%= g.getBwriter() %>',
+               bid : '<%= g.getBid() %>', 
+               mname : '<%= m.getMname() %>',
+               btitle : '<%= g.getBtitle() %>'
             }, 
             success : function(data){
                if(data == 'insert') {
