@@ -11,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
-import com.kh.report.model.service.ReportService;
-import com.kh.report.model.vo.Report;
 
 /**
  * Servlet implementation class MemberListServlet

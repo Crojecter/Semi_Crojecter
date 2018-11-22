@@ -42,6 +42,7 @@
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
 <form action="<%=request.getContextPath()%>/mworkView.do" method="post">
 <div class="galleryList">
+		<% if(glist.size() > 0) { %>
 		<% for (Gallery gal : glist) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
@@ -62,8 +63,10 @@
 					alt="" style="height:22px;"></button>
 				</div>
 			</div>
+		<% } } else { %>
+			<p>아직 업로드한 작품이 없습니다.</p>
 		<% } %>
-		</div>
+</div>
 		<script>
 			$(function(){
 				$("#gal-list").click(function(){

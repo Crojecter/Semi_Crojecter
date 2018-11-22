@@ -19,6 +19,53 @@ public class Board implements Serializable{
 	private String mprofile;
 	private String mname;
 
+	private String fname;
+	private String jTag;
+	private String gTag;
+	
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
+	}
+
+	public int getCommCnt() {
+		return commCnt;
+	}
+
+	public void setCommCnt(int commCnt) {
+		this.commCnt = commCnt;
+	}
+
+	private int likeCnt;
+	private int commCnt;
+	
+	public String getjTag() {
+		return jTag;
+	}
+
+	public void setjTag(String jTag) {
+		this.jTag = jTag;
+	}
+
+	public String getgTag() {
+		return gTag;
+	}
+
+	public void setgTag(String gTag) {
+		this.gTag = gTag;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
 	public Board() {}
 	
 	public Board(int bid, int btype, String btitle, String bcontent, int bcount, Date bdate, String bstatus,

@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.notice.model.service.NoticeService;
-import com.kh.board.notice.model.vo.Notice;
+import com.kh.member.model.service.MemberService;
+import com.kh.member.model.vo.Member;
 
 
 /**
@@ -39,6 +39,7 @@ public class MyworkViewServlet extends HttpServlet {
 		GalleryService gs = new GalleryService();
 		
 		int mid = Integer.parseInt(request.getParameter("mid"));
+		Member m = new MemberService().selectMember(mid);
 
 		glist = gs.searchGallery(mid);
 		
@@ -46,6 +47,7 @@ public class MyworkViewServlet extends HttpServlet {
 		
 		if(glist != null){
 			
+			request.setAttribute("myMember", m);
 			request.setAttribute("glist", glist);
 			request.getRequestDispatcher("views/mypage/myworkList.jsp").forward(request, response);
 			

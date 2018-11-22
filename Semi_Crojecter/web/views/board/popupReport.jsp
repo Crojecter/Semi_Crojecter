@@ -13,7 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <script src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
-<title>후원하기</title>
+<title>신고하기</title>
 <style>
 
 </style>

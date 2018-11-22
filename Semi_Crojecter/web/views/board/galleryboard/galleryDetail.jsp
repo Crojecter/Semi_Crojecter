@@ -173,6 +173,7 @@
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
                         <% } %>
                      </div>
+                     showReport(<%=g.getBid()%>, <%=bc.getCid()%>);
                      
                   </div>
                   <div class="comment commentContent">
@@ -198,7 +199,7 @@
          <% if(g.getMprofile() == null) { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
          <% } else { %>
-         <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/profileImg/<%=g.getMprofile()%>">
+         <img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=g.getMprofile()%>">
          <% }  %>
          </div>
          
@@ -215,7 +216,7 @@
          
          <div class="row" align="center" id="btnArea2" style="margin-top: 10px;">            
             <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showSpon();">후원</button></div>
-            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport();">신고</button></div>   
+            <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport(<%=g.getBid()%>, 0);">신고</button></div>   
             <!-- <input class="btn btnArea2" type="button" onclick="location.href='/crojecter/main.html'" value="목록"/> -->
          </div>
          <div class="row" align="center" id="btnArea3" style="margin-top: 10px;">
@@ -380,7 +381,7 @@
           var yPos = (screen.availHeight / 2) - 150;
           var b = bid;
           var c = cid;
-   
+          
           windowObj = window.open('<%= request.getContextPath() %>/views/board/popupReport.jsp?b='+b+'&c='+c,
                 '신고', 'width=500,height=550,top='+yPos+',left='+xPos
                 +',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
