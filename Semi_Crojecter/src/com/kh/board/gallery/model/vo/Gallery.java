@@ -6,6 +6,9 @@ import com.kh.board.common.model.vo.Board;
 
 public class Gallery extends Board implements Serializable {
 
+
+	private static final long serialVersionUID = 90998L;
+	
 	private int gid;				// 게시글 id
 	private int gcategoryid;		// 게시글 종류 id
 	private String gtag;			// 게시글 태그
@@ -18,9 +21,11 @@ public class Gallery extends Board implements Serializable {
 	
 	// 파일경로 조회용 코드
 	private String fname;
+	
 	public String getFname() {
 		return fname;
 	}
+	
 	public void setFname(String fname) {
 		this.fname = fname;
 	}

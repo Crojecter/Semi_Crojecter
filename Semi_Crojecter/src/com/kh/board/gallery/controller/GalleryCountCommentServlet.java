@@ -1,7 +1,7 @@
-package com.kh.mypage;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +9,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.likeit.model.service.LikeitService;
-import com.kh.likeit.model.vo.Likeit;
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
+import com.kh.board.gallery.model.service.GalleryService;
 
 /**
- * Servlet implementation class CollectViewServlet
+ * Servlet implementation class GalleryCountCommentServlet
  */
-@WebServlet("/collectView.do")
-public class CollectViewServlet extends HttpServlet {
+@WebServlet("/gCountCo.ga")
+public class GalleryCountCommentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CollectViewServlet() {
+    public GalleryCountCommentServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,21 +30,23 @@ public class CollectViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int mid = Integer.parseInt(request.getParameter("mpid"));
-		Member m = new MemberService().selectMember(mid);
-		
-		ArrayList<Likeit> list = null;
-		list = new LikeitService().searchLikeit(mid);
-		
-		if(list != null){
-			request.setAttribute("myMember", m);
-			request.setAttribute("list", list);
-			request.getRequestDispatcher("views/mypage/mycollectList.jsp").forward(request, response);
-		} else {
-			request.setAttribute("msg", "조회 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		// 댓글수 확인용 서블릿
+			GalleryService gs = new GalleryService();
+				
+			int countComment = 0;
+			
+			int bid = Integer.parseInt(request.getParameter("bid"));
+			
+			countComment = gs.countComment(bid);
+			
+			PrintWriter out = response.getWriter();
+			if(countComment < 0){
+				out.print(countComment);
+			}
+			else{
+				
+				out.print(countComment);
+			}
 	}
 
 	/**

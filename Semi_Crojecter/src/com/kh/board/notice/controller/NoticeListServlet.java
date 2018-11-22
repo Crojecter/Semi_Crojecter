@@ -40,11 +40,10 @@ public class NoticeListServlet extends HttpServlet {
 		//System.out.println("Mid ser : "+ request.getParameter("Mid"));
 		
 		noticeList = ns.selectNoticeList();
-		System.out.println();
 		String page = "";
 		
 		if (noticeList != null){
-			page = "views/noticeBoard/noticePage.jsp";
+			page = "views/board/noticeboard/noticePage.jsp";
 			request.setAttribute("noticeList", noticeList);
 			
 		} else {

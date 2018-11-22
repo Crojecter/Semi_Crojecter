@@ -29,7 +29,7 @@
 	
 	.menuMenu a {
 		margin-left:15px;
-		margin-right:15px;
+		margin-right:40px;
 		text-decoration: none;
 		color: darkgray;
 		font-size:23px;
@@ -42,18 +42,21 @@
 		border: 1px solid black;
 	}
 
-	.profileMenus {
+	#button {
 		border: solid 1px gray;
 		color: white;
 		background-color: gray;
 		border-radius: 5px;
 		font-size: 15px;
 		margin-right:20px;
-
+        margin-left:20px;
+        padding-top:5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        text-decoration: none;
 	}
 	
-
-
 	#profileImg {
 		width: 100px;
 		height: 100px;
@@ -61,12 +64,15 @@
 		margin-top: 20px;
 		margin-left: 20px;
 		border: solid 1px gray;
-	}			
+	}		
+
 </style>
+
 </head>
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
+	<% if(m2 == null) m2 = m; %>
 	<div class="profileArea">
 		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
@@ -77,7 +83,7 @@
 		<% if(m.getMid() == m2.getMid()) { %>
 		<p class=proMenu>
 		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
-		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
+		<a class="profileMenus" id="button" href="/crojecter/mUpdateProfile.me?mid=<%=m2.getMid()%>">정보수정</a>
 		<br>
 		</p>
 		<% } %>

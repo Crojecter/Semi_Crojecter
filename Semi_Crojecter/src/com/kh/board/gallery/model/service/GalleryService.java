@@ -171,17 +171,11 @@ public class GalleryService {
 		
 	
 		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
-				:  gDao.selectGalleryList(con);
+				:  gDao.selectGalleryList(con, 0, 0);
 		
 		return searchGalleryList;
 	}
 
-
-	public int updateAlarm(int aid) {
-		// 
-		
-		return 0;
-	}
 
 	public int deleteGallery(int bid) {
 		
@@ -204,6 +198,17 @@ public class GalleryService {
 		close(con);
 		
 		return glist;
+	}
+
+
+	public int countComment(int bid) {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		int countComment = gDao.countComment(con, bid);
+		System.out.println("countComment ser : "+ countComment);
+		close(con);
+		
+		return countComment;
 	}
 
 }

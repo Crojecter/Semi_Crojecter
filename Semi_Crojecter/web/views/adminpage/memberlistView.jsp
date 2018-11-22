@@ -11,20 +11,21 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-.outer{
-		width:900px;
-		height:600px;
-		background:black;
-		color:white;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:50px;
-	}
-	table {
-		padding : 20px;
-		border:1px solid white;
+
+	.table {
+		width:500px;
+		border:1px solid black;
 		text-align:center;
+        margin-left:40px;
+        margin-right:40px;
+        margin-top:40px;
 	}
+
+    .table th {
+        color:white;
+        background:darkgray;
+        text-align:center;
+    } 
 	.tableArea {
 		width:750px;
 		height:350px;
@@ -32,10 +33,11 @@
 		margin-right:auto;
 	}
 	.searchArea {
-		width:650px;
-		margin-left:auto;
-		margin-right:auto;
+
+	margin-left:200px;
+		
 	}
+
 
 </style>
 </head>
@@ -49,7 +51,7 @@
 		<input type="search" id="keyword" placeholder="검색어를 입력하세요!">
 		<button type="button" onclick="search();">검색하기</button>
 	</div>
-<table>
+<table class="table">
 	<tr>
 		<th>회원번호</th>
 		<th>닉네임</th>

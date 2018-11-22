@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Board implements Serializable{
+	
+	private static final long serialVersionUID = 90999L;
+	
 	private int bid; 
 	private int btype;
 	private String btitle;
@@ -15,8 +18,8 @@ public class Board implements Serializable{
 	private int brcount;
 	private String mprofile;
 	private String mname;
-	
-	private String fname;
+
+	private String FName;
 	private String jTag;
 	private String gTag;
 	
@@ -55,12 +58,12 @@ public class Board implements Serializable{
 		this.gTag = gTag;
 	}
 
-	public String getFname() {
-		return fname;
+	public String getFName() {
+		return FName;
 	}
 
-	public void setFname(String fname) {
-		this.fname = fname;
+	public void setFName(String fname) {
+		this.FName = fname;
 	}
 
 	public Board() {}

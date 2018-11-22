@@ -1,7 +1,6 @@
 package com.kh.mypage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +31,7 @@ public class MypageView extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		int mid = Integer.parseInt(request.getParameter("mpid"));
 		Member m = new MemberService().selectMember(mid);
 		
 		if(m != null){
