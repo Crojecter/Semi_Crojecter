@@ -20,24 +20,32 @@
 	}
 	
 	.card-title{
+
 		background:black; 
 		color:white;
 		text-decoration: none;
 	}
 	
 	.card-text{
+
 		
 	}
 	
 	.card-body{
+
 	}
 	
-	.alarm {
-	
+	.alarm {	
 	color:black;
 	padding-top:100px;
 	font-weight:bold;
 	
+	}
+	
+	.card-img-top {
+	
+	width:250px;
+	height:250px;
 	}
 	
 	
@@ -46,20 +54,17 @@
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
 <form action="<%=request.getContextPath()%>/mworkView.do" method="post">
-<div class="galleryList">
+<div class="row galleryList">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" style="margin-bottom: 50px; margin-top: 50px;">
 		<% if(glist.size() > 0) { %>
 		<% for (Gallery gal : glist) { %>
 			<%-- <% System.out.println("gList jsp : "+gList); %> --%>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-			<input type="hidden" value="<%= gal.getBid() %>" />
-			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= gal.getBid() %>"> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
-            <% if(gal.getFName() != null) { %>
-            <img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
-            alt="Card image cap" class="gallery">
-            <% } else { %>
-            <img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
-            <% } %>
-            </a>
+				<a href=""> <!-- galleryUploadFiles/%=gal.getBoardfile() % -->
+				<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= gal.getFname() %>"
+				 	alt="Card image cap" class="gallery">
+				</a>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= gal.getBtitle() %></a></h5>
 					<p class="card-text"><a href=""><%= gal.getGtag() %></a></p>
@@ -68,22 +73,28 @@
 					</button>
 					<button onclick="addLike();" class="btn btn-primary">
 					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= gal.getGlike() %></button>
+						 alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= gal.getGlike() %>
+					</button>
 					<button src="<%= request.getContextPath()%>/views/board/galleryDetail.jsp" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;"></button>
+					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" alt="" style="height:22px;" />
+					</button>
 				</div>
 			</div>
-		<% } } else { %>
+			<%} }   else { %>
 			<div class="alarm" align="center">아직 업로드한 작품이 없습니다.</div>
 		<% } %>
+		</div>
+	<div class="col-md-2"></div>
+
+		
 </div>
+
 		<script>
 			$(function(){
 				$("#gal-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
-					var bno = $(this).children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/gSelectOne.ga?bid=" + bno;
+					var bno = $(this).children().children().eq(0).val();
+					location.href="<%=request.getContextPath()%>/selectOne.ga?bno=" + bno;
 				})
 			});
 		</script>

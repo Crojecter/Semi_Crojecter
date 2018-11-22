@@ -165,16 +165,6 @@
 									</button>
 								</li>
 								<script>
-						$(document).ready(function(){
-							$.ajax({
-								data : { Mid : <%=m.getMid()%>},
-								url : "/crojecter/aRead.al",
-								type : "post",
-								success : function(data){
-									$("#countUnreadAlarm").text(data);
-								}
-							});
-						});
 					    
 						function openAlarmList() {
 							
@@ -221,9 +211,39 @@
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="#">
 							<img src="<%=request.getContextPath()%>/resources/images/icon/walnut.jpg"
-								 alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
+								 alt="" style="height: 30px;">:<span id="callHodu"></span>개</a>
 							</div>
 							</li>
+							<script>
+								$(document).ready(function(){
+									callHodu();
+									callAlarm();
+								});
+								
+								function callHodu(){
+									$.ajax({
+										url : "/crojecter/selectHodu.sh",
+										data : { mid : <%= m.getMid() %> },
+										type : "post",
+										success : function(data){
+											$("#callHodu").text(data);
+										}
+									});
+									setTimeout("callHodu()", 1000);
+								}
+								
+								function callAlarm(){
+									$.ajax({
+										data : { Mid : <%=m.getMid()%>},
+										url : "/crojecter/aRead.al",
+										type : "post",
+										success : function(data){
+											$("#countUnreadAlarm").text(data);
+										}
+									});
+									setTimeout("callAlarm()", 1000);
+								}
+							</script>
 							<li style="padding: 0 15px;">
 							<!-- 글쓰기 --> 
 							<a id="moveInsert"

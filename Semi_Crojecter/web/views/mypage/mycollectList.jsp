@@ -17,7 +17,7 @@
 		display: inline-block;
 		padding-top:30px;
 		margin-left:30px;
-		margin-top:100px;
+		margin-top:30px;
 		border:1px solid darkgary;
 	}
 	
@@ -53,7 +53,9 @@
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/collectView.do" method="post">
-<div class="collectList">
+<div class="row collectList">
+	<div class="col-md-2"></div>
+	<div class="col-md-8" style="margin-bottom: 100px">
 	<% if(list.size() > 0) { %>
 	<% for(Likeit l : list){ %>
 	<div id="gal-list" class="card">
@@ -73,6 +75,11 @@
 	<% } } else { %>
 		<div class="alarm" align="center">아직 좋아요한 작품이 없습니다.</div>
 	<% } %>
+	</div>
+	<div class="col-md-2"></div>
+	
+	
+	
 </div>
 </form>
 <%@ include file="../common/footer.jsp" %>

@@ -113,9 +113,9 @@
       max-width: 100%;
    }
    
-   .active {
-   	  
-   	  background: red;
+   .active {   	  
+   	  background: orange;
+   	  border: 1.5px solid orange;
    }
    
 </style>
