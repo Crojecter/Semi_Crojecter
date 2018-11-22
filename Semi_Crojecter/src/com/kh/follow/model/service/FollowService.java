@@ -38,6 +38,7 @@ public class FollowService {
 			result = fDao.deleteFollow(con, wid, mid) * 1;
 		} else {
 			result = fDao.insertFollow(con, wid, mid) * 2;
+			// mid가 wid를 팔로우 하면 wid한테 alarm 인서트
 		}
 		
 		if(result > 0) commit(con);
