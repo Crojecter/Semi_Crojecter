@@ -217,6 +217,9 @@ body {
 				else if($("#summernote").val == null){
 					alert("내용을 입력해주세요.");	
 				}
+				else if(!$('#tagsinput').val()) {
+					alert("태그를 한 개 이상 입력해주세요.");				
+				}
 				else return;
 				event.preventDefault();
 				

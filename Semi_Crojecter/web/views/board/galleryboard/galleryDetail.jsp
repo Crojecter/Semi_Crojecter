@@ -125,7 +125,7 @@
 
       <div class="col-md-6" 
       	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
-      	   margin-bottom: 20px;">
+      	   margin-bottom: 100px;">
             
          <%if(m != null)  {  %>
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
@@ -173,7 +173,7 @@
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
                         <% } %>
                      </div>
-                     showReport(<%=g.getBid()%>, <%=bc.getCid()%>);
+                     
                      
                   </div>
                   <div class="comment commentContent">

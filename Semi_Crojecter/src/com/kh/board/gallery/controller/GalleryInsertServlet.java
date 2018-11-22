@@ -85,6 +85,8 @@ public class GalleryInsertServlet extends HttpServlet {
 			g.setGcategoryid(Integer.parseInt(mrequest.getParameter("category")));
 			g.setCclid(Integer.parseInt(mrequest.getParameter("cclid")));
 			g.setGtag(mrequest.getParameter("tags"));
+			g.setMname(mrequest.getParameter("userName"));
+			
 			
 			System.out.println("setBcontent : " + mrequest.getParameter("content"));
 			System.out.println("tags : " + mrequest.getParameter("tags"));
@@ -96,37 +98,36 @@ public class GalleryInsertServlet extends HttpServlet {
 			String fileName = null;
 			
 			if(mrequest.getFile("thumbnailInput") != null){
-			// 대표 이미지 영역의 파일만 불러온다.
-			savefile = mrequest.getFile("thumbnailInput");
-			System.out.println("thumbnailInput file : " + savefile);
-
-			path = savefile.getPath();
-			fileName = savefile.getName();  
-						
-			System.out.println("path : " + path);				
-			System.out.println("fileName : " + fileName);			
-			
-			}
-
-			switch(g.getGcategoryid()){
-			case 1: 
-				af.setFname("textCategoryImage.png"); 
-				af.setFpath(savePath); 
-				break;
-			case 2: 									
-					af.setFname(fileName);
-					af.setFpath(path);										
+				// 대표 이미지 영역의 파일만 불러온다.
+				savefile = mrequest.getFile("thumbnailInput");
+				System.out.println("thumbnailInput file : " + savefile);
+	
+				path = savefile.getPath();
+				fileName = savefile.getName();  
+							
+				System.out.println("path : " + path);				
+				System.out.println("fileName : " + fileName);	
 				
-				break;
-			case 3: 
-				af.setFname("audioCategoryImage.png"); 
-				af.setFpath(savePath);
-				break;
-			case 4: 
-				af.setFname("videoCategoryImage.png"); 
-				af.setFpath(savePath); 
-				break;								
-		}			
+				af.setFname(fileName);
+				af.setFpath(path);					
+			
+			} else {				
+				
+				switch(g.getGcategoryid()){
+				case 1: 
+					af.setFname("textCategoryImage.png"); 
+					af.setFpath(savePath); 
+					break;
+				case 3: 
+					af.setFname("audioCategoryImage.png"); 
+					af.setFpath(savePath);
+					break;
+				case 4: 
+					af.setFname("videoCategoryImage.png"); 
+					af.setFpath(savePath); 
+					break;								
+				}			
+			}			
 			
 			//System.out.println("list : " + list);
 			// service로 작성한 내용 전송하기
