@@ -77,7 +77,7 @@ public class PageInfo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "PageInfo [currentPage=" + currentPage + ", countGalleryList=" + countProjectList + ", limit=" + limit
+		return "PageInfo [currentPage=" + currentPage + ", countProjectList" + countProjectList + ", limit=" + limit
 				+ ", maxPage=" + maxPage + ", startPage=" + startPage + ", endPage=" + endPage + "]";
 	}
 	

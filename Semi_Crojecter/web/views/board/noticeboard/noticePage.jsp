@@ -51,7 +51,7 @@ p {
 	<%@ include file="../../common/header.jsp"%>
 		
 		<div class="container" style="width: 600px; position: 50% absolute; padding-left: 50px;
-	padding-right: 50px; padding-bottom: 100px;">
+		padding-right: 50px; padding-bottom: 100px;">
 		<p>[공지사항]</p>
 		
 		<%-- <% System.out.println("Mid : "+ m.getMid()); %> --%>
@@ -78,11 +78,12 @@ p {
 					현재 공지사항이 없습니다.
 			<% } %>
 			</div>
+		
 			<% if(m != null && m.getMname().equals("관리자")){ %>
-			<!-- 인라인 호출방식 -->
+			
 			<button onclick="location.href='<%= request.getContextPath() %>/board/noticeInsert.jsp'">작성하기</button>
 			<% } %>
-		<% } else { %>
+			<% } else { %>
 				<% if(noticeList != null){ %>
 				<table align="center" id="noticeList" >
 				<tr id="noticeTR">
@@ -92,7 +93,7 @@ p {
 					<th id="noticeTH" width="100px" style="text-align: center; padding: 5px;">조회수</th>
 				</tr>
 				<% for(Notice n : noticeList){ %>
-				<tr id="noticeTR">				
+				<tr class="noticeTR">				
 					<td><input type="hidden" style="padding: 5px;" value="<%= n.getBid() %>"/></td>
 					<td id="noticeTD" style="padding: 5px;"><%= n.getBtitle() %></td>
 					<td id="noticeTD" style="padding: 5px;"><%= n.getBdate() %></td>
@@ -101,7 +102,7 @@ p {
 				<% } %>
 		
 				</table>
-			<% } else { %>
+				<% } else { %>
 					현재 공지사항이 없습니다.
 			<% } %>
 			</div>
@@ -111,12 +112,13 @@ p {
 		// 성일씨 이거 이벤트 좀 무난하게 변경해주세욥~!
 		$(function(){
 			$("#noticeList td").mouseenter(function(){				
-				$(this).parent().css({"background":"purple", "cursor":"pointer"});
+				$(this).parent().css({"background":"gray", "cursor":"pointer"});
 			}).mouseout(function(){
 				$(this).parent().css({"background":"lightgray"});
 			}).click(function(){
+				alert($(this).val());
 				var bid = $(this).parent().children().eq(0).val();
-				location.href="<%=request.getContextPath()%>/nSelectOne.no?bid=";				
+				location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;				
 			});
 		});
 		//

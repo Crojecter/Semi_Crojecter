@@ -71,7 +71,7 @@
 			$(function(){
 				$("pro-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
-					var bno = $(this).children().children().eq(0).val();
+					var bno = $(this).parent().children().eq(0).val();
 					location.href="<%=request.getContextPath()%>/selectOne.pr?bno=" + bno;
 				})
 			});
