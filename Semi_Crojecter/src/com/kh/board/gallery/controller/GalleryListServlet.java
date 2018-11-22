@@ -64,6 +64,7 @@ public class GalleryListServlet extends HttpServlet {
 		
 		list = gs.selectGalleryList(currentPage, limit);
 		//System.out.println("GalleryListServlet ga : "+ list);
+		
 		String page = "";
 		
 		if(list != null){

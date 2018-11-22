@@ -29,7 +29,7 @@
 	
 	.menuMenu a {
 		margin-left:15px;
-		margin-right:15px;
+		margin-right:40px;
 		text-decoration: none;
 		color: darkgray;
 		font-size:23px;
@@ -42,18 +42,21 @@
 		border: 1px solid black;
 	}
 
-	.profileMenus {
+	#button {
 		border: solid 1px gray;
 		color: white;
 		background-color: gray;
 		border-radius: 5px;
 		font-size: 15px;
 		margin-right:20px;
-
+        margin-left:20px;
+        padding-top:5px;
+        padding-bottom: 5px;
+        padding-right: 10px;
+        padding-left: 10px;
+        text-decoration: none;
 	}
 	
-
-
 	#profileImg {
 		width: 100px;
 		height: 100px;
@@ -61,12 +64,15 @@
 		margin-top: 20px;
 		margin-left: 20px;
 		border: solid 1px gray;
-	}			
+	}		
+
 </style>
+
 </head>
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
+	<% if(m2 == null) m2 = m; %>
 	<div class="profileArea">
 		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
@@ -76,8 +82,8 @@
 		
 		<% if(m.getMid() == m2.getMid()) { %>
 		<p class=proMenu>
-		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m.getMid()%>">결제내역</a> 
-		<a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
+		<a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
+		<a class="profileMenus" id="button" href="/crojecter/mUpdateProfile.me?mid=<%=m2.getMid()%>">정보수정</a>
 		<br>
 		</p>
 		<% } %>
@@ -87,15 +93,15 @@
 		<table>
 			<tr>
 				<td class="menuMenu"><a
-					href="/crojecter/mypageView.do?mpid=<%=m2.getMid()%>">About</a></td>
+					href="/crojecter/mypageView.do?mid=<%=m2.getMid()%>">About</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/mworkView.do?mpid=<%=m2.getMid()%>">Works</a></td>
+					href="/crojecter/mworkView.do?mid=<%=m2.getMid()%>">Works</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/collectView.do?mpid=<%=m2.getMid()%>">Collect</a></td>
-				<td class="menuMenu"><a 
-					href="/crojecter/followingView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followings</a></td>
+					href="/crojecter/collectView.do?mid=<%=m2.getMid()%>">Collect</a></td>
 				<td class="menuMenu"><a
-					href="/crojecter/followerView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followers</a></td>
+					href="/crojecter/followingView.do?mid=<%=m2.getMid()%>">Followings</a></td>
+				<td class="menuMenu"><a
+					href="/crojecter/followerView.do?mid=<%=m2.getMid()%>">Followers</a></td>
 			</tr>
 		</table>
 	</div>
