@@ -164,17 +164,7 @@
 											id="countUnreadAlarm"></span>
 									</button>
 								</li>
-						<script>
-						$(document).ready(function(){
-							$.ajax({
-								data : { Mid : <%=m.getMid()%>},
-								url : "/crojecter/aRead.al",
-								type : "post",
-								success : function(data){
-									$("#countUnreadAlarm").text(data);
-								}
-							});
-						});
+								<script>
 					    
 						function openAlarmList() {
 							
@@ -194,10 +184,12 @@
 									href="<%=request.getContextPath()%>#"
 									id="navbarDropdown" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"
-									style="height: auto; text-decoration: none"> <img
-										src="<%=request.getContextPath()%>/resources/images/user.png"
-										style="height: 30px;" class="rounded-circle"
-										alt="Cinque Terre">
+									style="height: auto; text-decoration: none"> 
+									<% if(m.getMprofile() == null) { %> 
+									<img src="<%=request.getContextPath()%>/resources/images/user.png" 
+									style="height: 30px;" class="rounded-circle" alt="Cinque Terre"> <% } else { %>
+									<img src="<%=request.getContextPath()%>/resources/profileFiles/<%=m.getMprofile()%>" 
+									style="height: 30px;" class="rounded-circle" alt="Cinque Terre"> <% }  %>
 								</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item"
@@ -222,6 +214,36 @@
 								 alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
 							</div>
 							</li>
+							<script>
+								$(document).ready(function(){
+									callHodu();
+									callAlarm();
+								});
+								
+								function callHodu(){
+									$.ajax({
+										url : "/crojecter/selectHodu.sh",
+										data : { mid : <%= m.getMid() %> },
+										type : "post",
+										success : function(data){
+											$("#callHodu").text(data);
+										}
+									});
+									setTimeout("callHodu()", 1000);
+								}
+								
+								function callAlarm(){
+									$.ajax({
+										data : { Mid : <%=m.getMid()%>},
+										url : "/crojecter/aRead.al",
+										type : "post",
+										success : function(data){
+											$("#countUnreadAlarm").text(data);
+										}
+									});
+									setTimeout("callAlarm()", 1000);
+								}
+							</script>
 							<li style="padding: 0 15px;">
 							<!-- 글쓰기 --> 
 							<a id="moveInsert"
@@ -251,7 +273,7 @@
 								<form class="navbar-search pull-left"
 									action="<%=request.getContextPath()%>/search.all" method="get">
 									<input type="text" class="search-query" placeholder="Search"
-										name="keyword" style="width: ">
+										name="keyword" style="border-radius: 5px; padding-left: 5px; border: 2px solid lightgray;">
 									<button class="btn my-2 my-sm-0" style="background : white;"
 										type="submit">
 										<img

@@ -2,6 +2,7 @@
     import = "com.kh.payment.model.vo.*, com.kh.member.model.vo.*, com.kh.spon.model.vo.*, java.util.*"%>
 <% 
 	ArrayList<Spon> slist = (ArrayList<Spon>)request.getAttribute("slist");
+	ArrayList<Spon> rslist = (ArrayList<Spon>)request.getAttribute("rslist");
 	ArrayList<Payment> plist = (ArrayList<Payment>)request.getAttribute("plist"); 
 %>
 <!DOCTYPE html>
@@ -13,28 +14,24 @@
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
         .tables {
-
             width:400px;
             height: auto;
             padding: 20px 20px;
             margin-top:160px;
             margin:0 auto;
 		    margin-bottom:160px;
-
             
         }
         .table {
             width: 400px;
             border: 1px solid black;
         }
-
         .table th {
             border: 1px solid black;
             background:lightgray;
             text-align:center;
             vertical-align:middle;
         }
-
         .table td {
            
             text-align:center;
@@ -77,16 +74,14 @@
 <table class="table">
 	<tr> 
 		<th>날짜</th>
-		<th>이름</th>
-		<th>후원호두</th>
-		<th>금액</th>
+		<th>후원자</th>
+		<th>호두</th>
 	</tr>
-		<% for(Spon s : slist){ %>
+		<% for(Spon s :rslist){ %>
 	<tr>
 		<td><%=s.getSdate()%></td>
 		<td><%=s.getMname() %></td>
 		<td><%=s.getShodu() %></td>
-		<td></td>
 	</tr>
 	<% } %>
 </table>
@@ -108,5 +103,6 @@
 	<% } %>
 </table>
 </div>
+<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

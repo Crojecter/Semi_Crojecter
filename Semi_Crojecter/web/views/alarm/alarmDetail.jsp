@@ -7,6 +7,7 @@
 	System.out.println("alarmDetail sz : "+ alarmList.size());
 	int Mid = Integer.parseInt(request.getParameter("Mid"));
 	int result = 0;
+	int count = 0;
 %>    
 <!DOCTYPE html>
 <html>
@@ -17,16 +18,50 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<style>
 		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
+		
+		body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-color: #fdf5e6  ;
+		}
+		
+		.wrapper{
+		margin:10px auto;
+		border:1px solid lightgray;
+		border-radius:20px;
+		background-color: white;
+		padding-bottom: 20px;
+		}
+		
+		th {
+  			background-color: white;
+  
+  		}
+  
+  		th, td {
+   			border-bottom: 1px solid lightgray;    
+ 		}
+ 		
+ 		button {
+			color:white;
+			padding: 0;
+			text-align:center;
+			border-radius:5px;
+			background-color:#30B2A0;
+			border:1px solid #30B2A0;
+ 		
+ 		}
 	</style>
 </head>
 <body>
-	<div class="outer">
+	<p style="padding-left: 20px; margin-bottom: 0; font-size: 18px; font-weight: bold;">[알람]</p>
+	<div class="wrapper">
 		<br>
 		<script>
 		$(function(){
 			console.log(sessionStorage.getItem("myAlarmList"));
 		});
 		</script>
+		
 		<div class="tableArea">
 		<% if(alarmList != null){ %>
 			<table align="center" id="alarmList">
@@ -36,19 +71,26 @@
 				<th id="alarmTH">확인</th>
 			</tr>
 			<% for(Alarm al : alarmList){ %>
-			<tr>
-				
-				<td><%= al.getAMsg() %>
-				</td>
-				<td><%= al.getADate() %></td>
-				<% if( al.getAFlag().equals("Y")) { %>
-				<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');">미확인</button></td>
-				<% } else { %>
-				<td>확인</td>
-				<% } %>
-			</tr>
+				<% if(al.getAFlag().equals("Y")) { %>
+				<tr>
+					<td><%= al.getAMsg() %></td>
+					<td><%= al.getADate() %></td>
+					<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');" style="font-size:15px;">미확인</button></td>
+				</tr>
+				<% count++; } %>
+				<%-- <% } else { %>
+				<tr>
+					<td><%= al.getAMsg() %></td>
+					<td><%= al.getADate() %></td>
+					<td align="center" style="font-size: 12px;">확인</td>
+				</tr>
+				<% } %> --%>
 			<% } %>
-			
+			<% if(count == 0) { %>
+			<tr>
+				<td colspan="3">확인하지 않은 알람이 없습니다.</td>
+			</tr>
+			<% } else { count = 0; } %>			
 			</table>
 			<script>
 
@@ -61,13 +103,11 @@
 						success : 
 							function(data){ 
 							if (data > 0){
-								obj.append("확인");
-								obj.remove();
-								window.location.reload();
+								obj.parent().parent().remove();
 							}
-							
 						}
 					});
+					location.reload();
 			}
 			
 				</script>
@@ -76,6 +116,8 @@
 		<% } %>
 		
 		</div>
+		</div>
+		
 		<script>
 			$(function(){
 				$("#alarmList td").mouseenter(function(){
@@ -95,7 +137,7 @@
 				});
 			}); --%>
 		</script>
-
+		</div>
 
 </body>
 </html>

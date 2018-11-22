@@ -224,8 +224,9 @@ public class MemberDao {
 			
 			pstmt = con.prepareStatement(sql);
 			
-			pstmt.setInt(1, m.getMsid());
-			pstmt.setInt(2, m.getMid());
+			pstmt.setString(1, m.getMpwd());
+			pstmt.setString(2, m.getMname());
+			pstmt.setInt(3, m.getMid());
 			
 			result = pstmt.executeUpdate();
 		

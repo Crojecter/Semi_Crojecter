@@ -1,27 +1,28 @@
-package com.kh.mypage;
+package com.kh.ajax.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.kh.member.model.service.MemberService;
+import com.kh.ajax.model.service.Service;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class UpdateMemberServlet
+ * Servlet implementation class selectHodu
  */
-@WebServlet("/mUpdate.do")
-public class UpdateMemberServlet extends HttpServlet {
+@WebServlet("/selectHodu.sh")
+public class selectHodu extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMemberServlet() {
+    public selectHodu() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,30 +32,21 @@ public class UpdateMemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String mname = request.getParameter("nickName");
-		String memail = request.getParameter("email");
-		String mpwd = request.getParameter("password");
-
-		MemberService ms = new MemberService();
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		PrintWriter out = response.getWriter();
 		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
-		m.setMname(mname);
-		m.setMemail(memail);
-		m.setMpwd(mpwd);
+		Service s = new Service();
+		Member m = new Member();
+		m.setMid(mid);
 		
-		int result = ms.updateMember(m);
+		m = s.selectHodu(mid);
 		
-		if(result > 0){
-			System.out.println("회원정보 수정 성공!");
-			request.setAttribute("myMember", m);
-			request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);
+		if(m != null) {
+			out.print(m.getMhodu());
 		} else {
-			System.out.println("회원정보 수정 실패");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			System.out.println("호두 갱신 실패");
 		}
 		
-	
 	}
 
 	/**
