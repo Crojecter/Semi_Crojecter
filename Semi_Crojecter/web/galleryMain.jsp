@@ -42,6 +42,7 @@
 			<a class="carousel-control-next" href="#slideBody" data-slide="next">
 			<span class="carousel-control-next-icon"></span></a>
 		</div>
+		
 	
 		
 		<script>
@@ -57,7 +58,9 @@
 						
 						for(var i in data){
 
-							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active' style='width: 1300px;'>") : $("<div class='carousel-item'  style='width:1300px'>");
+							var top5Slide = ( i == 0 ) ? 
+									$("<div class='carousel-item active' style='width: 1200px;'>") 
+									: $("<div class='carousel-item'  style='width: 1200px;'>");
 							var img = $('<img height="400px" width="50px">');
 							$(img).addClass('d-block w-100');
 							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname);
@@ -79,7 +82,7 @@
 		
 
 		<!-- 게시글 선택보기 -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 1200px;">
 			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
 

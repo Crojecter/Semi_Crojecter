@@ -99,17 +99,17 @@
 
 </head>
 <body style="position: absolute; width: 100%;">
-	<div class="row" style="background: white">
+	<div class="row" style="background: white;">
 		<div class="col-md-2">
-			<!-- 로고 -->
+			
+		</div>
+		<div class="col-md-10" style="padding-top: 10px;">
+			<nav class="navbar navbar-expand-lg navbar-light"
+				style="background: white; margin-bottom: 10px;">
+				<!-- 로고 -->
 			<a href="<%=request.getContextPath()%>/gList.ga"> <img
 				src="<%=request.getContextPath()%>/resources/images/icon/LogoImage.png"
-				alt="" style="width: 100%; height: 50px;" /></a>
-		</div>
-		<div class="col-md-10">
-			<nav class="navbar navbar-expand-lg navbar-light"
-				style="background: white">
-
+				alt="" style="width: 150px;%; height: 50px;" /></a>
 				<button class="navbar-toggler" type="button" data-toggle="collapse"
 					data-target="#navbarSupportedContent"
 					aria-controls="navbarSupportedContent" aria-expanded="false"
