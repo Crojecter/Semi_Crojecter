@@ -87,6 +87,7 @@
  		color : #30B2A0;
  		font-weight: bold;
 	}
+
 </style>
 
 </head>
@@ -137,9 +138,9 @@
 								if (m == null) {
 							%>
 							<form id="loginForm" action="/myWeb/login.me" method="post" style="float:left; padding-top: 5px;">
-								<a class="sign" style="text-decoration:none;"
+								<a class="sign" style="text-decoration:none; font-weight: normal;"
 									href="<%=request.getContextPath()%>/views/member/login.jsp">
-									Sign In</a> <a class="sign" style="text-decoration:none"
+									Sign In</a> <a class="sign" style="text-decoration:none; font-weight: normal;"
 									href="<%=request.getContextPath()%>/views/member/signUp.jsp">
 									Sign Up</a> &nbsp;&nbsp;&nbsp;
 							</form>

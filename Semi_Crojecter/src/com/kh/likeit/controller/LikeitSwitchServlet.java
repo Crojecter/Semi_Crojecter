@@ -32,8 +32,11 @@ public class LikeitSwitchServlet extends HttpServlet {
 		
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		int bid = Integer.parseInt(request.getParameter("bid")); 
+		int wid = Integer.parseInt(request.getParameter("wid")); // 작성자 회원번호
+		String mname = request.getParameter("mname"); //로그인한회원이름
+		String btitle = request.getParameter("btitle"); 
 		
-		int result = new LikeitService().switchLikeit(mid, bid);
+		int result = new LikeitService().switchLikeit(mid, bid, wid, mname, btitle);
 		System.out.println("lSwitch.li result : " + result);
 		
 		response.getWriter().print((result == 0) ? "error" : (result == 1)? "delete" : "insert");
