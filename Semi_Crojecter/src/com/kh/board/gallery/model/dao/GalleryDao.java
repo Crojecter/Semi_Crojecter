@@ -314,8 +314,6 @@ public class GalleryDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println("updateCount result : "  + result);
-			
 		} catch (SQLException e) {
 			
 		} finally {

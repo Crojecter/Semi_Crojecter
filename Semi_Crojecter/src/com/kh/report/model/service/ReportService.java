@@ -16,13 +16,14 @@ public class ReportService {
 		Connection con = getConnection();
 
 		int result = rDao.insertReport(con, r);
+		int result2 = rDao.updateCount(con, r);
 
-		if (result > 0) commit(con);
+		if(result*result2 > 0) commit(con);
 		else rollback(con);
-
+		
 		close(con);
 
-		return result;
+		return result*result2;
 	}
 
 	public int deleteReport(int rid) {

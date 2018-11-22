@@ -194,10 +194,12 @@
 									href="<%=request.getContextPath()%>#"
 									id="navbarDropdown" role="button" data-toggle="dropdown"
 									aria-haspopup="true" aria-expanded="false"
-									style="height: auto; text-decoration: none"> <img
-										src="<%=request.getContextPath()%>/resources/images/user.png"
-										style="height: 30px;" class="rounded-circle"
-										alt="Cinque Terre">
+									style="height: auto; text-decoration: none"> 
+									<% if(m.getMprofile() == null) { %> 
+									<img src="<%=request.getContextPath()%>/resources/images/user.png" 
+									style="height: 30px;" class="rounded-circle" alt="Cinque Terre"> <% } else { %>
+									<img src="<%=request.getContextPath()%>/resources/profileFiles/<%=m.getMprofile()%>" 
+									style="height: 30px;" class="rounded-circle" alt="Cinque Terre"> <% }  %>
 								</a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 										<a class="dropdown-item"
