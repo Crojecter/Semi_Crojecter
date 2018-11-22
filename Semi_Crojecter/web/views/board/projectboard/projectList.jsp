@@ -34,12 +34,12 @@
 		<% for (Project pro : projectList) { %>
 			<div id="pro-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 				<div style="width: 300px; height: 300px; display: inline-block; ">
-					<a href="">		
+					<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>">		
 					<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>"
 					alt="Card image cap" class="project"></a>
 				</div>
 				<div class="card-body">
-					<h5 class="card-title"><a href=""><%= pro.getBtitle() %></a></h5>
+					<h5 class="card-title"><a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
 					<% if(pro.getJtag() != null) {
 						String tags[] = pro.getJtag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
@@ -56,7 +56,7 @@
 						<button onclick="" class="btn btn-primary">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/dday.png" 
 						alt="" style="height:22px;" data-toggle="tooltip" title=""><%= pro.getJend() %></button>
-						<button src="<%= request.getContextPath()%>/views/board/projectDetail.jsp" class="btn btn-primary">
+						<button src="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>" class="btn btn-primary">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
 						alt="" style="height:22px;"><%= pro.getCommCnt() %></button>
 						<span id=Dday>.</span>
@@ -78,7 +78,7 @@
 					location.href="<%=request.getContextPath() %>/pSelectOne.pr?bid=" + bid;
 				})
 			});
-			<script>
+			
 			
 			$(document).ready(function(){
 				$.ajax({
