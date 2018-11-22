@@ -49,7 +49,7 @@
 	<div class="wrapper">
 		<form name="form" action="<%=request.getContextPath()%>/signUp.do"
 			method="post">
-			<div style="border: 1px solid gray; border-radius:20px;">
+			<div style="border: 1px solid lightgray; border-radius:20px; background: white;">
 				<div style="margin: 10px 10px 1px 10px;" class="fb-login-button"
 					data-max-rows="1" data-size="large" data-button-type="login_with"
 					data-show-faces="false" data-auto-logout-link="false"
@@ -321,26 +321,22 @@
 				
 				memberVerify();
 			}
-
 			memberVerify();
 		}
-
 		function memberVerify() {
 			if (nnChk == 1 && eChk == 1 && pChk == 1) {
 				$("#submit").removeAttr("disabled");
-				$("#submit").css("background-color", "tomato");
-				$("#submit").css("border", "1px solid tomato");
+				$("#submit").css("background-color", "lightblue");
+				$("#submit").css("border", "1px solid lightblue");
+				$("#submit").css("color", "black");
 			} else {
 				$("#submit").attr("disabled", "disabled");
 				$("#submit").css("background-color", "gray");
 				$("#submit").css("border", "1px solid gray");
 			}
 		}
-
 		function singUpCheck() {
-
 			$("#form").submit();
-
 		}
 		
 		function apiNickNameCheck() {

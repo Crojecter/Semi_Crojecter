@@ -17,16 +17,50 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
 	<style>
 		#alarmTB, #alarmTR, #alarmTB {background:lightyellow; border:solid 3px;}
+		
+		body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-color: #fdf5e6  ;
+		}
+		
+		.wrapper{
+		margin:10px auto;
+		border:1px solid lightgray;
+		border-radius:20px;
+		background-color: white;
+		padding-bottom: 20px;
+		}
+		
+		th {
+  			background-color: white;
+  
+  		}
+  
+  		th, td {
+   			border-bottom: 1px solid lightgray;    
+ 		}
+ 		
+ 		button {
+			color:white;
+			padding: 0;
+			text-align:center;
+			border-radius:5px;
+			background-color:#30B2A0;
+			border:1px solid #30B2A0;
+ 		
+ 		}
 	</style>
 </head>
 <body>
-	<div class="outer">
+	<p style="padding-left: 20px; margin-bottom: 0; font-size: 18px; font-weight: bold;">[알람]</p>
+	<div class="wrapper">
 		<br>
 		<script>
 		$(function(){
 			console.log(sessionStorage.getItem("myAlarmList"));
 		});
 		</script>
+		
 		<div class="tableArea">
 		<% if(alarmList != null){ %>
 			<table align="center" id="alarmList">
@@ -42,9 +76,9 @@
 				</td>
 				<td><%= al.getADate() %></td>
 				<% if( al.getAFlag().equals("Y")) { %>
-				<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');">미확인</button></td>
+				<td><button onclick="updateAlarm(this, '<%=al.getAid()%>' style="font-size: 8px;">미확인</button></td>
 				<% } else { %>
-				<td>확인</td>
+				<td align="center" style="font-size: 12px;">확인</td>
 				<% } %>
 			</tr>
 			<% } %>
@@ -76,6 +110,8 @@
 		<% } %>
 		
 		</div>
+		</div>
+		
 		<script>
 			$(function(){
 				$("#alarmList td").mouseenter(function(){

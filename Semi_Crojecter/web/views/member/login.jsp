@@ -29,9 +29,9 @@
 		font-size:30px;
 	}
 	.submit{
-		background:tomato;
-		color:white;
-		border:1px solid tomato;
+		background:lightblue;
+		color:black;
+		border:1px solid lightblue;
 		text-align:center;
 		border-radius:5px;
 		width:220px;
@@ -49,10 +49,11 @@
 	.wrapper{
 		width:290px;
 		margin:0 auto;
-		margin-top: 200px;
-		border:1px solid black;
+		margin-top: 150px;
+		border:1px solid lightgray;
 		border-radius:20px;
 		padding:10px 10px 10px 10px;
+		background-color: white;
 	}
 	
 	.label{

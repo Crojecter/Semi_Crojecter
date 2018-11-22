@@ -37,12 +37,18 @@ p {
   }
   
   th {
-  	background-color: lightblue;
+  	background-color: lightgray;
   
   }
   
   th, td {
     border-bottom: 1px solid white;    
+  }
+  
+  button {
+  	  height: 30px;
+  	  background: lightblue;
+      border: 1.5px solid lightblue;
   }
 
 </style>
@@ -52,9 +58,16 @@ p {
 		
 		<div class="container" style="width: 600px; position: 50% absolute; padding-left: 50px;
 		padding-right: 50px; padding-bottom: 100px;">
-		<p>[공지사항]</p>
-		
-		<%-- <% System.out.println("Mid : "+ m.getMid()); %> --%>
+		<div class=row">
+			<div class="col-md-9"><p>[공지사항]</p></div>
+			<div class="col-md-3" style="padding-top: 5px;">
+			<% if(m != null && m.getMname().equals("관리자")){ %>			
+			<button style="border-radius: 5px;" 
+					onclick="location.href='<%= request.getContextPath() %>/views/board/noticeboard/noticeInsert.jsp'">
+				작성하기</button>
+			<% } %>
+			</div>
+		</div>
 		<% if(m != null){ %>
 			<% if(noticeList != null){ %>
 				<table align="center" id="noticeList" >
@@ -78,11 +91,6 @@ p {
 					현재 공지사항이 없습니다.
 			<% } %>
 			</div>
-		
-			<% if(m != null && m.getMname().equals("관리자")){ %>
-			
-			<button onclick="location.href='<%= request.getContextPath() %>/board/noticeInsert.jsp'">작성하기</button>
-			<% } %>
 			<% } else { %>
 				<% if(noticeList != null){ %>
 				<table align="center" id="noticeList" >
@@ -111,14 +119,15 @@ p {
 		<script>
 		 $(function(){
 	         $("#noticeList td").mouseenter(function(){            
-	            $(this).parent().css({"background":"gray", "cursor":"pointer"});
+	            $(this).parent().css({"background":"white", "cursor":"pointer"});
 	         }).mouseout(function(){
-	            $(this).parent().css({"background":"lightgray"});
+	            $(this).parent().css({"background":""});
 	         }).click(function(){
 	            var bid = $(this).parent().children().eq(0).children().val();
 	            location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;            
 	         });
      	});
+		 
 		//
 		</script>
 				<!-- 리모컨 -->

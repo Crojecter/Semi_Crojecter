@@ -46,6 +46,8 @@ public class ReportInsertServlet extends HttpServlet {
 		
 		int result = new ReportService().insertReport(r);
 		
+		System.out.println("신고 result : " + result);
+		
 		response.getWriter().print((result > 0) ? "ok" : "no");
 		
 	}
