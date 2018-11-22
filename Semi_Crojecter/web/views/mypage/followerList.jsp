@@ -15,29 +15,53 @@
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
 
-	
 	#btnFollow {
 	
-	background:lightblue;
-	font-weight:bold;
 	width: 130px;
 	height: 35px;
 	margin-bottom:20px;
-	
+	padding-top:10px;
 	}
+
+
+
+    #btnFollow.btn.btn-follow active{
+
+        background:lightblue;
+        color:black;
+        height:30px;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align: center;
+        
+    }
+    
+     #btnFollow.btn.btn-follow{
+
+      background:lightblue;
+        color:black;
+        height:40px;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align: center;
+    }
 	
-	#name {
+	.inputName {
 	
 	color:darkgray;
 	padding-right:50px;
 	padding-left:100px;
+	padding-top:20px;
 	font-size:20px;
-	padding-top:30px;
+	border:white;
+	text-align:center;
+	
+	
 	}
 	
 	.form {
 	
-	border: 1px solid black;
+
 	margin-bottom:20px;
 
 	}
@@ -45,13 +69,18 @@
 	.table {
 	
 	width:50%;
-	border:1px black solid;
 	
 	}
+	
 
-	.btn {
-		border: 1px solid black;
-	}
+    
+    .p-follow {
+    
+
+    padding-bottom:30px;
+    }
+    
+
 </style>
 </head>
 <body>
@@ -60,15 +89,15 @@
 <div class="followerList">
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
-		<tr class="form">
-			<td id="name" name="name"><%=f1.getFollowername() %></td>
-			<td>
+		<tr class="set">
+			<td class="name"><input class="inputName" type="text" value="<%=f1.getFollowername() %>" readonly></td>
+			<td class="button">
 				<input type="hidden" name="fid" value="<%= f1.getFollowerid() %>"/> 
 				<% if(f1.getChk().equals("Y")){ %>
-					<div class="btn btn-follow active" onclick="switchfollow(this);">
+					<div id="btnFollow" class="btn btn-follow active" onclick="switchfollow(this);">
 					<p class="p-follow" style="color: black">언팔로우</p></div>
 				<% } else {%>
-					<div class="btn btn-follow" onclick="switchfollow(this);">
+					<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
 					<p class="p-follow" style="color: black">팔로우</p></div>
 				<% } %>
 			</td>

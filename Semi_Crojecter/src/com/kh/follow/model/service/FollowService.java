@@ -38,6 +38,7 @@ public class FollowService {
 			result = fDao.deleteFollow(con, wid, mid) * 1;
 		} else {
 			result = fDao.insertFollow(con, wid, mid) * 2;
+			// mid가 wid를 팔로우 하면 wid한테 alarm 인서트
 		}
 		
 		if(result > 0) commit(con);
@@ -50,10 +51,10 @@ public class FollowService {
 
 	}
 
-	public ArrayList<Follow> searchFollowing(int mid) {
+	public ArrayList<Follow> searchFollowing(int mid, int mpid) {
 		
 		Connection con = getConnection();
-		ArrayList<Follow> list = fDao.selectFollowingList(con, mid);
+		ArrayList<Follow> list = fDao.selectFollowingList(con, mid, mpid);
 		
 		close(con);
 		
@@ -61,12 +62,12 @@ public class FollowService {
 		
 	}
 
-	public ArrayList<Follow> searchFollower(int mid) {
+	public ArrayList<Follow> searchFollower(int mid, int mpid) {
 		
 		ArrayList<Follow> list = null;
 		Connection con = getConnection();
 		
-		list = fDao.selectFollowerList(con, mid);
+		list = fDao.selectFollowerList(con, mid, mpid);
 		
 		close(con);
 		

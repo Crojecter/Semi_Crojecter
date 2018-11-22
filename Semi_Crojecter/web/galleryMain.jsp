@@ -19,63 +19,10 @@
 	</head>
 	<body>
 		<%@ include file="views/common/header.jsp" %>
-
-<!-- 		
-		<table align="center" id="galleryTop5">
-			<thead>	
-				<tr>
-
-					<th width="70px">글번호</th>
-					<th width="150px">글제목</th>
-					<th width="70px">작성자</th>
-					<th width="70px">작성일 </th>
-					<th width="70px">조회수</th>
-					<th width="70px">파일명</th>		
-					
-				</tr>
-			</thead>
-			<tbody id="galBody">	 
-			</tbody>
-		</table>	
-
-		순위조회용 테스트 코드
-		<!-- 순위조회용 테스트 코드 -->
-<!--		<script>
-			// Top 5 계산 (TOP-N 분석)
-			$(document).ready(function(){
-
-				$.ajax({
-					url : '/crojecter/gTop5.ga',
-					type : 'get',
-					success : function(data){
-						
-						var body = $('#galBody');
-						console.log(data);
-						for(var i in data){
-							var trContent = $('<tr>');
-							
-							trContent.append($("<td id='' class=''>").text(data[i].bid));
-							trContent.append($("<td id='' class=''>").text(data[i].btitle));
-							trContent.append($("<td id='' class=''>").text(data[i].bwriter));
-							trContent.append($("<td id='' class=''>").text(data[i].bdate));
-							trContent.append($("<td id='' class=''>").text(data[i].bcount));
-							trContent.append($("<td >").text(data[i].fname));
-							
-							body.append(trContent);
-						}
-					}, error : function(data){
-						console.log("top5 조회 실패!!");
-					}
-				});
-				
-			});
-		</script>
-
- -->
-
-		<!-- 슬라이드 -->
-
-		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block;">
+		<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block; width:100%">
 		<!-- 슬라이드 버튼 -->
 		<ul class="carousel-indicators">
 			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
@@ -110,10 +57,10 @@
 						
 						for(var i in data){
 
-							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active' style='width: 1600px;'>") : $("<div class='carousel-item'  style='width:1600px'>");
+							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active'>") : $("<div class='carousel-item'>");
 							var img = $('<img height="400px" width="50px">');
 							$(img).addClass('d-block w-100');
-							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname +'.jpg');
+							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname);
 							
 							top5Slide.append($(img));
 							top5Slide.append($("<div class='carousel-caption'><h5 class='top5Title'>").text(data[i].btitle));
@@ -180,6 +127,9 @@
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>
 		<%@ include file="views/common/footer.jsp" %>
+		</div>
+		<div class="col-md-2"></div>
+		</div>
 </body>
 
 </html>

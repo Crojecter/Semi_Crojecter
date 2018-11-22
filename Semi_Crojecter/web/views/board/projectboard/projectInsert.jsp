@@ -207,6 +207,9 @@ body {
 			else if(!$("#date").val()){
 				alert("마감날짜를 입력해주세요.");	
 			}
+			else if(!$('#tagsinput').val()) {
+				alert("태그를 한 개 이상 입력해주세요.");				
+			}
 			else $("#insertform").submit();
 			
 			event.preventDefault();			

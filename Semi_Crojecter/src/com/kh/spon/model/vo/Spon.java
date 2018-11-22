@@ -10,19 +10,21 @@ public class Spon {
 	private int sgiverid;
 	private int sreceiverid;
 	private String sgivername;
-	private String sreceivername;
+	private String mname;
 	
 	public Spon() {
 		super();
 	}
 
-	public Spon(int sid, int shodu, Date sdate, int sgiverid, int sreceiverid) {
+	public Spon(int sid, int shodu, Date sdate, int sgiverid, int sreceiverid, String sgivername, String mname) {
 		super();
 		this.sid = sid;
 		this.shodu = shodu;
 		this.sdate = sdate;
 		this.sgiverid = sgiverid;
 		this.sreceiverid = sreceiverid;
+		this.sgivername = sgivername;
+		this.mname = mname;
 	}
 
 	public int getSid() {
@@ -73,19 +75,19 @@ public class Spon {
 		this.sgivername = sgivername;
 	}
 
-	public String getSreceivername() {
-		return sreceivername;
+	public String getMname() {
+		return mname;
 	}
 
-	public void setSreceivername(String sreceivername) {
-		this.sreceivername = sreceivername;
+	public void setMname(String mname) {
+		this.mname = mname;
 	}
 
 	@Override
 	public String toString() {
 		return "Spon [sid=" + sid + ", shodu=" + shodu + ", sdate=" + sdate + ", sgiverid=" + sgiverid
-				+ ", sreceiverid=" + sreceiverid + ", sgivername=" + sgivername + ", sreceivername=" + sreceivername
-				+ "]";
+				+ ", sreceiverid=" + sreceiverid + ", sgivername=" + sgivername + ", mname=" + mname + "]";
 	}
-
+	
+	
 }

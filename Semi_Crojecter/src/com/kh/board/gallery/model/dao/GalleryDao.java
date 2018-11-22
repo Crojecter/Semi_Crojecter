@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
+import com.kh.alarm.model.vo.Alarm;
 import com.kh.board.attachedfile.model.vo.AttachedFile;
 import com.kh.board.gallery.model.vo.Gallery;
 
@@ -647,6 +648,66 @@ public class GalleryDao {
 		return searchGalleryList;
 	}
 
+	public void insertAlarm(Connection con, Gallery g) {
+				
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Alarm> alarmList = null;
+		Alarm al = null;
+		
+		String sql = prop.getProperty("viewFollower");
+		
+		try {
+			
+			alarmList = new ArrayList<Alarm>();
+			pstmt = con.prepareStatement(sql);
+			
+			pstmt.setInt(1, g.getBwriter());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()){
+				
+				al = new Alarm();
+				al.setMid(rset.getInt(2));
+				alarmList.add(al);
+				
+				System.out.println("al : " + al);
+			}
+			
+		} catch (SQLException e1) {
+			
+			e1.printStackTrace();
+		}
+
+		String sql2 = prop.getProperty("insertAlarm");
+
+		try {
+			pstmt = con.prepareStatement(sql2);
+			
+			for(int i = 0; i < alarmList.size(); i++){	
+				
+				System.out.println("al.getMid() : " + al.getMid());
+				pstmt.setInt(1, al.getMid());
+				String msg = g.getMname() +" 님이 " +  g.getBtitle() +" (을)를 업로드했습니다.";
+				pstmt.setString(2, msg);
+			}
+			
+			int result = 0;
+			result += pstmt.executeUpdate();
+			System.out.println("result : " + result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+
+	}
+	
 	public int countComment(Connection con, int bid) {
 		int countComment = 0;
 		PreparedStatement pstmt = null;

@@ -107,17 +107,18 @@ public class FollowDao {
 	}
 
 
-	public ArrayList<Follow> selectFollowingList(Connection con, int mid) {
+	public ArrayList<Follow> selectFollowingList(Connection con, int mid, int mpid) {
 		ArrayList<Follow> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("viewFollow");
+		String sql = prop.getProperty("viewFollow2");
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mid);
+			pstmt.setInt(2, mpid);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Follow>();
@@ -128,6 +129,7 @@ public class FollowDao {
 				
 				f.setFollowid(rset.getInt("followid"));
 				f.setFollowname(rset.getString("mname"));
+				f.setChk(rset.getString("chk"));
 
 				list.add(f);
 			}
@@ -146,18 +148,18 @@ public class FollowDao {
 	}
 
 
-	public ArrayList<Follow> selectFollowerList(Connection con, int mid) {
+	public ArrayList<Follow> selectFollowerList(Connection con, int mid, int mpid) {
 		ArrayList<Follow> list = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 	
-		String sql = prop.getProperty("viewFollower");
+		String sql = prop.getProperty("viewFollower2");
 		
 		try {
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, mid);
-			pstmt.setInt(2, mid);
+			pstmt.setInt(2, mpid);
 			rset = pstmt.executeQuery();
 			
 			list = new ArrayList<Follow>();

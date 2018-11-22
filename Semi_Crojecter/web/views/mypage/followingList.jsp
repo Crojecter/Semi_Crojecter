@@ -18,20 +18,44 @@
 
 	#btnFollow {
 	
-	background:lightblue;
-	font-weight:bold;
 	width: 130px;
 	height: 35px;
 	margin-bottom:20px;
 	}
+
+
+
+    #btnFollow.btn.btn-follow active{
+
+        background:lightblue;
+        color:black;
+        height:30px;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align: center;
+        
+    }
+    
+     #btnFollow.btn.btn-follow{
+
+      background:lightblue;
+        color:black;
+        height:40px;
+        padding-top:10px;
+        padding-bottom:10px;
+        text-align: center;
+    }
 	
-	#name {
+	.inputName {
 	
 	color:darkgray;
 	padding-right:50px;
 	padding-left:100px;
+	padding-top:20px;
 	font-size:20px;
-	padding-top:30px;
+	border:white;
+	text-align:center;
+	
 	
 	}
 	
@@ -48,27 +72,39 @@
 	
 	}
 	
-	.set {
-	
-	border:solid 1px red;
-	
-	}
+
+    .followList {
+
+        border:1px black solid;
+
+    }
+    
+    .p-follow {
+    
+    padding-bottom:30px;
+    }
+    
+
 </style>
+
 </head>
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp"%><br><br>
 <form action="<%=request.getContextPath()%>/followingView.do" method="post">
-<div class="followList">
+<div class="followlist">
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
 		<tr class="set">
-			<td id="name" name="name"><%=f1.getFollowname() %></td>
-			<td>
-        
+			<td class="name" name="name"><input class="inputName"type="text" value="<%=f1.getFollowname() %>" readonly></td>
+			<td class="button" align="center">    
 				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> <br>
-				<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
-				<p id="p-follow" style="color: black">언팔로우</p></div>
-
+				<% if(f1.getChk().equals("Y")){ %>
+					<div id="btnFollow" class="btn btn-follow active" onclick="switchfollow(this);">
+					<p class="p-follow" style="color: black">언팔로우</p></div>
+				<% } else {%>
+					<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
+					<p class="p-follow" style="color: black">팔로우</p></div>
+				<% } %>
 			</td>
 		</tr>
 		<% } %>

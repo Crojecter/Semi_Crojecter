@@ -34,12 +34,11 @@ public class CollectViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int mid = Integer.parseInt(request.getParameter("mid"));
+		int mid = Integer.parseInt(request.getParameter("mpid"));
 		Member m = new MemberService().selectMember(mid);
 		
 		ArrayList<Likeit> list = null;
 		list = new LikeitService().searchLikeit(mid);
-		System.out.println("llllist : " + list);
 		
 		if(list != null){
 			request.setAttribute("myMember", m);

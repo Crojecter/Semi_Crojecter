@@ -168,17 +168,19 @@
                      <% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
                      <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
                      <div class="col-md-5" style="padding:0; float:right;">                  
-                        <% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
-                        <div class="" style="padding:0;">
+                         <% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
+                         <div class="" style="padding:0;">
                         	<button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
                      		<button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
-                            		style="display:none;">수정완료</button></div>
-                     <div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
-                        <% } %>                     
-                     <div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
-                     <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
+                            		style="display:none;">수정완료</button>
+                         </div>
+	                     <div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
+	                        <% } %>                     
+	                     <div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
+	                     <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
+                        </div>
                         <% } %>
-                     </div>                     
+                                          
                   </div>
                   
                   <div class="comment commentContent">                 
@@ -237,6 +239,7 @@
       
       
       <div class="col-md-2"></div>
+      
    </div>
 
    

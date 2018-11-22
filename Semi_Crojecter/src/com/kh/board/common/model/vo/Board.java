@@ -18,8 +18,8 @@ public class Board implements Serializable{
 	private int brcount;
 	private String mprofile;
 	private String mname;
-
-	private String FName;
+	
+	private String fName;
 	private String jTag;
 	private String gTag;
 	
@@ -59,11 +59,11 @@ public class Board implements Serializable{
 	}
 
 	public String getFName() {
-		return FName;
+		return fName;
 	}
 
 	public void setFName(String fname) {
-		this.FName = fname;
+		this.fName = fname;
 	}
 
 	public Board() {}
