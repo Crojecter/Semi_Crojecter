@@ -165,6 +165,7 @@
                      <span>닉네임 : <%=bc.getCwname() %></span> &nbsp;&nbsp;
                      <span>작성날짜 : <%=bc.getCdate() %></span>
                      </div>
+                   
                      <% if(m != null) { // 로그인한 회원의 경우 댓글달기 버튼 출력 %>
                      <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
                      <div class="col-md-5" style="padding:0; float:right;">                  
