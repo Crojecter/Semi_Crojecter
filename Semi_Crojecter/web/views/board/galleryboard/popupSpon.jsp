@@ -28,7 +28,7 @@
 	
 	body {
 	font-family: 'Nanum Gothic', sans-serif;
-	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
+	background-color: #fdf5e6  ;
 	}
 </style>
 </head>

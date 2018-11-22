@@ -151,5 +151,35 @@ public class LikeitDao {
 	}
 
 
+	public void insertAlarm(Connection con, int mid, int wid, String mname, String btitle) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("insertAlarm");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+				pstmt.setInt(1, wid);
+				String msg = mname +" 님이 회원님의 게시물 '" + btitle + "'(을)를 좋아합니다.";
+				pstmt.setString(2, msg);
+			
+			
+			int result = 0;
+			result += pstmt.executeUpdate();
+			System.out.println("result : " + result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+	}
+
+
 
 }

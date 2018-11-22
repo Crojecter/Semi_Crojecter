@@ -649,7 +649,7 @@ public class GalleryDao {
 	}
 
 	public void insertAlarm(Connection con, Gallery g) {
-				
+		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<Alarm> alarmList = null;
