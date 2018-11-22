@@ -56,7 +56,11 @@ public class Login extends HttpServlet {
 				
 				HttpSession session = request.getSession();
 				session.setAttribute("member", m);
-				response.sendRedirect(url.substring(21));
+				if(url.substring(21).equals("/crojecter/views/member/signUp.jsp")) {
+					response.sendRedirect("/crojecter");
+				} else {
+					response.sendRedirect(url.substring(21));
+				}
 				System.out.println("로그인 성공");
 				
 			} else {

@@ -37,8 +37,8 @@
 			<% if(b.getBtype() == 2) { %>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= b.getBid() %>">
-			<% if(b.getFname() != null) { %>
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>">
+			<% if(b.getFName() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFName() %>">
 			<% } else { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
 			<% } %>
@@ -77,8 +77,8 @@
 			<% if(b.getBtype() == 3) { %>
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= b.getBid() %>">
-			<% if(b.getFname() != null) { %>
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFname() %>">
+			<% if(b.getFName() != null) { %>
+			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= b.getFName() %>">
 			<% } else { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/images/icon/upload.png">
 			<% } %>

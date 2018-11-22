@@ -40,6 +40,9 @@
 	.sign{
 		font-size : 18px;
 		color : black;
+		margin-left:5px;
+		margin-right:5px;
+		font:bolder;
 	}
 	.sign:hover{
  		color : #B7F400;
@@ -121,9 +124,9 @@
 								if (m == null) {
 							%>
 							<form id="loginForm" action="/myWeb/login.me" method="post" style="float:left;">
-								<a class="btn sign"
+								<a class="sign" style="text-decoration:none;"
 									href="<%=request.getContextPath()%>/views/member/login.jsp">
-									Sign In</a> <a class="btn sign"
+									Sign In</a> <a class="sign" style="text-decoration:none"
 									href="<%=request.getContextPath()%>/views/member/signUp.jsp">
 									Sign Up</a> &nbsp;&nbsp;&nbsp;
 							</form>
