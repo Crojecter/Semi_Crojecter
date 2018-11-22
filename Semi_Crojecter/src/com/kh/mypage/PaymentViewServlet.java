@@ -46,7 +46,7 @@ public class PaymentViewServlet extends HttpServlet {
 		slist = ss.selectlist(mid);
 		plist = ps.searchPayment(mid);
 		
-		if(plist != null){
+		if(plist != null && slist != null){
 			
 			request.setAttribute("myMember", m);
 			request.setAttribute("slist", slist);

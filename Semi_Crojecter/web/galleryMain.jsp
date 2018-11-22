@@ -22,7 +22,7 @@
 		<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block;">
+		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block; width:100%">
 		<!-- 슬라이드 버튼 -->
 		<ul class="carousel-indicators">
 			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
@@ -42,7 +42,6 @@
 			<a class="carousel-control-next" href="#slideBody" data-slide="next">
 			<span class="carousel-control-next-icon"></span></a>
 		</div>
-		
 	
 		
 		<script>
@@ -58,9 +57,7 @@
 						
 						for(var i in data){
 
-							var top5Slide = ( i == 0 ) ? 
-									$("<div class='carousel-item active' style='width: 1200px;'>") 
-									: $("<div class='carousel-item'  style='width: 1200px;'>");
+							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active'>") : $("<div class='carousel-item'>");
 							var img = $('<img height="400px" width="50px">');
 							$(img).addClass('d-block w-100');
 							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname);
@@ -82,7 +79,7 @@
 		
 
 		<!-- 게시글 선택보기 -->
-		<nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 1200px;">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
 				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
 
