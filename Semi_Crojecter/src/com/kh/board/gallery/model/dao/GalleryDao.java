@@ -648,7 +648,6 @@ public class GalleryDao {
 		return searchGalleryList;
 	}
 
-<<<<<<< HEAD
 	public void insertAlarm(Connection con, Gallery g) {
 				
 		PreparedStatement pstmt = null;
@@ -709,10 +708,6 @@ public class GalleryDao {
 
 	}
 	
-	
-	
-	
-=======
 	public int countComment(Connection con, int bid) {
 		int countComment = 0;
 		PreparedStatement pstmt = null;
@@ -738,5 +733,4 @@ public class GalleryDao {
 		
 		return countComment;
 	}
->>>>>>> refs/remotes/origin/master
 }
