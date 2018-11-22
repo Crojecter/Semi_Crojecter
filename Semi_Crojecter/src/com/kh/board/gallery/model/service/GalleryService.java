@@ -205,4 +205,15 @@ public class GalleryService {
 		return glist;
 	}
 
+
+	public int countComment(int bid) {
+		// TODO Auto-generated method stub
+		Connection con = getConnection();
+		int countComment = gDao.countComment(con, bid);
+		System.out.println("countComment ser : "+ countComment);
+		close(con);
+		
+		return countComment;
+	}
+
 }
