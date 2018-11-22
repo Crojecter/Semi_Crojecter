@@ -1,6 +1,7 @@
 package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,32 +12,36 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.board.gallery.model.vo.PageInfo;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class GalleryImageListServlet
  */
-@WebServlet("/gList.ga")
-public class GalleryListServlet extends HttpServlet {
+@WebServlet("/gCategoryList.ga")
+public class GalleryCategoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GalleryListServlet() {
+    public GalleryCategoryListServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
-
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		int categoryId = Integer.parseInt(request.getParameter("cateId"));
+		System.out.println("categoryId : " + categoryId);
 		ArrayList<Gallery> gList = null;
 		GalleryService gs = new GalleryService();
 		
-		gList = gs.selectGalleryList();
-		
+		gList = gs.selectCategoryId(categoryId);
+				
 		if(gList != null) {
-			request.setAttribute("glist", gList);
+			request.setAttribute("gList2", gList);
 			request.getRequestDispatcher("/galleryMain.jsp").forward(request, response);
 		} else {
 			System.out.println("실패");

@@ -733,4 +733,112 @@ public class GalleryDao {
 		
 		return countComment;
 	}
+
+	public ArrayList<Gallery> selectGalleryList(Connection con) {
+		
+		ArrayList<Gallery> gList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectGalleryList");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			gList = new ArrayList<Gallery>();
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setBid(rset.getInt("BID"));
+				
+				g.setFName(rset.getString("FNAME"));
+				g.setMname(rset.getString("MNAME"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setgTag(rset.getString("GTAG"));
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setLikeCnt(rset.getInt("LIKECNT"));
+				g.setCommCnt(rset.getInt("COMMCNT"));
+				
+				g.setBcontent(rset.getString("BCONTENT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBrcount(rset.getInt("BRCOUNT"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBtype(rset.getInt("BTYPE"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGid(rset.getInt("GID"));
+				
+				gList.add(g);
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		
+		return gList;
+	}
+
+	public ArrayList<Gallery> selectCategoryId(Connection con, int categoryId) {
+
+		ArrayList<Gallery> gList = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCategoryId");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, categoryId);
+			rset = pstmt.executeQuery();
+			
+			gList = new ArrayList<Gallery>();
+			while(rset.next()){
+				Gallery g = new Gallery();
+				
+				g.setBid(rset.getInt("BID"));
+				
+				g.setFName(rset.getString("FNAME"));
+				g.setMname(rset.getString("MNAME"));
+				g.setBtitle(rset.getString("BTITLE"));
+				g.setgTag(rset.getString("GTAG"));
+				g.setBcount(rset.getInt("BCOUNT"));
+				g.setLikeCnt(rset.getInt("LIKECNT"));
+				g.setCommCnt(rset.getInt("COMMCNT"));
+				
+				g.setBcontent(rset.getString("BCONTENT"));
+				g.setBdate(rset.getDate("BDATE"));
+				g.setBrcount(rset.getInt("BRCOUNT"));
+				g.setBstatus(rset.getString("BSTATUS"));
+				g.setBtype(rset.getInt("BTYPE"));
+				g.setBwriter(rset.getInt("BWRITER"));
+				g.setGcategoryid(rset.getInt("GCATEGORYID"));
+				g.setGid(rset.getInt("GID"));
+				
+				gList.add(g);
+			}
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return gList;
+	}
 }
