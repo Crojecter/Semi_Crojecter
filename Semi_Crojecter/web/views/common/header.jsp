@@ -162,7 +162,7 @@
 											id="countUnreadAlarm"></span>
 									</button>
 								</li>
-								<script>
+						<script>
 						$(document).ready(function(){
 							$.ajax({
 								data : { Mid : <%=m.getMid()%>},

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.*, com.kh.board.project.model.vo.*" %>
+    pageEncoding="UTF-8" import="java.util.*, com.kh.board.project.model.vo.*, com.kh.board.common.model.vo.*" %>
  
 <% 
+
 	ArrayList<Project> projectList = (ArrayList<Project>)request.getAttribute("projectList"); 
 	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	//System.out.println("PageInfo gl : "+ pi);
@@ -10,6 +11,10 @@
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage(); 
+	//Project pr = (Project)session.getAttribute("Project");
+	 Board b = (Board)session.getAttribute("Board");
+	//int commCnt = b.getCommCnt();
+	//System.out.println("commCnt gl : "+ commCnt); 
 %> 
  
 <!DOCTYPE html>
@@ -37,11 +42,11 @@
 
 		<% for (Project pro : projectList) { %>
 			<div id="pro-list" class="card" style="width: 300px; height: auto; display: inline-block;">
-			<div style="width: 300px; height: 300px; display: inline-block; ">
-			<a href="">		
-			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>"
-			alt="Card image cap" class="project"></a>
-			</div>
+				<div style="width: 300px; height: 300px; display: inline-block; ">
+					<a href="">		
+					<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>"
+					alt="Card image cap" class="project"></a>
+				</div>
 				<div class="card-body">
 					<h5 class="card-title"><a href=""><%= pro.getBtitle() %></a></h5>
 					<% if(pro.getJtag() != null) {
@@ -53,15 +58,15 @@
 						
 					} %>
 					<div>
-					<button disabled class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= pro.getBcount() %>
-					</button>
-					<button onclick="" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></button>
-					<button src="<%= request.getContextPath()%>/views/board/projectDetail.jsp" class="btn btn-primary">
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</button>
+						<button disabled class="btn btn-primary">
+						<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" id="proImg" style="height:22px;"><%= pro.getBcount() %>
+						</button>
+						<button onclick="" class="btn btn-primary">
+						<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
+						alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></button>
+						<button src="<%= request.getContextPath()%>/views/board/projectDetail.jsp" class="btn btn-primary">
+						<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
+						alt="" style="height:22px;"><%= b.getCommCnt() %></button>
 					</div>
 				</div>
 			</div>
@@ -69,12 +74,23 @@
 		</div>
 		<script>
 			$(function(){
-				$("pro-list").click(function(){
+				$("#pro-list").click(function(){
 					// 눌렀을때 갤러리 상세로 이동
-					var bno = $(this).parent().children().eq(0).val();
-					location.href="<%=request.getContextPath()%>/selectOne.pr?bno=" + bno;
+					var bno = $(this).parent().children().eq(0).children().val();
+					location.href="<%=request.getContextPath()%>/gSelectOne.ga?bid=" + bid;
 				})
 			});
+			// 댓글갯수 조회
+			<%-- $(document).ready(function(){
+				$.ajax({
+					data : { Bid : <%=pr.getBid()%>},
+					url : "/crojecter/countPComment.pr",
+					type : "post",
+					success : function(data){
+						$("#countPComment").text(data);
+					}
+				});
+			}); --%>
 		</script>
 		<%@ include file="../../common/footer.jsp"%>
 </body>

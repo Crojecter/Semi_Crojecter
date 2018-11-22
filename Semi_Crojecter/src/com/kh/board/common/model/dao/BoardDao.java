@@ -65,7 +65,7 @@ public class BoardDao {
 		
 				b.setLikeCnt(rset.getInt("LIKECNT"));
 				b.setCommCnt(rset.getInt("COMMCNT"));
-				b.setFname(rset.getString("FNAME"));
+				b.setFName(rset.getString("FNAME"));
 				b.setMname(rset.getString("MNAME"));
 				b.setMprofile(rset.getString("MPROFILE"));
 				

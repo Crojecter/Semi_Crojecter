@@ -367,7 +367,7 @@ public class ProjectDao {
 				Project pro = new Project();
 				// 갤러리분
 				pro.setJid(rset.getInt("JID"));
-				pro.setJend(rset.getDate("JEND"));
+				pro.setJend((rset.getDate("JEND")));
 				pro.setJtag(rset.getString("JTAG"));
 				// 상속분
 				pro.setBid(rset.getInt("BID"));
