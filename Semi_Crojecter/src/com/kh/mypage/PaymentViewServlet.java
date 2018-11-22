@@ -38,24 +38,31 @@ public class PaymentViewServlet extends HttpServlet {
 		PaymentService ps = new PaymentService();
 		
 		ArrayList<Spon> slist = null;
+		ArrayList<Spon> rslist = null;
 		SponService ss = new SponService();
 		
 		int mid = Integer.parseInt(request.getParameter("mid"));
 		Member m = new MemberService().selectMember(mid);
 		
-		slist = ss.selectlist(mid);
+		slist = ss.selectlist(mid); // 후원내역
+		rslist = ss.receivedList(mid); //받은 후원 내역
 		plist = ps.searchPayment(mid);
 		
-		if(plist != null && slist != null){
-			
+		
+		System.out.println("slist : " + slist);
+		System.out.println("plist : " + plist);
+
+		
+		if(plist != null && slist != null && rslist != null){
 			request.setAttribute("myMember", m);
 			request.setAttribute("slist", slist);
 			request.setAttribute("plist", plist);
+			request.setAttribute("rslist",rslist);
 			request.getRequestDispatcher("views/mypage/paymentList.jsp").forward(request, response);
 			
-		} else {			
+		} else {
+			
 			request.setAttribute("msg", "조회 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}
