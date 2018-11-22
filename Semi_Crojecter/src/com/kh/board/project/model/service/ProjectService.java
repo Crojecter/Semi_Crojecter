@@ -109,10 +109,10 @@ public class ProjectService {
 	public ArrayList<Project> selectProjectList(int currentPage, int limit) {
 		// 게시판 목록
 		Connection con = getConnection();
-		ArrayList<Project> list = pDao.selectProjectList(con, currentPage, limit);
+		ArrayList<Project> projectList = pDao.selectProjectList(con, currentPage, limit);
 		
 		close(con);
-		return list;
+		return projectList;
 	}
 	
 	public int getCountProjectList() {

@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="../common/header.jsp"%>
+	<%@ include file="../../common/header.jsp"%>
 	<h3> 만든 사람들</h3><br />
 	<h5> 안알랴줌</h5>
-	<%@ include file="../common/footer.jsp"%>
+	<%@ include file="../../common/footer.jsp"%>
 
 </body>
 </html>
