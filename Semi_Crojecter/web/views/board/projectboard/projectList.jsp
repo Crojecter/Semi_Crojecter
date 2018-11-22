@@ -49,7 +49,7 @@
 						
 					} %>
 					<div>
-<<<<<<< HEAD
+
 						<button disabled class="btn btn-primary">
 						<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" id="proImg" style="height:22px;"><%= pro.getBcount() %>
 						</button>
@@ -60,17 +60,7 @@
 						<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
 						alt="" style="height:22px;"><%= pro.getCommCnt() %></button>
 						<span id=Dday>.</span>
-=======
-					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/view.png" alt="" style="height:22px;"><%= pro.getBcount() %>
-					</label>
-					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/like.png" 
-					alt="" style="height:22px;" data-toggle="tooltip" title="좋아요 +1"><%= pro.getJend() %></label>
-					<label>
-					<img src="<%= request.getContextPath()%>/resources/images/icon/reply.png" 
-					alt="" style="height:22px;">수</label>
->>>>>>> refs/remotes/origin/master
+
 					</div>
 				</div>
 				
