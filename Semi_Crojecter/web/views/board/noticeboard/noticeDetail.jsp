@@ -13,11 +13,6 @@
 	src="<%=request.getContextPath()%>/resources/js/jquery-3.3.1.min.js"></script>
 <style>
 
-	body {
-		font-family: 'Nanum Gothic', sans-serif;
-		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
-	}
-	
 	.outer {
 		margin-top: 50px;
 		margin-bottom: 100px;
@@ -39,6 +34,11 @@
 	      float: right;
 	      margin-right:2px;
 	   }
+	   
+	   body {
+		font-family: 'Nanum Gothic', sans-serif;
+		background-image: url("<%=request.getContextPath()%>/resources/images/background2.jpg");
+	}
 </style>
 
 <title>공지사항 상세보기</title>

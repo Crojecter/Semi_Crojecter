@@ -414,6 +414,28 @@ public class MemberDao {
 		
 		return result;
 	}
+
+	public void insertAlarm(Connection con, int mid) {
+
+		String sql = prop.getProperty("insertAlarmMember");
+		
+		try {
+			
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, mid);
+			int result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+	}
 	
 }
 
