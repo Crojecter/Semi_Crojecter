@@ -12,32 +12,30 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
-.outer{
-		width:900px;
-		height:600px;
-		background:black;
-		color:white;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:50px;
+
+
+	.table {
+		width:800px;
+		border:1px solid black;
+        border-radius: 3px;
+        margin-left:40px;
+        margin-right:40px;
+        text-align:center;
 	}
-	table {
-		padding : 20px;
-		border:1px solid white;
-		text-align:center;
-	}
-	.tableArea {
-		width:750px;
-		height:350px;
-		margin-left:auto;
-		margin-right:auto;
-	}
+
+    table th {
+        color:white;
+        background:darkgray;
+        text-align:center;
+
+    }
+
 	.searchArea {
 		width:650px;
-		margin-left:auto;
-		margin-right:auto;
+		margin-left:600px;
 	}
 </style>
+
 </head>
 <body>
 <%@ include file="../adminpage/common/adminpageHeader.jsp" %>
@@ -48,7 +46,8 @@
 		<option value="comment">사유순</option>
 	</select>
 </div>
-<table>
+<div>
+<table class="table">
 	<tr>
 		<th>날짜</th>
 		<th>사유</th>
@@ -68,6 +67,7 @@
 	</tr>
 	<% } %>
 </table>
+</div>
 
 </body>
 </html>

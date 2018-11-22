@@ -35,6 +35,14 @@
 
 	}
 	
+	.alarm {
+	
+	color:black;
+	padding-top:100px;
+	font-weight:bold;
+	
+	}
+	
 	
 </style>
 </head>
@@ -64,7 +72,7 @@
 				</div>
 			</div>
 		<% } } else { %>
-			<p>아직 업로드한 작품이 없습니다.</p>
+			<div class="alarm" align="center">아직 업로드한 작품이 없습니다.</div>
 		<% } %>
 </div>
 		<script>
