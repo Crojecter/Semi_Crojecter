@@ -251,7 +251,7 @@
 								<form class="navbar-search pull-left"
 									action="<%=request.getContextPath()%>/search.all" method="get">
 									<input type="text" class="search-query" placeholder="Search"
-										name="keyword" style="width: ">
+										name="keyword" style="border-radius: 5px; padding-left: 5px; border: 2px solid lightgray;">
 									<button class="btn my-2 my-sm-0" style="background : white;"
 										type="submit">
 										<img
