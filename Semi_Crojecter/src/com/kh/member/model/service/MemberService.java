@@ -24,8 +24,11 @@ public class MemberService {
 		
 		result = mDao.signUpMember(con, m);
 		
-		if(result > 0) commit(con);
-		else rollback(con);
+		if(result > 0){
+			commit(con);
+			Member m2 = mDao.selectMember(con, m);
+			mDao.insertAlarm(con, m2.getMid());
+		} else rollback(con);
 		
 		close(con);
 		
@@ -179,6 +182,5 @@ public class MemberService {
 		
 		return result;
 	}
-
 
 }
