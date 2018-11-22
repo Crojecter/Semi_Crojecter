@@ -13,9 +13,12 @@
 <style>
 	#gal-list {
 		width: 300px; 
-		height: 300px; 
+		height: auto; 
 		display: inline-block;
 		padding-top:30px;
+		margin-left:30px;
+		margin-top:100px;
+		border:1px solid darkgary;
 	}
 	
 	#gal-list a {
@@ -25,10 +28,26 @@
 		font-size: 18px;
 	}
 	
+	
 	.card-title {
 	
 		text-align:center;
 	}
+	
+	.alarm {
+	
+	color:black;
+	padding-top:100px;
+	font-weight:bold;
+	
+	}
+	
+	.card-img-top {
+	
+	width:250px;
+	height:250px;
+	}
+
 	
 
 </style>
@@ -48,7 +67,7 @@
 		</div>
 	</div>
 	<% } } else { %>
-		<p>아직 좋아요한 작품이 없습니다.</p>
+		<div class="alarm" align="center">아직 좋아요한 작품이 없습니다.</div>
 	<% } %>
 </div>
 </form>
