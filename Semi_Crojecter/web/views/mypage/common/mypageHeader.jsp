@@ -13,10 +13,10 @@
 	.profileArea {
 		border: 1px solid black;
 		color: black;
-		background: lightgray;
 		text-align:center;
 		font-weight:bold;
 		font-size:23px;
+		background-image: url("<%=request.getContextPath()%>/resources/images/mypage.jpg");
 		
 	}
 	
@@ -65,6 +65,7 @@
 		margin-left: 20px;
 		border: solid 1px gray;
 	}		
+
 
 </style>
 
