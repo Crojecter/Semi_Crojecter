@@ -22,7 +22,7 @@
 		<div class="row">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
-		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block;">
+		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block; width:100%">
 		<!-- 슬라이드 버튼 -->
 		<ul class="carousel-indicators">
 			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
@@ -57,7 +57,7 @@
 						
 						for(var i in data){
 
-							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active' style='width: 1300px;'>") : $("<div class='carousel-item'  style='width:1300px'>");
+							var top5Slide = ( i == 0 ) ? $("<div class='carousel-item active'>") : $("<div class='carousel-item'>");
 							var img = $('<img height="400px" width="50px">');
 							$(img).addClass('d-block w-100');
 							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname);
