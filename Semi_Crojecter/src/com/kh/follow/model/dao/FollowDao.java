@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.alarm.model.vo.Alarm;
 import com.kh.follow.model.vo.Follow;
 
 public class FollowDao {
@@ -186,6 +187,31 @@ public class FollowDao {
 		}
 			
 		return list;
+	}
+
+
+	public void insertAlarm(Connection con, String wid, String mname) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("insertAlarm");
+
+		try {
+			pstmt = con.prepareStatement(sql);
+
+				pstmt.setInt(1, Integer.parseInt(wid));
+				String msg = mname +" 님이 팔로우했습니다.";
+				pstmt.setString(2, msg);	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+			
+		}
+		
 	}
 }
 	

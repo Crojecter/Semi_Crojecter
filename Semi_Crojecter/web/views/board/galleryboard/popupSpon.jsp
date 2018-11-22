@@ -28,7 +28,7 @@
 	
 	body {
 	font-family: 'Nanum Gothic', sans-serif;
-	background-image: url("<%=request.getContextPath()%>/resources/images/background4.jpg");
+	background-color: #fdf5e6  ;
 	}
 </style>
 </head>
@@ -51,7 +51,7 @@
 	<script>
 		var referrer = document.referrer;
 		var sponReferrer = "";
-		
+		console.log("부모창에서 이름 가져오기 : " + $(opener.document).find("#parentGetName").text())
 		$("#childName").text($(opener.document).find("#parentGetName").text());
 		$("#childGiverid").text($(opener.document).find("#parentGetmid").text());
 		var swriter = $("#childName").text();

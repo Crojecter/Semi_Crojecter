@@ -1,25 +1,29 @@
-package com.kh.follow.controller;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.follow.model.service.FollowService;
+import com.kh.board.gallery.model.service.GalleryService;
+import com.kh.board.gallery.model.vo.Gallery;
 
 /**
- * Servlet implementation class FollowSwitchServlet
+ * Servlet implementation class GalleryImageListServlet
  */
-@WebServlet("/fSwitch.fo")
-public class FollowSwitchServlet extends HttpServlet {
+@WebServlet("/gCategoryList.ga")
+public class GalleryCategoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public FollowSwitchServlet() {
+    public GalleryCategoryListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,16 +33,20 @@ public class FollowSwitchServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String wid = request.getParameter("wid"); //글쓴이
-		String mid = request.getParameter("mid"); //로그인한회원
-		String mname = request.getParameter("mname"); //로그인한회원이름	
+		int categoryId = Integer.parseInt(request.getParameter("cateId"));
+		System.out.println("categoryId : " + categoryId);
+		ArrayList<Gallery> gList = null;
+		GalleryService gs = new GalleryService();
 		
-		System.out.println("mid : " + mid + " / wid : " + wid + " / mname : " + mname);
+		gList = gs.selectCategoryId(categoryId);
+				
+		if(gList != null) {
+			request.setAttribute("gList2", gList);
+			request.getRequestDispatcher("/galleryMain.jsp").forward(request, response);
+		} else {
+			System.out.println("실패");
+		}
 		
-		int result = new FollowService().switchFollow(wid, mid, mname);
-		System.out.println("fSwitch.fo result : " + result);
-		
-		response.getWriter().print((result == 0) ? "error" : (result == 1)? "delete" : "insert");
 	}
 
 	/**

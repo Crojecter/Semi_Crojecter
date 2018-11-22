@@ -3,9 +3,7 @@
 <!DOCTYPE html>
 <%
  
-	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List"); 
-	System.out.println("GalleryList ArrayList : "+ gTop5List);
-	
+	ArrayList<Gallery> gTop5List = (ArrayList<Gallery>)request.getAttribute("gTop5List");
  	
 %>
 <html>
@@ -14,22 +12,38 @@
 	<title>Gallery Main</title>
 		<meta charset="UTF-8">
 		<style>
+		
+		body {
+		font-family: 'Nanum Gothic', sans-serif;		
+		}
+		
 		#slide{ height:400px;}
+		
+		.carousel-caption {
+			font-size: 30px;			
+			background-color: rgba( 255, 255, 255, 0.5 );
+			
+			
+		}
+		
+		.carousel-indicators li {
+		margin: 10px;}
+		
 		</style> 
 	</head>
 	<body>
 		<%@ include file="views/common/header.jsp" %>
-		<div class="row">
+		<div class="row" style="margin-bottom: 60px;">
 	<div class="col-md-2"></div>
 	<div class="col-md-8">
 		<div id="slideBody" class="carousel slide" data-ride="carousel" style="display : inline-block; width:100%">
 		<!-- 슬라이드 버튼 -->
 		<ul class="carousel-indicators">
-			<li data-target="#slideBody" data-slide-to="0" class="active"></li>
-			<li data-target="#slideBody" data-slide-to="1" class=""></li>
-			<li data-target="#slideBody" data-slide-to="2" class=""></li>
-			<li data-target="#slideBody" data-slide-to="3" class=""></li>
-			<li data-target="#slideBody" data-slide-to="4" class=""></li>
+			<li data-target="#slideBody" data-slide-to="0" class="active" style="background-color: #30B2A0;"> </li>
+			<li data-target="#slideBody" data-slide-to="1" class="" style="background-color: #30B2A0;"> </li>
+			<li data-target="#slideBody" data-slide-to="2" class="" style="background-color: #30B2A0;"> </li>
+			<li data-target="#slideBody" data-slide-to="3" class="" style="background-color: #30B2A0;"> </li>
+			<li data-target="#slideBody" data-slide-to="4" class="" style="background-color: #30B2A0;"> </li>
 		</ul>
 		<!--  슬라이드 본문 -->
 			<div class="carousel-inner" id="top5test">
@@ -53,7 +67,6 @@
 					success : function(data){
 
 						var body = $('#top5test');
-						console.log(data);
 						
 						for(var i in data){
 
@@ -63,7 +76,7 @@
 							$(img).attr('src', '<%= request.getContextPath()%>/resources/uploadFiles/' + data[i].fname);
 							
 							top5Slide.append($(img));
-							top5Slide.append($("<div class='carousel-caption'><h5 class='top5Title'>").text(data[i].btitle));
+							top5Slide.append($("<div class='carousel-caption' style='text-shadow: none; padding: 0; margin: 40px; color: black; '><h5 class='top5Title'>").text(data[i].btitle));
 							//top5Slide.append($("<p class='top5Writer'>").text(data[i].bwriter));
 							
 							body.append(top5Slide);
@@ -80,49 +93,23 @@
 
 		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
+			<button type="button" value="0" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gList.ga'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px">
+			</button>
 
-			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
-				
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
-				<ul class="navbar-nav mr-auto"></ul>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="nav-item dropdown" type="submit">
-						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							최신순		
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
-						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
-						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
-						</div>
-					</button>
-				</form>
-			</div>		
+			<button type="button" value="2" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=2'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px">
+			</button><!-- 2 -->		
+			<button type="button" value="3" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=3'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px">
+				</button><!-- 3 -->
+			<button type="button" value="1" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=1'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px">
+			</button><!-- 1 -->
+			<button type="button" value="4" class="btn btn-light" onclick="location.href='<%= request.getContextPath()%>/gCategoryList.ga?cateId=4'">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px">
+			</button><!-- 4 -->
 		</nav>
-		
-		<script>
-		function searchImg(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchAud(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchTxt(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		function searchVid(){
-			location.href="<%=request.getContextPath()%>/gSearch.ga?con="+$('#searchCondition').val()+"&keyword="+$('#keyword').val();
-		}
-		</script>
 	
 		<!-- 갤러리 내용 -->
 		<%@ include file="views/board/galleryboard/galleryList.jsp" %>

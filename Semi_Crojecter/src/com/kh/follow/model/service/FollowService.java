@@ -28,7 +28,7 @@ public class FollowService {
 		return result;
 	}
 
-	public int switchFollow(String wid, String mid) {
+	public int switchFollow(String wid, String mid, String mname) {
 		
 		Connection con = getConnection();
 		
@@ -39,6 +39,7 @@ public class FollowService {
 		} else {
 			result = fDao.insertFollow(con, wid, mid) * 2;
 			// mid가 wid를 팔로우 하면 wid한테 alarm 인서트
+			fDao.insertAlarm(con, wid, mname);
 		}
 		
 		if(result > 0) commit(con);
