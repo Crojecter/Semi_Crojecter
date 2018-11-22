@@ -102,7 +102,9 @@ p {
 				</tr>
 				<% for(Notice n : noticeList){ %>
 				<tr class="noticeTR">				
-					<td><input type="hidden" style="padding: 5px;" value="<%= n.getBid() %>"/></td>
+					<td>
+						<input type="hidden" style="padding: 5px;" value="<%= n.getBid() %>"/>
+					</td>
 					<td id="noticeTD" style="padding: 5px;"><%= n.getBtitle() %></td>
 					<td id="noticeTD" style="padding: 5px;"><%= n.getBdate() %></td>
 					<td id="noticeTD" style="padding: 5px;"><%= n.getBcount() %></td>
@@ -127,7 +129,6 @@ p {
 	            location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;            
 	         });
      	});
-		 
 		//
 		</script>
 				<!-- 리모컨 -->

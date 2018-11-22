@@ -7,9 +7,13 @@ import com.kh.board.common.model.vo.Board;
 
 public class Project extends Board implements Serializable {
 
+
+	private static final long serialVersionUID = 2000L;
+	
 	private int jid;
 	private Date jend;
 	private String jtag;
+	
 	private int dday;
 
 	// 파일경로 조회용 코드
@@ -28,6 +32,14 @@ public class Project extends Board implements Serializable {
 		super();
 	}
 
+	public Project(int jid, Date jend,  String jtag) {
+		super();
+		this.jid = jid;
+		this.jend = jend;
+		this.jtag = jtag;			
+	}
+
+	
 	public Project(int jid, Date jend,  String jtag, int dday) {
 		super();
 		this.jid = jid;
@@ -68,15 +80,16 @@ public class Project extends Board implements Serializable {
 		this.dday = dday;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Project [jid=" + jid + ", jend=" + jend + ", jtag=" + jtag + ", dday=" + dday + ", getBid()=" + getBid()
-				+ ", getBtype()=" + getBtype() + ", getBtitle()=" + getBtitle() + ", getBcontent()=" + getBcontent()
-				+ ", getBcount()=" + getBcount() + ", getBdate()=" + getBdate() + ", getBstatus()=" + getBstatus()
-				+ ", getBwriter()=" + getBwriter() + ", getBrcount()=" + getBrcount() + ", getMprofile()="
-				+ getMprofile() + ", getMname()=" + getMname() + ", toString()=" + super.toString() + ", getClass()="
-				+ getClass() + ", hashCode()=" + hashCode() + "]";
+		return "Project [jid=" + jid + ", jend=" + jend + ", jtag=" + jtag + ", dday=" + dday + ", getLikeCnt()="
+				+ getLikeCnt() + ", getCommCnt()=" + getCommCnt() + ", getjTag()=" + getjTag() + ", getgTag()="
+				+ getgTag() + ", getFName()=" + getFName() + ", getBid()=" + getBid() + ", getBtype()=" + getBtype()
+				+ ", getBtitle()=" + getBtitle() + ", getBcontent()=" + getBcontent() + ", getBcount()=" + getBcount()
+				+ ", getBdate()=" + getBdate() + ", getBstatus()=" + getBstatus() + ", getBwriter()=" + getBwriter()
+				+ ", getBrcount()=" + getBrcount() + ", getMprofile()=" + getMprofile() + ", getMname()=" + getMname()
+				+ ", toString()=" + super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+				+ "]";
 	}
-
+	
 }
