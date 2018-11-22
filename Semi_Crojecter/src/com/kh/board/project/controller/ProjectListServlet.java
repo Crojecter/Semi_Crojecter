@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.board.gallery.model.vo.PageInfo;
+import com.kh.board.project.model.vo.PageInfo;
 import com.kh.board.project.model.service.ProjectService;
 import com.kh.board.project.model.vo.Project;
 
@@ -30,7 +30,7 @@ public class ProjectListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 게시글 목록용 서블릿
-		ArrayList<Project> list = null;
+		ArrayList<Project> projectList = null;
 		ProjectService ps = new ProjectService();
 		
 		int startPage;		// 첫 페이지	
@@ -49,7 +49,7 @@ public class ProjectListServlet extends HttpServlet {
 		// 전체 게시글 수 조회하기
 		int countProjectList = ps.getCountProjectList();
 		
-		System.out.println("전체 게시글 수 : "+ countProjectList);
+		System.out.println("전체 프로잭트 수 : "+ countProjectList);
 					
 		maxPage = (int)((double)countProjectList / limit + 0.9);
 		
@@ -62,17 +62,19 @@ public class ProjectListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		list = ps.selectProjectList(currentPage, limit);
-		//System.out.println("GalleryListServlet ga : "+ list);
+		projectList = ps.selectProjectList(currentPage, limit);
+		System.out.println("ProjectListServlet ga : "+ projectList);
 		String page = "";
 		
-		if(list != null){
+		if(projectList != null){
 			
 			PageInfo pi = new PageInfo(currentPage, countProjectList, limit, maxPage, startPage, endPage);
 			
-			page = "views/projectBoard/projectPage.jsp";
+			page = "views/board/projectboard/projectList.jsp";
 			request.setAttribute("pi", pi);
-			request.setAttribute("list", list);
+			request.setAttribute("projectList", projectList);	
+			System.out.println("start, end, max, current, limit : "+ startPage +", "+ endPage +", "+ maxPage +", "+ currentPage +", "+ limit);
+		
 		} else {
 			
 			page = "views/common/errorPage.jsp";

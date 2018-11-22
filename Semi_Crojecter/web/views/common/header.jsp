@@ -85,6 +85,16 @@
 	src="<%=request.getContextPath()%>/resources/bootstrap-tagsinput/bootstrap-tagsinput.js"></script>
 
 <style>
+	.sign{
+		font-size : 18px;
+		color : black;
+		margin-left:5px;
+		margin-right:5px;
+		font:bolder;
+	}
+	.sign:hover{
+ 		color : #B7F400;
+	}
 </style>
 
 </head>
@@ -114,15 +124,13 @@
 							<!-- 갤러리 -->
 							<li class="galleryLink">
 								<h4>
-									<a class="sign" style="text-decoration: none"
-										href="<%=request.getContextPath()%>/gList.ga">갤러리</a>
+									<a class="sign" style="text-decoration:none" href="<%=request.getContextPath()%>/gList.ga">갤러리</a>
 								</h4>
 							</li> &nbsp;&nbsp;&nbsp;
 							<!-- 프로젝트 -->
 							<li class="projectLink">
 								<h4>
-									<a class="sign" style="text-decoration: none"
-										href="<%=request.getContextPath()%>/pList.pr">프로젝트</a>
+									<a class="sign" style="text-decoration:none" href="<%=request.getContextPath()%>/pList.pr">프로젝트</a>
 								</h4>
 							</li>
 						</ul>
@@ -134,11 +142,10 @@
 							<%
 								if (m == null) {
 							%>
-							<form id="loginForm" action="/myWeb/login.me" method="post"
-								style="float: left;">
-								<a class="btn sign"
+							<form id="loginForm" action="/myWeb/login.me" method="post" style="float:left;">
+								<a class="sign" style="text-decoration:none;"
 									href="<%=request.getContextPath()%>/views/member/login.jsp">
-									Sign In</a> <a class="btn sign"
+									Sign In</a> <a class="sign" style="text-decoration:none"
 									href="<%=request.getContextPath()%>/views/member/signUp.jsp">
 									Sign Up</a> &nbsp;&nbsp;&nbsp;
 							</form>
@@ -189,9 +196,9 @@
 
 								<!-- 프로필 -->
 								<li class="nav-item dropdown" style="padding: 0 5px;"><a
-									href="<%=request.getContextPath()%>#" id="navbarDropdown"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"
+									href="<%=request.getContextPath()%>#"
+									id="navbarDropdown" role="button" data-toggle="dropdown"
+									aria-haspopup="true" aria-expanded="false"
 									style="height: auto; text-decoration: none"> <img
 										src="<%=request.getContextPath()%>/resources/images/user.png"
 										style="height: 30px;" class="rounded-circle"
@@ -246,7 +253,7 @@
 									action="<%=request.getContextPath()%>/search.all" method="get">
 									<input type="text" class="search-query" placeholder="Search"
 										name="keyword">
-									<button class="btn my-2 my-sm-0" style="background: white;"
+									<button class="btn my-2 my-sm-0" style="background : white;"
 										type="submit">
 										<img
 											src="<%= request.getContextPath()%>/resources/images/icon/search.png"
