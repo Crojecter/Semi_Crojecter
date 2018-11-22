@@ -17,7 +17,6 @@
       font-weight:bold;
       font-size:23px;
       background-image: url("<%=request.getContextPath()%>/resources/images/mypage.jpg");
-  
    }
    
    .menu {
@@ -71,15 +70,19 @@
    <%@ include file="../../common/header.jsp"%>
    <div class="profileArea">
       <form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
-         <img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
+         <% if(m2.getMprofile() == null) { %>
+         <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
+         <% } else { %>
+         <img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=m2.getMprofile()%>">
+         <% }  %>
          <input type="file" name="file" id="btnProfile" style="display:none;" onchange="updateProfile();"/>
       </form>
       <p id="profileName"><%=m2.getMname()%>님의 페이지</p>
       
       <% if(m.getMid() == m2.getMid()) { %>
       <p class=proMenu>
-      <a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
-      <a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
+      <a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%= m.getMid() %>">결제내역</a> 
+      <a class="profileMenus" id="button" href="/crojecter/myInfoView.my?mid=<%= m.getMid() %>">정보수정</a>
       <br>
       </p>
       <% } %>
@@ -89,24 +92,20 @@
       <table>
          <tr>
             <td class="menuMenu"><a
-            href="/crojecter/mypageView.do?mpid=<%=m2.getMid()%>">About</a></td>
-         <td class="menuMenu"><a
-            href="/crojecter/mworkView.do?mpid=<%=m2.getMid()%>">Works</a></td>
-         <td class="menuMenu"><a
-            href="/crojecter/collectView.do?mpid=<%=m2.getMid()%>">Collect</a></td>
-         <td class="menuMenu"><a 
-            href="/crojecter/followingView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followings</a></td>
-         <td class="menuMenu"><a
-            href="/crojecter/followerView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followers</a></td>
+				href="/crojecter/mypageView.do?mpid=<%=m2.getMid()%>">About</a></td>
+			<td class="menuMenu"><a
+				href="/crojecter/mworkView.do?mpid=<%=m2.getMid()%>">Works</a></td>
+			<td class="menuMenu"><a
+				href="/crojecter/collectView.do?mpid=<%=m2.getMid()%>">Collect</a></td>
+			<td class="menuMenu"><a 
+				href="/crojecter/followingView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followings</a></td>
+			<td class="menuMenu"><a
+				href="/crojecter/followerView.do?mpid=<%=m2.getMid()%>&mid=<%=m.getMid()%>">Followers</a></td>
          </tr>
       </table>
    </div>
    
    <script>
-
-   $(function() {
-      $('#profileImg').attr('src', "../../resources/profileFiles/<%= m2.getMprofile() %>");
-   });
       
    function updateProfile() {
       $("#updateForm").submit();

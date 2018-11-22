@@ -11,7 +11,16 @@ public class Spon {
 	private int sreceiverid;
 	private String sgivername;
 	private String mname;
+	private String sreceivername;
 	
+	public String getSreceivername() {
+		return sreceivername;
+	}
+
+	public void setSreceivername(String sreceivername) {
+		this.sreceivername = sreceivername;
+	}
+
 	public Spon() {
 		super();
 	}

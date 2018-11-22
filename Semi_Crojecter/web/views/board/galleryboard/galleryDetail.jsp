@@ -187,7 +187,8 @@
                   <div class="comment commentContent">                 
                      <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>                                     
                      <p style="border:1px solid lightgray; background:white; height:70px;">
-                        <% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
+                        <% if(bc.getCrefmid()>0) { %><a href=
+                        	"/crojecter/mypageView.do?mpid=<%=bc.getCrefmid()%>">@<%= bc.getCfname() %></a> <% } %>
                         <%= bc.getCcontent() %>
                      </p>                                     
                   </div>
@@ -208,7 +209,7 @@
          <% }  %>
          </div>
          
-         <h4 align="center"><%=g.getMname()%></h4>
+         <h4 align="center" id="parentGetName"><%=g.getMname()%></h4>
 
          <div class="row" align="center" id="" style="margin-top: 10px;">
             <div class="col-md-6" style="padding:0;"><button class="btn-follow btnArea1" id="btnFollow">팔로우</button></div>         

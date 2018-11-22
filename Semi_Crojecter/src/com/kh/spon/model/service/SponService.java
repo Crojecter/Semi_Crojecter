@@ -26,4 +26,16 @@ public class SponService {
 
 	}
 
+	public ArrayList<Spon> receivedList(int mid) {
+		
+		ArrayList<Spon> list = null;
+		Connection con = getConnection();
+		
+		list = sDao.receivedList(con, mid);
+		
+		close(con);
+		
+		return list;
+	}
+
 }

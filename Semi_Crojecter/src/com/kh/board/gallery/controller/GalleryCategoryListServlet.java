@@ -1,6 +1,7 @@
-package com.kh.mypage;
+package com.kh.board.gallery.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -11,21 +12,18 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.board.gallery.model.service.GalleryService;
 import com.kh.board.gallery.model.vo.Gallery;
-import com.kh.member.model.service.MemberService;
-import com.kh.member.model.vo.Member;
-
 
 /**
- * Servlet implementation class MyworkViewServlet
+ * Servlet implementation class GalleryImageListServlet
  */
-@WebServlet("/mworkView.do")
-public class MyworkViewServlet extends HttpServlet {
+@WebServlet("/gCategoryList.ga")
+public class GalleryCategoryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyworkViewServlet() {
+    public GalleryCategoryListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,24 +33,20 @@ public class MyworkViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ArrayList<Gallery> glist = null;
+		int categoryId = Integer.parseInt(request.getParameter("cateId"));
+		System.out.println("categoryId : " + categoryId);
+		ArrayList<Gallery> gList = null;
 		GalleryService gs = new GalleryService();
 		
-		int mid = Integer.parseInt(request.getParameter("mpid"));
-		Member m = new MemberService().selectMember(mid);
-
-		glist = gs.searchGallery(mid);
-		
-		System.out.println("work list : " + glist);
-		
-		if(glist != null){
-			request.setAttribute("myMember", m);
-			request.setAttribute("glist", glist);
-			request.getRequestDispatcher("views/mypage/myworkList.jsp").forward(request, response);
+		gList = gs.selectCategoryId(categoryId);
+				
+		if(gList != null) {
+			request.setAttribute("gList2", gList);
+			request.getRequestDispatcher("/galleryMain.jsp").forward(request, response);
 		} else {
-			request.setAttribute("msg", "조회 실패!");
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			System.out.println("실패");
 		}
+		
 	}
 
 	/**

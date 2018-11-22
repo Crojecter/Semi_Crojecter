@@ -6,22 +6,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 
 /**
- * Servlet implementation class UpdateMemberServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet("/mUpdate.do")
-public class UpdateMemberServlet extends HttpServlet {
+@WebServlet("/mypage.do")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateMemberServlet() {
+    public MyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,31 +29,16 @@ public class UpdateMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int mid = Integer.parseInt(request.getParameter("mid"));
+		Member m = new MemberService().selectMember(mid);
 		
-		String mname = request.getParameter("nickName");
-		String memail = request.getParameter("email");
-		String mpwd = request.getParameter("password");
-
-		MemberService ms = new MemberService();
-		
-		HttpSession session = request.getSession(false);
-		Member m = (Member)session.getAttribute("member");
-		m.setMname(mname);
-		m.setMemail(memail);
-		m.setMpwd(mpwd);
-		
-		int result = ms.updateMember(m);
-		
-		if(result > 0){
-			System.out.println("회원정보 수정 성공!");
+		if(m != null){
 			request.setAttribute("myMember", m);
-			request.getRequestDispatcher("views/mypage/mypageView.jsp").forward(request, response);
+			request.getRequestDispatcher("views/mypage/mypage.jsp").forward(request, response);
 		} else {
-			System.out.println("회원정보 수정 실패");
+			request.setAttribute("msg", "조회 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		
-	
 	}
 
 	/**

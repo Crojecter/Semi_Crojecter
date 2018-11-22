@@ -211,4 +211,32 @@ public class GalleryService {
 		return countComment;
 	}
 
+
+	public ArrayList<Gallery> selectGalleryList() {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Gallery> gList = gDao.selectGalleryList(con);
+		
+		close(con);
+		
+		return gList;
+	}
+
+
+	public ArrayList<Gallery> selectCategoryId(int categoryId) {
+		
+		Connection con = getConnection();
+		ArrayList<Gallery> gList = null;
+		
+		if(categoryId == 0) {
+			gList = gDao.selectGalleryList(con);
+		} else {
+			gList = gDao.selectCategoryId(con, categoryId);
+		}
+		close(con);
+		
+		return gList;
+	}
+
 }
