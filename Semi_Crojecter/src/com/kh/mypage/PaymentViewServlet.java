@@ -55,6 +55,7 @@ public class PaymentViewServlet extends HttpServlet {
 			
 		} else {			
 			request.setAttribute("msg", "조회 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
 		
 	}
