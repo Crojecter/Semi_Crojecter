@@ -9,6 +9,6 @@
 	<h4>
 		<a style="color:white; text-decoration:none;" href="<%= request.getContextPath()%>/views/board/noticeboard/createrPage.jsp">CopyLight by Crojector</a> |
 		<a style="color:white; text-decoration:none;" href="<%= request.getContextPath()%>/nList.no">공지사항</a> |
-		<a style="color:white; text-decoration:none;" href="http://www.mcst.go.kr/web/s_etc/copyright/copyrightGuide.jsp">저작권정책</a>
+		<a style="color:white; text-decoration:none;" target="blank" href="http://www.mcst.go.kr/web/s_etc/copyright/copyrightGuide.jsp">저작권정책</a>
 	</h4>
 </footer>
