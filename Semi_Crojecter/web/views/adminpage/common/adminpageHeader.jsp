@@ -8,12 +8,15 @@
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
 	
-	.profileArea{
-			border:1px solid black;
-			color:black;
-			background: lavender;
-
-		}
+	.profileArea {
+		border: 1px solid black;
+		color: black;
+		background: lightgray;
+		text-align:center;
+		font-weight:bold;
+		font-size:23px;
+		
+	}
 		.profileMenu{
 			border: solid 1px black;
 			text-decoration: none;
@@ -23,39 +26,46 @@
 			
 		}
 
-		.menu{
-			border:1px solid black;
-		}
+		.menu {
+		border: 1px solid gray;
+		padding-top:20px;
+		padding-bottom:20px;
 
-		.menuMenu a{
-			text-decoration: none;
-			color:darkgray;
-			width: 100px;
-			margin-right: 30px;
-			margin-left: 30px;
+	}
 
-		}
+		.menuMenu a {
+		margin-left:15px;
+		margin-right:40px;
+		text-decoration: none;
+		color: darkgray;
+		font-size:23px;
+		font-weight:bold;
+
+
+	}
 
 		.form{
 			border:1px solid black;
 		}
 
-		.profilePic{
-			width:100px;
-			height: 100px;
-			border-radius: 50px;
-			margin-top:10px;
-			margin-left:10px;
-		}
+		#profileImg {
+		width: 100px;
+		height: 100px;
+		border-radius: 50px;
+		margin-top: 20px;
+		margin-left: 20px;
+		border: solid 1px gray;
+	}	
+
 </style>
 <body>
 <%@ include file="../../common/header.jsp"%>
 	<div class="profileArea">
-		<img src="../../resources/profileFiles/user.png" class="profilePic">
+		<img src="../../resources/profileFiles/user.png" class="profilePic" id="profileImg">
 		<p id="profileName"> 관리자 페이지</p>
 	</div>
 	<br>
-	<div class="menu">
+	<div class="menu" align="center">
 		<table>
 			<tr>
 				<td class="menuMenu"><a href="/crojecter/mListView.do">회원관리</a></td>
