@@ -30,7 +30,7 @@ public class Gallery extends Board implements Serializable {
 		this.fname = fname;
 	}
 	//
-	
+
 	
 	public Gallery() {
 		super();
