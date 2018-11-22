@@ -78,13 +78,6 @@
 					<td><button onclick="updateAlarm(this, '<%=al.getAid()%>');" style="font-size:15px;">미확인</button></td>
 				</tr>
 				<% count++; } %>
-				<%-- <% } else { %>
-				<tr>
-					<td><%= al.getAMsg() %></td>
-					<td><%= al.getADate() %></td>
-					<td align="center" style="font-size: 12px;">확인</td>
-				</tr>
-				<% } %> --%>
 			<% } %>
 			<% if(count == 0) { %>
 			<tr>
