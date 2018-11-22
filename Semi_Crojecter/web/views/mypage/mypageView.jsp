@@ -89,7 +89,7 @@
 					<td class="tdStyle"><input type="text" class="inputContent"
 						value="<%=m2.getMdate()%>" readonly></td>
 				</tr>
-			</table>>
+			</table>
 	</div>
 
 </body>

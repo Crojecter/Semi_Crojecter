@@ -113,6 +113,11 @@
       max-width: 100%;
    }
    
+   .active {
+   	  
+   	  background: red;
+   }
+   
 </style>
 
 <title>갤러리 상세보기</title>
@@ -164,28 +169,25 @@
                      <input type="hidden" name="crefmid" value="<%= bc.getCwriter() %>" />
                      <div class="col-md-5" style="padding:0; float:right;">                  
                         <% if(m.getMid() == bc.getCwriter()) { // 댓글쓴이 본인인 경우 수정,삭제버튼 추가 출력 %>   
-                        <div class="" style="padding:0;"><button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
-                     <button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
-                            style="display:none;">수정완료</button></div>
+                        <div class="" style="padding:0;">
+                        	<button type="button" class="bottomBtn updateBtn" onclick="updateComment(this);">수정</button>
+                     		<button type="button" class="bottomBtn updateConfirm" onclick="updateConfirm(this);"
+                            		style="display:none;">수정완료</button></div>
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn deleteBtn" onclick="deleteComment(this);">삭제</button></div>
                         <% } %>                     
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn insertBtn" onclick="reComment(this);">댓글 달기</button></div>
                      <div class="" style="padding:0;"><button type="button" class="bottomBtn reportBtn" onclick="showReport(<%=g.getBid()%>, <%=bc.getCid()%>);">신고</button></div>          
                         <% } %>
-                     </div>
-                     showReport(<%=g.getBid()%>, <%=bc.getCid()%>);
-                     
+                     </div>                     
                   </div>
-                  <div class="comment commentContent">
                   
-                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>
-                     
-                     <div class="row"></div>                     
+                  <div class="comment commentContent">                 
+                     <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>                                     
                      <p style="border:1px solid lightgray; background:white; height:70px;">
                         <% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
                         <%= bc.getCcontent() %>
-                     </p>                                       
-                     </div>
+                     </p>                                     
+                  </div>
                      
                   <hr />
                </div>
@@ -217,7 +219,7 @@
          <div class="row" align="center" id="btnArea2" style="margin-top: 10px;">            
             <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showSpon();">후원</button></div>
             <div class="col-md-6" style="padding:0;"><button class="btnArea1" onclick="showReport(<%=g.getBid()%>, 0);">신고</button></div>   
-            <!-- <input class="btn btnArea2" type="button" onclick="location.href='/crojecter/main.html'" value="목록"/> -->
+
          </div>
          <div class="row" align="center" id="btnArea3" style="margin-top: 10px;">
             <% if(m != null && m.getMid() == g.getBwriter()){ // 글쓴이 본인인 경우 %>
@@ -304,18 +306,18 @@
       
       // 댓글 수정
       function updateComment(obj) {   
-         $(obj).parent().parent().find('textarea').css('display', 'block');
-         $(obj).parent().parent().find('p').css('display', 'none');
+         $(obj).parent().parent().parent().siblings().children('textarea').css('display', 'block');
+         $(obj).parent().parent().parent().siblings().children('p').css('display', 'none');
          $(obj).siblings('.updateConfirm').css('display','inline');
          $(obj).css('display', 'none');
       }
       
       // 댓글 수정 완료 
       function updateConfirm(obj) {
-         var cid = $(obj).siblings('input[name="cid"]').val();
+         var cid = $(obj).parent().parent().siblings().children('input[name="cid"]').val();
          var bid = '<%=g.getBid()%>';
          var btype = '<%= g.getBtype() %>';
-         var content = $(obj).parent().parent().find('textarea').val();
+         var content = $(obj).parent().parent().parent().siblings().children('textarea').val();
          
          location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
       }
