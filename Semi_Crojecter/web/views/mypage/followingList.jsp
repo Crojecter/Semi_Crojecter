@@ -96,14 +96,14 @@
 		<% for(Follow f1 : list){ %>
 		<tr class="set">
 			<td class="name" name="name"><input class="inputName"type="text" value="<%=f1.getFollowname() %>" readonly></td>
-			<td class="button" align="cetner">    
+			<td class="button" align="center">    
 				<input type="hidden" name="fid" value="<%= f1.getFollowid() %>"/> <br>
 				<% if(f1.getChk().equals("Y")){ %>
 					<div id="btnFollow" class="btn btn-follow active" onclick="switchfollow(this);">
-					<p class="p-follow" >언팔로우</p></div>
+					<p class="p-follow" style="color: black">언팔로우</p></div>
 				<% } else {%>
-					<div class="btn btn-follow" onclick="switchfollow(this);">
-					<p class="p-follow" >팔로우</p></div>
+					<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
+					<p class="p-follow" style="color: black">팔로우</p></div>
 				<% } %>
 			</td>
 		</tr>

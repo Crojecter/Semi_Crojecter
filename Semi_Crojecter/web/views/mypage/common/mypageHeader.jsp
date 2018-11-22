@@ -78,7 +78,7 @@
       
       <% if(m.getMid() == m2.getMid()) { %>
       <p class=proMenu>
-      <a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do">결제내역</a> 
+      <a class="profileMenus" id="button" href="/crojecter/myPaymentSelect.do?mid=<%=m2.getMid()%>">결제내역</a> 
       <a class="profileMenus" id="button" href="/crojecter/views/mypage/mypage.jsp">정보수정</a>
       <br>
       </p>

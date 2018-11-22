@@ -56,7 +56,7 @@
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
 <div class="tables">
-<label class="subject">후원 내역</label>
+<label class="subject">후원 한 내역</label>
 <table class="table">
 	<tr> 
 		<th>날짜</th>
@@ -72,7 +72,25 @@
 	<% } %>
 </table>
 </div>
-<br>
+<div class="tables">
+<label class="subject">후원 받은 내역</label>
+<table class="table">
+	<tr> 
+		<th>날짜</th>
+		<th>이름</th>
+		<th>후원호두</th>
+		<th>금액</th>
+	</tr>
+		<% for(Spon s : slist){ %>
+	<tr>
+		<td><%=s.getSdate()%></td>
+		<td><%=s.getMname() %></td>
+		<td><%=s.getShodu() %></td>
+		<td></td>
+	</tr>
+	<% } %>
+</table>
+</div>
 <div class="tables">
 <label class="subject">충전 내역</label>
 <table class="table">

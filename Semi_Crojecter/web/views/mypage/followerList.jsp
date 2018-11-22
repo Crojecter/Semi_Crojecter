@@ -20,6 +20,7 @@
 	width: 130px;
 	height: 35px;
 	margin-bottom:20px;
+	padding-top:10px;
 	}
 
 
@@ -72,14 +73,10 @@
 	}
 	
 
-    .followerList {
-
-        border:1px black solid;
-
-    }
     
     .p-follow {
     
+
     padding-bottom:30px;
     }
     
@@ -92,15 +89,15 @@
 <div class="followerList">
 	<table class="table">  
 		<% for(Follow f1 : list){ %>
-		<tr class="form">
-			<td class="name"><%=f1.getFollowername() %></td>
-			<td>
+		<tr class="set">
+			<td class="name"><input class="inputName" type="text" value="<%=f1.getFollowername() %>" readonly></td>
+			<td class="button">
 				<input type="hidden" name="fid" value="<%= f1.getFollowerid() %>"/> 
 				<% if(f1.getChk().equals("Y")){ %>
-					<div class="btn btn-follow active" onclick="switchfollow(this);">
+					<div id="btnFollow" class="btn btn-follow active" onclick="switchfollow(this);">
 					<p class="p-follow" style="color: black">언팔로우</p></div>
 				<% } else {%>
-					<div class="btn btn-follow" onclick="switchfollow(this);">
+					<div id="btnFollow" class="btn btn-follow" onclick="switchfollow(this);">
 					<p class="p-follow" style="color: black">팔로우</p></div>
 				<% } %>
 			</td>
