@@ -93,8 +93,8 @@ body {
 			</div>
 			<div class="col-md-2"
 				 style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
-				<input type="hidden" id="userId" name="userId"
-					value="<%=m.getMid()%>" />
+				<input type="hidden" id="userId" name="userId" value="<%=m.getMid()%>" />
+				<input type="hidden" id="userName" name="userName" value="<%=m.getMname()%>" />
 				<div class="thumbnailArea" id="thumbnailArea" name="thumbnailArea" style="background: white;">					
 					<img id="titleImg">
 					<div id="thumbnailLabel" class="tagText">여기를 눌러 <br>대표이미지를 <br>설정하세요!</div>
@@ -205,6 +205,9 @@ body {
 			}
 			else if($('#cclid').val() == null) {
 				alert("ccl을 선택해주세요.");				
+			}
+			else if(!$('#tagsinput').val()) {
+				alert("태그를 한 개 이상 입력해주세요.");				
 			}
 			else $("#insertform").submit();
 			

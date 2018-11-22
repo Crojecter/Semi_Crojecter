@@ -34,7 +34,7 @@ public class GalleryDeleteServlet extends HttpServlet {
 		int result = new GalleryService().deleteGallery(bid);
 		
 		if(result > 0) {
-			response.sendRedirect("gSelectOne.ga?bid="+bid);
+			response.sendRedirect(request.getContextPath()+"/gList.ga");
 		} else {
 			request.setAttribute("msg", "삭제 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp");

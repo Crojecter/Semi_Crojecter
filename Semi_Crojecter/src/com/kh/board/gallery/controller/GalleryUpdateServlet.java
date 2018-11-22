@@ -92,34 +92,33 @@ public class GalleryUpdateServlet extends HttpServlet {
 				// 대표 이미지 영역의 파일만 불러온다.
 				savefile = mrequest.getFile("thumbnailInput");
 				System.out.println("thumbnailInput file : " + savefile);
-
+	
 				path = savefile.getPath();
 				fileName = savefile.getName();  
-				
-				System.out.println("GalleryUpdateServlet path : " + path);				
-				System.out.println("GalleryUpdateServlet fileName : " + fileName);
+							
+				System.out.println("path : " + path);				
+				System.out.println("fileName : " + fileName);	
 				
 				af.setFname(fileName);
-				af.setFpath(path);
-			}
+				af.setFpath(path);					
+			
+			} else {				
 				
-			switch(g.getGcategoryid()){
+				switch(g.getGcategoryid()){
 				case 1: 
 					af.setFname("textCategoryImage.png"); 
 					af.setFpath(savePath); 
 					break;
-				case 2: 											
-					break;
 				case 3: 
 					af.setFname("audioCategoryImage.png"); 
-					af.setFpath(savePath);; 
+					af.setFpath(savePath);
 					break;
 				case 4: 
 					af.setFname("videoCategoryImage.png"); 
 					af.setFpath(savePath); 
 					break;								
+				}			
 			}			
-
 		int result = gs.updateGallery(g, af);
 		
 		String page = "";

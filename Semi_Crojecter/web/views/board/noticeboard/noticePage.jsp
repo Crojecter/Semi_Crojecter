@@ -109,18 +109,16 @@ p {
 		<% } %>
 		<a name="bottom"></a>
 		<script>
-		// 성일씨 이거 이벤트 좀 무난하게 변경해주세욥~!
-		$(function(){
-			$("#noticeList td").mouseenter(function(){				
-				$(this).parent().css({"background":"gray", "cursor":"pointer"});
-			}).mouseout(function(){
-				$(this).parent().css({"background":"lightgray"});
-			}).click(function(){
-				alert($(this).val());
-				var bid = $(this).parent().children().eq(0).val();
-				location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;				
-			});
-		});
+		 $(function(){
+	         $("#noticeList td").mouseenter(function(){            
+	            $(this).parent().css({"background":"gray", "cursor":"pointer"});
+	         }).mouseout(function(){
+	            $(this).parent().css({"background":"lightgray"});
+	         }).click(function(){
+	            var bid = $(this).parent().children().eq(0).children().val();
+	            location.href="<%=request.getContextPath()%>/nSelectOne.no?bid="+ bid;            
+	         });
+     	});
 		//
 		</script>
 				<!-- 리모컨 -->

@@ -39,6 +39,7 @@ public class ProjectService {
 		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);
 			result = 1;
+			pDao.insertAlarm(con, p);	
 			
 		} else rollback(con);
 		

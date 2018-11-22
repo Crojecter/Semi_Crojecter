@@ -35,7 +35,7 @@ public class ProjectDeleteServlet extends HttpServlet {
 		int result = new ProjectService().deleteProject(bid);
 		
 		if(result > 0) {
-			response.sendRedirect("jSelectOne.pr?bid="+bid);
+			response.sendRedirect(request.getContextPath()+"/gList.ga");
 		} else {
 			request.setAttribute("msg", "삭제 실패!");
 			request.getRequestDispatcher("views/common/errorPage.jsp");

@@ -81,6 +81,7 @@ public class GalleryService {
 		if( result1 > 0 && result2 > 0 && result3 > 0) {
 			commit(con);
 			result = 1;
+			gDao.insertAlarm(con, g);	
 			
 		} else rollback(con);
 		
