@@ -42,16 +42,6 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic"
 	rel="stylesheet">
 
-<style>
-.sign {
-	font-size: 18px;
-	color: black;
-}
-
-.sign:hover {
-	color: #B7F400;
-}
-</style>
 
 <!-- include libraries(jQuery, bootstrap) -->
 <link
@@ -87,13 +77,15 @@
 <style>
 	.sign{
 		font-size : 18px;
+		font-weight: bold;
 		color : black;
 		margin-left:5px;
 		margin-right:5px;
 		font:bolder;
 	}
 	.sign:hover{
- 		color : #B7F400;
+ 		color : #30B2A0;
+ 		font-weight: bold;
 	}
 </style>
 
@@ -103,7 +95,7 @@
 		<div class="col-md-2">
 			
 		</div>
-		<div class="col-md-10" style="padding-top: 10px;">
+		<div class="col-md-8" style="padding-top: 10px;">
 			<nav class="navbar navbar-expand-lg navbar-light"
 				style="background: white; margin-bottom: 10px;">
 				<!-- 로고 -->
@@ -117,8 +109,9 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 
-				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<div class="col-md-2">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent" 
+					 style="padding-left: 20px; padding-right: 0; padding-top: 5px;">
+					<div class="col-md-3">
 						<!-- 왼쪽 -->
 						<ul class="navbar-nav mr-auto" style="list-style: none;">
 							<!-- 갤러리 -->
@@ -135,14 +128,15 @@
 							</li>
 						</ul>
 					</div>
-					<div class="col-md-4"></div>
+					<div class="col-md-3"></div>
 					<div class="col-md-6">
+						<div class="row">
 						<!-- 오른쪽 -->
 						<div class="loginArea">
 							<%
 								if (m == null) {
 							%>
-							<form id="loginForm" action="/myWeb/login.me" method="post" style="float:left;">
+							<form id="loginForm" action="/myWeb/login.me" method="post" style="float:left; padding-top: 5px;">
 								<a class="sign" style="text-decoration:none;"
 									href="<%=request.getContextPath()%>/views/member/login.jsp">
 									Sign In</a> <a class="sign" style="text-decoration:none"
@@ -221,15 +215,18 @@
 							}
 							
 							</script>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item" href="#"><img
-											src="<%=request.getContextPath()%>/resources/images/icon/walnut.jpg"
-											alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
-									</div></li>
-								<li style="padding: 0 5px;">
-									<!-- 글쓰기 --> <a id="moveInsert"
-									href="<%=request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp"
-									style="height: auto;"> <script>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">
+							<img src="<%=request.getContextPath()%>/resources/images/icon/walnut.jpg"
+								 alt="" style="height: 30px;">:<%=m.getMhodu()%>개</a>
+							</div>
+							</li>
+							<li style="padding: 0 15px;">
+							<!-- 글쓰기 --> 
+							<a id="moveInsert"
+							   href="<%=request.getContextPath()%>/views/board/galleryboard/galleryInsert.jsp"
+							 style="height: auto;"> 
+							<script>
 							var x = location.href;
 							$(function(){
 							if(x == "http://localhost:8088/crojecter/pList.pr"){
@@ -237,22 +234,23 @@
 							}
 							
 							});			
-						</script> <img
-										src="<%=request.getContextPath()%>/resources/images/icon/upload.png"
-										alt="" style="height: 30px;"></a> &nbsp;&nbsp;
-								</li>
-							</ul>
+							</script> 
+							<img src="<%=request.getContextPath()%>/resources/images/icon/upload.png"
+								 alt="" style="height: 30px;"></a> &nbsp;&nbsp;
+							</li>
+						</ul>
 							<%
 								}
 							%>
 						</div>
 						<!-- 검색 -->
-						<ul style="list-style: none;">
+						
+						<ul style="list-style: none; ">
 							<li>
 								<form class="navbar-search pull-left"
 									action="<%=request.getContextPath()%>/search.all" method="get">
 									<input type="text" class="search-query" placeholder="Search"
-										name="keyword">
+										name="keyword" style="width: ">
 									<button class="btn my-2 my-sm-0" style="background : white;"
 										type="submit">
 										<img
@@ -261,11 +259,14 @@
 									</button>
 								</form>
 							</li>
-						</ul>
+						</ul>						
+						</div>
+					
 					</div>
 				</div>
 			</nav>
 		</div>
+		<div class="col-md-2"></div>
 	</div>
 </body>
 </html>
