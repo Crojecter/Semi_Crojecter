@@ -72,6 +72,7 @@
 
 <body>
 	<%@ include file="../../common/header.jsp"%>
+	<% if(m2 == null) m2 = m; %>
 	<div class="profileArea">
 		<form id="updateForm" action="<%=request.getContextPath()%>/mUpdateProfile.me" method="post" encType="multipart/form-data">
 			<img id="profileImg" name="profileImg" src="../../resources/profileFiles/user.png"><br />
