@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.spon.model.vo.Spon;
+import com.kh.member.model.vo.Member;
 import com.kh.payment.model.vo.Payment;
 import com.kh.spon.model.dao.SponDao;
 
@@ -97,12 +98,15 @@ public class SponDao {
 				Spon s = new Spon();
 				
 				s.setSdate(rset.getDate("sdate"));
-				s.setSreceivername(rset.getString("sreceivername"));
+				s.setMname(rset.getString("mname"));
 				s.setShodu(rset.getInt("shodu"));
 	
 				list.add(s);
 				
+				
 			}
+			
+			System.out.println("SPON list : " + list);
 			
 		} catch (SQLException e) {
 		

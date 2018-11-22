@@ -11,13 +11,53 @@
 <script src="/crojecter/resources/js/jquery-3.3.1.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
+<style>
+        .tables {
+
+            width:400px;
+            height: auto;
+            padding: 20px 20px;
+            margin-top:160px;
+            margin:0 auto;
+		    margin-bottom:160px;
+
+            
+        }
+        .table {
+            width: 400px;
+            border: 1px solid black;
+        }
+
+        .table th {
+            border: 1px solid black;
+            background:lightgray;
+            text-align:center;
+            vertical-align:middle;
+        }
+
+        .table td {
+           
+            text-align:center;
+            vertical-align:middle;
+            
+        }
+        .subject {
+            color:black;
+            font-size: 20px;
+            width:400px;
+            text-align:center;
+            magin-bottom:10px;
+            
+        }
+</style>
+
 
 </head>
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
-<div>
-<label>*후원 내역</label>
-<table class="sponTable">
+<div class="tables">
+<label class="subject">후원 한 내역</label>
+<table class="table">
 	<tr> 
 		<th>날짜</th>
 		<th>받는이</th>
@@ -26,18 +66,34 @@
 		<% for(Spon s : slist){ %>
 	<tr>
 		<td><%=s.getSdate()%></td>
-		<td><%=s.getSreceivername() %></td>
+		<td><%=s.getMname() %></td>
 		<td><%=s.getShodu() %></td>
 	</tr>
 	<% } %>
-
-
 </table>
 </div>
-<br><br><br><br><br><br>
-<div>
-<label>*충전 내역</label>
-<table class="paymentTable">
+<div class="tables">
+<label class="subject">후원 받은 내역</label>
+<table class="table">
+	<tr> 
+		<th>날짜</th>
+		<th>이름</th>
+		<th>후원호두</th>
+		<th>금액</th>
+	</tr>
+		<% for(Spon s : slist){ %>
+	<tr>
+		<td><%=s.getSdate()%></td>
+		<td><%=s.getMname() %></td>
+		<td><%=s.getShodu() %></td>
+		<td></td>
+	</tr>
+	<% } %>
+</table>
+</div>
+<div class="tables">
+<label class="subject">충전 내역</label>
+<table class="table">
 	<tr> 
 		<th>날짜</th>
 		<th>충전 호두</th>
