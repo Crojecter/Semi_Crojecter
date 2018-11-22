@@ -80,33 +80,22 @@
 
 		<!-- 게시글 선택보기 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<button type="button" class="btn btn-light"><a class="nav-link" href="#" id="viewAll">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px"></a></button>
+			<button type="button" class="btn btn-light">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/selectImg.png" alt="" style="height:30px">
+			</button>
 
-			<button type="button" class="btn btn-light" onclick="searchImg();"><a class="nav-link" href="#" id="viewImg">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px"></a></button>		
-			<button type="button" class="btn btn-light" onclick="searchAud();"><a class="nav-link" href="#" id="viewSound">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchTxt();"><a class="nav-link" href="#" id="viewText">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px"></a></button>
-			<button type="button" class="btn btn-light" onclick="searchVid();"><a class="nav-link" href="#" id="viewVidio">
-				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px"></a></button>
-				
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">		
-				<ul class="navbar-nav mr-auto"></ul>
-				<form class="form-inline my-2 my-lg-0">
-					<button class="nav-item dropdown" type="submit">
-						<a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							최신순		
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="#" id="viewRecent">최신순</a>
-						<a class="dropdown-item" href="#" id="viewLike">좋아요순</a>
-						<a class="dropdown-item active" href="#" id="viewHits">조회순</a>
-						</div>
-					</button>
-				</form>
-			</div>		
+			<button type="button" class="btn btn-light" ">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/imageImg.png" alt="" style="height:30px">
+			</button>		
+			<button type="button" class="btn btn-light" ">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/soundImg.png" alt="" style="height:30px">
+				</button>
+			<button type="button" class="btn btn-light" ">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/textImg.png" alt="" style="height:30px">
+			</button>
+			<button type="button" class="btn btn-light" ">
+				<img src="<%= request.getContextPath()%>/resources/images/icon/vidioImg.png" alt="" style="height:30px">
+			</button>
 		</nav>
 		
 		<script>

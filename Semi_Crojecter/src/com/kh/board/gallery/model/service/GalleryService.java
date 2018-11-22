@@ -211,4 +211,16 @@ public class GalleryService {
 		return countComment;
 	}
 
+
+	public ArrayList<Gallery> selectGalleryList() {
+		
+		Connection con = getConnection();
+		
+		ArrayList<Gallery> gList = gDao.selectGalleryList(con);
+		
+		close(con);
+		
+		return gList;
+	}
+
 }
