@@ -170,17 +170,11 @@ public class GalleryService {
 		
 	
 		searchGalleryList = (condition.length() > 0) ? gDao.searchGallery(con, condition, keyword) 
-				:  gDao.selectGalleryList(con);
+				:  gDao.selectGalleryList(con, 0, 0);
 		
 		return searchGalleryList;
 	}
 
-
-	public int updateAlarm(int aid) {
-		// 
-		
-		return 0;
-	}
 
 	public int deleteGallery(int bid) {
 		
