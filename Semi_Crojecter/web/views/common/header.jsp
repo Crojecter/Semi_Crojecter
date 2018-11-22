@@ -164,8 +164,7 @@
 											id="countUnreadAlarm"></span>
 									</button>
 								</li>
-								<script>
-					    
+						<script>
 						function openAlarmList() {
 							
 							// 알람창 크기
@@ -176,7 +175,6 @@
 						    		'알람', 'width=500,height=300,top='+yPos+',left='+xPos
 						    		+',toolbar=no,menubar=no,scrollbars=no,resizable=no,status=no');
 						}
-						
 						</script>
 
 								<!-- 프로필 -->
