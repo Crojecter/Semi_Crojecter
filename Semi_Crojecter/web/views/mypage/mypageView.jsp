@@ -10,12 +10,12 @@
 .form {
 	width: 300px;
 	margin: 0 auto;
-	margin-top: 160px;
+	margin-top: 100px;
 	margin-bottom: 160px;
 	padding: 10px 10px 10px 10px;
-	background:lightgray;
+	background:white;
 	border-radius: 5px;
-
+	
 }
 
 .label {
@@ -26,35 +26,16 @@
 	margin: 1px 10px 1px 10px;
 }
 
-.inputContent {
-
-	width: 100px;
-	text-align:center;
-	background:lightgray;
-	border:lightgray;
-	margin-top:20px;
-
-}
-
 .myTable{
 
 	font-size:15px;
 	width:auto;
 	height: 300px;
 	color:black;
+	background: white;
 
-}
+	
 
-
-
-#submit {
-	color: white;
-	text-align: center;
-	border-radius: 5px;
-	height: 40px;
-	width: 120px;
-	font-size: 15px;
-	margin: 1px 10px 1px 10px;
 }
 
 
@@ -63,8 +44,7 @@
 color:black;
 width:auto;
 text-align:center;
-background:lightgray;
-border:lightgray;
+
 
 }
 
@@ -74,34 +54,43 @@ width:150px;
 text-align:center;
 }
 
+		th {
+  			background-color: white;
+  
+  		}
+  
+  		th, td {
+   			border-bottom: 1px solid lightgray;    
+   			background-color: white;
+ 		}
+ 		
+ 		td {
+ 			padding-left: 10px; padding-right: 10px;
+ 		}
+
 
 </style>
 
 </head>
 <body>
 	<%@ include file="../mypage/common/mypageHeader.jsp"%>
-	<div class="form">
-			<table class="myTable">
+	<div class="form" style="padding:0; border: 1px solid lightgray;">
+			<table class="myTable" align="center">
 				<tr>
 					<td class="tdArea"><label class="tdStyle">닉네임</label></td>
-					<td colspan="2" ><input type="text"
-						class="tdStyle" name="nickName" id="nickName"
-						oninput="checkNickName();" value="<%=m2.getMname()%>" readonly></td>
+					<td colspan="2" ><%=m2.getMname()%></td>
 				</tr>
 				<tr>
 					<td class="tdArea"><label class="tdStyle">이메일</label></td>
-					<td colspan="2" ><input type="email"
-						class="tdStyle" value="<%=m2.getMemail()%>" readonly></td>
+					<td colspan="2" ><%=m2.getMemail()%></td>
 				</tr>
 				<tr>
 					<td class="tdArea"><label class="tdStyle">호두</label></td>
-					<td colspan="2"><input type="text"
-						class="tdStyle" value="<%=m2.getMhodu()%>" readonly></td>
+					<td colspan="2"><%=m2.getMhodu()%></td>
 				</tr>
 				<tr>
 					<td class="tdArea"><label class="tdStyle">가입일</label></td>
-					<td colspan="2"><input type="text" class="tdStyle"
-						value="<%=m2.getMdate()%>" readonly></td>
+					<td colspan="2"><%=m2.getMdate()%></td>
 				</tr>
 			</table>
 	</div>

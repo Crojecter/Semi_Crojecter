@@ -104,10 +104,7 @@ public class GalleryInsertServlet extends HttpServlet {
 	
 				path = savefile.getPath();
 				fileName = savefile.getName();  
-							
-				System.out.println("path : " + path);				
-				System.out.println("fileName : " + fileName);	
-				
+						
 				af.setFname(fileName);
 				af.setFpath(path);					
 			
