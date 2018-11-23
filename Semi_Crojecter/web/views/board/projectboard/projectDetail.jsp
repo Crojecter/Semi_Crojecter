@@ -120,6 +120,11 @@
       max-height: 100%;
       max-width: 100%;
    }
+   
+   .active {   	  
+   	  background: orange;
+   	  border: 1.5px solid orange;
+   }
 	
 </style>
 
@@ -186,7 +191,8 @@
                   <div class="comment commentContent">                 
                      <textarea class="comment-content" cols="80" rows="3" style="display:none;"><%= bc.getCcontent() %></textarea>                                     
                      <p style="border:1px solid lightgray; background:white; height:70px;">
-                        <% if(bc.getCrefmid()>0) { %><a href="https://www.naver.com/">@<%= bc.getCfname() %></a> <% } %>
+                        <% if(bc.getCrefmid()>0) { %><a href=
+                        	"/crojecter/mypageView.do?mpid=<%=bc.getCrefmid()%>">@<%= bc.getCfname() %></a> <% } %>
                         <%= bc.getCcontent() %>
                      </p>                                     
                   </div>
@@ -200,11 +206,12 @@
       	
       	<div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">
       		<div align="center">
+      		<a href="/crojecter/mypageView.do?mpid=<%= j.getBwriter() %>">
          	<% if(j.getMprofile() == null) { %>
          	<img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
          	<% } else { %>
          	<img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=j.getMprofile()%>">
-         	<% }  %>
+         	<% }  %> </a>
          	</div>
          
          	<h4 align="center"><%=j.getMname()%></h4>
@@ -242,6 +249,48 @@
 
 	<% if(m != null) { // 회원 %>
 	<script> 
+		// 초기화 함수
+	    $(function(){      
+	       // 팔로우 버튼 초기화
+	       $.ajax({
+	          url : '/crojecter/fCheck.fo',
+	          type : 'get',
+	          data : {
+	             mid : '<%= m.getMid() %>',
+	             wid : '<%= j.getBwriter() %>'
+	          }, 
+	          success : function(data){
+	             if(data == 'ok') {
+	                $("#btnFollow").addClass('active');
+	                $('#btnFollow').text('언팔로우');
+	             } else if (data == 'no') {
+	                $("#btnFollow").removeClass('active');
+	             } 
+	          }, error : function(data){
+	             console.log('팔로우버튼 초기화 에러 발생!');
+	          }
+	       });
+	       
+	       // 좋아요 버튼 초기화
+	       $.ajax({
+	          url : '/crojecter/lCheck.li',
+	          type : 'get',
+	          data : {
+	             mid : '<%= m.getMid() %>',
+	             bid : '<%= j.getBid() %>'
+	          }, 
+	          success : function(data){
+	             if(data == 'ok') {
+	                $("#btnLikeit").addClass('active');
+	             } else if (data == 'no') {
+	                $("#btnLikeit").removeClass('active');
+	             } 
+	          }, error : function(data){
+	             console.log('좋아요버튼 초기화 에러 발생!');
+	          }
+	       });
+	    });
+		
 		// 댓글 삽입 
 		function insertComment(obj) {
    
@@ -262,21 +311,21 @@
 		
 		// 댓글 수정
 		function updateComment(obj) {	
-			$(obj).parent().parent().find('textarea').css('display', 'block');
-			$(obj).parent().parent().find('p').css('display', 'none');
-			$(obj).siblings('.updateConfirm').css('display','inline');
-			$(obj).css('display', 'none');
+			$(obj).parent().parent().parent().siblings().children('textarea').css('display', 'block');
+	         $(obj).parent().parent().parent().siblings().children('p').css('display', 'none');
+	         $(obj).siblings('.updateConfirm').css('display','inline');
+	         $(obj).css('display', 'none');
 		}
 		
 		// 댓글 수정 완료 
 		function updateConfirm(obj) {
-			var cid = $(obj).siblings('input[name="cid"]').val();
-			var bid = '<%=j.getBid()%>';
-			var btype = '<%= j.getBtype() %>';
-			var content = $(obj).parent().parent().find('textarea').val();
-			
-			location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
-		}
+			var cid = $(obj).parent().parent().siblings().children('input[name="cid"]').val();
+	         var bid = '<%=j.getBid()%>';
+	         var btype = '<%= j.getBtype() %>';
+	         var content = $(obj).parent().parent().parent().siblings().children('textarea').val();
+	         
+	         location.href="/crojecter/cUpdate.co?cid="+cid+"&bid="+bid+"&btype="+btype+"&content="+content;
+	    }
 		
 		// 대댓글
 		function reComment(obj){
@@ -305,12 +354,70 @@
 	
 	<% if(m.getMid() == j.getBwriter()) { // 글쓴이 본인 %>	 
 	<script>
+		$('#btnFollow').click(function(){
+	        alert("본인은 팔로우할 수 없습니다.");
+	     });
+	     $('#btnLikeit').click(function(){
+	        alert("본인 작품은 좋아요 할 수 없습니다.");
+	     });
 		function showReport() {
 			alert("본인은 신고할 수 없습니다.");
 		}	
 	</script>
 	<% } else { // 뷰어 입장 %>
-	<script>				
+	<script>
+		// 팔로우 버튼 클릭
+	    $('#btnFollow').click(function(){
+	       $.ajax({
+	          url : '/crojecter/fSwitch.fo',
+	          type : 'get',
+	          data : {
+	             mid : '<%= m.getMid() %>',
+	             wid : '<%= j.getBwriter() %>',
+	             mname : '<%= m.getMname() %>'
+	          }, 
+	          success : function(data){
+	             if(data == 'insert') {
+	                $("#btnFollow").addClass('active');
+	                $('#btnFollow').text('언팔로우');
+	             } else if (data == 'delete') {
+	                $("#btnFollow").removeClass('active');
+	                $('#btnFollow').text('팔로우');
+	             } else {
+	                console.log('btnFollow() 에러 발생!');
+	             }
+	          }, error : function(data){
+	             console.log('btnFollow() 에러 발생!!');
+	          }
+	       });
+	    });
+	    
+	    // 좋아요 버튼 클릭
+	    $('#btnLikeit').click(function(){
+	       $.ajax({
+	          url : '/crojecter/lSwitch.li',
+	          type : 'get',
+	          data : {
+	             mid : '<%= m.getMid() %>',
+	             wid : '<%= j.getBwriter() %>',
+	             bid : '<%= j.getBid() %>', 
+	             mname : '<%= m.getMname() %>',
+	             btitle : '<%= j.getBtitle() %>'
+	          }, 
+	          success : function(data){
+	             if(data == 'insert') {
+	                $("#btnLikeit").addClass('active');
+	             } else if (data == 'delete') {
+	                $("#btnLikeit").removeClass('active');
+	             } else {
+	                console.log('btnLikeit() 에러 발생!');
+	             }
+	          }, error : function(data){
+	             console.log('btnLikeit() 에러 발생!!');
+	          }
+	       });
+	    });
+	
 		// 신고하기
 		function showReport(bid, cid) {
 			var windowObj = null;
