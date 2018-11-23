@@ -32,7 +32,7 @@
 		<div class="col-md-8" style="padding: 0;">
 		
 		<% for (Project pro : projectList) { %>
-			<div id="pro-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<div id="pro-list" class="card" style="width: 300px; height: 300px; display: inline-block;">
 				<div style="width: 300px; height: 300px; display: inline-block; ">
 					<a href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>">		
 					<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= pro.getFname() %>"
