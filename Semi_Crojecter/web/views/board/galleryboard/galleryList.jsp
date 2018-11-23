@@ -11,20 +11,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-</head>
-<body>
-
 <style>
-.card-img-to {
-	display: inline-block;
-  	vertical-align: middle;
-    max-height: 100%;
-    max-width: 100%;
+.card-img-top {
+    height: 300px;
+    width: 300px;
 }
 
 </style>
-
 </head>
+
 <body style="height:100%;">
 		<div class="galleryList">
 		<% if(gList == null) { %>
@@ -32,7 +27,7 @@
 				해당 게시글이 존재하지 않습니다.
 			<% } else { %>
 			<% for (Gallery g : gList2) { %>
-			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block; padding=5px;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>">
 			<% if(g.getFName() != null) { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= g.getFName() %>">
@@ -65,7 +60,8 @@
 		<% } %>
 			<% } %>
 		<% } else { %>
-		<% for (Gallery g : gList) { %>
+		<% for (Gallery g : gList) { System.out.println("gllist : "+g.getBid());%>
+		
 			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>">
 			<% if(g.getFName() != null) { %>

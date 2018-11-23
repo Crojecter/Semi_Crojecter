@@ -13,11 +13,9 @@
 <body>
 
 <style>
-.card-img-to {
-	display: inline-block;
-  	vertical-align: middle;
-    max-height: 100%;
-    max-width: 100%;
+.card-img-top {
+    height: 300px;
+    width: 300px;
 }
 </style>
 
