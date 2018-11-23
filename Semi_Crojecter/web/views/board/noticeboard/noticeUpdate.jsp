@@ -106,8 +106,6 @@ body {
 					processData : false,
 					success : function(url) {
 						url.replace("\/","/");
-						alert(url);
-						
 						$(el).summernote('editor.insertImage', url);
 					}, error : function(){						
 						console.log("실패!!");

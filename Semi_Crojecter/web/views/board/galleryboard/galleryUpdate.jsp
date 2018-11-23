@@ -147,8 +147,7 @@ body {
 					enctype : 'multipart/form-data',
 					processData : false,
 					success : function(url) {
-						url.replace("\/","/");
-						alert(url);						
+						url.replace("\/","/");					
 						$(el).summernote('editor.insertImage', url);
 					}, error : function(){						
 						console.log("실패!!");						
