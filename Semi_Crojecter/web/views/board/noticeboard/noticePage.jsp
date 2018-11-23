@@ -61,13 +61,14 @@ p {
 		<div class=row">
 			<div class="col-md-9"><p>[공지사항]</p></div>
 			<div class="col-md-3" style="padding-top: 5px;">
-			<% if(m != null && m.getMname().equals("관리자")){ %>			
+			<% if(m != null && m.getMid()==-1){ %>			
 			<button style="border-radius: 5px;" 
 					onclick="location.href='<%= request.getContextPath() %>/views/board/noticeboard/noticeInsert.jsp'">
 				작성하기</button>
 			<% } %>
 			</div>
 		</div>
+		
 		<% if(m != null){ %>
 			<% if(noticeList != null){ %>
 				<table align="center" id="noticeList" >
