@@ -130,7 +130,7 @@
 
       <div class="col-md-6" 
       	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
-      	   margin-bottom: 20px;">
+      	   margin-bottom: 70px;">
             
          <%if(m != null)  {  %>
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>

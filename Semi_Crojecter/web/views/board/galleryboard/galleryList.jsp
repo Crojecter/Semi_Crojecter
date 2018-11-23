@@ -36,7 +36,7 @@
 			<% } %>
 			</a>
 				<div class="card-body">
-					<h5 class="card-title"><%= g.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>"><%= g.getBtitle() %></a></h5>
+					<h5 class="card-title" style="height:40px;"><%= g.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>"><%= g.getBtitle() %></a></h5>
 					<% if(g.getgTag() != null) {
 						String tags[] = g.getgTag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>

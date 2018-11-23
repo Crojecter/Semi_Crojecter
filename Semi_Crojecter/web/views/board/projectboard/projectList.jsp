@@ -39,7 +39,7 @@
 			<% } %>
 			</a>
 				<div class="card-body">
-					<h5 class="card-title"><%= pro.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
+					<h5 class="card-title" style="height:40px;"><%= pro.getMname() %> | <a style="text-decoration:none; color:black;" href="<%= request.getContextPath()%>/jSelectOne.pr?bid=<%= pro.getBid() %>"><%= pro.getBtitle() %></a></h5>
 					<% if(pro.getJtag() != null) {
 						String tags[] = pro.getJtag().split(",");
 						for(int i = 0; i < tags.length; i++) { %>
