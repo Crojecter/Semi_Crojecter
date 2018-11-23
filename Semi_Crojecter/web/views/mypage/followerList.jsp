@@ -14,12 +14,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>CopyRight 홈페이지에 오신걸 환영합니다.</title>
 <style>
+
 	#btnFollow {
 	
 	width: 130px;
 	height: 35px;
 	margin-bottom:20px;
-	padding-top:10px;
 	}
     #btnFollow.btn.btn-follow active{
         background:lightblue;
@@ -39,7 +39,7 @@
         padding-bottom:10px;
         text-align: center;
     }
-	
+
 	.inputName {
 	
 	color:darkgray;
@@ -60,7 +60,7 @@
 	
 	.table {
 	
-	width:50%;
+	style:width:300px;
 	
 	}
 	
@@ -77,6 +77,11 @@
 	font-weight:bold;
 	
 	}
+	
+	.active {   	  
+   	  background: orange;
+   	  border: 1.5px solid orange;
+   }
     
 </style>
 </head>

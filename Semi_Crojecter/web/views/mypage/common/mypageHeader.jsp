@@ -16,7 +16,7 @@
       text-align:center;
       font-weight:bold;
       font-size:23px;
-      background-image: url("<%=request.getContextPath()%>/resources/images/mypage.jpg");
+      background-image: url("<%=request.getContextPath()%>/resources/images/mypage2.jpg");
    }
    
    .menu {
