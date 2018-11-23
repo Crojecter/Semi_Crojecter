@@ -32,7 +32,7 @@
 				해당 게시글이 존재하지 않습니다.
 			<% } else { %>
 			<% for (Gallery g : gList2) { %>
-			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<div id="gal-list" class="card" style="width: 300px; height: 300px; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>">
 			<% if(g.getFName() != null) { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= g.getFName() %>">
@@ -66,7 +66,7 @@
 			<% } %>
 		<% } else { %>
 		<% for (Gallery g : gList) { %>
-			<div id="gal-list" class="card" style="width: 300px; height: auto; display: inline-block;">
+			<div id="gal-list" class="card" style="width: 300px; height: 300px; display: inline-block;">
 			<a href="<%= request.getContextPath()%>/gSelectOne.ga?bid=<%= g.getBid() %>">
 			<% if(g.getFName() != null) { %>
 			<img class="card-img-top" src="<%= request.getContextPath()%>/resources/uploadFiles/<%= g.getFName() %>">

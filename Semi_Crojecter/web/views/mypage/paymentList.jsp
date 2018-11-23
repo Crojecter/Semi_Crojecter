@@ -20,6 +20,8 @@
             margin-top:160px;
             margin:0 auto;
 		    margin-bottom:160px;
+		    float:left;
+			width:33%;
             
         }
         .table {
@@ -52,7 +54,10 @@
 </head>
 <body>
 <%@ include file="../mypage/common/mypageHeader.jsp" %>
-<div class="tables">
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<div class="tables">
 <label class="subject">후원 한 내역</label>
 <table class="table">
 	<tr> 
@@ -102,6 +107,9 @@
 	</tr>
 	<% } %>
 </table>
+</div>
+	</div>
+	<div class="col-md-2"></div>
 </div>
 <%@ include file="../common/footer.jsp" %>
 </body>
