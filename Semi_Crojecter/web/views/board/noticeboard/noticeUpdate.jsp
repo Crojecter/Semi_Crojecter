@@ -54,7 +54,7 @@ body {
 	<%
 		if (m != null) {
 	%>
-	<form action="<%=request.getContextPath()%>/nUpdate.no?bid=<%=n.getBid()%>" method="post" >
+	<form id="insertform" action="<%=request.getContextPath()%>/nUpdate.no?bid=<%=n.getBid()%>" method="post" >
 		<div class="row" style="margin-top: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-6" style="background: white; padding-top: 10px; 
@@ -106,8 +106,6 @@ body {
 					processData : false,
 					success : function(url) {
 						url.replace("\/","/");
-						alert(url);
-						
 						$(el).summernote('editor.insertImage', url);
 					}, error : function(){						
 						console.log("실패!!");

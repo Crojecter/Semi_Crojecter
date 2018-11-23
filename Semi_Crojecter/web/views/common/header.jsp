@@ -252,7 +252,7 @@
 							<script>
 							var x = location.href;
 							$(function(){
-							if(x == "http://localhost:8088/crojecter/pList.pr"){
+							if(x == "http://localhost:8088/crojecter/pList.pr" || x == "http://192.168.20.21:8088/crojecter/pList.pr"){
 								$("#moveInsert").attr('href','<%=request.getContextPath()%>/views/board/projectboard/projectInsert.jsp');
 							}
 							

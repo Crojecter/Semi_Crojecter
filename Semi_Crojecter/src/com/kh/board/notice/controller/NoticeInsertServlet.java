@@ -60,7 +60,7 @@ public class NoticeInsertServlet extends HttpServlet {
 				response.sendRedirect("nSelectOne.no?bid="+result);
 				
 			} else {
-
+				request.setAttribute("msg", "공지사항 인서트 에러");
 				request.getRequestDispatcher("views/common/errorPage.jsp")
 				.forward(request, response);
 			}

@@ -16,8 +16,6 @@
 		padding: 20px;
 		width:600px;
 		height:500px;
-		background:black;
-		color:white;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:50px;

@@ -130,7 +130,7 @@
 
       <div class="col-md-6" 
       	   style="background: white; padding-top: 10px; background-color: rgba( 255, 255, 255, 0.5 );
-      	   margin-bottom: 20px;">
+      	   margin-bottom: 70px;">
             
          <%if(m != null)  {  %>
          <span id="parentGetmid" style="display:none;"><%= m.getMid() %></span> <% } %>
@@ -202,11 +202,12 @@
       
       <div class="col-md-2" style="background: white; padding-top: 10px; padding-right: -5px; background-color: rgba( 255, 255, 255, 0.5 );">      
          <div align="center">
+         <a href="/crojecter/mypageView.do?mpid=<%= g.getBwriter() %>">
          <% if(g.getMprofile() == null) { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
          <% } else { %>
          <img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=g.getMprofile()%>">
-         <% }  %>
+         <% }  %></a>
          </div>
          
          <h4 align="center" id="parentGetName"><%=g.getMname()%></h4>
@@ -262,7 +263,7 @@
             success : function(data){
                if(data == 'ok') {
                   $("#btnFollow").addClass('active');
-                  $('#p-follow').html('언팔로우');
+                  $('#btnFollow').text('언팔로우');
                } else if (data == 'no') {
                   $("#btnFollow").removeClass('active');
                } 
@@ -407,10 +408,10 @@
             success : function(data){
                if(data == 'insert') {
                   $("#btnFollow").addClass('active');
-                  $('#p-follow').html('언팔로우');
+                  $('#btnFollow').text('언팔로우');
                } else if (data == 'delete') {
                   $("#btnFollow").removeClass('active');
-                  $('#p-follow').html('팔로우');
+                  $('#btnFollow').text('팔로우');
                } else {
                   console.log('btnFollow() 에러 발생!');
                }

@@ -61,7 +61,11 @@
 <body>
 <%@ include file="../../common/header.jsp"%>
 	<div class="profileArea">
-		<img src="../../resources/profileFiles/user.png" class="profilePic" id="profileImg">
+		<% if(m.getMprofile() == null) { %>
+         <img id="profileImg" src="<%=request.getContextPath()%>/resources/images/user.png">
+         <% } else { %>
+         <img id="profileImg" src="<%=request.getContextPath()%>/resources/profileFiles/<%=m.getMprofile()%>">
+         <% }  %>
 		<p id="profileName"> 관리자 페이지</p>
 	</div>
 	<br>

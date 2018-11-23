@@ -156,7 +156,6 @@ body {
 					processData : false,
 					success : function(url) {
 						url.replace("\/","/");
-						alert(url);
 						$(el).summernote('editor.insertImage', url);
 						//$('#deletefile').attr(url);
 					}, error : function(){						
